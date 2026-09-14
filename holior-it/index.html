@@ -1,0 +1,2011 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assenzio, Mallo di Noce Nera, Semi di Zucca e Chiodi di Garofano in Softgel* &ndash; Holior</title>
+<meta name="description" content="Elimina parassiti e larve nascosti in soli 14 giorni. 18 ingredienti attivi che agiscono sull'intero ciclo vitale del parassita.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Lato:ital,wght@0,400;0,700;0,900;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   HOLIOR IT — Design tokens estratti dalla pagina originale
+   ============================================================ */
+:root{
+  --green:#C9DE80;
+  --green-dark:#B5CC62;
+  --dark:#071F2A;
+  --dark-2:#0E1C25;
+  --deep:#0D2F3A;
+  --border-teal:#184D54;
+  --grey-bg:#F4F4F4;
+  --cream:#F5F3EE;
+  --green-tint:#F6F9EB;
+  --table-row:#E8EDEE;
+  --text:#464646;
+  --text-soft:#606060;
+  --ink:#221E20;
+  --red:#B30007;
+  --line:#E0E0E0;
+
+  --font-head:"Baloo 2","Montserrat",sans-serif;
+  --font-body:"Lato","Montserrat",Arial,sans-serif;
+
+  --page:1440px;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.5;
+  color:var(--text);
+  background:#fff;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+h1,h2,h3,h4{font-family:var(--font-head);margin:0;color:var(--dark-2);}
+p{margin:0;}
+ul{margin:0;padding:0;list-style:none;}
+
+.page-width{max-width:var(--page);margin:0 auto;padding:0 5rem;}
+@media(max-width:900px){.page-width{padding:0 1.25rem;}}
+
+/* ---------- CTA condiviso ---------- */
+.cta-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:8px;}
+.cta-btn{
+  display:inline-block;
+  background:var(--green);
+  border:2px solid var(--green);
+  color:var(--dark);
+  font-family:var(--font-body);
+  font-size:16px;font-weight:700;
+  padding:14px 34px;
+  border-radius:12px;
+  text-decoration:none;
+  text-align:center;
+  transition:background .2s ease;
+  margin-top:40px;
+}
+.cta-btn:hover{background:var(--green-dark);}
+.guarantee{display:flex;align-items:center;gap:7px;}
+.guarantee img,.guarantee svg{width:16px;height:18px;object-fit:contain;flex-shrink:0;}
+.guarantee p{font-size:14px;font-weight:500;color:var(--deep);}
+.guarantee--light p{color:#fff;}
+
+.d-none{display:none;}
+@media(min-width:993px){.d-lg-block{display:block;}}
+@media(max-width:576px){.d-lg-none-inv{display:block;}}
+
+/* ============================================================
+   1. TICKER STAMPA
+   ============================================================ */
+.press-outer{position:relative;margin:auto;}
+.press-holder{position:relative;max-width:100vw;margin:auto;line-height:1;background:var(--green);}
+@keyframes logo_scroll{0%{transform:translate(0);}100%{transform:translate(-50%);}}
+.press-wrapper{display:flex;align-items:center;justify-content:center;padding:10px 0;overflow:hidden;}
+.press-scroll{width:100%;min-width:1px;}
+.press-track{display:flex;animation:logo_scroll 150s infinite linear;align-items:center;width:fit-content;}
+.press-item{
+  font-family:var(--font-head);display:inline-block;margin:0 25px;font-size:14px;
+  color:var(--dark);font-weight:500;white-space:nowrap;line-height:1;text-align:center;
+}
+.press-sep{display:inline-block;width:1px;height:18px;background:var(--dark);opacity:.8;flex-shrink:0;}
+@media(max-width:900px){
+  .press-wrapper{padding:14px 0;}
+  .press-item{font-size:16px;}
+}
+
+/* ============================================================
+   2. PRODOTTO PRINCIPALE
+   ============================================================ */
+.main-product{padding:40px 0 60px;}
+.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+@media(max-width:990px){.product-grid{grid-template-columns:1fr;gap:28px;}}
+
+.product-media{position:sticky;top:20px;}
+@media(max-width:990px){.product-media{position:static;}}
+.main-image{position:relative;border-radius:12px;overflow:hidden;background:var(--grey-bg);}
+.main-image img{width:100%;height:auto;transition:opacity .22s ease;}
+.main-image img.is-fading{opacity:0;}
+.main-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border:0;padding:0;background:rgba(255,255,255,.8);
+  border-radius:50%;cursor:pointer;z-index:5;display:grid;place-items:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+.main-nav svg{width:18px;height:18px;stroke:var(--border-teal);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.main-nav--prev{left:10px;}
+.main-nav--next{right:10px;}
+.thumbs{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+.thumbs button{border:2px solid transparent;padding:0;border-radius:10px;background:transparent;cursor:pointer;}
+.thumbs img{width:72px;height:72px;object-fit:cover;border-radius:8px;}
+.thumbs button.is-active{border-color:var(--dark);}
+.media-banner{margin-top:16px;}
+
+/* colonna destra */
+.product-info{display:flex;flex-direction:column;}
+.reviews-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.reviews-row img{height:18px;width:auto;}
+.reviews-row p{font-size:14px;color:var(--text);font-weight:500;}
+
+.product-title{
+  font-family:var(--font-head);
+  font-size:38px;font-weight:700;line-height:1.12;
+  color:var(--dark-2);margin:0 0 12px;
+}
+.product-subtitle{font-size:18px;font-weight:500;color:var(--text);margin-bottom:18px;line-height:1.35;}
+@media(max-width:576px){
+  .product-title{font-size:27px;}
+  .product-subtitle{font-size:16px;}
+}
+
+.itrow{display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:20px;}
+.itrow__item{display:flex;align-items:center;gap:7px;}
+.itrow__item img{width:15px;height:15px;}
+.itrow__text{font-size:14px;font-weight:600;color:var(--dark-2);}
+
+.features{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.feature-line{display:flex;align-items:center;gap:12px;}
+.feature-line img{width:28px;height:28px;object-fit:contain;flex-shrink:0;}
+.feature-line p{font-size:16px;font-weight:600;color:var(--dark-2);line-height:1.2;}
+
+/* selettore varianti */
+.selector{display:flex;flex-direction:column;gap:12px;}
+.sel-block{
+  border:1.5px solid var(--line);border-radius:14px;overflow:hidden;
+  cursor:pointer;background:#fff;position:relative;transition:border-color .2s,box-shadow .2s;
+}
+.sel-block.active{border-color:var(--border-teal);box-shadow:0 0 0 1px var(--border-teal) inset;background:var(--green-tint);}
+.sel-head{display:flex;align-items:center;gap:12px;padding:14px;position:relative;}
+.var-image{width:76px;flex-shrink:0;}
+.var-image img{width:100%;height:auto;object-fit:contain;}
+.sel-main{flex:1;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.sel-title{font-size:17px;font-weight:700;color:var(--dark-2);font-family:var(--font-head);line-height:1.15;}
+.variant-discount{font-size:13px;font-weight:700;color:var(--border-teal);}
+.save-badge{
+  font-size:12px;font-weight:700;background:var(--green);color:#000;
+  padding:3px 9px;border-radius:40px;white-space:nowrap;
+}
+.sel-price-wrap{text-align:right;margin-left:auto;}
+.sel-price{font-size:20px;font-weight:800;color:var(--dark-2);font-family:var(--font-head);line-height:1.1;}
+.sel-compare{font-size:14px;color:#8a8a8a;}
+.corner-badge{
+  position:absolute;top:0;right:0;
+  font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  padding:4px 10px;border-bottom-left-radius:10px;
+}
+.corner-badge--popular{background:var(--dark);color:var(--green);}
+.corner-badge--best{background:var(--green);color:var(--dark);}
+.sel-block.has-badge .sel-head{padding-top:26px;}
+.sel-perks{display:flex;flex-wrap:wrap;gap:8px 16px;padding:0 14px 12px;}
+.perk-item{display:flex;align-items:center;gap:6px;}
+.perk-item img{width:16px;height:16px;object-fit:contain;}
+.perk-item p{font-size:13px;font-weight:600;color:var(--border-teal);}
+
+.autoship{
+  display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px 14px;
+  border:1.5px dashed var(--border-teal);border-radius:12px;background:var(--green-tint);
+}
+.autoship-check{
+  width:22px;height:22px;flex-shrink:0;border-radius:5px;background:var(--green);
+  display:grid;place-items:center;
+}
+.autoship-title{font-size:15px;font-weight:800;color:var(--dark-2);font-family:var(--font-head);}
+.autoship-text{font-size:13px;color:var(--text);}
+
+.usp-line{text-align:center;margin:16px 0 10px;}
+.usp-line p{font-size:14px;font-weight:600;color:var(--border-teal);}
+
+.atc-btn{
+  display:block;width:100%;border:0;cursor:pointer;
+  background:var(--green);color:var(--dark);
+  font-family:var(--font-body);font-size:19px;font-weight:800;letter-spacing:.02em;
+  text-transform:uppercase;padding:18px 20px;border-radius:12px;
+  transition:background .2s;
+}
+.atc-btn:hover{background:var(--green-dark);}
+
+.under-cta{display:flex;align-items:center;justify-content:center;gap:16px;padding-top:15px;flex-wrap:wrap;}
+.cta-note{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:500;color:var(--text);}
+.cta-note svg,.cta-note img{width:16px;height:16px;object-fit:contain;}
+.cta-note+.cta-note{padding-left:16px;position:relative;}
+.cta-note+.cta-note::before{content:"|";position:absolute;left:-1px;top:0;color:#bbb;}
+
+.payment-icons{width:60%;margin:15px auto;}
+
+.replica-tab{border:1px solid #f0c9c9;background:#fff6f6;border-radius:10px;padding:12px 14px;margin-top:6px;}
+.replica-tab > div:first-child{display:flex;align-items:center;gap:8px;}
+.replica-tab img{width:18px;height:18px;}
+.replica-tab p{font-size:14px;font-weight:700;color:var(--red);}
+.replica-text{margin-top:4px;}
+.replica-text span{font-size:13px;color:var(--text);line-height:normal;}
+
+/* accordion schede */
+.tabs{display:flex;flex-direction:column;gap:10px;margin:22px auto 0;}
+.tab-block{border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;}
+.tab-thumb{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;user-select:none;justify-content:space-between;}
+.tab-thumb-left{display:flex;align-items:center;gap:12px;}
+.tab-icon{width:22px;height:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.tab-icon img,.tab-icon svg{width:22px;height:22px;object-fit:contain;}
+.tab-thumb p{font-size:15px;font-weight:700;color:#1a1a1a;line-height:1.3;}
+.tab-chevron{width:28px;height:28px;border:1.5px solid #d0d0d0;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.tab-chevron svg{width:14px;height:14px;stroke:#555;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s ease;}
+.tab-content{display:none;padding:0 18px;font-size:14px;color:#444;line-height:1.7;}
+.tab-content p+p{margin-top:10px;}
+.tab-block.is-open .tab-content{display:block;padding:0 18px 18px;}
+.tab-block.is-open .tab-chevron svg{transform:rotate(180deg);}
+
+/* ============================================================
+   3. TRUST
+   ============================================================ */
+.trust-outer{
+  background-color:#0E1C25;
+  background-image:url('https://cdn.shopify.com/s/files/1/0795/2003/9125/files/f3a0d6d9c30295d2d4cf7d43107aaacb826de4b0_1_430x.jpg?v=1773235920');
+  background-size:cover;background-position:center bottom;background-repeat:no-repeat;
+  padding:60px 20px;position:relative;
+}
+.trust-outer::before{content:'';position:absolute;inset:0;background:rgba(14,28,37,.9);z-index:0;}
+.trust-outer > *{position:relative;z-index:1;}
+.trust-inner{max-width:var(--page);margin:0 auto;padding:0 5rem;display:flex;flex-direction:column;align-items:center;gap:28px;}
+.trust-title{font-size:42px;font-weight:600;line-height:1.1;color:var(--green);margin:0;text-align:center;}
+.trust-badges{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;width:100%;}
+.trust-badge{
+  display:flex;align-items:center;justify-content:center;gap:10px;border-radius:5px;
+  border:1px dashed rgba(255,255,255,.05);background:rgba(255,255,255,.15);padding:12px 8px;flex:1;
+}
+.trust-badge img{width:32px;height:32px;object-fit:contain;flex-shrink:0;}
+.trust-badge span{font-size:18px;color:#fff;font-weight:500;line-height:1.1;}
+.trust-tags{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
+.trust-tag{display:flex;align-items:center;gap:7px;}
+.trust-tag img{width:20px;height:20px;object-fit:contain;flex-shrink:0;}
+.trust-tag span{font-size:16px;font-weight:500;line-height:1.1;color:#fff;}
+@media(max-width:700px){
+  .trust-inner{padding:0 1.5rem;gap:20px;}
+  .trust-title{font-size:28px;}
+  .trust-badge{flex-direction:column;text-align:center;width:calc(50% - 8px);max-width:calc(50% - 8px);min-height:105px;padding:12px 6px;flex:unset;gap:8px;}
+  .trust-badge img{width:28px;height:28px;}
+  .trust-badge span{font-size:12px;}
+  .trust-tags{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;justify-items:start;width:100%;max-width:340px;margin:0 auto;}
+}
+
+/* ============================================================
+   4. SINTOMI PRECOCI
+   ============================================================ */
+.symptoms-outer{background:var(--cream);padding:60px 20px;}
+.symptoms-inner{max-width:1300px;margin:0 auto;text-align:center;}
+.symptoms-label{font-size:20px;font-weight:700;text-transform:uppercase;color:var(--dark-2);margin-bottom:10px;letter-spacing:.02em;}
+.symptoms-headline{font-size:42px;font-weight:600;line-height:1.1;color:var(--dark-2);margin-bottom:16px;}
+.symptoms-subtitle{font-size:18px;color:var(--text);line-height:1.45;max-width:900px;margin:0 auto;}
+.symptoms-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:40px 0;text-align:left;}
+.symptoms-card{background:#fff;border:1px solid #e0ddd6;border-radius:12px;padding:24px 16px;display:flex;flex-direction:column;gap:12px;}
+.symptoms-head{display:flex;align-items:center;gap:14px;}
+.symptoms-card__image{flex-shrink:0;width:70px;height:70px;border-radius:50%;overflow:hidden;}
+.symptoms-card__image img{width:100%;height:100%;object-fit:cover;}
+.symptoms-card__title{font-size:20px;font-weight:600;line-height:1.15;color:var(--ink);}
+.symptoms-card__short{font-size:15px;font-weight:700;color:var(--dark-2);}
+.text-separator{display:block;width:100%;height:1px;background:#e5e2da;margin:10px 0;}
+.symptoms-card__long{font-size:15px;color:var(--text-soft);line-height:1.5;}
+@media(max-width:900px){.symptoms-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){
+  .symptoms-grid{grid-template-columns:1fr;margin:30px 0 0;}
+  .symptoms-card{padding:14px 14px;}
+  .symptoms-headline{font-size:28px;}
+  .symptoms-label{font-size:18px;}
+  .symptoms-subtitle{font-size:16px;}
+}
+
+/* ============================================================
+   5. PERCHÉ HAI FALLITO
+   ============================================================ */
+.why-failed-outer{background:#fff;padding:60px 0;}
+.why-failed-inner{max-width:var(--page);margin:0 auto;padding:0 5rem;}
+.why-failed-header{text-align:center;margin-bottom:40px;}
+.why-failed-eyebrow{display:block;color:var(--dark-2);font-size:20px;font-weight:700;line-height:24px;text-transform:uppercase;margin-bottom:10px;}
+.why-failed-title{color:var(--dark-2);font-size:42px;font-weight:600;line-height:1.05;}
+.why-failed-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.why-failed-card{background:#fff;border-radius:8px;overflow:hidden;border:1px solid var(--border-teal);display:flex;flex-direction:column;}
+.why-failed-card__image{position:relative;width:100%;height:215px;overflow:hidden;}
+.why-failed-card__image img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%);}
+.why-failed-card__tag{
+  display:inline-block;position:absolute;top:0;left:0;background:var(--green);color:#000;
+  padding:0 10px;border-radius:4px;font-family:var(--font-head);font-weight:600;font-size:18px;line-height:175%;
+}
+.why-failed-card__body{background:var(--grey-bg);padding:16px 16px 32px;flex:1;}
+.why-failed-card__title{color:var(--ink);margin:0 0 10px;font-family:var(--font-head);font-weight:600;font-size:22px;line-height:1.2;}
+.why-failed-card__text{color:var(--text-soft);font-size:16px;font-weight:500;line-height:1.4;}
+@media(max-width:1024px){.why-failed-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){
+  .why-failed-grid{grid-template-columns:1fr;}
+  .why-failed-outer{padding:50px 15px;}
+  .why-failed-inner{padding:0;}
+  .why-failed-eyebrow{font-size:18px;}
+  .why-failed-title{font-size:28px;line-height:1.25;}
+  .why-failed-card__title{font-size:20px;}
+  .why-failed-card__text{font-size:14px;}
+  .why-failed-header{margin-bottom:20px;}
+}
+
+/* ============================================================
+   6. CAROSELLO MEDIA
+   ============================================================ */
+.mc2-outer{background:var(--dark);padding:50px 0 60px;overflow:hidden;}
+.mc2-inner{max-width:1200px;margin:0 auto;padding:0 20px;}
+.mc2-title{color:var(--green);font-family:var(--font-head);font-weight:600;font-size:42px;line-height:1.05;text-align:center;margin:0 0 36px;}
+.mc2-stage{position:relative;display:flex;align-items:center;max-width:1200px;margin:0 auto;padding:0 56px;}
+.mc2-btn{
+  position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;
+  border:none;background:#fff;color:var(--border-teal);cursor:pointer;display:flex;align-items:center;
+  justify-content:center;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.15);transition:opacity .2s;z-index:2;
+}
+.mc2-btn:hover{opacity:.7;}
+.mc2-btn--prev{left:0;}
+.mc2-btn--next{right:0;}
+.mc2-viewport{width:100%;overflow:hidden;}
+.mc2-track{display:flex;transition:transform .45s cubic-bezier(.4,0,.2,1);will-change:transform;}
+.mc2-slide{flex-shrink:0;padding:0 16px;}
+.mc2-card{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;padding:0 8px;}
+.mc2-card__quote{min-height:85px;color:#fff;font-family:var(--font-body);font-style:italic;font-size:16px;line-height:1.4;font-weight:400;}
+.mc2-card__logo{display:flex;align-items:center;justify-content:center;}
+.mc2-card__logo img{max-height:32px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.9;}
+.mc2-card__logo-text{font-size:22px;font-family:Georgia,serif;font-style:italic;color:#fff;opacity:.9;}
+.mc2-dots{display:flex;justify-content:center;gap:8px;margin-top:35px;}
+.mc2-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);border:none;padding:0;cursor:pointer;transition:.2s;}
+.mc2-dot.is-active{background:rgba(255,255,255,.9);transform:scale(1.3);}
+@media(max-width:768px){
+  .mc2-stage{padding:0 48px;}
+  .mc2-card__quote{font-size:14px;}
+  .mc2-title{font-size:28px;margin:0 0 20px;}
+  .mc2-btn{width:30px;height:30px;}
+}
+
+/* ============================================================
+   7. PERCHÉ È IMPORTANTE
+   ============================================================ */
+.restore-outer{padding:60px 0;background:#fff;}
+.restore-inner{max-width:var(--page);margin:0 auto;padding:0 5rem;}
+.restore-header{text-align:center;margin-bottom:40px;}
+.restore-title{font-size:42px;font-weight:600;color:var(--dark-2);line-height:1.05;margin-bottom:10px;}
+.restore-subtitle{font-size:20px;font-weight:500;color:#000;}
+.restore-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.restore-card{border:1px solid var(--border-teal);border-radius:12px;overflow:hidden;background:#fff;display:flex;flex-direction:column;}
+.restore-card__image img{width:100%;height:230px;object-fit:cover;}
+.restore-card__body{padding:20px 18px 26px;}
+.restore-card__tag{
+  display:inline-block;background:var(--green);color:#000;font-size:13px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.04em;padding:4px 12px;border-radius:40px;margin-bottom:12px;
+}
+.restore-card__title{font-size:22px;font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:10px;}
+.restore-card__text{font-size:16px;color:var(--text-soft);line-height:1.45;}
+@media(max-width:900px){.restore-grid{grid-template-columns:1fr;}.restore-inner{padding:0 1.25rem;}.restore-title{font-size:28px;}.restore-subtitle{font-size:18px;}}
+
+/* ============================================================
+   8. CONFRONTO "PRIMA / DOPO"
+   ============================================================ */
+.compare-pills-outer{padding:60px 0;background:var(--cream);}
+.compare-pills-inner{max-width:var(--page);margin:0 auto;padding:0 5rem;}
+.compare-pills-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:stretch;}
+.compare-pills-title{font-size:38px;font-weight:600;color:var(--dark-2);line-height:1.1;margin-bottom:14px;}
+.compare-pills-subtitle{font-size:16px;color:var(--text);line-height:1.5;margin-bottom:28px;}
+.pill-rows{display:flex;flex-direction:column;gap:14px;}
+.pill-row{display:grid;grid-template-columns:1fr 26px 1fr;align-items:center;gap:10px;}
+.pill{display:flex;align-items:center;gap:8px;padding:12px 14px;border-radius:40px;font-size:15px;font-weight:600;line-height:1.15;}
+.pill--bad{background:#fff;border:1px solid #e3d5d5;color:#8a8a8a;}
+.pill--bad .pill__icon{color:var(--red);font-weight:800;}
+.pill--good{background:var(--dark);color:#fff;}
+.pill--good svg{width:16px;height:16px;flex-shrink:0;}
+.pill-arrow{width:22px;height:auto;opacity:.6;}
+.compare-pills-right{display:flex;align-items:stretch;}
+.compare-pills-video{width:100%;height:100%;object-fit:cover;border-radius:12px;min-height:420px;}
+@media(max-width:900px){
+  .compare-pills-inner{padding:0 1.25rem;}
+  .compare-pills-layout{grid-template-columns:1fr;gap:28px;}
+  .compare-pills-title{font-size:28px;}
+  .compare-pills-video{min-height:260px;}
+  .pill{font-size:13px;padding:10px 12px;}
+}
+
+/* ============================================================
+   9. ESPERTI / CICLO VITALE
+   ============================================================ */
+.experts-outer{background:var(--grey-bg);padding:60px 20px;}
+.experts-inner{max-width:var(--page);padding:0 5rem;margin:0 auto;}
+.experts-header{text-align:center;margin-bottom:40px;}
+.experts-title{font-size:42px;font-weight:600;color:var(--dark-2);line-height:1.05;max-width:900px;margin:0 auto;}
+.experts-subtitle{font-size:20px;font-weight:500;color:#000;line-height:1.35;margin-top:16px;}
+.experts-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.experts-img{width:100%;height:100%;object-fit:cover;border-radius:12px;}
+.experts-right{display:flex;flex-direction:column;gap:10px;}
+.experts-block-title{font-size:18px;font-weight:700;line-height:1.5;color:#000;font-family:var(--font-body);}
+.experts-block-intro{font-size:18px;font-weight:700;line-height:1.2;margin-top:10px;}
+.highlight-underline{background:linear-gradient(transparent 60%,var(--green) 60%);}
+.experts-block-secondary{
+  font-size:18px;margin-top:10px;font-style:italic;font-weight:500;background:var(--green-tint);
+  border:1px solid #000;line-height:1.2;padding:15px;border-radius:8px;
+}
+.experts-block-list{margin:15px 0 0;display:flex;flex-direction:column;gap:6px;}
+.experts-block-list li{font-size:16px;color:var(--text);font-weight:500;line-height:1.5;display:flex;align-items:flex-start;gap:6px;margin-bottom:5px;}
+.experts-list-icon{width:18px;height:18px;object-fit:contain;flex-shrink:0;margin-top:4px;}
+.bold{font-weight:800;color:#000;}
+.experts-block-bold{
+  font-size:18px;margin:30px auto 0;max-width:950px;font-style:italic;color:#000;font-weight:500;
+  line-height:1.3;background:var(--green);padding:20px 25px;border-radius:8px;text-align:center;
+}
+@media(max-width:900px){
+  .experts-inner{padding:0 1.25rem;}
+  .experts-layout{grid-template-columns:1fr;gap:28px;}
+  .experts-title{font-size:28px;}
+  .experts-subtitle{font-size:18px;}
+  .experts-left{max-width:420px;margin:0 auto;}
+}
+
+/* ============================================================
+   10. INGREDIENTI
+   ============================================================ */
+.nutrient-outer{padding:60px 20px;background:#fff;}
+.nutrient-inner{max-width:var(--page);padding:0 5rem;margin:0 auto;}
+.nutrient-header{text-align:center;margin-bottom:40px;}
+.nutrient-title{font-size:42px;font-weight:700;line-height:1.1;color:var(--deep);margin:0 0 12px;}
+.nutrient-subtitle{color:#000;text-align:center;font-size:20px;font-weight:500;line-height:1.35;max-width:1000px;margin:0 auto;}
+.nutrient-grid{display:flex;flex-wrap:wrap;max-width:1100px;margin:0 auto;gap:20px;justify-content:center;}
+.nutrient-card{background:#fff;border:2px solid var(--border-teal);border-radius:14px;overflow:hidden;width:calc(33.333% - 14px);min-width:240px;display:flex;flex-direction:column;}
+.nutrient-card__header{background:var(--dark-2);color:#fff;padding:18px 16px;text-align:center;display:flex;justify-content:center;align-items:center;}
+.nutrient-card__name{font-size:24px;font-weight:500;line-height:1.1;color:#fff;}
+.nutrient-card__vs-row{display:flex;align-items:center;justify-content:center;}
+.nutrient-card__vs-row img{width:100%;height:150px;object-fit:cover;object-position:top center;}
+.nutrient-card__stat{background:var(--green);color:#000;font-size:18px;padding:10px 6px;font-weight:600;text-align:center;line-height:1.2;font-family:var(--font-body);}
+.nutrient-card__list{padding:14px 18px 18px;}
+.nutrient-card__list li{color:var(--text);font-size:16px;line-height:1.25;margin:0 0 15px;position:relative;padding-left:28px;}
+.nutrient-card__list li::before{
+  content:"";position:absolute;left:0;top:0;width:18px;height:18px;
+  background-image:url('https://cdn.shopify.com/s/files/1/0594/2414/5480/files/pill-check_430x.png?v=1774361076');
+  background-size:contain;background-repeat:no-repeat;
+}
+@media(max-width:900px){.nutrient-card{width:calc(50% - 10px);}.nutrient-inner{padding:0 1.25rem;}.nutrient-title{font-size:28px;}.nutrient-subtitle{font-size:18px;}}
+@media(max-width:560px){
+  .nutrient-card{width:100%;min-width:unset;}
+  .nutrient-card__name{font-size:20px;}
+  .nutrient-card__stat{font-size:16px;}
+  .nutrient-card__list li{font-size:14px;margin-bottom:10px;}
+}
+
+/* ============================================================
+   11. STATISTICHE
+   ============================================================ */
+.stats-outer{padding:60px 0;background:var(--grey-bg);}
+.stats-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.stat-cell .block-title{font-size:52px;font-weight:800;color:var(--deep);line-height:1;position:relative;z-index:1;}
+.stat-underline{display:inline-block;width:110px;height:7px;margin-top:-14px;margin-bottom:12px;background:var(--green);position:relative;z-index:0;}
+.stat-cell p{font-size:15px;color:var(--text);line-height:1.4;}
+.stats-right .section-title{font-size:38px;font-weight:600;color:var(--dark-2);line-height:1.1;margin-bottom:16px;}
+.stats-right .section-text{font-size:17px;color:var(--text);line-height:1.5;}
+@media(max-width:900px){
+  .stats-layout{grid-template-columns:1fr;gap:24px;}
+  .stats-right{order:-1;text-align:center;}
+  .stats-right .section-title{font-size:28px;}
+  .stats-grid{gap:8px 16px;}
+  .stat-cell .block-title{font-size:38px;}
+  .stat-underline{width:80px;}
+}
+
+/* ============================================================
+   12. TABELLA COMPARATIVA + RECENSIONI
+   ============================================================ */
+.compare-table-outer{padding:60px 20px;background:#fff;}
+.compare-table-inner{max-width:1200px;padding:0 5rem;margin:0 auto;}
+.compare-table-eyebrow{text-align:center;color:var(--dark-2);margin:0 0 10px;font-weight:700;font-size:20px;line-height:24px;text-transform:uppercase;}
+.compare-table-title{font-family:var(--font-head);text-align:center;font-size:42px;font-weight:600;color:var(--dark-2);margin:0 0 36px;line-height:1.05;}
+.compare-table-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start;margin-top:40px;}
+.ct-carousel__slides{position:relative;width:100%;border:2px solid var(--dark);border-radius:15px;}
+.ct-carousel__slide{display:none;}
+.ct-carousel__slide.is-active{display:block;}
+.ct-carousel__img-wrap{position:relative;width:100%;border-radius:15px;overflow:hidden;line-height:0;}
+.ct-carousel__img{width:100%;height:375px;object-fit:cover;border-radius:15px;}
+.ct-carousel__arrow{
+  position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;background:rgba(255,255,255,.7);
+  border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);z-index:2;
+}
+.ct-carousel__arrow--prev{left:12px;}
+.ct-carousel__arrow--next{right:12px;}
+.ct-carousel__testimonial{
+  padding:25px 20px 15px;margin-top:-10px;box-shadow:0 0 24px rgba(0,0,0,.08);border:1px solid var(--line);
+  background:var(--green-tint);border-bottom-left-radius:15px;border-bottom-right-radius:15px;
+}
+.ct-carousel__stars{display:flex;gap:4px;margin-bottom:10px;}
+.ct-carousel__quote{font-size:16px;min-height:75px;font-weight:500;color:#222;line-height:1.3;margin:0 0 8px;}
+.ct-carousel__name{font-size:18px;font-weight:600;line-height:1.2;color:#111;}
+.ct-carousel__dots{display:flex;justify-content:center;gap:8px;margin-top:20px;}
+.ct-carousel__dot{width:6px;height:6px;border-radius:50%;background:#ccc;border:none;cursor:pointer;padding:0;}
+.ct-carousel__dot.is-active{background:var(--border-teal);}
+
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;border-radius:12px;overflow:hidden;}
+.compare-table__feature-col{width:58%;}
+.compare-table__brand-col,.compare-table__other-col{width:21%;}
+.compare-table thead th{padding:0;vertical-align:bottom;}
+.compare-table__brand-pill{
+  display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--dark);color:#fff;
+  font-size:14px;font-weight:700;padding:12px 10px 0;text-align:center;
+  border-top-left-radius:5px;border-top-right-radius:5px;
+}
+.compare-table__other-label{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;font-weight:400;color:#000;line-height:1.4;text-align:center;padding:8px 6px 0;}
+.compare-table__header-logo{width:85px;}
+.compare-table__header-img{width:70px;height:70px;margin:10px auto;object-fit:contain;}
+.compare-table__row{background:var(--table-row);}
+.compare-table tbody tr td:first-child{border-left:1px solid var(--dark);}
+.compare-table tbody tr td:last-child{border-right:1px solid var(--dark);}
+.compare-table tbody tr:last-child{border-bottom:1px solid var(--border-teal);}
+.compare-table__feature{font-size:16px;color:#000;padding:14px 12px 14px 18px;line-height:1.2;font-weight:500;border-top:1px solid var(--border-teal);}
+.compare-table__check{text-align:center;padding:14px 6px;vertical-align:middle;}
+.compare-table__check--brand{background:var(--dark);border-top:1px solid var(--green);}
+.compare-table__check--other{border-top:1px solid var(--border-teal);}
+.compare-icon{display:inline-flex;align-items:center;justify-content:center;}
+@media(max-width:900px){
+  .compare-table-inner{padding:0 1.25rem;}
+  .compare-table-layout{grid-template-columns:1fr;gap:28px;}
+  .compare-table-title{font-size:28px;}
+  .compare-table-eyebrow{font-size:18px;}
+  .compare-table-left{max-width:420px;margin:0 auto;}
+  .ct-carousel__img{height:235px;}
+  .compare-table__feature{font-size:14px;padding:12px 8px;}
+  .compare-table__header-img{width:56px;height:56px;}
+  .compare-table__other-label{font-size:11px;}
+}
+
+/* ============================================================
+   13. GARANZIA
+   ============================================================ */
+.guarantee-outer{background:var(--grey-bg);padding:0 20px;overflow:hidden;}
+.guarantee-inner{max-width:var(--page);padding:0 5rem;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px;}
+.guarantee-content{display:flex;flex-direction:column;align-items:center;gap:10px;padding:60px 0;}
+.guarantee-badge img{width:110px;height:110px;object-fit:contain;}
+.guarantee-eyebrow{font-size:20px;font-weight:400;line-height:1.2;color:var(--deep);}
+.guarantee-title{font-size:39px;font-weight:700;color:var(--deep);line-height:1.1;}
+.guarantee-text{font-size:16px;color:var(--text);line-height:1.3;max-width:500px;text-align:center;}
+.guarantee-image img{height:400px;width:auto;object-fit:contain;margin-bottom:-30px;}
+@media(max-width:900px){
+  .guarantee-inner{flex-direction:column;align-items:center;text-align:center;padding:0 1.25rem;}
+  .guarantee-eyebrow{font-size:18px;}
+  .guarantee-title{font-size:30px;}
+  .guarantee-image{display:none;}
+  .guarantee-content{padding:40px 0;}
+}
+
+/* ============================================================
+   14. FAQ
+   ============================================================ */
+.faq-redesign{background:var(--dark);padding:0;overflow:hidden;}
+.faq-layout{display:grid;grid-template-columns:1fr 1fr;min-height:500px;align-items:start;}
+.faq-left{padding:60px;background:var(--dark);display:flex;flex-direction:column;}
+.faq-main-title{font-family:var(--font-head);font-size:40px;font-weight:800;color:#fff;margin:0 0 28px;line-height:1.1;}
+.faq-box{border-top:1px solid rgba(255,255,255,.15);}
+.faq-box:last-of-type{border-bottom:1px solid rgba(255,255,255,.15);}
+.faq-thumb{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;cursor:pointer;user-select:none;}
+.faq-thumb p{color:#fff;flex:1;font-size:19px;font-weight:700;line-height:1.15;}
+.faq-icon{color:#fff;flex-shrink:0;width:20px;height:20px;display:flex;align-items:center;justify-content:center;}
+.faq-content{display:none;padding:0 0 16px;}
+.faq-content p{font-size:15px;font-weight:400;line-height:1.6;color:rgba(255,255,255,.75);margin:0 0 10px;}
+.faq-content p:last-child{margin-bottom:0;}
+.faq-box.is-open .faq-content{display:block;}
+.faq-cta{margin-top:32px;width:345px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.faq-btn{
+  display:inline-block;background:var(--green);border:2px solid var(--green);color:var(--dark);
+  font-size:16px;font-weight:700;width:100%;padding:12px 10px;text-align:center;border-radius:12px;text-decoration:none;
+}
+.faq-btn:hover{background:var(--green-dark);}
+.faq-right-img{width:100%;height:100%;max-height:985px;object-fit:cover;object-position:center;}
+@media(max-width:900px){
+  .faq-layout{grid-template-columns:1fr;}
+  .faq-right{height:300px;}
+  .faq-left{padding:36px 20px;}
+  .faq-cta{width:100%;}
+  .faq-main-title{font-size:30px;}
+  .faq-thumb p{font-size:17px;}
+}
+
+/* ============================================================
+   15. FOOTER
+   ============================================================ */
+.site-footer{background:#fff;border-top:1px solid var(--line);padding:32px 0 28px;}
+.footer-top{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;}
+.footer-logo img{max-width:170px;}
+.footer-menu{display:flex;flex-wrap:wrap;gap:8px 24px;}
+.footer-menu a{font-size:14px;color:var(--text);text-decoration:none;}
+.footer-menu a:hover{text-decoration:underline;}
+.footer-bottom{margin-top:26px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.footer-payments{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.footer-copy{font-size:12px;color:#8a8a8a;text-align:center;}
+.footer-disclaimer{max-width:1000px;margin:12px auto 0;font-size:11px;line-height:1.5;text-align:center;opacity:.75;}
+@media(max-width:900px){.footer-top{flex-direction:column;align-items:center;text-align:center;}.footer-menu{justify-content:center;}}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     1. TICKER
+     ============================================================ -->
+<div class="press-outer">
+  <div class="press-holder">
+    <div class="press-wrapper">
+      <div class="press-scroll">
+        <div class="press-track" id="pressTrack">
+          <span class="press-set" style="display:contents">
+            <p class="press-item">Agisce Oltre il Semplice Sollievo</p><span class="press-sep"></span>
+            <p class="press-item">Riduce i Disturbi Ricorrenti</p><span class="press-sep"></span>
+            <p class="press-item">Creato per un Supporto Intestinale Profondo</p><span class="press-sep"></span>
+            <p class="press-item">Aiuta a Ristabilire l&rsquo;Equilibrio Intestinale</p><span class="press-sep"></span>
+            <p class="press-item">Agisce sulla Candida alla Radice</p><span class="press-sep"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     2. PRODOTTO PRINCIPALE
+     ============================================================ -->
+<section class="main-product" id="pricebox">
+  <div class="page-width">
+    <div class="product-grid">
+
+      <!-- GALLERIA -->
+      <div class="product-media">
+        <div class="main-image">
+          <button type="button" class="main-nav main-nav--prev" aria-label="Immagine precedente">
+            <svg viewBox="0 0 10 18"><path d="M9 1L1 9L9 17"/></svg>
+          </button>
+          <img id="mainPackImage" src="https://holior.com/cdn/shop/files/wwps_1.jpg?v=1775505882" alt="Assenzio, Mallo di Noce Nera, Semi di Zucca e Chiodi di Garofano in softgel">
+          <button type="button" class="main-nav main-nav--next" aria-label="Immagine successiva">
+            <svg viewBox="0 0 10 18"><path d="M1 1L9 9L1 17"/></svg>
+          </button>
+        </div>
+
+        <div class="thumbs" id="productThumbs">
+          <button type="button" class="is-active" data-index="0" aria-label="Immagine 1"><img src="https://holior.com/cdn/shop/files/wwps_1_200x200.jpg?v=1775505882" alt=""></button>
+          <button type="button" data-index="1" aria-label="Immagine 2"><img src="https://holior.com/cdn/shop/files/wwps_2_200x200.jpg?v=1775505882" alt=""></button>
+          <button type="button" data-index="2" aria-label="Immagine 3"><img src="https://holior.com/cdn/shop/files/wwps_6_200x200.jpg?v=1775505882" alt=""></button>
+          <button type="button" data-index="3" aria-label="Immagine 4"><img src="https://holior.com/cdn/shop/files/wwps_4_200x200.jpg?v=1775506152" alt=""></button>
+          <button type="button" data-index="4" aria-label="Immagine 5"><img src="https://holior.com/cdn/shop/files/wwps_5_200x200.jpg?v=1775506152" alt=""></button>
+          <button type="button" data-index="5" aria-label="Immagine 6"><img src="https://holior.com/cdn/shop/files/wwps_3_200x200.jpg?v=1775505882" alt=""></button>
+        </div>
+
+        <script type="application/json" id="productImagesJson">
+        [
+          {"src":"https://holior.com/cdn/shop/files/wwps_1.jpg?v=1775505882"},
+          {"src":"https://holior.com/cdn/shop/files/wwps_2.jpg?v=1775505882"},
+          {"src":"https://holior.com/cdn/shop/files/wwps_6.jpg?v=1775505882"},
+          {"src":"https://holior.com/cdn/shop/files/wwps_4.jpg?v=1775506152"},
+          {"src":"https://holior.com/cdn/shop/files/wwps_5.jpg?v=1775506152"},
+          {"src":"https://holior.com/cdn/shop/files/wwps_3.jpg?v=1775505882"},
+          {"src":"https://holior.com/cdn/shop/files/wwps_7.jpg?v=1775505882"}
+        ]
+        </script>
+
+        <div class="media-banner">
+          <img src="https://holior.com/cdn/shop/files/Frame_1484581340.png?v=1775557989" alt="" loading="lazy">
+        </div>
+      </div>
+
+      <!-- INFORMAZIONI -->
+      <div class="product-info">
+
+        <div class="reviews-row">
+          <img src="https://cdn.shopify.com/s/files/1/0594/2414/5480/files/star-rate.png?v=1774339365" alt="5 stelle">
+          <p>Basato su 16.343 clienti soddisfatti</p>
+        </div>
+
+        <h1 class="product-title">Elimina Parassiti e Larve Nascosti in Soli 14 Giorni con Assenzio, Mallo di Noce Nera e Chiodi di Garofano</h1>
+
+        <p class="product-subtitle">Da gonfiore, stanchezza e annebbiamento mentale a un organismo pulito ed equilibrato</p>
+
+        <div class="itrow">
+          <div class="itrow__item">
+            <img src="https://holior.com/cdn/shop/files/check.png?v=1774339250&amp;width=15" alt="" width="15" height="15" loading="lazy">
+            <span class="itrow__text">18 Ingredienti Attivi</span>
+          </div>
+          <div class="itrow__item">
+            <img src="https://holior.com/cdn/shop/files/check.png?v=1774339250&amp;width=15" alt="" width="15" height="15" loading="lazy">
+            <span class="itrow__text">Agisce su Adulti, Larve e Uova</span>
+          </div>
+          <div class="itrow__item">
+            <img src="https://holior.com/cdn/shop/files/check.png?v=1774339250&amp;width=15" alt="" width="15" height="15" loading="lazy">
+            <span class="itrow__text">Protocollo Quotidiano in Softgel</span>
+          </div>
+        </div>
+
+        <div class="features">
+          <div class="feature-line">
+            <img loading="lazy" src="https://holior.com/cdn/shop/files/worm_4046683_1.png?v=1775558324" alt="">
+            <p>Elimina i parassiti alla radice</p>
+          </div>
+          <div class="feature-line">
+            <img loading="lazy" src="https://holior.com/cdn/shop/files/power_10874962_1.png?v=1775558324" alt="">
+            <p>Ripristina energia, lucidit&agrave; e concentrazione</p>
+          </div>
+          <div class="feature-line">
+            <img loading="lazy" src="https://holior.com/cdn/shop/files/Group.png?v=1775558324" alt="">
+            <p>Favorisce la riparazione intestinale e l&rsquo;equilibrio interno</p>
+          </div>
+          <div class="feature-line">
+            <img loading="lazy" src="https://holior.com/cdn/shop/files/body_3023682_1.png?v=1775558324" alt="">
+            <p>Ripristina le normali funzioni dell&rsquo;organismo</p>
+          </div>
+        </div>
+
+        <!-- SELETTORE FORMATO -->
+        <div class="selector" id="variantSelector">
+
+          <div class="sel-block" data-id="41123714465864" data-price="29,99 &euro;">
+            <div class="sel-head">
+              <div class="var-image"><img src="https://holior.com/cdn/shop/files/1bag_90.png?v=1786630117&amp;width=600" alt="1 Confezione" loading="lazy"></div>
+              <div class="sel-main">
+                <div>
+                  <p class="sel-title">1 Confezione</p>
+                  <p class="variant-discount">33% di sconto</p>
+                </div>
+                <span class="save-badge">Risparmi 15,00 &euro;</span>
+              </div>
+              <div class="sel-price-wrap">
+                <p class="sel-price">29,99 &euro;</p>
+                <s class="sel-compare">44,99 &euro;</s>
+              </div>
+            </div>
+            <div class="sel-perks">
+              <div class="perk-item">
+                <img src="https://holior.com/cdn/shop/files/truck.png?v=1774367813" alt="">
+                <p>+ Spedizione gratuita</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sel-block active has-badge" data-id="41123714498632" data-price="59,99 &euro;">
+            <span class="corner-badge corner-badge--popular">Pi&ugrave; venduto</span>
+            <div class="sel-head">
+              <div class="var-image"><img src="https://holior.com/cdn/shop/files/3bags_90.png?v=1786630117&amp;width=600" alt="2 + 1 Gratis" loading="lazy"></div>
+              <div class="sel-main">
+                <div>
+                  <p class="sel-title">2 + 1 Gratis</p>
+                  <p class="variant-discount">56% di sconto</p>
+                </div>
+                <span class="save-badge">Risparmi 74,98 &euro;</span>
+              </div>
+              <div class="sel-price-wrap">
+                <p class="sel-price">59,99 &euro;</p>
+                <s class="sel-compare">134,97 &euro;</s>
+              </div>
+            </div>
+            <div class="sel-perks">
+              <div class="perk-item">
+                <img src="https://holior.com/cdn/shop/files/truck.png?v=1774367813" alt="">
+                <p>+ Spedizione gratuita</p>
+              </div>
+              <div class="perk-item">
+                <img src="https://holior.com/cdn/shop/files/ebook.png?v=1774373423" alt="">
+                <p>+ eBook &laquo;Salute Naturale&raquo; GRATIS</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sel-block has-badge" data-id="41123714531400" data-price="89,98 &euro;">
+            <span class="corner-badge corner-badge--best">Miglior offerta</span>
+            <div class="sel-head">
+              <div class="var-image"><img src="https://holior.com/cdn/shop/files/5bags_90.png?v=1786630118&amp;width=600" alt="3 + 2 Gratis" loading="lazy"></div>
+              <div class="sel-main">
+                <div>
+                  <p class="sel-title">3 + 2 Gratis</p>
+                  <p class="variant-discount">60% di sconto</p>
+                </div>
+                <span class="save-badge">Risparmi 134,97 &euro;</span>
+              </div>
+              <div class="sel-price-wrap">
+                <p class="sel-price">89,98 &euro;</p>
+                <s class="sel-compare">224,95 &euro;</s>
+              </div>
+            </div>
+            <div class="sel-perks">
+              <div class="perk-item">
+                <img src="https://holior.com/cdn/shop/files/truck.png?v=1774367813" alt="">
+                <p>+ Spedizione gratuita</p>
+              </div>
+              <div class="perk-item">
+                <img src="https://holior.com/cdn/shop/files/ebook.png?v=1774373423" alt="">
+                <p>+ eBook &laquo;Salute Naturale&raquo; GRATIS</p>
+              </div>
+              <div class="perk-item">
+                <img src="https://holior.com/cdn/shop/files/la_shipping-fast.png?v=1774373472" alt="">
+                <p>+ Regalo a sorpresa GRATIS</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="autoship">
+          <div class="autoship-check">
+            <svg width="14" height="9" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.4924 0.900024L6.73767 8.65475C6.58057 8.8118 6.36753 8.90002 6.1454 8.90002C5.92327 8.90002 5.71023 8.8118 5.55314 8.65475L1.50781 4.60943" stroke="#0E1C25" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <p class="autoship-title">Risparmia il 25% con le Ricariche Automatiche!</p>
+            <p class="autoship-text">Spedizione ogni 4 settimane. Nessun vincolo. Disdici quando vuoi.</p>
+          </div>
+        </div>
+
+        <div class="usp-line">
+          <p>Spedizione in giornata per gli ordini effettuati oggi.</p>
+        </div>
+
+        <button type="button" class="atc-btn">Aggiungi al Carrello</button>
+
+        <div class="under-cta">
+          <p class="cta-note">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M14.583 12.1713C14.8698 12.1333 15.2001 12.1658 15.2331 12.5409L15.4195 14.6275C15.4683 15.1837 14.6219 15.2591 14.5729 14.7009L14.4664 13.5087C11.0241 17.4806 4.69181 17.0524 1.8463 12.5832C0.813943 10.9619 0.373055 8.97183 0.729143 6.97041C0.826743 6.41646 1.66639 6.56543 1.56914 7.11708C0.93661 10.7064 3.13963 14.1944 6.67777 15.1423C9.24097 15.8291 11.929 15.0161 13.687 13.1046L12.7599 13.1875C12.2036 13.2364 12.1283 12.39 12.6865 12.3409L14.583 12.1713ZM4.40861 3.48455L3.31261 3.58232C5.07048 1.67103 7.75883 0.858057 10.3219 1.54481C13.86 2.4929 16.063 5.98072 15.4305 9.57006C15.3332 10.1217 16.1729 10.2707 16.2705 9.71672C16.6267 7.71512 16.1857 5.72526 15.1533 4.10392C12.3587 -0.285054 6.18194 -0.791543 2.68932 3.00366L2.59723 1.97219C2.54817 1.41397 1.70177 1.48917 1.75065 2.04561L1.93554 4.11495C1.95314 4.36881 2.16274 4.54428 2.41768 4.51548L4.48203 4.33112C5.03972 4.28206 4.96559 3.43619 4.40861 3.48455Z" fill="currentColor"></path>
+            </svg>
+            Ricariche ogni 4 settimane
+          </p>
+          <p class="cta-note">
+            <img src="https://cdn.shopify.com/s/files/1/0779/0673/9384/files/clock.webp" alt="" width="16" height="16" loading="lazy">
+            Sospendi o disdici quando vuoi
+          </p>
+        </div>
+
+        <img class="payment-icons" src="https://cdn.shopify.com/s/files/1/0795/2003/9125/files/payment_icons_webp.png?v=1772028176" alt="Metodi di pagamento accettati" loading="lazy">
+
+        <div class="replica-tab">
+          <div>
+            <img src="https://cdn.shopify.com/s/files/1/0795/2003/9125/files/redinfo.png?v=1772045601" alt="">
+            <p>Attenzione alle imitazioni</p>
+          </div>
+          <div class="replica-text">
+            <span>Solo i nostri marchi garantiscono il prodotto della massima qualit&agrave;, amato da migliaia di persone.</span>
+          </div>
+        </div>
+
+        <!-- SCHEDE -->
+        <div class="tabs">
+
+          <div class="tab-block">
+            <div class="tab-thumb">
+              <div class="tab-thumb-left">
+                <div class="tab-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                  </svg>
+                </div>
+                <p>Descrizione del Prodotto</p>
+              </div>
+              <div class="tab-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="tab-content">
+              <p>Holior &egrave; stato creato per affrontare un problema che la maggior parte delle persone non sa di avere: i parassiti che vivono all&rsquo;interno dell&rsquo;organismo e ne alterano il funzionamento quotidiano. Questi organismi si attaccano alla parete intestinale, si nutrono dei tuoi nutrienti e si moltiplicano, spesso senza segnali evidenti all&rsquo;inizio.</p>
+              <p>Con il tempo, gli effetti si manifestano ovunque: gonfiore, poca energia, annebbiamento mentale, digestione difficile, problemi della pelle e la costante sensazione che qualcosa non vada, anche quando mangi in modo corretto.</p>
+              <p>Holior utilizza una combinazione mirata di assenzio, mallo di noce nera, semi di zucca e chiodi di garofano &ndash; supportata da altri 14 ingredienti &ndash; per agire sull&rsquo;intero ciclo vitale del parassita. Invece di colpire soltanto i parassiti attivi, aiuta anche a farli staccare ed elimina le uova microscopiche che permettono al ciclo di ricominciare.</p>
+              <p>Il risultato &egrave; un organismo che torna a funzionare come dovrebbe: digestione pi&ugrave; leggera, energia stabile, pensieri pi&ugrave; lucidi, pelle migliore e un ritrovato senso di equilibrio, una volta rimossa l&rsquo;interferenza interna.</p>
+            </div>
+          </div>
+
+          <div class="tab-block">
+            <div class="tab-thumb">
+              <div class="tab-thumb-left">
+                <div class="tab-icon"><img src="https://holior.com/cdn/shop/files/how_60x.png?v=1774425243" alt=""></div>
+                <p>Come si Usa</p>
+              </div>
+              <div class="tab-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="tab-content">
+              <p>Assumi 3 softgel al giorno prima di colazione.</p>
+              <p>Questo momento della giornata permette alla formula di lavorare in sintonia con il naturale ritmo digestivo del tuo corpo, agendo sui parassiti quando sono pi&ugrave; attivi nell&rsquo;intestino.</p>
+              <p>Per risultati ottimali, usa il prodotto con costanza ogni giorno, in modo da interrompere completamente il ciclo vitale del parassita e impedirne la ripresa.</p>
+            </div>
+          </div>
+
+          <div class="tab-block">
+            <div class="tab-thumb">
+              <div class="tab-thumb-left">
+                <div class="tab-icon"><img src="https://holior.com/cdn/shop/files/holior-why_60x.png?v=1774425243" alt=""></div>
+                <p>Perch&eacute; Hai Bisogno di Holior</p>
+              </div>
+              <div class="tab-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="tab-content">
+              <p>La vita moderna ti espone continuamente ai parassiti &ndash; attraverso cibo, acqua, animali domestici e il contatto quotidiano &ndash; senza che tu te ne accorga.</p>
+              <p>Con il tempo si accumulano. Si attaccano all&rsquo;intestino, si nutrono dei tuoi nutrienti e si moltiplicano, prosciugando lentamente le tue energie e alterando il funzionamento del tuo corpo.</p>
+              <p>&Egrave; allora che i sintomi compaiono ovunque: gonfiore, annebbiamento mentale, stanchezza, problemi della pelle e la costante sensazione che qualcosa non vada. Holior &egrave; stato pensato per rimuovere la causa &ndash; non solo per gestire i sintomi &ndash; cos&igrave; che il tuo corpo possa tornare alla normalit&agrave;.</p>
+            </div>
+          </div>
+
+          <div class="tab-block">
+            <div class="tab-thumb">
+              <div class="tab-thumb-left">
+                <div class="tab-icon"><img src="https://holior.com/cdn/shop/files/mingcute_check-2-line_60x.png?v=1774425243" alt=""></div>
+                <p>I Benefici di Holior</p>
+              </div>
+              <div class="tab-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="tab-content">
+              <p>Questa formula utilizza una combinazione mirata di <strong>18 ingredienti</strong> pensata per eliminare i parassiti in modo naturale e ristabilire l&rsquo;equilibrio dell&rsquo;organismo &ndash; non solo temporaneamente, ma alla radice.</p>
+              <p>Assenzio, Mallo di Noce Nera, Semi di Zucca e Chiodi di Garofano &ndash; per un <strong>equivalente di 6.600 mg per dose</strong> &ndash; agiscono sull&rsquo;intero ciclo vitale del parassita. Questo significa colpire gli adulti, costringerli a staccarsi ed eliminare le uova microscopiche responsabili della reinfestazione, sostenendo al contempo la riparazione intestinale e il recupero interno.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. TRUST
+     ============================================================ -->
+<div class="trust-outer">
+  <div class="trust-inner">
+    <h2 class="trust-title">Perch&eacute; Fidarsi di Holior?</h2>
+
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <img src="https://holior.com/cdn/shop/files/Clinically_Formulated_80x.png?v=1774344481" alt="" loading="lazy">
+        <span>Formulazione Clinica</span>
+      </div>
+      <div class="trust-badge">
+        <img src="https://holior.com/cdn/shop/files/Third-Party_Tested_80x.png?v=1774344480" alt="" loading="lazy">
+        <span>Testato da Enti Terzi</span>
+      </div>
+      <div class="trust-badge">
+        <img src="https://holior.com/cdn/shop/files/Premium-Grade_Ingredients_80x.png?v=1774344480" alt="" loading="lazy">
+        <span>Ingredienti di Qualit&agrave; Premium</span>
+      </div>
+      <div class="trust-badge">
+        <img src="https://holior.com/cdn/shop/files/Manufactured_in_Certified_Facilities_80x.png?v=1774344481" alt="" loading="lazy">
+        <span>Prodotto in Stabilimenti Certificati</span>
+      </div>
+    </div>
+
+    <div class="trust-tags">
+      <div class="trust-tag"><img src="https://holior.com/cdn/shop/files/mdi_checkbox-marked_40x.png?v=1774344704" alt="" loading="lazy"><span>Senza Zuccheri Aggiunti</span></div>
+      <div class="trust-tag"><img src="https://holior.com/cdn/shop/files/mdi_checkbox-marked_40x.png?v=1774344704" alt="" loading="lazy"><span>Senza Glutine</span></div>
+      <div class="trust-tag"><img src="https://holior.com/cdn/shop/files/mdi_checkbox-marked_40x.png?v=1774344704" alt="" loading="lazy"><span>Senza Coloranti Artificiali</span></div>
+      <div class="trust-tag"><img src="https://holior.com/cdn/shop/files/mdi_checkbox-marked_40x.png?v=1774344704" alt="" loading="lazy"><span>Senza Dolcificanti Artificiali</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     4. SINTOMI PRECOCI
+     ============================================================ -->
+<div class="symptoms-outer">
+  <div class="symptoms-inner">
+    <p class="symptoms-label">Adulti over 30: da leggere</p>
+    <h2 class="symptoms-headline">Non Ignorare Questi Primi Sintomi.</h2>
+    <p class="symptoms-subtitle">Disturbi del sonno, annebbiamento mentale, problemi della pelle, alterazioni della circolazione, umore instabile e squilibri ormonali possono avere tutti la stessa origine nascosta: un organismo che lavora contro di te dall&rsquo;interno.</p>
+
+    <div class="symptoms-grid">
+      <div class="symptoms-card">
+        <div class="symptoms-head">
+          <div class="symptoms-card__image"><img src="https://holior.com/cdn/shop/files/Container_600x.png?v=1775549494" alt="" loading="lazy"></div>
+          <h3 class="symptoms-card__title">Gonfiore e Fastidi Digestivi</h3>
+        </div>
+        <div class="symptoms-card__body">
+          <p class="symptoms-card__short">Lo stomaco ti sembra pesante o gonfio.</p>
+          <span class="text-separator"></span>
+          <p class="symptoms-card__long">I parassiti si attaccano alla parete intestinale e interferiscono con la digestione, causando pressione, gas e gonfiore costante.</p>
+        </div>
+      </div>
+
+      <div class="symptoms-card">
+        <div class="symptoms-head">
+          <div class="symptoms-card__image"><img src="https://holior.com/cdn/shop/files/symptoms--2_600x.jpg?v=1774354701" alt="" loading="lazy"></div>
+          <h3 class="symptoms-card__title">Annebbiamento Mentale e Scarsa Concentrazione</h3>
+        </div>
+        <div class="symptoms-card__body">
+          <p class="symptoms-card__short">Il tuo pensiero &egrave; pi&ugrave; lento di un tempo.</p>
+          <span class="text-separator"></span>
+          <p class="symptoms-card__long">Le tossine rilasciate dai parassiti possono influire sulla lucidit&agrave; mentale, rendendo pi&ugrave; difficile concentrarsi e restare reattivi.</p>
+        </div>
+      </div>
+
+      <div class="symptoms-card">
+        <div class="symptoms-head">
+          <div class="symptoms-card__image"><img src="https://holior.com/cdn/shop/files/4829e7512d1aef08c1e250c490cb58d847e7ec9e_600x.png?v=1775549552" alt="" loading="lazy"></div>
+          <h3 class="symptoms-card__title">Poca Energia e Stanchezza</h3>
+        </div>
+        <div class="symptoms-card__body">
+          <p class="symptoms-card__short">Ti senti svuotato, anche dopo aver riposato.</p>
+          <span class="text-separator"></span>
+          <p class="symptoms-card__long">I parassiti si nutrono dei tuoi nutrienti, lasciando il corpo impoverito e senza energia per tutta la giornata.</p>
+        </div>
+      </div>
+
+      <div class="symptoms-card">
+        <div class="symptoms-head">
+          <div class="symptoms-card__image"><img src="https://holior.com/cdn/shop/files/symptoms--4_600x.jpg?v=1774354697" alt="" loading="lazy"></div>
+          <h3 class="symptoms-card__title">Pelle Stressata e Invecchiamento Precoce</h3>
+        </div>
+        <div class="symptoms-card__body">
+          <p class="symptoms-card__short">La tua pelle inizia a riflettere lo squilibrio interno.</p>
+          <span class="text-separator"></span>
+          <p class="symptoms-card__long">L&rsquo;alterazione interna pu&ograve; innescare infiammazione, causando imperfezioni, colorito spento e pelle non uniforme.</p>
+        </div>
+      </div>
+
+      <div class="symptoms-card">
+        <div class="symptoms-head">
+          <div class="symptoms-card__image"><img src="https://holior.com/cdn/shop/files/720573c34da1fb56c088673839437faa60a74aa3_600x.jpg?v=1775549605" alt="" loading="lazy"></div>
+          <h3 class="symptoms-card__title">Difese Indebolite e Recupero Lento</h3>
+        </div>
+        <div class="symptoms-card__body">
+          <p class="symptoms-card__short">Il tuo corpo fatica a riprendersi.</p>
+          <span class="text-separator"></span>
+          <p class="symptoms-card__long">I parassiti tengono il sistema immunitario costantemente attivo, rallentando il recupero e lasciandoti pi&ugrave; vulnerabile.</p>
+        </div>
+      </div>
+
+      <div class="symptoms-card">
+        <div class="symptoms-head">
+          <div class="symptoms-card__image"><img src="https://holior.com/cdn/shop/files/symptoms--6_600x.jpg?v=1774354696" alt="" loading="lazy"></div>
+          <h3 class="symptoms-card__title">Squilibri Ormonali e Poca Vitalit&agrave;</h3>
+        </div>
+        <div class="symptoms-card__body">
+          <p class="symptoms-card__short">Il tuo corpo sembra fuori sintonia.</p>
+          <span class="text-separator"></span>
+          <p class="symptoms-card__long">Lo stress interno cronico causato dai parassiti pu&ograve; influire su energia, umore, metabolismo e vitalit&agrave; generale.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <a href="#pricebox" class="cta-btn">Prova l&rsquo;Eliminazione dei Parassiti Senza Rischi Oggi</a>
+      <div class="guarantee">
+        <img src="https://cdn.shopify.com/s/files/1/0594/2414/5480/files/icon-yes_430x.png?v=1774356057" alt="">
+        <p>Garanzia di rimborso di 30 giorni</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     5. PERCHÉ HAI FALLITO
+     ============================================================ -->
+<div class="why-failed-outer">
+  <div class="why-failed-inner">
+    <div class="why-failed-header">
+      <span class="why-failed-eyebrow">4 motivi</span>
+      <h2 class="why-failed-title">Perch&eacute; Tutto Ci&ograve; che Hai Provato Ha Fallito</h2>
+    </div>
+
+    <div class="why-failed-grid">
+      <div class="why-failed-card">
+        <div class="why-failed-card__image">
+          <img src="https://holior.com/cdn/shop/files/2682c607748e43fc32c7b13ae101eb1e1502e0bf_800x.jpg?v=1775549967" alt="" loading="lazy" width="800" height="215">
+          <span class="why-failed-card__tag">Motivo 1</span>
+        </div>
+        <div class="why-failed-card__body">
+          <h3 class="why-failed-card__title">Hai Colpito Solo una Parte del Problema</h3>
+          <p class="why-failed-card__text">La maggior parte dei trattamenti punta a uccidere i parassiti, ma ignora le uova. Quelle rimaste si moltiplicano in fretta e ricostruiscono tutto nel giro di poche settimane.</p>
+        </div>
+      </div>
+
+      <div class="why-failed-card">
+        <div class="why-failed-card__image">
+          <img src="https://holior.com/cdn/shop/files/6d6baad19f3496d97b3eec21b93e84beee4861df_800x.png?v=1775549964" alt="" loading="lazy" width="800" height="215">
+          <span class="why-failed-card__tag">Motivo 2</span>
+        </div>
+        <div class="why-failed-card__body">
+          <h3 class="why-failed-card__title">Non Hai Interrotto il Ciclo Vitale</h3>
+          <p class="why-failed-card__text">Anche se alcuni parassiti sono stati eliminati, il ciclo non &egrave; mai stato interrotto. Adulti, larve e uova devono essere affrontati tutti nello stesso momento.</p>
+        </div>
+      </div>
+
+      <div class="why-failed-card">
+        <div class="why-failed-card__image">
+          <img src="https://holior.com/cdn/shop/files/dd0379e0e88df9bd4cffc00b2a1264457ca8451d_800x.png?v=1775549964" alt="" loading="lazy" width="800" height="215">
+          <span class="why-failed-card__tag">Motivo 3</span>
+        </div>
+        <div class="why-failed-card__body">
+          <h3 class="why-failed-card__title">Hai Preso Formule Incomplete</h3>
+          <p class="why-failed-card__text">Singoli ingredienti o miscele deboli non riescono a gestire l&rsquo;intero carico. I parassiti sopravvivono, si adattano e continuano a nutrirsi del tuo corpo.</p>
+        </div>
+      </div>
+
+      <div class="why-failed-card">
+        <div class="why-failed-card__image">
+          <img src="https://holior.com/cdn/shop/files/ff7667d8c5b1b6432a14e878fa4872842cd218e1_800x.png?v=1775549966" alt="" loading="lazy" width="800" height="215">
+          <span class="why-failed-card__tag">Motivo 4</span>
+        </div>
+        <div class="why-failed-card__body">
+          <h3 class="why-failed-card__title">Non Hai Mai Rimosso la Causa</h3>
+          <p class="why-failed-card__text">Gonfiore, stanchezza, annebbiamento mentale: non sono casuali. Sono i sintomi di qualcosa che vive dentro di te. Finch&eacute; non viene rimosso, nulla cambia davvero.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <a href="#pricebox" class="cta-btn">Prova l&rsquo;Eliminazione dei Parassiti Senza Rischi Oggi</a>
+      <div class="guarantee">
+        <img src="https://cdn.shopify.com/s/files/1/0594/2414/5480/files/icon-yes_430x.png?v=1774356057" alt="">
+        <p>Garanzia di rimborso di 30 giorni</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     6. CAROSELLO MEDIA
+     ============================================================ -->
+<div id="mediaCarousel" class="mc2-outer">
+  <div class="mc2-inner">
+    <h2 class="mc2-title">I Media sull&rsquo;Eliminazione dei Parassiti</h2>
+  </div>
+
+  <div class="mc2-stage">
+    <button class="mc2-btn mc2-btn--prev" aria-label="Precedente">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.825 9L9.425 14.6L8 16L0 8L8 0L9.425 1.4L3.825 7H16V9H3.825Z" fill="currentColor"/></svg>
+    </button>
+
+    <div class="mc2-viewport">
+      <div class="mc2-track">
+        <div class="mc2-slide">
+          <div class="mc2-card">
+            <p class="mc2-card__quote">&laquo;L&rsquo;approccio di Holior si concentra su un problema che la maggior parte dei prodotti trascura: l&rsquo;intero ciclo vitale del parassita. Agendo su adulti, larve e uova, spiega perch&eacute; i sintomi continuano a ripresentarsi.&raquo;</p>
+            <div class="mc2-card__logo"><img src="https://holior.com/cdn/shop/files/logo--3_300x.png?v=1774359851" alt="" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="mc2-slide">
+          <div class="mc2-card">
+            <p class="mc2-card__quote">&laquo;A differenza dei trattamenti tradizionali, Holior combina pi&ugrave; estratti vegetali che agiscono sulle diverse fasi dell&rsquo;attivit&agrave; parassitaria, non su una sola.&raquo;</p>
+            <div class="mc2-card__logo-text">The New York Times</div>
+          </div>
+        </div>
+        <div class="mc2-slide">
+          <div class="mc2-card">
+            <p class="mc2-card__quote">&laquo;Ci&ograve; che distingue Holior &egrave; la presenza dell&rsquo;eugenolo derivato dai chiodi di garofano, fondamentale per agire sulle uova dei parassiti: uno dei motivi per cui molti protocolli falliscono.&raquo;</p>
+            <div class="mc2-card__logo"><img src="https://holior.com/cdn/shop/files/logo--3_300x.png?v=1774359851" alt="" loading="lazy"></div>
+          </div>
+        </div>
+        <div class="mc2-slide">
+          <div class="mc2-card">
+            <p class="mc2-card__quote">&laquo;Con la sua formula multi-ingrediente e il supporto alla riparazione intestinale, Holior va oltre la semplice eliminazione: aiuta a ristabilire l&rsquo;equilibrio dopo la rimozione dei parassiti.&raquo;</p>
+            <div class="mc2-card__logo"><img src="https://holior.com/cdn/shop/files/logo--5_300x.png?v=1774359877" alt="" loading="lazy"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="mc2-btn mc2-btn--next" aria-label="Successivo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M16.175 11L10.575 5.4L12 4L20 12L12 20L10.575 18.6L16.175 13H4V11H16.175Z" fill="currentColor"/></svg>
+    </button>
+  </div>
+
+  <div class="mc2-inner"><div class="mc2-dots"></div></div>
+</div>
+
+<!-- ============================================================
+     7. PERCHÉ È IMPORTANTE
+     ============================================================ -->
+<div class="restore-outer">
+  <div class="restore-inner">
+    <div class="restore-header">
+      <h2 class="restore-title">Perch&eacute; Eliminare i Parassiti &Egrave; Importante Oggi</h2>
+      <p class="restore-subtitle">Un problema nascosto che influisce ogni giorno su come ti senti.</p>
+    </div>
+
+    <div class="restore-grid">
+      <div class="restore-card">
+        <div class="restore-card__image"><img src="https://holior.com/cdn/shop/files/bf9d5ad6fe54a420dd95cc2df702f99b2134b54a_800x.png?v=1775551245" alt="" loading="lazy" width="800" height="600"></div>
+        <div class="restore-card__body">
+          <span class="restore-card__tag">Elimina</span>
+          <h3 class="restore-card__title">Rimuovi Ci&ograve; che Prosciuga il Tuo Corpo</h3>
+          <p class="restore-card__text">I parassiti si attaccano all&rsquo;intestino, si nutrono dei tuoi nutrienti e alterano digestione ed energia. Holior li colpisce direttamente, aiutando a eliminare ci&ograve; che in silenzio stava condizionando il funzionamento del tuo corpo.</p>
+        </div>
+      </div>
+
+      <div class="restore-card">
+        <div class="restore-card__image"><img src="https://holior.com/cdn/shop/files/79112398d6f79b1044f928acdb6366c52bdd1d2b_800x.png?v=1775551246" alt="" loading="lazy" width="800" height="600"></div>
+        <div class="restore-card__body">
+          <span class="restore-card__tag">Interrompi</span>
+          <h3 class="restore-card__title">Interrompi il Ciclo Vitale del Parassita</h3>
+          <p class="restore-card__text">La maggior parte dei prodotti fallisce perch&eacute; ignora le uova. Holior agisce su adulti, larve e uova microscopiche, fermando il ciclo affinch&eacute; non riparta qualche settimana dopo.</p>
+        </div>
+      </div>
+
+      <div class="restore-card">
+        <div class="restore-card__image"><img src="https://holior.com/cdn/shop/files/why--3_800x.jpg?v=1774360252" alt="" loading="lazy" width="800" height="600"></div>
+        <div class="restore-card__body">
+          <span class="restore-card__tag">Ripristina</span>
+          <h3 class="restore-card__title">Riporta il Tuo Corpo in Equilibrio</h3>
+          <p class="restore-card__text">Una volta eliminati i parassiti, il tuo corpo pu&ograve; tornare a funzionare normalmente: digestione migliore, energia stabile, pensieri pi&ugrave; lucidi e un organismo pi&ugrave; leggero ed equilibrato.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     8. CONFRONTO PRIMA / DOPO
+     ============================================================ -->
+<div class="compare-pills-outer">
+  <div class="compare-pills-inner">
+    <div class="compare-pills-layout">
+      <div class="compare-pills-left">
+        <h2 class="compare-pills-title">Quando i Parassiti Vengono Eliminati, Tutto il Corpo Se Ne Accorge</h2>
+        <p class="compare-pills-subtitle">Lo noti nella digestione, nell&rsquo;energia, nella concentrazione e in come ti senti giorno dopo giorno. Guarda la differenza tra un corpo che convive con i parassiti e uno finalmente libero.</p>
+
+        <div class="pill-rows">
+          <div class="pill-row">
+            <div class="pill pill--bad"><span class="pill__icon">&#10005;</span><span>Gonfiore e stomaco pesante</span></div>
+            <img src="https://cdn.shopify.com/s/files/1/0795/2003/9125/files/right.png?v=1773170960" class="pill-arrow" alt="">
+            <div class="pill pill--good">
+              <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 10.5394C3.34453 14.1581 6.58734 17.4159 9.70453 21.5363C13.0936 14.7956 16.5623 8.03156 22.2858 0.706406L20.7436 0C15.9108 5.12531 12.1561 9.97688 8.89359 15.7425C6.62484 13.6988 2.95828 10.8066 0.719531 9.32063L0 10.5394Z" fill="#C9DE80"/></svg>
+              <span>Digestione piatta e confortevole</span>
+            </div>
+          </div>
+
+          <div class="pill-row">
+            <div class="pill pill--bad"><span class="pill__icon">&#10005;</span><span>Annebbiamento mentale</span></div>
+            <img src="https://cdn.shopify.com/s/files/1/0795/2003/9125/files/right.png?v=1773170960" class="pill-arrow" alt="">
+            <div class="pill pill--good">
+              <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 10.5394C3.34453 14.1581 6.58734 17.4159 9.70453 21.5363C13.0936 14.7956 16.5623 8.03156 22.2858 0.706406L20.7436 0C15.9108 5.12531 12.1561 9.97688 8.89359 15.7425C6.62484 13.6988 2.95828 10.8066 0.719531 9.32063L0 10.5394Z" fill="#C9DE80"/></svg>
+              <span>Pensiero lucido e reattivo</span>
+            </div>
+          </div>
+
+          <div class="pill-row">
+            <div class="pill pill--bad"><span class="pill__icon">&#10005;</span><span>Stanchezza costante</span></div>
+            <img src="https://cdn.shopify.com/s/files/1/0795/2003/9125/files/right.png?v=1773170960" class="pill-arrow" alt="">
+            <div class="pill pill--good">
+              <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 10.5394C3.34453 14.1581 6.58734 17.4159 9.70453 21.5363C13.0936 14.7956 16.5623 8.03156 22.2858 0.706406L20.7436 0C15.9108 5.12531 12.1561 9.97688 8.89359 15.7425C6.62484 13.6988 2.95828 10.8066 0.719531 9.32063L0 10.5394Z" fill="#C9DE80"/></svg>
+              <span>Energia stabile e naturale</span>
+            </div>
+          </div>
+
+          <div class="pill-row">
+            <div class="pill pill--bad"><span class="pill__icon">&#10005;</span><span>Sensazione di essere fuori sintonia</span></div>
+            <img src="https://cdn.shopify.com/s/files/1/0795/2003/9125/files/right.png?v=1773170960" class="pill-arrow" alt="">
+            <div class="pill pill--good">
+              <svg viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 10.5394C3.34453 14.1581 6.58734 17.4159 9.70453 21.5363C13.0936 14.7956 16.5623 8.03156 22.2858 0.706406L20.7436 0C15.9108 5.12531 12.1561 9.97688 8.89359 15.7425C6.62484 13.6988 2.95828 10.8066 0.719531 9.32063L0 10.5394Z" fill="#C9DE80"/></svg>
+              <span>Corpo equilibrato e sotto controllo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-wrap" style="align-items:flex-start">
+          <a href="#pricebox" class="cta-btn">Prova l&rsquo;Eliminazione dei Parassiti Senza Rischi Oggi</a>
+          <div class="guarantee">
+            <img src="https://cdn.shopify.com/s/files/1/0594/2414/5480/files/icon-yes_430x.png?v=1774356057" alt="">
+            <p>Garanzia di rimborso di 30 giorni</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-pills-right">
+        <video class="compare-pills-video" autoplay muted loop playsinline>
+          <source src="https://cdn.shopify.com/videos/c/o/v/f21f69d593e645b2988e23591c3efdb5.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     9. ESPERTI / CICLO VITALE
+     ============================================================ -->
+<div class="experts-outer">
+  <div class="experts-inner">
+    <div class="experts-header">
+      <h2 class="experts-title">Scopri Perch&eacute; gli Esperti Scelgono Holior per un&rsquo;Eliminazione Completa dei Parassiti</h2>
+      <p class="experts-subtitle">L&rsquo;intero ciclo vitale del parassita</p>
+    </div>
+
+    <div class="experts-layout">
+      <div class="experts-left">
+        <img src="https://holior.com/cdn/shop/files/LEFT__Image_1_800x.png?v=1775560075" loading="lazy" class="experts-img" width="800" height="900" alt="">
+      </div>
+
+      <div class="experts-right">
+        <h3 class="experts-block-title">Il tuo corpo &egrave; coinvolto in un ciclo continuo:</h3>
+        <p class="experts-block-intro"><span class="highlight-underline">I parassiti entrano &rarr; si attaccano &rarr; si moltiplicano &rarr; depongono le uova &rarr; tutto ricomincia</span></p>
+        <p class="experts-block-secondary"><span class="bold">La maggior parte dei trattamenti antiparassitari fallisce perch&eacute; non affronta l&rsquo;intero ciclo vitale.</span> Holior &egrave; stato formulato esattamente per farlo.</p>
+
+        <ul class="experts-block-list">
+          <li>
+            <img src="https://holior.com/cdn/shop/files/pill-check_40x.png?v=1774361076" alt="" class="experts-list-icon">
+            <span><span class="bold">Colpisce i parassiti adulti</span> &ndash; assenzio e mallo di noce nera aiutano a disgregare gli organismi attivi</span>
+          </li>
+          <li>
+            <img src="https://holior.com/cdn/shop/files/pill-check_40x.png?v=1774361076" alt="" class="experts-list-icon">
+            <span><span class="bold">Favorisce il distacco dei parassiti</span> &ndash; i semi di zucca aiutano i parassiti a staccarsi dalla parete intestinale</span>
+          </li>
+          <li>
+            <img src="https://holior.com/cdn/shop/files/pill-check_40x.png?v=1774361076" alt="" class="experts-list-icon">
+            <span><span class="bold">Elimina le uova nascoste</span> &ndash; i chiodi di garofano agiscono sulle uova microscopiche responsabili della reinfestazione</span>
+          </li>
+          <li>
+            <img src="https://holior.com/cdn/shop/files/pill-check_40x.png?v=1774361076" alt="" class="experts-list-icon">
+            <span><span class="bold">Sostiene il recupero intestinale</span> &ndash; la L-glutammina aiuta a riparare la mucosa intestinale</span>
+          </li>
+          <li>
+            <img src="https://holior.com/cdn/shop/files/pill-check_40x.png?v=1774361076" alt="" class="experts-list-icon">
+            <span><span class="bold">Crea un ambiente interno ostile</span> &ndash; i composti botanici rendono difficile la sopravvivenza</span>
+          </li>
+          <li>
+            <img src="https://holior.com/cdn/shop/files/pill-check_40x.png?v=1774361076" alt="" class="experts-list-icon">
+            <span><span class="bold">Aiuta a impedire che il ciclo riparta</span> &ndash; affrontando ogni fase, non solo i sintomi</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="experts-block-bold">Ecco perch&eacute; Holior non &egrave; l&rsquo;ennesimo trattamento: &egrave; un approccio completo all&rsquo;eliminazione dei parassiti, pensato per eliminare e prevenire la reinfestazione.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     10. INGREDIENTI
+     ============================================================ -->
+<div class="nutrient-outer">
+  <div class="nutrient-inner">
+    <div class="nutrient-header">
+      <h2 class="nutrient-title">Super Complesso di Assenzio, Mallo di Noce Nera e Chiodi di Garofano<br class="d-none d-lg-block"> Creato per Spezzare il Ciclo del Parassita in Ogni Fase</h2>
+      <p class="nutrient-subtitle">Insieme, i composti erboristici selezionati da Holior agiscono in sinergia per aiutare a eliminare i parassiti e ristabilire l&rsquo;equilibrio interno, sostenendo intestino, energia, pelle e vitalit&agrave; generale dall&rsquo;interno.</p>
+    </div>
+
+    <div class="nutrient-grid">
+      <div class="nutrient-card">
+        <div class="nutrient-card__header"><h3 class="nutrient-card__name">Estratto di Assenzio</h3></div>
+        <div class="nutrient-card__vs-row"><img src="https://holior.com/cdn/shop/files/3c49318c28d919e659120657707779c286388566_300x.png?v=1775554878" alt="Estratto di Assenzio" loading="lazy"></div>
+        <div class="nutrient-card__stat">Erba depurativa antiparassitaria mirata</div>
+        <ul class="nutrient-card__list">
+          <li>Aiuta a contrastare i parassiti attivi nell&rsquo;organismo</li>
+          <li>Sostiene la depurazione e l&rsquo;equilibrio interno</li>
+          <li>Aiuta a ridurre la sensazione di pesantezza e fastidio</li>
+          <li>Favorisce un ambiente intestinale pi&ugrave; pulito e stabile</li>
+        </ul>
+      </div>
+
+      <div class="nutrient-card">
+        <div class="nutrient-card__header"><h3 class="nutrient-card__name">Mallo di Noce Nera</h3></div>
+        <div class="nutrient-card__vs-row"><img src="https://holior.com/cdn/shop/files/fa85e8a9f113a660de01b8474568c33f0faefcda_300x.png?v=1775554878" alt="Mallo di Noce Nera" loading="lazy"></div>
+        <div class="nutrient-card__stat">Composto depurativo della tradizione</div>
+        <ul class="nutrient-card__list">
+          <li>Aiuta a creare un ambiente ostile ai parassiti</li>
+          <li>Sostiene la depurazione dell&rsquo;apparato digerente</li>
+          <li>Aiuta a ridurre accumuli e squilibri interni</li>
+          <li>Favorisce chiarezza e funzionalit&agrave; intestinale</li>
+        </ul>
+      </div>
+
+      <div class="nutrient-card">
+        <div class="nutrient-card__header"><h3 class="nutrient-card__name">Estratto di Chiodi di Garofano</h3></div>
+        <div class="nutrient-card__vs-row"><img src="https://holior.com/cdn/shop/files/9313c77232456311d81f7f9f80c3ce70e04653f1_300x.png?v=1775554878" alt="Estratto di Chiodi di Garofano" loading="lazy"></div>
+        <div class="nutrient-card__stat">Composto che agisce sul ciclo vitale</div>
+        <ul class="nutrient-card__list">
+          <li>Aiuta a colpire le uova nascoste dei parassiti</li>
+          <li>Sostiene una depurazione pi&ugrave; profonda, oltre la superficie</li>
+          <li>Aiuta a impedire che il ciclo prosegua</li>
+          <li>Favorisce l&rsquo;equilibrio interno a lungo termine</li>
+        </ul>
+      </div>
+
+      <div class="nutrient-card">
+        <div class="nutrient-card__header"><h3 class="nutrient-card__name">Estratto di Semi di Zucca</h3></div>
+        <div class="nutrient-card__vs-row"><img src="https://holior.com/cdn/shop/files/a0436b72cc218cb80b37c70e8fe9ef6faef26f57_300x.png?v=1775554877" alt="Estratto di Semi di Zucca" loading="lazy"></div>
+        <div class="nutrient-card__stat">Supporto naturale al distacco</div>
+        <ul class="nutrient-card__list">
+          <li>Aiuta i parassiti a staccarsi dalla parete intestinale</li>
+          <li>Sostiene un&rsquo;eliminazione pi&ugrave; fluida dall&rsquo;organismo</li>
+          <li>Favorisce comfort e regolarit&agrave; digestiva</li>
+          <li>Aiuta a ridurre gonfiore e pressione interna</li>
+        </ul>
+      </div>
+
+      <div class="nutrient-card">
+        <div class="nutrient-card__header"><h3 class="nutrient-card__name">Olio di Origano</h3></div>
+        <div class="nutrient-card__vs-row"><img src="https://holior.com/cdn/shop/files/oregano_300x.png?v=1785418787" alt="Olio di Origano" loading="lazy"></div>
+        <div class="nutrient-card__stat">Supporto naturale all&rsquo;equilibrio microbico</div>
+        <ul class="nutrient-card__list">
+          <li>Aiuta a mantenere un microbiota intestinale equilibrato</li>
+          <li>Tradizionalmente usato per sostenere salute digestiva e intestinale</li>
+          <li>Favorisce un ambiente migliore per l&rsquo;assorbimento dei nutrienti</li>
+          <li>Aiuta a sostenere il corretto utilizzo del ferro e il recupero della ferritina</li>
+        </ul>
+      </div>
+
+      <div class="nutrient-card">
+        <div class="nutrient-card__header"><h3 class="nutrient-card__name">Complesso Erboristico Sinergico</h3></div>
+        <div class="nutrient-card__vs-row"><img src="https://holior.com/cdn/shop/files/fda81dd5a9c49e8a34888ce943c3fb25e81234dd_300x.png?v=1775554878" alt="Complesso Erboristico Sinergico" loading="lazy"></div>
+        <div class="nutrient-card__stat">Supporto combinato su tutto il ciclo</div>
+        <ul class="nutrient-card__list">
+          <li>Agisce sull&rsquo;intero ciclo vitale del parassita, non su una sola fase</li>
+          <li>Aiuta a ristabilire equilibrio e stabilit&agrave; intestinale</li>
+          <li>Sostiene energia, lucidit&agrave; e vitalit&agrave; naturali</li>
+          <li>Favorisce un corpo pi&ugrave; pulito, leggero e resistente</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-wrap">
+    <a href="#pricebox" class="cta-btn">Prova l&rsquo;Eliminazione dei Parassiti Senza Rischi Oggi</a>
+    <div class="guarantee">
+      <img src="https://cdn.shopify.com/s/files/1/0594/2414/5480/files/icon-yes_430x.png?v=1774356057" alt="">
+      <p>Garanzia di rimborso di 30 giorni</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     11. STATISTICHE
+     ============================================================ -->
+<div class="stats-outer">
+  <div class="page-width">
+    <div class="stats-layout">
+      <div class="stats-left">
+        <div class="stats-grid">
+          <div class="stat-cell">
+            <h2 class="block-title">95%</h2>
+            <span class="stat-underline"></span>
+            <p>Ha eliminato il gonfiore e si &egrave; sentito pi&ugrave; leggero nel giro di pochi giorni*</p>
+          </div>
+          <div class="stat-cell">
+            <h2 class="block-title">87%</h2>
+            <span class="stat-underline"></span>
+            <p>Ha ritrovato un&rsquo;energia costante, senza cali n&eacute; stanchezza*</p>
+          </div>
+          <div class="stat-cell">
+            <h2 class="block-title">91%</h2>
+            <span class="stat-underline"></span>
+            <p>Ha notato una pelle pi&ugrave; pulita e un colorito visibilmente pi&ugrave; sano*</p>
+          </div>
+          <div class="stat-cell">
+            <h2 class="block-title">84%</h2>
+            <span class="stat-underline"></span>
+            <p>Ha sperimentato pi&ugrave; vitalit&agrave;, slancio e rendimento quotidiano*</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-right">
+        <h2 class="section-title">Sistema Completo di Eliminazione dei Parassiti di Ispirazione Clinica*</h2>
+        <p class="section-text">Il <span class="bold">Super Complesso di Assenzio, Mallo di Noce Nera e Chiodi di Garofano</span> di Holior &egrave; costruito per fare ci&ograve; che la maggior parte dei trattamenti non riesce a fare: <span class="bold">spezzare il ciclo del parassita in ogni fase.</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     12. TABELLA COMPARATIVA
+     ============================================================ -->
+<div class="compare-table-outer">
+  <div class="compare-table-inner">
+    <p class="compare-table-eyebrow">Perch&eacute; le persone scelgono Holior</p>
+    <h2 class="compare-table-title">L&rsquo;Unico Approccio che Agisce sulla Causa Profonda:<br class="d-none d-lg-block"> il Ciclo Vitale del Parassita</h2>
+
+    <div class="compare-table-layout">
+      <div class="compare-table-left">
+        <div class="ct-carousel" id="ctCarousel">
+          <div class="ct-carousel__slides">
+
+            <div class="ct-carousel__slide is-active" data-index="0">
+              <div class="ct-carousel__img-wrap">
+                <img src="https://holior.com/cdn/shop/files/review_carousel_1_800x.png?v=1786628763" alt="Rachele D., Milano" loading="lazy" class="ct-carousel__img">
+                <button class="ct-carousel__arrow ct-carousel__arrow--prev" aria-label="Precedente"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="#184D54" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="ct-carousel__arrow ct-carousel__arrow--next" aria-label="Successivo"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="#184D54" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+              <div class="ct-carousel__testimonial">
+                <div class="ct-carousel__stars"></div>
+                <p class="ct-carousel__quote">&laquo;La mia pelle, la mia digestione, perfino come mi sento dopo i pasti: tutto &egrave; semplicemente pi&ugrave; equilibrato. Non &egrave; successo da un giorno all&rsquo;altro, ma una mattina mi sono guardata allo specchio e ho capito di avere un aspetto pi&ugrave; sano.&raquo;</p>
+                <p class="ct-carousel__name"><strong>Rachele D., Milano</strong></p>
+              </div>
+            </div>
+
+            <div class="ct-carousel__slide" data-index="1">
+              <div class="ct-carousel__img-wrap">
+                <img src="https://holior.com/cdn/shop/files/review_carousel_2_800x.png?v=1786628763" alt="Antonio S., Torino" loading="lazy" class="ct-carousel__img">
+                <button class="ct-carousel__arrow ct-carousel__arrow--prev" aria-label="Precedente"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="#184D54" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="ct-carousel__arrow ct-carousel__arrow--next" aria-label="Successivo"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="#184D54" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+              <div class="ct-carousel__testimonial">
+                <div class="ct-carousel__stars"></div>
+                <p class="ct-carousel__quote">&laquo;Non mi ero reso conto di quanto stessi male finch&eacute; non ho ricominciato a sentirmi normale. Pi&ugrave; leggero, pi&ugrave; concentrato, di umore migliore. &Egrave; difficile da spiegare, ma mi sento di nuovo me stesso.&raquo;</p>
+                <p class="ct-carousel__name"><strong>Antonio S., Torino</strong></p>
+              </div>
+            </div>
+
+            <div class="ct-carousel__slide" data-index="2">
+              <div class="ct-carousel__img-wrap">
+                <img src="https://holior.com/cdn/shop/files/review_carousel_4_800x.png?v=1786628763" alt="Melissa C., Napoli" loading="lazy" class="ct-carousel__img">
+                <button class="ct-carousel__arrow ct-carousel__arrow--prev" aria-label="Precedente"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="#184D54" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="ct-carousel__arrow ct-carousel__arrow--next" aria-label="Successivo"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="#184D54" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+              <div class="ct-carousel__testimonial">
+                <div class="ct-carousel__stars"></div>
+                <p class="ct-carousel__quote">&laquo;Mi svegliavo gi&agrave; gonfia, come se il mio stomaco non fosse mai davvero a posto. Sembra una sciocchezza, ma condizionava tutto: come mi vestivo, come mi sentivo. Dopo qualche settimana mi sono svegliata e ho capito&hellip; era sparito. Quella sensazione di pesantezza non c&rsquo;era pi&ugrave;.&raquo;</p>
+                <p class="ct-carousel__name"><strong>Melissa C., Napoli</strong></p>
+              </div>
+            </div>
+
+            <div class="ct-carousel__slide" data-index="3">
+              <div class="ct-carousel__img-wrap">
+                <img src="https://holior.com/cdn/shop/files/review_carousel_3_800x.png?v=1786628763" alt="Giordano P., Roma" loading="lazy" class="ct-carousel__img">
+                <button class="ct-carousel__arrow ct-carousel__arrow--prev" aria-label="Precedente"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M9 1L1 9L9 17" stroke="#184D54" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <button class="ct-carousel__arrow ct-carousel__arrow--next" aria-label="Successivo"><svg xmlns="http://www.w3.org/2000/svg" width="10" height="18" viewBox="0 0 10 18" fill="none"><path d="M1 1L9 9L1 17" stroke="#184D54" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+              <div class="ct-carousel__testimonial">
+                <div class="ct-carousel__stars"></div>
+                <p class="ct-carousel__quote">&laquo;Verso le 14-15 ogni giorno ero finito. Testa annebbiata, zero energie, andavo avanti a fatica. Pensavo fosse normale. Adesso arrivo a fine giornata senza quel crollo e mi sento di nuovo lucido.&raquo;</p>
+                <p class="ct-carousel__name"><strong>Giordano P., Roma</strong></p>
+              </div>
+            </div>
+
+          </div>
+          <div class="ct-carousel__dots">
+            <button class="ct-carousel__dot is-active" data-index="0" aria-label="Recensione 1"></button>
+            <button class="ct-carousel__dot" data-index="1" aria-label="Recensione 2"></button>
+            <button class="ct-carousel__dot" data-index="2" aria-label="Recensione 3"></button>
+            <button class="ct-carousel__dot" data-index="3" aria-label="Recensione 4"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-table-right">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th class="compare-table__feature-col"></th>
+              <th class="compare-table__brand-col">
+                <div class="compare-table__brand-pill">
+                  <img src="https://holior.com/cdn/shop/files/white-logo_200x.png?v=1774373673" alt="Holior" class="compare-table__header-logo">
+                  <img src="https://holior.com/cdn/shop/files/1bag_90_200x.png?v=1786630117" alt="" class="compare-table__header-img">
+                </div>
+              </th>
+              <th class="compare-table__other-col">
+                <div class="compare-table__other-label">
+                  <span>Farmaci e multivitaminici</span>
+                  <img src="https://holior.com/cdn/shop/files/other-products_200x.png?v=1774373723" alt="" class="compare-table__header-img">
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="compare-table__row">
+              <td class="compare-table__feature">Agisce sull&rsquo;intero ciclo vitale del parassita, non solo sui sintomi</td>
+              <td class="compare-table__check compare-table__check--brand"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none"><path d="M0 10.5394C3.34453 14.1581 6.58734 17.4159 9.70453 21.5363C13.0936 14.7956 16.5623 8.03156 22.2858 0.706406L20.7436 0C15.9108 5.12531 12.1561 9.97688 8.89359 15.7425C6.62484 13.6988 2.95828 10.8066 0.719531 9.32063L0 10.5394Z" fill="#C9DE80"/></svg></span></td>
+              <td class="compare-table__check compare-table__check--other"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none"><path d="M18.7964 18.9629C18.0138 17.0051 15.614 13.4639 12.9984 9.93311C15.4658 7.10431 17.7044 4.52771 18.2868 3.79971C19.462 2.33071 19.3814 1.70151 17.1792 1.69111C15.601 1.68331 15.055 1.49351 14.0098 2.58811C13.3962 3.23031 12.0754 4.8033 10.557 6.7195C8.12861 3.5891 5.62408 1.8439 4.67768 0.850698C3.32568 -0.566302 0.993307 0.214745 0.993307 0.214745C0.993307 0.214745 -0.938105 1.26774 0.585496 3.16834C1.4331 4.22915 3.80481 6.61551 7.45001 10.7911C5.56501 13.3625 3.88021 15.8793 3.31081 17.3067C2.55681 19.1943 4.23381 20.0185 5.66121 18.3545C6.44641 17.4367 8.04541 15.6063 9.85241 13.5367C12.3848 16.4357 14.6676 19.0513 15.7544 20.3201C17.6004 22.4729 19.774 21.4069 18.7964 18.9629Z" fill="#B30007"/></svg></span></td>
+            </tr>
+            <tr class="compare-table__row">
+              <td class="compare-table__feature">Aiuta a eliminare parassiti, larve e uova nascoste</td>
+              <td class="compare-table__check compare-table__check--brand"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none"><path d="M0 10.5394C3.34453 14.1581 6.58734 17.4159 9.70453 21.5363C13.0936 14.7956 16.5623 8.03156 22.2858 0.706406L20.7436 0C15.9108 5.12531 12.1561 9.97688 8.89359 15.7425C6.62484 13.6988 2.95828 10.8066 0.719531 9.32063L0 10.5394Z" fill="#C9DE80"/></svg></span></td>
+              <td class="compare-table__check compare-table__check--other"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none"><path d="M18.7964 18.9629C18.0138 17.0051 15.614 13.4639 12.9984 9.93311C15.4658 7.10431 17.7044 4.52771 18.2868 3.79971C19.462 2.33071 19.3814 1.70151 17.1792 1.69111C15.601 1.68331 15.055 1.49351 14.0098 2.58811C13.3962 3.23031 12.0754 4.8033 10.557 6.7195C8.12861 3.5891 5.62408 1.8439 4.67768 0.850698C3.32568 -0.566302 0.993307 0.214745 0.993307 0.214745C0.993307 0.214745 -0.938105 1.26774 0.585496 3.16834C1.4331 4.22915 3.80481 6.61551 7.45001 10.7911C5.56501 13.3625 3.88021 15.8793 3.31081 17.3067C2.55681 19.1943 4.23381 20.0185 5.66121 18.3545C6.44641 17.4367 8.04541 15.6063 9.85241 13.5367C12.3848 16.4357 14.6676 19.0513 15.7544 20.3201C17.6004 22.4729 19.774 21.4069 18.7964 18.9629Z" fill="#B30007"/></svg></span></td>
+            </tr>
+            <tr class="compare-table__row">
+              <td class="compare-table__feature">Interrompe il ciclo di reinfestazione alla radice</td>
+              <td class="compare-table__check compare-table__check--brand"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none"><path d="M0 10.5394C3.34453 14.1581 6.58734 17.4159 9.70453 21.5363C13.0936 14.7956 16.5623 8.03156 22.2858 0.706406L20.7436 0C15.9108 5.12531 12.1561 9.97688 8.89359 15.7425C6.62484 13.6988 2.95828 10.8066 0.719531 9.32063L0 10.5394Z" fill="#C9DE80"/></svg></span></td>
+              <td class="compare-table__check compare-table__check--other"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none"><path d="M18.7964 18.9629C18.0138 17.0051 15.614 13.4639 12.9984 9.93311C15.4658 7.10431 17.7044 4.52771 18.2868 3.79971C19.462 2.33071 19.3814 1.70151 17.1792 1.69111C15.601 1.68331 15.055 1.49351 14.0098 2.58811C13.3962 3.23031 12.0754 4.8033 10.557 6.7195C8.12861 3.5891 5.62408 1.8439 4.67768 0.850698C3.32568 -0.566302 0.993307 0.214745 0.993307 0.214745C0.993307 0.214745 -0.938105 1.26774 0.585496 3.16834C1.4331 4.22915 3.80481 6.61551 7.45001 10.7911C5.56501 13.3625 3.88021 15.8793 3.31081 17.3067C2.55681 19.1943 4.23381 20.0185 5.66121 18.3545C6.44641 17.4367 8.04541 15.6063 9.85241 13.5367C12.3848 16.4357 14.6676 19.0513 15.7544 20.3201C17.6004 22.4729 19.774 21.4069 18.7964 18.9629Z" fill="#B30007"/></svg></span></td>
+            </tr>
+            <tr class="compare-table__row">
+              <td class="compare-table__feature">Sostiene la riparazione intestinale e l&rsquo;equilibrio interno dopo la depurazione</td>
+              <td class="compare-table__check compare-table__check--brand"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none"><path d="M0 10.5394C3.34453 14.1581 6.58734 17.4159 9.70453 21.5363C13.0936 14.7956 16.5623 8.03156 22.2858 0.706406L20.7436 0C15.9108 5.12531 12.1561 9.97688 8.89359 15.7425C6.62484 13.6988 2.95828 10.8066 0.719531 9.32063L0 10.5394Z" fill="#C9DE80"/></svg></span></td>
+              <td class="compare-table__check compare-table__check--other"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none"><path d="M18.7964 18.9629C18.0138 17.0051 15.614 13.4639 12.9984 9.93311C15.4658 7.10431 17.7044 4.52771 18.2868 3.79971C19.462 2.33071 19.3814 1.70151 17.1792 1.69111C15.601 1.68331 15.055 1.49351 14.0098 2.58811C13.3962 3.23031 12.0754 4.8033 10.557 6.7195C8.12861 3.5891 5.62408 1.8439 4.67768 0.850698C3.32568 -0.566302 0.993307 0.214745 0.993307 0.214745C0.993307 0.214745 -0.938105 1.26774 0.585496 3.16834C1.4331 4.22915 3.80481 6.61551 7.45001 10.7911C5.56501 13.3625 3.88021 15.8793 3.31081 17.3067C2.55681 19.1943 4.23381 20.0185 5.66121 18.3545C6.44641 17.4367 8.04541 15.6063 9.85241 13.5367C12.3848 16.4357 14.6676 19.0513 15.7544 20.3201C17.6004 22.4729 19.774 21.4069 18.7964 18.9629Z" fill="#B30007"/></svg></span></td>
+            </tr>
+            <tr class="compare-table__row">
+              <td class="compare-table__feature">Ripristina energia, lucidit&agrave; e vitalit&agrave; quotidiana naturali</td>
+              <td class="compare-table__check compare-table__check--brand"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none"><path d="M0 10.5394C3.34453 14.1581 6.58734 17.4159 9.70453 21.5363C13.0936 14.7956 16.5623 8.03156 22.2858 0.706406L20.7436 0C15.9108 5.12531 12.1561 9.97688 8.89359 15.7425C6.62484 13.6988 2.95828 10.8066 0.719531 9.32063L0 10.5394Z" fill="#C9DE80"/></svg></span></td>
+              <td class="compare-table__check compare-table__check--other"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none"><path d="M18.7964 18.9629C18.0138 17.0051 15.614 13.4639 12.9984 9.93311C15.4658 7.10431 17.7044 4.52771 18.2868 3.79971C19.462 2.33071 19.3814 1.70151 17.1792 1.69111C15.601 1.68331 15.055 1.49351 14.0098 2.58811C13.3962 3.23031 12.0754 4.8033 10.557 6.7195C8.12861 3.5891 5.62408 1.8439 4.67768 0.850698C3.32568 -0.566302 0.993307 0.214745 0.993307 0.214745C0.993307 0.214745 -0.938105 1.26774 0.585496 3.16834C1.4331 4.22915 3.80481 6.61551 7.45001 10.7911C5.56501 13.3625 3.88021 15.8793 3.31081 17.3067C2.55681 19.1943 4.23381 20.0185 5.66121 18.3545C6.44641 17.4367 8.04541 15.6063 9.85241 13.5367C12.3848 16.4357 14.6676 19.0513 15.7544 20.3201C17.6004 22.4729 19.774 21.4069 18.7964 18.9629Z" fill="#B30007"/></svg></span></td>
+            </tr>
+            <tr class="compare-table__row">
+              <td class="compare-table__feature">Lavora con il tuo corpo per un reset completo dall&rsquo;interno</td>
+              <td class="compare-table__check compare-table__check--brand"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="23" height="22" viewBox="0 0 23 22" fill="none"><path d="M0 10.5394C3.34453 14.1581 6.58734 17.4159 9.70453 21.5363C13.0936 14.7956 16.5623 8.03156 22.2858 0.706406L20.7436 0C15.9108 5.12531 12.1561 9.97688 8.89359 15.7425C6.62484 13.6988 2.95828 10.8066 0.719531 9.32063L0 10.5394Z" fill="#C9DE80"/></svg></span></td>
+              <td class="compare-table__check compare-table__check--other"><span class="compare-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none"><path d="M18.7964 18.9629C18.0138 17.0051 15.614 13.4639 12.9984 9.93311C15.4658 7.10431 17.7044 4.52771 18.2868 3.79971C19.462 2.33071 19.3814 1.70151 17.1792 1.69111C15.601 1.68331 15.055 1.49351 14.0098 2.58811C13.3962 3.23031 12.0754 4.8033 10.557 6.7195C8.12861 3.5891 5.62408 1.8439 4.67768 0.850698C3.32568 -0.566302 0.993307 0.214745 0.993307 0.214745C0.993307 0.214745 -0.938105 1.26774 0.585496 3.16834C1.4331 4.22915 3.80481 6.61551 7.45001 10.7911C5.56501 13.3625 3.88021 15.8793 3.31081 17.3067C2.55681 19.1943 4.23381 20.0185 5.66121 18.3545C6.44641 17.4367 8.04541 15.6063 9.85241 13.5367C12.3848 16.4357 14.6676 19.0513 15.7544 20.3201C17.6004 22.4729 19.774 21.4069 18.7964 18.9629Z" fill="#B30007"/></svg></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-wrap">
+    <a href="#pricebox" class="cta-btn">Prova l&rsquo;Eliminazione dei Parassiti Senza Rischi Oggi</a>
+    <div class="guarantee">
+      <img src="https://cdn.shopify.com/s/files/1/0594/2414/5480/files/icon-yes_430x.png?v=1774356057" alt="">
+      <p>Garanzia di rimborso di 30 giorni</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     13. GARANZIA
+     ============================================================ -->
+<div class="guarantee-outer">
+  <div class="guarantee-inner">
+    <div class="guarantee-content">
+      <div class="guarantee-badge">
+        <img src="https://holior.com/cdn/shop/files/guarantee-badge_200x.png?v=1774374800" alt="Sigillo di garanzia" loading="lazy">
+      </div>
+      <p class="guarantee-eyebrow">Senti la differenza</p>
+      <h2 class="guarantee-title">Garanzia di 30 Giorni</h2>
+      <p class="guarantee-text">Se non vedi o non senti una differenza entro 30 giorni, sei protetto dalla nostra Garanzia di Rimborso di 30 Giorni.*</p>
+    </div>
+
+    <div class="guarantee-image">
+      <img src="https://holior.com/cdn/shop/files/avatar-guarantee_600x.png?v=1774375062" alt="" loading="lazy">
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     14. FAQ
+     ============================================================ -->
+<div class="faq-redesign">
+  <div class="faq-layout">
+    <div class="faq-left">
+      <h2 class="faq-main-title">Domande Frequenti</h2>
+
+      <div class="faq-container" id="faqContainer">
+
+        <div class="faq-box is-open">
+          <div class="faq-thumb"><p>Che cos&rsquo;&egrave; Holior?</p><span class="faq-icon"></span></div>
+          <div class="faq-content">
+            <p>Holior &egrave; una formula quotidiana antiparassitaria pensata per aiutare a eliminare i parassiti alla radice &ndash; adulti, larve e uova microscopiche &ndash; sostenendo al contempo l&rsquo;equilibrio intestinale e il recupero di tutto l&rsquo;organismo. Molti disturbi comuni come gonfiore, stanchezza, problemi della pelle e annebbiamento mentale possono essere collegati a squilibri interni nascosti. Holior lavora per aiutare a rimuoverli dall&rsquo;interno, cos&igrave; che il tuo corpo possa tornare a funzionare correttamente.</p>
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-thumb"><p>Cosa rende diversa la vostra formula?</p><span class="faq-icon"></span></div>
+          <div class="faq-content">
+            <p>La maggior parte dei trattamenti antiparassitari agisce su una sola fase &ndash; di solito i parassiti attivi &ndash; permettendo al ciclo di continuare. Holior &egrave; stato progettato per affrontare l&rsquo;intero ciclo vitale del parassita, aiutando a eliminare ci&ograve; che &egrave; attivo e agendo anche sulle uova, sostenendo il naturale processo depurativo del corpo. Invece di un sollievo temporaneo, punta a impedire che il problema si ripresenti.</p>
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-thumb"><p>In quanto tempo noter&ograve; i risultati?</p><span class="faq-icon"></span></div>
+          <div class="faq-content">
+            <p>Molte persone iniziano a notare miglioramenti come riduzione del gonfiore, digestione pi&ugrave; leggera ed energia pi&ugrave; stabile entro le prime 1-2 settimane. Man mano che il corpo si depura e ritrova l&rsquo;equilibrio, spesso seguono altri benefici come pelle pi&ugrave; pulita, maggiore concentrazione e vitalit&agrave; generale.</p>
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-thumb"><p>Chi dovrebbe assumere Holior?</p><span class="faq-icon"></span></div>
+          <div class="faq-content">
+            <p>Holior &egrave; pensato per adulti che avvertono sintomi come gonfiore, fastidi digestivi, poca energia, annebbiamento mentale, problemi della pelle o la costante sensazione che qualcosa non vada senza un motivo chiaro. &Egrave; ideale per chi cerca un reset interno completo e vuole ristabilire l&rsquo;equilibrio dall&rsquo;interno.</p>
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-thumb"><p>Holior si pu&ograve; assumere insieme ad altri integratori?</p><span class="faq-icon"></span></div>
+          <div class="faq-content">
+            <p>Nella maggior parte dei casi Holior pu&ograve; essere usato insieme a integratori comuni come vitamine e minerali. &Egrave; per&ograve; meglio evitare di combinare pi&ugrave; formule depurative o detox nello stesso periodo. Se assumi farmaci o hai patologie in corso, consulta il tuo medico prima dell&rsquo;uso.</p>
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-thumb"><p>I vostri prodotti sono puliti e sicuri?</p><span class="faq-icon"></span></div>
+          <div class="faq-content">
+            <p>S&igrave;. Holior &egrave; realizzato con ingredienti erboristici accuratamente selezionati e non contiene additivi artificiali, riempitivi superflui o sostanze chimiche aggressive. La formula &egrave; pensata per essere efficace ma allo stesso tempo delicata, adatta all&rsquo;uso quotidiano.</p>
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-thumb"><p>Holior &egrave; supportato da ricerche?</p><span class="faq-icon"></span></div>
+          <div class="faq-content">
+            <p>Gli ingredienti utilizzati in Holior &ndash; tra cui assenzio, mallo di noce nera, chiodi di garofano e semi di zucca &ndash; sono stati tradizionalmente impiegati e studiati per il loro ruolo di supporto alla depurazione antiparassitaria e alla salute intestinale. Questi composti lavorano insieme per sostenere l&rsquo;equilibrio interno e aiutare l&rsquo;organismo a mantenere un ambiente pi&ugrave; pulito e stabile.</p>
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-thumb"><p>Offrite una garanzia?</p><span class="faq-icon"></span></div>
+          <div class="faq-content">
+            <p>Assolutamente s&igrave;. Offriamo una <strong>garanzia di rimborso di 30 giorni</strong>, cos&igrave; puoi provare Holior senza rischi. Se non sei soddisfatto, ti basta contattare l&rsquo;assistenza all&rsquo;indirizzo contact@holior.com.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="faq-cta">
+        <a href="#pricebox" class="faq-btn">Prova l&rsquo;Eliminazione dei Parassiti Senza Rischi Oggi</a>
+        <div class="guarantee guarantee--light">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18" fill="none">
+            <path d="M6.95505 0.673476L7.21979 0.0542521C7.13612 0.0184559 7.04606 0 6.95505 0C6.86405 0 6.77398 0.0184559 6.69031 0.0542521L6.95505 0.673476ZM6.95505 16.8272L6.62121 17.4114C6.72289 17.4695 6.83796 17.5 6.95505 17.5C7.07215 17.5 7.18722 17.4695 7.2889 17.4114L6.95505 16.8272ZM6.68942 0.0551496L0.953066 2.5132L1.48075 3.75165L7.2189 1.2927L6.68942 0.0551496ZM0 3.95716V10.1135H1.34614V3.95716H0ZM3.05215 15.3724L6.62121 17.4114L7.2889 16.2429L3.71983 14.2031L3.05215 15.3724ZM7.2889 17.4114L10.858 15.3724L10.1903 14.2031L6.62121 16.2429L7.2889 17.4114ZM13.9101 10.1126V3.95806H12.564V10.1144L13.9101 10.1126ZM12.9588 2.5141L7.21979 0.0551496L6.69031 1.2918L12.4285 3.75165L12.9588 2.5141ZM13.9101 3.95806C13.9101 3.32986 13.5359 2.76179 12.9588 2.5141L12.4285 3.75165C12.4688 3.76903 12.5031 3.79785 12.5272 3.83453C12.5512 3.87122 12.564 3.91417 12.564 3.95806H13.9101ZM10.858 15.3724C11.7851 14.8426 12.5557 14.0772 13.0917 13.1537C13.6277 12.2301 13.91 11.1813 13.9101 10.1135H12.564C12.5638 10.9439 12.3442 11.7595 11.9273 12.4776C11.5105 13.1958 10.9112 13.791 10.1903 14.2031L10.858 15.3724ZM0 10.1135C9.5818e-05 11.1813 0.282448 12.2301 0.818445 13.1537C1.35444 14.0772 2.12504 14.8426 3.05215 15.3724L3.71983 14.2031C2.99875 13.791 2.39942 13.1956 1.98257 12.4772C1.56572 11.7589 1.34616 10.9431 1.34614 10.1126L0 10.1135ZM0.951272 2.5132C0.668947 2.63433 0.428349 2.8356 0.259265 3.0921C0.0901823 3.34859 4.01739e-05 3.64995 0 3.95716H1.34614C1.34614 3.86742 1.39998 3.78575 1.48255 3.74985L0.951272 2.5132Z" fill="white"/>
+            <path d="M9.64725 6.95605L6.05755 10.5458L4.2627 8.75091" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>Garanzia di rimborso di 30 giorni</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-right">
+      <img src="https://holior.com/cdn/shop/files/FAQ_img_800x.png?v=1786629126" alt="" loading="lazy" class="faq-right-img">
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     15. FOOTER
+     ============================================================ -->
+<footer class="site-footer">
+  <div class="page-width">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <img src="https://holior.com/cdn/shop/files/Kaching_Cart_-_Heading_1.png?v=1774470955&amp;width=340" alt="Holior" width="247" height="86" loading="lazy">
+      </div>
+      <nav class="footer-menu">
+        <a href="/policies/privacy-policy">Informativa sulla Privacy</a>
+        <a href="/policies/contact-information">Contatti</a>
+        <a href="/policies/refund-policy">Politica di Rimborso</a>
+        <a href="/policies/subscription-policy">Condizioni di Abbonamento</a>
+        <a href="/policies/terms-of-service">Termini e Condizioni</a>
+        <a href="#">Gestisci Abbonamento</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <img class="footer-payments" src="https://cdn.shopify.com/s/files/1/0795/2003/9125/files/payment_icons_webp.png?v=1772028176" alt="Metodi di pagamento" style="max-width:320px" loading="lazy">
+      <p class="footer-copy">&copy; 2026, Holior</p>
+    </div>
+
+    <div class="footer-disclaimer">
+      <p>*Le dichiarazioni riportate non sono state valutate da alcuna autorit&agrave; sanitaria. Questo prodotto &egrave; un integratore alimentare e non &egrave; destinato a diagnosticare, trattare, curare o prevenire alcuna malattia. Gli integratori alimentari non vanno intesi come sostituti di una dieta variata ed equilibrata e di uno stile di vita sano. Tenere fuori dalla portata dei bambini al di sotto dei tre anni. Non superare la dose giornaliera consigliata. I risultati possono variare da persona a persona.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Ticker: duplica il set per riempire la traccia ---------- */
+(function(){
+  var track = document.getElementById('pressTrack');
+  if(!track) return;
+  var html = track.innerHTML;
+  for(var i=0;i<7;i++){ track.insertAdjacentHTML('beforeend', html); }
+})();
+
+/* ---------- Galleria prodotto ---------- */
+(function(){
+  var mainImg = document.getElementById('mainPackImage');
+  var thumbsWrap = document.getElementById('productThumbs');
+  var prevBtn = document.querySelector('.main-nav--prev');
+  var nextBtn = document.querySelector('.main-nav--next');
+  var jsonEl = document.getElementById('productImagesJson');
+  if(!mainImg || !thumbsWrap || !jsonEl) return;
+
+  var images = [];
+  try { images = JSON.parse(jsonEl.textContent || '[]'); } catch(e){ images = []; }
+  if(!images.length) return;
+
+  var thumbButtons = Array.prototype.slice.call(thumbsWrap.querySelectorAll('button'));
+  var currentIndex = 0, isAnimating = false;
+
+  function setActiveThumb(index){
+    thumbButtons.forEach(function(btn){
+      btn.classList.toggle('is-active', Number(btn.dataset.index) === index);
+    });
+  }
+
+  function changeImage(index){
+    if(isAnimating) return;
+    if(index < 0) index = images.length - 1;
+    if(index >= images.length) index = 0;
+    if(index === currentIndex) return;
+
+    isAnimating = true;
+    var next = images[index];
+    mainImg.classList.add('is-fading');
+
+    var finishSwap = function(){
+      mainImg.src = next.src;
+      currentIndex = index;
+      setActiveThumb(index);
+      requestAnimationFrame(function(){
+        mainImg.classList.remove('is-fading');
+        setTimeout(function(){ isAnimating = false; }, 50);
+      });
+    };
+
+    var onFadeOutEnd = function(e){
+      if(e.propertyName !== 'opacity') return;
+      mainImg.removeEventListener('transitionend', onFadeOutEnd);
+      finishSwap();
+    };
+    mainImg.addEventListener('transitionend', onFadeOutEnd);
+    setTimeout(function(){
+      mainImg.removeEventListener('transitionend', onFadeOutEnd);
+      if(mainImg.classList.contains('is-fading')) finishSwap();
+    }, 400);
+  }
+
+  setActiveThumb(0);
+  thumbsWrap.addEventListener('click', function(e){
+    var btn = e.target.closest('button');
+    if(!btn) return;
+    var idx = Number(btn.dataset.index);
+    if(!isNaN(idx)) changeImage(idx);
+  });
+  if(prevBtn) prevBtn.addEventListener('click', function(){ changeImage(currentIndex - 1); });
+  if(nextBtn) nextBtn.addEventListener('click', function(){ changeImage(currentIndex + 1); });
+})();
+
+/* ---------- Selettore formato ---------- */
+(function(){
+  var wrap = document.getElementById('variantSelector');
+  if(!wrap) return;
+  wrap.addEventListener('click', function(e){
+    var block = e.target.closest('.sel-block');
+    if(!block) return;
+    wrap.querySelectorAll('.sel-block').forEach(function(b){ b.classList.remove('active'); });
+    block.classList.add('active');
+  });
+})();
+
+/* ---------- Schede prodotto ---------- */
+(function(){
+  var container = document.querySelector('.tabs');
+  if(!container) return;
+  var blocks = container.querySelectorAll('.tab-block');
+  blocks.forEach(function(b){ b.classList.remove('is-open'); });
+  container.querySelectorAll('.tab-thumb').forEach(function(thumb){
+    thumb.addEventListener('click', function(){
+      var block = this.closest('.tab-block');
+      var isOpen = block.classList.contains('is-open');
+      blocks.forEach(function(b){ b.classList.remove('is-open'); });
+      if(!isOpen) block.classList.add('is-open');
+    });
+  });
+})();
+
+/* ---------- Carosello media ---------- */
+(function(){
+  var outer = document.getElementById('mediaCarousel');
+  if(!outer || outer.dataset.init) return;
+  outer.dataset.init = 'true';
+
+  var track = outer.querySelector('.mc2-track');
+  var slides = Array.prototype.slice.call(outer.querySelectorAll('.mc2-slide'));
+  var dotsWrap = outer.querySelector('.mc2-dots');
+  var btnPrev = outer.querySelector('.mc2-btn--prev');
+  var btnNext = outer.querySelector('.mc2-btn--next');
+  var viewport = outer.querySelector('.mc2-viewport');
+  if(!slides.length) return;
+
+  var current = 0, AUTOPLAY_MS = 4000, timer = null, isTouching = false;
+
+  function slidesPerView(){ return window.innerWidth <= 768 ? 1 : 3; }
+  function setSizes(){
+    var w = viewport.clientWidth / slidesPerView();
+    slides.forEach(function(s){ s.style.width = w + 'px'; });
+  }
+  function maxIndex(){ return Math.max(0, slides.length - slidesPerView()); }
+  function applyTranslate(){
+    var w = viewport.clientWidth / slidesPerView();
+    track.style.transform = 'translateX(-' + (current * w) + 'px)';
+  }
+  function buildDots(){
+    dotsWrap.innerHTML = '';
+    for(var i = 0; i <= maxIndex(); i++){
+      var d = document.createElement('button');
+      d.className = 'mc2-dot' + (i === current ? ' is-active' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i + 1));
+      d.dataset.i = i;
+      d.addEventListener('click', function(){ stop(); goTo(+this.dataset.i); resume(); });
+      dotsWrap.appendChild(d);
+    }
+  }
+  function updateDots(){
+    dotsWrap.querySelectorAll('.mc2-dot').forEach(function(d, i){
+      d.classList.toggle('is-active', i === current);
+    });
+  }
+  function goTo(index){
+    if(index < 0) index = maxIndex();
+    if(index > maxIndex()) index = 0;
+    current = index;
+    applyTranslate();
+    updateDots();
+  }
+  function start(){
+    stop();
+    timer = setInterval(function(){
+      if(isTouching) return;
+      goTo(current + 1 > maxIndex() ? 0 : current + 1);
+    }, AUTOPLAY_MS);
+  }
+  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+  function resume(){ setTimeout(function(){ if(!isTouching) start(); }, 1200); }
+
+  btnPrev.addEventListener('click', function(){ stop(); goTo(current - 1); resume(); });
+  btnNext.addEventListener('click', function(){ stop(); goTo(current + 1); resume(); });
+
+  var startX = 0;
+  track.addEventListener('touchstart', function(e){ isTouching = true; stop(); startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    var diff = startX - e.changedTouches[0].clientX;
+    if(Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    isTouching = false;
+    resume();
+  }, {passive:true});
+
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){ setSizes(); applyTranslate(); buildDots(); }, 120);
+  });
+
+  setSizes(); applyTranslate(); buildDots(); start();
+})();
+
+/* ---------- Carosello recensioni + stelle ---------- */
+(function(){
+  var el = document.getElementById('ctCarousel');
+  if(!el) return;
+
+  var starSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.939 6.326L22 9.274l-5.5 5.184L17.878 22 12 18.9 6.122 22l1.378-7.542L2 9.274l7.061-.948L12 2z" fill="#071F2A"/></svg>';
+  el.querySelectorAll('.ct-carousel__stars').forEach(function(w){
+    var html = ''; for(var i = 0; i < 5; i++){ html += starSvg; } w.innerHTML = html;
+  });
+
+  var slides = el.querySelectorAll('.ct-carousel__slide');
+  var dots = el.querySelectorAll('.ct-carousel__dot');
+  var total = slides.length, current = 0, timer;
+
+  function goTo(index){
+    slides[current].classList.remove('is-active');
+    dots[current].classList.remove('is-active');
+    current = (index + total) % total;
+    slides[current].classList.add('is-active');
+    dots[current].classList.add('is-active');
+  }
+  function start(){ timer = setInterval(function(){ goTo(current + 1); }, 5000); }
+  function reset(){ clearInterval(timer); start(); }
+
+  el.querySelectorAll('.ct-carousel__arrow--prev').forEach(function(b){
+    b.addEventListener('click', function(e){ e.stopPropagation(); goTo(current - 1); reset(); });
+  });
+  el.querySelectorAll('.ct-carousel__arrow--next').forEach(function(b){
+    b.addEventListener('click', function(e){ e.stopPropagation(); goTo(current + 1); reset(); });
+  });
+  dots.forEach(function(dot, i){ dot.addEventListener('click', function(){ goTo(i); reset(); }); });
+
+  if(total > 1) start();
+})();
+
+/* ---------- FAQ ---------- */
+(function(){
+  var container = document.getElementById('faqContainer');
+  if(!container || container.dataset.faqInit) return;
+  container.dataset.faqInit = 'true';
+
+  var plusIcon = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  var minusIcon = '<svg width="14" height="14" viewBox="0 0 14 2" fill="none"><line x1="0" y1="1" x2="14" y2="1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+
+  function setIcons(){
+    container.querySelectorAll('.faq-box').forEach(function(box){
+      var icon = box.querySelector('.faq-icon');
+      if(icon) icon.innerHTML = box.classList.contains('is-open') ? minusIcon : plusIcon;
+    });
+  }
+  function closeAll(){
+    container.querySelectorAll('.faq-box').forEach(function(box){ box.classList.remove('is-open'); });
+  }
+
+  container.querySelectorAll('.faq-thumb').forEach(function(thumb){
+    thumb.addEventListener('click', function(e){
+      e.stopPropagation();
+      var box = this.closest('.faq-box');
+      var isOpen = box.classList.contains('is-open');
+      closeAll();
+      if(!isOpen) box.classList.add('is-open');
+      setIcons();
+    });
+  });
+
+  setIcons();
+})();
+</script>
+</body>
+</html>
