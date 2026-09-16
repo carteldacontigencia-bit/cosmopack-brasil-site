@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kit 3 Cuecas Boxer Calvin Klein + Crocs Preto GRÁTIS — NORDHORN</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --ink:#111113;
+    --ink-2:#5c5c66;
+    --ink-3:#8a8a94;
+    --line:#e4e4e8;
+    --line-2:#f0f0f3;
+    --bg:#ffffff;
+    --surface:#f7f7f8;
+    --stage:#efeeef;
+    --sale:#e2231a;
+    --radius:10px;
+  }
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Helvetica Neue",Helvetica,Arial,system-ui,-apple-system,sans-serif;
+    font-size:15px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  body.is-locked{overflow:hidden}
+  img{display:block;max-width:100%}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+  /* ---------- cabeçalho ---------- */
+  .header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:20}
+  .header__inner{
+    max-width:1180px;margin:0 auto;padding:20px 24px;
+    display:flex;align-items:center;gap:40px;
+  }
+  .logo{font-size:19px;font-weight:700;letter-spacing:.08em}
+  .nav{display:flex;gap:26px;font-size:14px;color:var(--ink-2)}
+  .nav a{color:inherit;text-decoration:none}
+  .nav a:hover{color:var(--ink)}
+  .nav a.is-sale{color:var(--sale)}
+  .header__icons{margin-left:auto;display:flex;gap:20px;color:var(--ink)}
+  .header__icons button{display:flex;padding:2px}
+
+  /* ---------- layout ---------- */
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 80px}
+  .product{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);gap:44px;align-items:start}
+
+  /* ---------- carrossel ---------- */
+  .gallery{position:relative}
+  .stage{
+    position:relative;overflow:hidden;border-radius:var(--radius);
+    background:var(--stage);height:470px;
+  }
+  .track{display:flex;height:100%;transition:transform .38s cubic-bezier(.4,0,.2,1);will-change:transform}
+  .slide{flex:0 0 100%;height:100%;display:flex;align-items:center;justify-content:center;padding:22px;background:var(--stage)}
+  .slide img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;mix-blend-mode:multiply}
+  .slide--flat{padding:0}
+  .slide--flat img{mix-blend-mode:normal;max-width:100%;max-height:100%}
+  .arrow{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:40px;height:40px;border-radius:50%;background:#fff;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 3px rgba(0,0,0,.12),0 4px 14px rgba(0,0,0,.08);
+    transition:opacity .15s,box-shadow .15s;
+  }
+  .arrow:hover{box-shadow:0 2px 6px rgba(0,0,0,.16),0 6px 18px rgba(0,0,0,.12)}
+  .arrow--prev{left:14px}
+  .arrow--next{right:14px}
+  .arrow[disabled]{opacity:.35;cursor:not-allowed;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+  .counter{
+    position:absolute;right:14px;bottom:14px;padding:5px 10px;border-radius:20px;
+    background:rgba(255,255,255,.92);font-size:12px;color:var(--ink-2);
+    font-variant-numeric:tabular-nums;
+  }
+  .thumbs{display:flex;gap:10px;margin-top:10px}
+  .thumb{
+    flex:1 1 0;aspect-ratio:1/1;border-radius:8px;background:var(--stage);
+    overflow:hidden;padding:8px;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 1px var(--line) inset;transition:box-shadow .15s;
+  }
+  .thumb img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;mix-blend-mode:multiply}
+  .thumb--flat img{mix-blend-mode:normal}
+  .thumb:hover{box-shadow:0 0 0 1px #b9b9c2 inset}
+  .thumb[aria-current="true"]{box-shadow:0 0 0 2px var(--ink) inset}
+  .dots{display:none;justify-content:center;gap:7px;margin-top:14px}
+  .dots span{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background-color .15s}
+  .dots span.is-on{background:var(--ink)}
+
+  /* ---------- coluna de compra ---------- */
+  .buy{position:sticky;top:96px}
+  .eyebrow{
+    display:inline-block;font-size:11px;letter-spacing:.12em;font-weight:700;
+    color:#fff;background:var(--ink);padding:5px 10px;border-radius:4px;
+  }
+  h1{font-size:30px;line-height:1.18;letter-spacing:-.01em;margin-top:14px;font-weight:700}
+  .subtitle{color:var(--ink-2);margin-top:8px}
+  .price{font-size:30px;font-weight:700;letter-spacing:-.01em;margin-top:16px}
+  .lede{color:var(--ink-2);margin-top:10px;max-width:40ch}
+  .rule{height:1px;background:var(--line);margin:22px 0}
+
+  .field{margin-bottom:22px}
+  .field__label{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .field__label span{font-weight:400;color:var(--ink-2)}
+  .field__link{font-size:13px;font-weight:400;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
+  .field__link:hover{color:var(--ink)}
+  .swatch{
+    width:30px;height:30px;border-radius:50%;background:#141416;
+    box-shadow:0 0 0 2px #fff inset,0 0 0 2px var(--ink);
+  }
+  .options{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{
+    min-width:52px;padding:11px 14px;border:1px solid var(--line);border-radius:7px;
+    font-size:14px;text-align:center;transition:border-color .15s,background-color .15s;
+  }
+  .opt:hover{border-color:#b9b9c2}
+  .opt[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:#fff}
+
+  .qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+  .qty button{width:42px;height:44px;font-size:18px;color:var(--ink-2)}
+  .qty button:hover{background:var(--line-2);color:var(--ink)}
+  .qty__value{width:48px;text-align:center;font-size:15px;font-variant-numeric:tabular-nums}
+
+  .atc{
+    width:100%;height:56px;background:var(--ink);color:#fff;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    font-size:15px;font-weight:600;letter-spacing:.01em;transition:opacity .15s,transform .06s;
+  }
+  .atc:hover{opacity:.88}
+  .atc:active{transform:translateY(1px)}
+  .atc[disabled]{opacity:.42;cursor:not-allowed;transform:none}
+  .secure{
+    margin-top:12px;display:flex;align-items:center;justify-content:center;gap:7px;
+    font-size:13px;color:var(--ink-2);
+  }
+  .notice{
+    margin-top:16px;padding:12px 14px;border-radius:8px;background:var(--surface);
+    font-size:13px;color:var(--ink-2);display:flex;gap:9px;align-items:flex-start;
+  }
+  .notice strong{color:var(--ink);font-weight:600;display:block;margin-bottom:2px}
+  .notice[hidden]{display:none}
+  .notice--ok{background:#f2f8f3;color:#2c6b3f}
+  .notice--ok strong{color:#1f5230}
+
+  /* ---------- blocos de informação ---------- */
+  .info{
+    margin-top:56px;padding-top:40px;border-top:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px;
+  }
+  .info h2{font-size:15px;font-weight:700;margin-bottom:20px}
+  .included{display:flex;flex-direction:column;gap:20px}
+  .included__row{display:flex;gap:14px;align-items:flex-start}
+  .included__icon{
+    flex:0 0 46px;height:46px;border-radius:50%;background:var(--surface);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .included__row p{font-size:13px;color:var(--ink-2);margin-top:2px}
+  .included__row b{font-size:14px;font-weight:600;color:var(--ink)}
+  .tag{
+    display:inline-block;margin-left:7px;font-size:10px;font-weight:700;letter-spacing:.08em;
+    color:#fff;background:var(--sale);padding:2px 6px;border-radius:3px;vertical-align:2px;
+  }
+  .checks{display:flex;flex-direction:column;gap:13px}
+  .checks li{display:flex;gap:11px;align-items:center;font-size:14px;color:var(--ink-2);list-style:none}
+  .checks svg{flex:0 0 18px}
+  .btn-outline{
+    margin-top:22px;height:48px;padding:0 18px;border:1px solid var(--ink);border-radius:8px;
+    display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;
+    transition:background-color .15s,color .15s;
+  }
+  .btn-outline:hover{background:var(--ink);color:#fff}
+
+  /* ---------- descrição ---------- */
+  .description{margin-top:56px;padding-top:40px;border-top:1px solid var(--line);max-width:760px}
+  .description h2{font-size:15px;font-weight:700;margin-bottom:18px}
+  .description p{color:var(--ink-2);margin-bottom:16px}
+  .description p:last-child{margin-bottom:0}
+  .description b{color:var(--ink)}
+
+  /* ---------- modal ---------- */
+  .modal{position:fixed;inset:0;z-index:60;display:none}
+  .modal.is-open{display:block}
+  .modal__backdrop{position:absolute;inset:0;background:rgba(17,17,19,.45)}
+  .modal__panel{
+    position:relative;max-width:720px;margin:6vh auto;background:#fff;border-radius:14px;
+    max-height:88vh;display:flex;flex-direction:column;overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,.24);
+  }
+  .modal__head{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:20px 24px;border-bottom:1px solid var(--line);
+  }
+  .modal__title{font-size:17px;font-weight:700}
+  .modal__close{
+    width:36px;height:36px;border-radius:50%;flex:0 0 36px;
+    display:flex;align-items:center;justify-content:center;color:var(--ink-2);
+  }
+  .modal__close:hover{background:var(--surface);color:var(--ink)}
+  .modal__body{padding:24px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .modal__body h3{font-size:13px;font-weight:600;margin:0 0 10px}
+  .modal__body h3+p,.modal__body p{color:var(--ink-2);margin-bottom:14px}
+  .modal__body p:last-child{margin-bottom:0}
+  .modal__body ul{margin:0 0 16px 18px;color:var(--ink-2)}
+  .modal__body li{margin-bottom:7px}
+  .modal__body .tables{margin-bottom:6px}
+  .modal__foot{padding:16px 24px;border-top:1px solid var(--line);display:flex;justify-content:flex-end}
+  .btn-back{
+    height:46px;padding:0 22px;border-radius:8px;background:var(--ink);color:#fff;
+    font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:9px;
+  }
+  .btn-back:hover{opacity:.88}
+  .modal-source{display:none}
+
+  /* ---------- tabelas de tamanho ---------- */
+  .tables{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line-2)}
+  th{font-weight:600;background:var(--surface);color:var(--ink)}
+  td{color:var(--ink-2)}
+  .fineprint{margin-top:14px;font-size:12px;color:var(--ink-3)}
+
+  /* ---------- rodapé ---------- */
+  .footer{border-top:1px solid var(--line);padding:32px 24px;text-align:center}
+  .footer__logo{font-size:14px;font-weight:700;letter-spacing:.1em;margin-bottom:16px}
+  .footer__links{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;
+    font-size:13px;color:var(--ink-2);
+  }
+  .footer__links button{text-decoration:underline;text-underline-offset:3px}
+  .footer__links button:hover{color:var(--ink)}
+  .footer__note{margin-top:18px;font-size:12px;color:var(--ink-3)}
+
+  @media (max-width:940px){
+    .product{grid-template-columns:1fr;gap:32px}
+    .buy{position:static}
+    .nav{display:none}
+    h1{font-size:26px}
+    .info{grid-template-columns:1fr;gap:36px}
+    .stage{height:400px}
+  }
+  @media (max-width:560px){
+    .wrap{padding:20px 16px 60px}
+    .header__inner{padding:16px;gap:16px}
+    .stage{height:330px}
+    .slide{padding:16px}
+    .thumbs{display:none}
+    .dots{display:flex}
+    .arrow{width:34px;height:34px}
+    .arrow--prev{left:10px}
+    .arrow--next{right:10px}
+    .modal__panel{margin:3vh 12px;max-height:94vh}
+    .modal__body{padding:20px}
+    .tables{grid-template-columns:1fr;gap:26px}
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header__inner">
+    <div class="logo">NORDHORN</div>
+    <nav class="nav">
+      <a href="#">Masculino</a>
+      <a href="#">Cuecas</a>
+      <a href="#">Calçados</a>
+      <a href="#">Kits</a>
+      <a href="#">Novidades</a>
+      <a href="#" class="is-sale">Promoção</a>
+    </nav>
+    <div class="header__icons">
+      <button aria-label="Buscar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5" stroke-linecap="round"/></svg></button>
+      <button aria-label="Conta"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4.5 20a7.5 7.5 0 0115 0" stroke-linecap="round"/></svg></button>
+      <button aria-label="Carrinho"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 7h14l-1.2 13H6.2L5 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="product">
+
+    <section class="gallery" aria-label="Imagens do produto" aria-roledescription="carrossel">
+      <div class="stage" id="stage">
+        <div class="track" id="track">
+          <div class="slide slide--flat"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gMTwvdGV4dD48L3N2Zz4=" alt="Kit com 3 cuecas boxer Calvin Klein e Crocs preto grátis"></div>
+          <div class="slide"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gMjwvdGV4dD48L3N2Zz4=" alt="Kit com 3 cuecas boxer Calvin Klein pretas"></div>
+          <div class="slide"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gMzwvdGV4dD48L3N2Zz4=" alt="Cueca boxer Calvin Klein preta, detalhe do elástico"></div>
+          <div class="slide"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gNDwvdGV4dD48L3N2Zz4=" alt="Modelo vestindo cueca boxer Calvin Klein preta, frente"></div>
+          <div class="slide"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gNTwvdGV4dD48L3N2Zz4=" alt="Modelo vestindo cueca boxer Calvin Klein preta, costas"></div>
+          <div class="slide"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gNjwvdGV4dD48L3N2Zz4=" alt="Crocs preto grátis, vista lateral"></div>
+          <div class="slide"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gNzwvdGV4dD48L3N2Zz4=" alt="Crocs preto grátis, vista frontal"></div>
+        </div>
+        <button class="arrow arrow--prev" id="prev" type="button" aria-label="Imagem anterior">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="arrow arrow--next" id="next" type="button" aria-label="Próxima imagem">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="counter" id="counter" aria-live="polite">1 / 7</div>
+      </div>
+
+      <div class="thumbs" id="thumbs">
+        <button class="thumb thumb--flat" type="button" data-i="0" aria-current="true" aria-label="Imagem 1"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gMTwvdGV4dD48L3N2Zz4=" alt=""></button>
+        <button class="thumb" type="button" data-i="1" aria-current="false" aria-label="Imagem 2"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gMjwvdGV4dD48L3N2Zz4=" alt=""></button>
+        <button class="thumb" type="button" data-i="2" aria-current="false" aria-label="Imagem 3"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gMzwvdGV4dD48L3N2Zz4=" alt=""></button>
+        <button class="thumb" type="button" data-i="3" aria-current="false" aria-label="Imagem 4"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gNDwvdGV4dD48L3N2Zz4=" alt=""></button>
+        <button class="thumb" type="button" data-i="4" aria-current="false" aria-label="Imagem 5"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gNTwvdGV4dD48L3N2Zz4=" alt=""></button>
+        <button class="thumb" type="button" data-i="5" aria-current="false" aria-label="Imagem 6"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gNjwvdGV4dD48L3N2Zz4=" alt=""></button>
+        <button class="thumb" type="button" data-i="6" aria-current="false" aria-label="Imagem 7"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0iI2U2ZTZlYSIvPjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsIiBmb250LXNpemU9IjQwIiBmaWxsPSIjOGE4YTk0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj5pbWFnZW0gNzwvdGV4dD48L3N2Zz4=" alt=""></button>
+      </div>
+      <div class="dots" id="dots" aria-hidden="true">
+        <span class="is-on"></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </section>
+
+    <section class="buy">
+      <div class="eyebrow">COMPRE O KIT — LEVE O CROCS GRÁTIS</div>
+      <h1>Kit 3 Cuecas Boxer Calvin Klein + Crocs Preto GRÁTIS</h1>
+      <p class="subtitle">Kit de básicos pretos para o dia a dia</p>
+      <div class="price">R$ 97,90</div>
+      <p class="lede">Compre um kit com 3 cuecas boxer Calvin Klein pretas e ganhe um par de Crocs preto grátis.</p>
+
+      <div class="rule"></div>
+
+      <div class="field">
+        <div class="field__label"><span style="font-weight:600;color:var(--ink)">Cor: <span>Preto</span></span></div>
+        <div class="swatch" role="img" aria-label="Cor preto, selecionada"></div>
+      </div>
+
+      <div class="field">
+        <div class="field__label">
+          Tamanho da Cueca
+          <button class="field__link" type="button" data-modal="size-guide">Guia de tamanhos</button>
+        </div>
+        <div class="options" id="underwear-size" role="group" aria-label="Tamanho da cueca">
+          <button class="opt" type="button" aria-pressed="false" data-value="P">P</button>
+          <button class="opt" type="button" aria-pressed="false" data-value="M">M</button>
+          <button class="opt" type="button" aria-pressed="false" data-value="G">G</button>
+          <button class="opt" type="button" aria-pressed="false" data-value="GG">GG</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field__label">Tamanho do Crocs Grátis (BR)</div>
+        <div class="options" id="crocs-size" role="group" aria-label="Tamanho do Crocs">
+          <button class="opt" type="button" aria-pressed="false" data-value="BR 38/39">BR 38/39</button>
+          <button class="opt" type="button" aria-pressed="false" data-value="BR 40">BR 40</button>
+          <button class="opt" type="button" aria-pressed="false" data-value="BR 41">BR 41</button>
+          <button class="opt" type="button" aria-pressed="false" data-value="BR 42/43">BR 42/43</button>
+          <button class="opt" type="button" aria-pressed="false" data-value="BR 44">BR 44</button>
+          <button class="opt" type="button" aria-pressed="false" data-value="BR 45/46">BR 45/46</button>
+          <button class="opt" type="button" aria-pressed="false" data-value="BR 47">BR 47</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field__label">Quantidade</div>
+        <div class="qty">
+          <button type="button" id="qty-minus" aria-label="Diminuir quantidade">&minus;</button>
+          <span class="qty__value" id="qty-value" aria-live="polite">1</span>
+          <button type="button" id="qty-plus" aria-label="Aumentar quantidade">+</button>
+        </div>
+      </div>
+
+      <button class="atc" id="atc" type="button" disabled>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 7h14l-1.2 13H6.2L5 7z" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" stroke-linecap="round"/></svg>
+        Adicionar ao Carrinho
+      </button>
+
+      <div class="secure">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7 3v6c0 4.2-2.9 7.7-7 9-4.1-1.3-7-4.8-7-9V6l7-3z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Compra segura
+      </div>
+
+      <div class="notice" id="notice">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="margin-top:2px"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.2v.2" stroke-linecap="round"/></svg>
+        <span>
+          <strong>Seleção obrigatória</strong>
+          Escolha o tamanho da cueca e o tamanho do seu Crocs grátis antes de adicionar ao carrinho.
+        </span>
+      </div>
+    </section>
+  </div>
+
+  <section class="info">
+    <div>
+      <h2>O que está incluído</h2>
+      <div class="included">
+        <div class="included__row">
+          <div class="included__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111113" stroke-width="1.5"><path d="M4 7h16l-1 6c-.4 2.4-2 4-4.2 4-1.6 0-2.4-1-2.8-2.6-.4 1.6-1.2 2.6-2.8 2.6-2.2 0-3.8-1.6-4.2-4L4 7z" stroke-linejoin="round"/><path d="M4 9.5h16"/></svg>
+          </div>
+          <div>
+            <b>1 x Kit com 3 Cuecas Boxer Calvin Klein Pretas</b>
+            <p>Modelagem clássica com elástico de logo exclusivo.</p>
+          </div>
+        </div>
+        <div class="included__row">
+          <div class="included__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111113" stroke-width="1.5"><path d="M5 9.5c0-2.5 2.6-4 4.7-4h4.6c2.1 0 4.7 1.5 4.7 4v3.2c0 2.6-2.2 4.3-5 4.3H10c-2.8 0-5-1.7-5-4.3V9.5z" stroke-linejoin="round"/><path d="M8.5 9v1M11 8.6v1M13.5 9v1" stroke-linecap="round"/><path d="M19 11c1.4.5 1.8 1.6 1.4 2.6" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <b>1 x Par de Crocs Preto<span class="tag">GRÁTIS</span></b>
+            <p>Leve, com tira traseira giratória — seu sem custo adicional.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2>Detalhes do produto</h2>
+      <ul class="checks">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="#111113"><circle cx="12" cy="12" r="10"/><path d="M8 12.4l2.6 2.6L16 9.6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Caimento confortável para o dia a dia</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="#111113"><circle cx="12" cy="12" r="10"/><path d="M8 12.4l2.6 2.6L16 9.6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Design leve em material moldado</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="#111113"><circle cx="12" cy="12" r="10"/><path d="M8 12.4l2.6 2.6L16 9.6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Tecido macio com elastano</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="#111113"><circle cx="12" cy="12" r="10"/><path d="M8 12.4l2.6 2.6L16 9.6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Básicos fáceis de usar todos os dias</li>
+      </ul>
+
+      <button class="btn-outline" type="button" data-modal="size-guide">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="8" width="19" height="8" rx="1.5"/><path d="M7 8v3M12 8v4M17 8v3" stroke-linecap="round"/></svg>
+        Guia de tamanhos
+      </button>
+    </div>
+  </section>
+
+  <section class="description">
+    <h2>Descrição</h2>
+    <p>
+      <b>Compre 1 kit com 3 cuecas boxer Calvin Klein pretas e ganhe 1 par de Crocs preto grátis.</b>
+      Um pedido, R$ 97,90, e as duas peças que você realmente pega toda manhã já estão resolvidas.
+    </p>
+    <p>
+      O kit traz três cuecas boxer pretas em mistura de algodão com elastano, no corte clássico de
+      perna média, com o elástico de logo exclusivo que fica no lugar o dia inteiro. Sem subir, sem
+      apertar, sem você precisar pensar nisso.
+    </p>
+    <p>
+      Seu par de Crocs preto grátis vem com a construção leve e moldada, as aberturas de ventilação e
+      a tira traseira giratória — use no modo esportivo quando estiver em movimento ou jogue a tira
+      para a frente quando for só dar uma saída rápida.
+    </p>
+    <p>
+      Tudo preto, então combina com tudo o que você já tem. Escolha acima o tamanho da cueca e o
+      tamanho do seu Crocs grátis; os dois são selecionados no mesmo pedido e enviados juntos em uma
+      única encomenda.
+    </p>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__logo">NORDHORN</div>
+  <div class="footer__links">
+    <button type="button" data-modal="shipping">Política de envio</button>
+    <button type="button" data-modal="refund">Trocas e devoluções</button>
+    <button type="button" data-modal="privacy">Política de privacidade</button>
+    <button type="button" data-modal="terms">Termos de serviço</button>
+    <button type="button" data-modal="contact">Contato</button>
+  </div>
+  <div class="footer__note">&copy; NORDHORN. Todos os direitos reservados.</div>
+</footer>
+
+<!-- ============ MODAL ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__panel">
+    <div class="modal__head">
+      <div class="modal__title" id="modal-title">Guia de tamanhos</div>
+      <button class="modal__close" type="button" data-close aria-label="Fechar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="modal__body" id="modal-body"></div>
+    <div class="modal__foot">
+      <button class="btn-back" type="button" data-close>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Voltar ao produto
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONTEÚDO DOS MODAIS ============ -->
+<div class="modal-source">
+
+  <div id="src-size-guide" data-title="Guia de tamanhos">
+    <div class="tables">
+      <div>
+        <h3>Cuecas boxer</h3>
+        <table>
+          <thead><tr><th>Tamanho</th><th>Cintura (pol)</th><th>Cintura (cm)</th></tr></thead>
+          <tbody>
+            <tr><td>P</td><td>28&ndash;30</td><td>71&ndash;76</td></tr>
+            <tr><td>M</td><td>32&ndash;34</td><td>81&ndash;86</td></tr>
+            <tr><td>G</td><td>36&ndash;38</td><td>91&ndash;97</td></tr>
+            <tr><td>GG</td><td>40&ndash;42</td><td>102&ndash;107</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3>Crocs</h3>
+        <table>
+          <thead><tr><th>BR</th><th>EU</th><th>Comprimento do pé</th></tr></thead>
+          <tbody>
+            <tr><td>BR 38/39</td><td>39&ndash;40</td><td>25,0 cm</td></tr>
+            <tr><td>BR 40</td><td>41&ndash;42</td><td>26,0 cm</td></tr>
+            <tr><td>BR 41</td><td>42&ndash;43</td><td>27,0 cm</td></tr>
+            <tr><td>BR 42/43</td><td>43&ndash;44</td><td>28,0 cm</td></tr>
+            <tr><td>BR 44</td><td>45&ndash;46</td><td>29,0 cm</td></tr>
+            <tr><td>BR 45/46</td><td>46&ndash;47</td><td>30,0 cm</td></tr>
+            <tr><td>BR 47</td><td>48&ndash;49</td><td>31,0 cm</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="fineprint">
+      As medidas são aproximadas. O Crocs tem caimento folgado &mdash; se você estiver entre dois
+      tamanhos, escolha o menor. Ainda em dúvida? Escreva para a gente antes de comprar que ajudamos
+      você a escolher.
+    </p>
+  </div>
+
+  <div id="src-shipping" data-title="Política de envio">
+    <h3>Prazo de processamento</h3>
+    <p>Os pedidos são processados em 1&ndash;2 dias úteis após a confirmação do pagamento. Pedidos feitos no fim de semana ou em feriado são processados no próximo dia útil. Pagamentos por boleto podem levar até 3 dias úteis para compensar.</p>
+    <h3>Prazo de entrega</h3>
+    <p>A entrega estimada é de 5&ndash;9 dias úteis após o despacho. O prazo varia conforme a região do Brasil e é confirmado no checkout, junto com o cálculo do frete. Os prazos são estimativas e dependem da transportadora ou dos Correios.</p>
+    <h3>Custos de envio</h3>
+    <p>O frete é calculado no checkout pelo seu CEP e exibido antes do pagamento.</p>
+    <h3>Rastreamento</h3>
+    <p>Você recebe o código de rastreamento por e-mail assim que a encomenda for despachada. As informações de rastreio podem levar até 48 horas para atualizar após o despacho.</p>
+    <h3>Endereço incorreto ou incompleto</h3>
+    <p>Confira o CEP, o número e o complemento com atenção. Não nos responsabilizamos por encomendas extraviadas por endereço incorreto ou incompleto. Se a encomenda voltar para nós, entramos em contato para combinar um novo envio.</p>
+    <h3>Encomendas atrasadas ou extraviadas</h3>
+    <p>Se sua encomenda não chegar em até 15 dias úteis após o despacho, escreva para <b>contato@nordhorn.com.br</b> com o número do pedido que abrimos uma investigação junto à transportadora.</p>
+  </div>
+
+  <div id="src-refund" data-title="Política de trocas e devoluções">
+    <h3>Direito de arrependimento &mdash; 7 dias</h3>
+    <p>Como esta é uma compra feita fora do estabelecimento comercial, o artigo 49 do Código de Defesa do Consumidor (Lei nº 8.078/1990) garante a você o direito de desistir do pedido em até <b>7 dias corridos</b>, contados do recebimento do produto, sem precisar justificar. Nesse caso, devolvemos o valor integral do pedido, incluindo o frete que você pagou, e o custo da devolução é por nossa conta.</p>
+    <h3>Produto com defeito &mdash; 90 dias</h3>
+    <p>Vestuário e calçados são produtos duráveis. Pelo artigo 26 do CDC, você tem até <b>90 dias</b>, contados do recebimento, para reclamar de vícios ou defeitos. Entre em contato com fotos e resolvemos conforme o artigo 18 do CDC: conserto, troca por outro igual, abatimento proporcional do preço ou devolução do valor pago.</p>
+    <h3>Condições dos itens</h3>
+    <p>Para devoluções por arrependimento, os itens precisam estar sem uso, nas mesmas condições em que foram recebidos e na embalagem original com todas as etiquetas.</p>
+    <h3>Exceção por higiene &mdash; cuecas</h3>
+    <p>Por motivos de higiene, as cuecas boxer só podem ser devolvidas com o lacre da embalagem intacto. Essa restrição não se aplica a produtos com defeito, que seguem o prazo de 90 dias acima.</p>
+    <h3>Brinde</h3>
+    <p>O Crocs é fornecido gratuitamente junto com o kit e faz parte da mesma compra. Se você devolver o kit, o Crocs precisa ser devolvido junto. Caso não seja devolvido, o valor de varejo dele é descontado do reembolso.</p>
+    <h3>Como solicitar</h3>
+    <p>Escreva para <b>contato@nordhorn.com.br</b> com o número do pedido e o motivo. Respondemos com as instruções e, quando o frete for por nossa conta, enviamos o código de postagem. Itens enviados de volta sem solicitação prévia não podem ser aceitos.</p>
+    <h3>Frete da devolução</h3>
+    <p>Nas devoluções por arrependimento dentro dos 7 dias, e nos casos de produto com defeito, danificado ou enviado errado, o frete de devolução é por nossa conta. Em trocas de tamanho fora dessas situações, o frete fica por conta do cliente.</p>
+    <h3>Reembolsos</h3>
+    <p>Assim que recebermos e conferirmos a devolução, informamos a aprovação. O estorno é feito na mesma forma de pagamento em até 10 dias. No cartão de crédito, o valor pode aparecer somente na fatura seguinte, conforme o prazo da administradora. Se o pagamento foi por Pix, devolvemos na chave que você informar.</p>
+    <h3>Cancelamentos</h3>
+    <p>Pedidos podem ser cancelados sem custo enquanto ainda estiverem em processamento. Depois de despachado, o pedido precisa ser tratado como devolução.</p>
+  </div>
+
+  <div id="src-privacy" data-title="Política de privacidade">
+    <h3>O que coletamos</h3>
+    <p>Quando você faz um pedido, coletamos as informações que você nos fornece: nome, CPF, e-mail, endereço de entrega, telefone e dados de pagamento. Também coletamos dados básicos de dispositivo e navegação por meio de cookies para manter a loja funcionando e medir nossa publicidade.</p>
+    <h3>Por que usamos</h3>
+    <ul>
+      <li>Para processar, enviar e dar suporte ao seu pedido.</li>
+      <li>Para enviar atualizações de pedido e de entrega.</li>
+      <li>Para prevenir fraudes e abusos.</li>
+      <li>Para cumprir obrigações legais, fiscais e regulatórias.</li>
+      <li>Para medir e melhorar nosso marketing, quando você consentir.</li>
+    </ul>
+    <h3>Bases legais</h3>
+    <p>Tratamos seus dados com base na execução do contrato de compra e venda, no cumprimento de obrigação legal ou regulatória, no legítimo interesse para prevenir fraudes e, nas ações de marketing, no seu consentimento &mdash; que pode ser retirado a qualquer momento.</p>
+    <h3>Com quem compartilhamos</h3>
+    <p>Compartilhamos dados apenas com os fornecedores necessários para operar a loja: nossa plataforma de e-commerce, meios de pagamento, transportadoras e Correios, e fornecedores de análise ou publicidade. Os dados de pagamento são tratados pelo processador de pagamento &mdash; nunca armazenamos o número completo do seu cartão.</p>
+    <h3>Seus direitos</h3>
+    <p>Pela Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você pode solicitar a confirmação da existência de tratamento, o acesso aos seus dados, a correção de dados incompletos ou desatualizados, a anonimização, o bloqueio ou a eliminação de dados desnecessários, a portabilidade, a informação sobre com quem compartilhamos e a revogação do consentimento. Escreva para <b>contato@nordhorn.com.br</b>: pedidos simplificados são respondidos de imediato e os demais em até 15 dias.</p>
+    <p>Você também pode apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD).</p>
+    <h3>Retenção</h3>
+    <p>Guardamos os registros de pedidos pelo prazo exigido pela legislação fiscal e contábil e, depois disso, os excluímos ou anonimizamos.</p>
+    <h3>Cookies</h3>
+    <p>Os cookies mantêm seu carrinho funcionando e nos ajudam a entender como a loja é usada. Você pode bloquear cookies nas configurações do navegador, mas partes da loja podem deixar de funcionar.</p>
+  </div>
+
+  <div id="src-terms" data-title="Termos de serviço">
+    <h3>Aceitação</h3>
+    <p>Ao usar esta loja e fazer um pedido, você concorda com estes termos. Se não concordar, por favor não use a loja.</p>
+    <h3>Produtos e preços</h3>
+    <p>Todos os preços são exibidos em reais (BRL) e incluem impostos quando aplicável. Fazemos o possível para mostrar os produtos com precisão, mas as cores podem variar levemente entre telas. Podemos corrigir erros de preço e cancelar os pedidos afetados com reembolso integral.</p>
+    <h3>A promoção</h3>
+    <p>O par de Crocs grátis vale somente para o kit de 3 cuecas boxer anunciado, um par grátis por kit comprado, enquanto durarem os estoques. A promoção não pode ser trocada por dinheiro nem combinada com outras promoções.</p>
+    <h3>Pedidos</h3>
+    <p>Podemos recusar ou cancelar um pedido a nosso critério, inclusive em caso de suspeita de fraude ou de indisponibilidade de estoque. Qualquer valor já pago é reembolsado integralmente.</p>
+    <h3>Idade</h3>
+    <p>Você precisa ter pelo menos 18 anos para comprar. Menores de 18 anos só podem fazer pedidos assistidos ou representados pelos pais ou responsáveis legais.</p>
+    <h3>Responsabilidade</h3>
+    <p>Nossa responsabilidade se limita ao valor dos produtos comprados. Nada nestes termos afasta ou limita os seus direitos previstos no Código de Defesa do Consumidor.</p>
+    <h3>Marcas registradas</h3>
+    <p>Todos os nomes de marca e logotipos são propriedade de seus respectivos titulares. Comercializamos produtos originais adquiridos de nossos fornecedores; não somos os fabricantes nem representantes oficiais dessas marcas.</p>
+    <h3>Legislação e foro</h3>
+    <p>Estes termos são regidos pela legislação brasileira, em especial o Código de Defesa do Consumidor (Lei nº 8.078/1990), o Decreto nº 7.962/2013 e o Marco Civil da Internet (Lei nº 12.965/2014). Fica eleito o foro do domicílio do consumidor para resolver eventuais controvérsias.</p>
+    <h3>Alterações</h3>
+    <p>Podemos atualizar estes termos a qualquer momento. Vale a versão publicada nesta página no momento do seu pedido.</p>
+  </div>
+
+  <div id="src-contact" data-title="Contato">
+    <!-- OBRIGATORIO pelo Decreto 7.962/2013 (art. 2, I): inclua aqui razao social,
+         CNPJ e endereco fisico completo da empresa antes de colocar a loja no ar. -->
+    <h3>Atendimento ao cliente</h3>
+    <p>E-mail: <b>contato@nordhorn.com.br</b></p>
+    <p>Respondemos todas as mensagens em até 24 horas em dias úteis, de segunda a sexta.</p>
+    <h3>Antes de escrever</h3>
+    <p>Inclua o número do seu pedido e, se for sobre entrega, o código de rastreio. Assim seu problema é resolvido em uma resposta, e não em três.</p>
+    <h3>Alterações no pedido</h3>
+    <p>Precisa mudar um tamanho ou um endereço? Escreva em até 12 horas após o pedido &mdash; depois disso a encomenda normalmente já está com a transportadora.</p>
+  </div>
+
+</div>
+
+<script>
+/* ---------- carrossel ---------- */
+(function(){
+  var track = document.getElementById('track');
+  var slides = track.children.length;
+  var thumbs = document.getElementById('thumbs');
+  var dots = document.getElementById('dots').children;
+  var prev = document.getElementById('prev');
+  var next = document.getElementById('next');
+  var counter = document.getElementById('counter');
+  var index = 0;
+
+  function go(i){
+    index = Math.max(0, Math.min(slides - 1, i));
+    track.style.transform = 'translateX(' + (-index * 100) + '%)';
+    counter.textContent = (index + 1) + ' / ' + slides;
+    prev.disabled = index === 0;
+    next.disabled = index === slides - 1;
+    for (var t = 0; t < thumbs.children.length; t++){
+      thumbs.children[t].setAttribute('aria-current', t === index ? 'true' : 'false');
+    }
+    for (var d = 0; d < dots.length; d++){
+      dots[d].classList.toggle('is-on', d === index);
+    }
+  }
+
+  prev.addEventListener('click', function(){ go(index - 1); });
+  next.addEventListener('click', function(){ go(index + 1); });
+
+  thumbs.addEventListener('click', function(e){
+    var btn = e.target.closest('.thumb');
+    if (btn) go(parseInt(btn.dataset.i, 10));
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (document.getElementById('modal').classList.contains('is-open')) return;
+    if (e.key === 'ArrowLeft') go(index - 1);
+    if (e.key === 'ArrowRight') go(index + 1);
+  });
+
+  var startX = null;
+  var stage = document.getElementById('stage');
+  stage.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  stage.addEventListener('touchend', function(e){
+    if (startX === null) return;
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) go(index + (dx < 0 ? 1 : -1));
+    startX = null;
+  }, {passive:true});
+
+  go(0);
+})();
+
+/* ---------- modal (guia de tamanhos + políticas) ---------- */
+(function(){
+  var modal = document.getElementById('modal');
+  var body = document.getElementById('modal-body');
+  var title = document.getElementById('modal-title');
+  var lastFocus = null;
+
+  function open(key, trigger){
+    var source = document.getElementById('src-' + key);
+    if (!source) return;
+    lastFocus = trigger || null;
+    title.textContent = source.dataset.title;
+    body.innerHTML = source.innerHTML;
+    body.scrollTop = 0;
+    modal.classList.add('is-open');
+    document.body.classList.add('is-locked');
+    modal.querySelector('.modal__close').focus();
+  }
+
+  function close(){
+    modal.classList.remove('is-open');
+    document.body.classList.remove('is-locked');
+    if (lastFocus) lastFocus.focus();
+  }
+
+  document.addEventListener('click', function(e){
+    var opener = e.target.closest('[data-modal]');
+    if (opener){ open(opener.dataset.modal, opener); return; }
+    if (e.target.closest('[data-close]')) close();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+  });
+})();
+
+/* ---------- variações, quantidade e adicionar ao carrinho ---------- */
+(function(){
+  var selected = { underwear:null, crocs:null };
+  var atc = document.getElementById('atc');
+  var notice = document.getElementById('notice');
+
+  function refresh(){
+    var ready = selected.underwear && selected.crocs;
+    atc.disabled = !ready;
+    if (ready) { notice.hidden = true; }
+  }
+
+  function bindGroup(id, key){
+    var group = document.getElementById(id);
+    group.addEventListener('click', function(e){
+      var btn = e.target.closest('.opt');
+      if(!btn) return;
+      group.querySelectorAll('.opt').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+      btn.setAttribute('aria-pressed','true');
+      selected[key] = btn.dataset.value;
+      notice.classList.remove('notice--ok');
+      notice.querySelector('strong').textContent = 'Seleção obrigatória';
+      notice.querySelector('span').lastChild.textContent = ' Escolha o tamanho da cueca e o tamanho do seu Crocs grátis antes de adicionar ao carrinho.';
+      notice.hidden = false;
+      refresh();
+    });
+  }
+  bindGroup('underwear-size','underwear');
+  bindGroup('crocs-size','crocs');
+
+  var qty = 1;
+  var qtyValue = document.getElementById('qty-value');
+  document.getElementById('qty-minus').addEventListener('click', function(){
+    if(qty > 1){ qty--; qtyValue.textContent = qty; }
+  });
+  document.getElementById('qty-plus').addEventListener('click', function(){
+    if(qty < 10){ qty++; qtyValue.textContent = qty; }
+  });
+
+  atc.addEventListener('click', function(){
+    if(atc.disabled) return;
+    notice.classList.add('notice--ok');
+    notice.querySelector('strong').textContent = 'Adicionado ao carrinho';
+    notice.querySelector('span').lastChild.textContent =
+      ' ' + qty + ' x Kit — Cueca ' + selected.underwear + ', Crocs grátis ' + selected.crocs + '.';
+    notice.hidden = false;
+  });
+
+  refresh();
+})();
+</script>
+</body>
+</html>
