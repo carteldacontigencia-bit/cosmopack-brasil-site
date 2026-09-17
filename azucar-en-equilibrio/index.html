@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <!-- TRACKING: pega aquí tus scripts (GTM, Meta Pixel, Clarity, UTM tracker) -->
 
-<!-- CHECKOUT: liga de pago hospedada de XPag → https://xpag.global/pay/UGgNzbVn -->
+<!-- CHECKOUT: checkout propio (SPEI + OXXO) en /checkout?p=azucar
+     El precio vive en api/_xpag.js, no aquí: si cambia uno hay que
+     cambiar el otro. Para volver a la liga hospedada, reemplaza los 2
+     href por https://xpag.global/pay/UGgNzbVn -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Azúcar en Equilibrio — 55 Remedios Naturales para cuidar tu azúcar día con día</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -228,7 +231,7 @@
       <div class="preco"><span>$</span>100</div>
       <div class="pagamento">Pago único. Transferencia SPEI o efectivo en OXXO.</div>
 
-      <a href="https://xpag.global/pay/UGgNzbVn" class="btn-compra">QUIERO LOS 55 REMEDIOS POR $100</a>
+      <a href="/checkout?p=azucar" class="btn-compra">QUIERO LOS 55 REMEDIOS POR $100</a>
       <p class="pos-botao">Acceso inmediato después del pago.</p>
 
       <div class="fecho-oferta">
@@ -300,7 +303,7 @@
   <div class="estreito">
     <h2>Empieza hoy a cuidar tu azúcar <mark>todos los días</mark><br>no solo cuando te mides</h2>
     <p class="sub" style="margin:18px auto 30px">55 remedios naturales ordenados por lo que sientes, cada uno con su dosis, su hora y su advertencia.</p>
-    <a href="https://xpag.global/pay/UGgNzbVn" class="btn grande">Quiero los 55 remedios →</a>
+    <a href="/checkout?p=azucar" class="btn grande">Quiero los 55 remedios →</a>
     <p style="margin-top:20px;font-size:1rem;color:var(--cinza)">🔒 Pago seguro · Acceso inmediato · Garantía de 7 días</p>
   </div>
 </section>

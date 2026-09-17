@@ -7,6 +7,9 @@ process.env.XPAG_WEBHOOK_URL = 'https://ejemplo.com/api/webhook';
 const checkout = (await import('../../api/checkout.js')).default;
 const status   = (await import('../../api/status.js')).default;
 const webhook  = (await import('../../api/webhook.js')).default;
+const { PRODUCTS } = await import('../../api/_xpag.js');
+const PRECIO = PRODUCTS.azucar.amount;
+console.log(`Precio de azucar según el catálogo: ${PRECIO} MXN`);
 
 function res() {
   const o = { code: 0, body: null, headers: {} };
@@ -24,13 +27,13 @@ let r = res(); await checkout(req('POST', { product:'azucar', name:'Juan Pérez'
 ok(r.code === 200 && r.body.ok, 'devuelve 200');
 ok(r.body.clabe === '012345678901234567', 'trae la CLABE');
 ok(r.body.bank_name && r.body.beneficiary, 'trae banco y beneficiario');
-ok(r.body.amount === 47.9, 'importe del catálogo, no del cliente', String(r.body.amount));
+ok(r.body.amount === PRECIO, 'importe del catálogo, no del cliente', String(r.body.amount));
 ok(!JSON.stringify(r.body).includes('test_secret'), 'el secreto NO sale al cliente');
 const pedido = r.body;
 
 console.log('\n2) El cliente NO puede fijar el precio');
 r = res(); await checkout(req('POST', { product:'azucar', name:'Juan Pérez', email:'j@c.com', method:'spei', amount: 1, price: 1 }), r);
-ok(r.body.amount === 47.9, 'amount del cliente ignorado', String(r.body.amount));
+ok(r.body.amount === PRECIO, 'amount del cliente ignorado', String(r.body.amount));
 
 console.log('\n3) Validación de entrada');
 r = res(); await checkout(req('POST', { product:'azucar', name:'Jo', email:'j@c.com' }), r);
@@ -40,7 +43,7 @@ ok(r.code === 400 && r.body.field === 'email', 'correo inválido rechazado');
 r = res(); await checkout(req('POST', { product:'inexistente', name:'Juan Pérez', email:'j@c.com' }), r);
 ok(r.code === 400, 'producto desconocido rechazado');
 r = res(); await checkout(req('GET', null, { product: 'azucar' }), r);
-ok(r.code === 200 && r.body.amount === 47.9 && !r.body.clabe, 'GET devuelve precio y NO crea cobranza');
+ok(r.code === 200 && r.body.amount === PRECIO && !r.body.clabe, 'GET devuelve precio y NO crea cobranza');
 r = res(); await checkout(req('GET', null, {}), r);
 ok(r.code === 404, 'GET sin producto: 404');
 r = res(); await checkout(req('DELETE', {}), r);
