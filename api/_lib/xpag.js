@@ -61,6 +61,7 @@ export function normalizar(data) {
       status: pagado ? 'confirmed' : (p.status || 'pending'),
       amount: p.amount, currency: p.currency, e2e: p.e2e,
       transaction_id: p.transaction_id, external_id: p.external_id,
+      payer_name: p.payer_name || null,
     };
   }
   return {
@@ -68,6 +69,7 @@ export function normalizar(data) {
     amount: data.amount, currency: data.currency, e2e: data.e2e,
     transaction_id: data.transaction_id || data.request_number,
     external_id: data.external_id,
+    payer_name: data.payer_name || null,
   };
 }
 

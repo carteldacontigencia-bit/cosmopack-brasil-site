@@ -33,6 +33,7 @@ const server = http.createServer(async (req, res) => {
       id, status: 'pending', amount: body.amount, currency: 'MXN',
       external_id: body.external_id, e2e: 'E' + id.toUpperCase(),
       webhook_url: body.webhook_url || null,
+      payer_name: body.name || body.payerData?.name || null,
     };
     pagos.set(id, reg);
     if (body.external_id) porExterno.set(body.external_id, reg);
@@ -66,7 +67,8 @@ const server = http.createServer(async (req, res) => {
       return json(200, {
         ok: true, type: 'cashin', status: p.status, amount: p.amount, fee: 5,
         currency: p.currency, request_number: tx, transaction_id: tx,
-        e2e: p.e2e, external_id: p.external_id, provider: 'XPag',
+        e2e: p.e2e, external_id: p.external_id, payer_name: p.payer_name,
+        provider: 'XPag',
       });
     }
     if (ext) {
@@ -78,7 +80,7 @@ const server = http.createServer(async (req, res) => {
         payments: [{
           id: p.id, status: p.status, amount: p.amount, fee: 5, currency: p.currency,
           e2e: p.e2e, transaction_id: p.id, external_id: ext,
-          clabe: '012345678901234567', payer_name: 'Prueba',
+          clabe: '012345678901234567', payer_name: p.payer_name || 'Prueba',
         }],
       });
     }

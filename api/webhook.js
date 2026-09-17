@@ -13,6 +13,7 @@ import { timingSafeEqual } from 'node:crypto';
 import { guard } from './_lib/guard.js';
 import { cfg } from './_lib/env.js';
 import { estadoDe } from './_lib/xpag.js';
+import { enviarCompra } from './_lib/meta.js';
 
 function claveValida(dada) {
   const esperada = cfg.webhookKey;
@@ -69,22 +70,40 @@ export default async function handler(req, res) {
   await entregar({
     external_id: est.external_id || ev.external_id,
     e2e: est.e2e || ev.e2e,
-    amount: est.amount, currency: est.currency,
+    amount: est.amount ?? ev.amount,
+    currency: est.currency || ev.currency,
+    payer_name: est.payer_name,
   });
   return responder('verificado y entregado');
 }
 
-/* La entrega en si la hace /api/access cuando el comprador abre su
-   enlace: verifica la firma, reconsulta y redirige. Es lo que permite
-   que el pago por OXXO, que confirma horas despues, funcione sin
-   almacenar nada.
+/* La entrega del producto en si la hace /api/access cuando el comprador
+   abre su enlace: verifica la firma, reconsulta y redirige. Eso es lo
+   que permite que el pago por OXXO, que confirma horas despues, funcione
+   sin almacenar nada.
 
-   Este gancho queda para lo que SI necesita empujarse desde el servidor
-   (avisar por WhatsApp, o el Purchase server-side del pixel con
-   e2e como id de evento). Sin las variables de entorno correspondientes
-   no hace nada. */
+   Aqui va lo que SI hay que empujar desde el servidor, porque no puede
+   esperar a que la persona vuelva a abrir la pagina. */
 async function entregar(pago) {
   console.log('[entrega] PAGO CONFIRMADO', pago);
+
+  /* Purchase de Meta. Es el motivo de que esto exista: en OXXO la
+     persona paga en la tienda y casi nunca reabre la pantalla, asi que
+     el evento del navegador no llega nunca. event_id = e2e, el mismo que
+     usa el navegador, para que Meta deduplique cuando lleguen los dos.
+     Si Meta falla NO se corta nada: el producto ya se entrega por el
+     enlace firmado. */
+  try {
+    await enviarCompra({
+      eventId: pago.e2e || pago.external_id,
+      value: pago.amount,
+      currency: pago.currency,
+      externalId: pago.external_id,
+      payerName: pago.payer_name,
+    });
+  } catch (e) {
+    console.error('[entrega] el envio a Meta lanzo, se ignora:', e.name);
+  }
 }
 
 async function revocar(info) {

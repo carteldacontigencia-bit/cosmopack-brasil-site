@@ -116,6 +116,34 @@ con los nombres que el código lee. Eso se confirma corriendo, desde una
 máquina con salida a internet, una petición al sandbox y comparando la
 respuesta con `test/mock-xpag.mjs`.
 
+## El Purchase de Meta se manda dos veces, a propósito
+
+Desde el **navegador**, cuando la pantalla detecta la confirmación. Y
+desde el **servidor** (`api/_lib/meta.js`), en el webhook, después de
+verificar el pago contra XPag.
+
+Los dos llevan el mismo `event_id` (el `e2e`, único por pago), así que
+Meta deduplica y la venta cuenta una sola vez.
+
+No es redundancia: el evento del navegador sólo llega si la persona tiene
+la pantalla abierta cuando el pago confirma. En SPEI ocurre, son minutos.
+**En OXXO no**: se paga en la tienda horas después y casi nadie vuelve a
+abrir la página. Sin el envío del servidor, esas ventas serían invisibles
+para Meta y el algoritmo optimizaría en contra, creyendo que el anuncio
+no convierte.
+
+El evento del servidor no tiene las cookies `_fbp`/`_fbc`, porque quien
+llama es el gateway y no el navegador del comprador. Va con lo que se
+puede recuperar sin almacenar nada: el identificador de la venta y el
+nombre del pagador que devuelve XPag, los dos en SHA-256. La coincidencia
+es más pobre que la del evento del navegador, pero una venta contada con
+señal modesta vale más que una venta no contada.
+
+Si Meta falla o está caído, no se rompe nada: el producto se entrega por
+el enlace firmado, que no depende de Meta. Hay una prueba que apunta el
+envío a un puerto donde no escucha nadie y comprueba que el comprador
+entra igual.
+
 ## Lo que afecta la conversión
 
 - **El nombre del beneficiario va arriba, antes de la CLABE.** Si no

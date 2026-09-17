@@ -221,7 +221,88 @@ await create(reqMismaIp('198.51.100.8', { offer: 'principal', name: 'Ana Lopez',
 ok(otra.code === 200, 'otra IP no queda castigada por la rafaga ajena', otra.code);
 delete process.env.RATE_CREATE;
 
-console.log('\n16) Cada endpoint con su propio cupo');
+console.log('\n16) Purchase de Meta desde el servidor');
+/* Es el motivo de que exista el envio server-side: en OXXO la persona
+   paga en la tienda y casi nunca reabre la pantalla, asi que el evento
+   del navegador no llega nunca. */
+process.env.META_API_BASE = 'http://127.0.0.1:8788';
+process.env.META_PIXEL_ID = '4479089439026636';
+process.env.META_CAPI_TOKEN = 'token-de-prueba';
+await fetch('http://127.0.0.1:8788/__limpiar');
+
+const qOxxo = res();
+await create(req('POST', { offer: 'principal', name: 'Luis Hernandez', method: 'oxxo' }), qOxxo);
+const ventaOxxo = qOxxo.body;
+await simular({ transaction_id: ventaOxxo.transaction_id, outcome: 'paid' });
+await capturarLogs(async () => {
+  const q = res();
+  await webhook(req('POST', {
+    type: 'cashin', status: 'confirmed', amount: PRECIO, currency: 'MXN',
+    transaction_id: ventaOxxo.transaction_id, external_id: ventaOxxo.external_id,
+    e2e: 'E-OXXO-REAL',
+  }, { k: process.env.WEBHOOK_KEY }), q);
+});
+const enviados = await (await fetch('http://127.0.0.1:8788/__recibidos')).json();
+ok(enviados.length === 1, 'el webhook mando UN Purchase a Meta', enviados.length);
+const ev = enviados[0]?.data?.[0] || {};
+ok(enviados[0]?.pixelId === '4479089439026636', 'al Pixel ID correcto', enviados[0]?.pixelId);
+ok(ev.event_name === 'Purchase', 'evento Purchase', ev.event_name);
+ok(ev.action_source === 'website', 'action_source website');
+ok(ev.custom_data?.value === PRECIO && ev.custom_data?.currency === 'MXN', 'valor y moneda', ev.custom_data);
+ok(Boolean(ev.event_id), 'lleva event_id para deduplicar', ev.event_id);
+ok(/^[a-f0-9]{64}$/.test(ev.user_data?.external_id || ''), 'external_id en SHA-256', (ev.user_data?.external_id || '').slice(0, 16) + '...');
+ok(/^[a-f0-9]{64}$/.test(ev.user_data?.fn || ''), 'nombre del pagador en SHA-256 (recuperado de XPag)');
+const crudo = JSON.stringify(enviados[0]);
+ok(!crudo.includes('Luis') && !crudo.includes('Hernandez'), 'NINGUN dato personal viaja en claro');
+ok(crudo.includes('token-de-prueba'), 'el token va en el cuerpo, no en la URL');
+
+console.log('\n17) Un pago confirmado dos veces no manda dos Purchase distintos');
+await fetch('http://127.0.0.1:8788/__limpiar');
+for (let i = 0; i < 2; i++) {
+  await capturarLogs(async () => {
+    const q = res();
+    await webhook(req('POST', {
+      type: 'cashin', status: 'confirmed', amount: PRECIO, currency: 'MXN',
+      transaction_id: ventaOxxo.transaction_id, external_id: ventaOxxo.external_id,
+    }, { k: process.env.WEBHOOK_KEY }), q);
+  });
+}
+const repetidos = await (await fetch('http://127.0.0.1:8788/__recibidos')).json();
+const idsEvento = new Set(repetidos.map((r) => r.data[0].event_id));
+ok(idsEvento.size === 1, 'el mismo event_id en los reenvios, para que Meta deduplique', [...idsEvento]);
+
+console.log('\n18) Sin token de Meta no se envia nada');
+await fetch('http://127.0.0.1:8788/__limpiar');
+delete process.env.META_CAPI_TOKEN;
+await capturarLogs(async () => {
+  const q = res();
+  await webhook(req('POST', {
+    type: 'cashin', status: 'confirmed',
+    transaction_id: ventaOxxo.transaction_id, external_id: ventaOxxo.external_id,
+  }, { k: process.env.WEBHOOK_KEY }), q);
+});
+const nada = await (await fetch('http://127.0.0.1:8788/__recibidos')).json();
+ok(nada.length === 0, 'no se envia nada y la entrega sigue funcionando', nada.length);
+process.env.META_CAPI_TOKEN = 'token-de-prueba';
+
+console.log('\n19) Si Meta falla, la entrega NO se rompe');
+process.env.META_API_BASE = 'http://127.0.0.1:9999';  /* nadie escucha */
+let entregoIgual = '';
+entregoIgual = await capturarLogs(async () => {
+  const q = res();
+  await webhook(req('POST', {
+    type: 'cashin', status: 'confirmed',
+    transaction_id: ventaOxxo.transaction_id, external_id: ventaOxxo.external_id,
+  }, { k: process.env.WEBHOOK_KEY }), q);
+  ok(q.code === 200, 'el webhook responde 200 aunque Meta este caido', q.code);
+});
+ok(entregoIgual.includes('PAGO CONFIRMADO'), 'el pago se sigue dando por entregado');
+const accesoIgual = res();
+await access(req('GET', null, { t: ventaOxxo.access_token }), accesoIgual);
+ok(accesoIgual.code === 302, 'y el comprador entra a su material', accesoIgual.code);
+process.env.META_API_BASE = 'http://127.0.0.1:8788';
+
+console.log('\n20) Cada endpoint con su propio cupo');
 const IP2 = '198.51.100.99';
 const reqIp = (metodo, body, query, ruta) => ({
   method: metodo, body, query,
