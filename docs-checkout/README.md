@@ -5,13 +5,23 @@ Checkout propio para las landings, sobre la API de XPag
 
 ## Lo que hay aquí
 
+Vercel sólo reconoce funciones en `api/` de la RAÍZ del proyecto, así que
+el código vive ahí y esta carpeta guarda sólo la documentación y las
+pruebas.
+
 ```
-api/_xpag.js      credenciales, catálogo de precios, mapa de errores
-api/checkout.js   POST — crea la cobranza, devuelve CLABE o referencia OXXO
-api/status.js     GET  — ¿ya pagó? (pregunta a XPag, no a una base propia)
-api/webhook.js    POST — receptor del webhook, con verificación obligatoria
-public/checkout.html  la página que ve el comprador
-vercel.json       runtime y la ruta /checkout
+(raíz del repo)
+  api/_xpag.js        credenciales, catálogo de precios, mapa de errores
+  api/checkout.js     POST crea la cobranza · GET devuelve el precio
+  api/status.js       GET  — ¿ya pagó? (pregunta a XPag, no a una base propia)
+  api/webhook.js      POST — receptor del webhook, con verificación obligatoria
+  checkout.html       la página que ve el comprador
+  vercel.json         runtime, la ruta /checkout y la raíz del sitio
+  .env.example        plantilla de las variables
+
+docs-checkout/
+  README.md           este archivo
+  test/               mock de XPag, pruebas y verificación de contrato
 ```
 
 ## Métodos disponibles
@@ -22,8 +32,8 @@ copia de las landings que los prometía fue corregida.
 
 ## Desplegar
 
-1. Subir esta carpeta a Vercel (o mover `api/` y `public/` a la raíz del
-   proyecto que ya tengas ahí).
+1. Subir **la raíz del repo** a Vercel (Add New → Project → importar el
+   repositorio; sin framework, sin build command).
 2. Variables de entorno en el panel de Vercel:
 
    | Variable | Para qué |
@@ -117,10 +127,11 @@ documentación, porque `api.xpag.global` no siempre es alcanzable desde un
 entorno de build.
 
 ```bash
-node test/mock-xpag.mjs &      # mock del API en :8787
-node test/handlers.test.mjs    # 23 pruebas de los tres handlers
-node test/dev-server.mjs &     # sirve public/ y enruta /api/* en :8080
-node test/checkout.e2e.mjs     # recorre la página en Chromium
+cd docs-checkout/test
+node mock-xpag.mjs &       # mock del API en :8787
+node handlers.test.mjs     # 25 pruebas de los tres handlers
+node dev-server.mjs &      # sirve el sitio y enruta /api/* en :8080
+node checkout.e2e.mjs      # recorre la página en Chromium
 ```
 
 La prueba que más importa es la 7: un webhook falsificado que dice
@@ -135,7 +146,7 @@ pero **no** que XPag devuelva los campos con los nombres que el código
 lee. Eso lo confirma:
 
 ```bash
-node test/verificar-contrato.mjs
+node docs-checkout/test/verificar-contrato.mjs
 ```
 
 Pega el sandbox real y comprueba, uno por uno, los campos de los que
@@ -148,7 +159,7 @@ proxy de un error de XPag, para no reportar verde en falso.
 Con credenciales propias en vez del sandbox:
 
 ```bash
-XPAG_CLIENT_ID=... XPAG_CLIENT_SECRET=... node test/verificar-contrato.mjs
+XPAG_CLIENT_ID=... XPAG_CLIENT_SECRET=... node docs-checkout/test/verificar-contrato.mjs
 ```
 
 Ahí las cobranzas que crea son **reales** (quedan pendientes, nadie las

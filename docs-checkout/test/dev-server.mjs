@@ -6,11 +6,11 @@ process.env.XPAG_BASE_URL='http://127.0.0.1:8787';
 process.env.XPAG_CLIENT_ID='test_id';
 process.env.XPAG_CLIENT_SECRET='test_secret';
 process.env.XPAG_WEBHOOK_URL='http://127.0.0.1:8080/api/webhook';
-const DIR='../public';
+const DIR=new URL('../../', import.meta.url).pathname;
 const rutas={
-  '/api/checkout': (await import('../api/checkout.js')).default,
-  '/api/status':   (await import('../api/status.js')).default,
-  '/api/webhook':  (await import('../api/webhook.js')).default,
+  '/api/checkout': (await import('../../api/checkout.js')).default,
+  '/api/status':   (await import('../../api/status.js')).default,
+  '/api/webhook':  (await import('../../api/webhook.js')).default,
 };
 http.createServer(async (req,res)=>{
   const u=new URL(req.url,'http://x');

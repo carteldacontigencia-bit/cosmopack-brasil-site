@@ -4,9 +4,9 @@ process.env.XPAG_CLIENT_ID = 'test_id';
 process.env.XPAG_CLIENT_SECRET = 'test_secret';
 process.env.XPAG_WEBHOOK_URL = 'https://ejemplo.com/api/webhook';
 
-const checkout = (await import('../api/checkout.js')).default;
-const status   = (await import('../api/status.js')).default;
-const webhook  = (await import('../api/webhook.js')).default;
+const checkout = (await import('../../api/checkout.js')).default;
+const status   = (await import('../../api/status.js')).default;
+const webhook  = (await import('../../api/webhook.js')).default;
 
 function res() {
   const o = { code: 0, body: null, headers: {} };
@@ -93,7 +93,7 @@ ok(warns.join(' ').includes('REVOCAR ACCESO'), 'dispara la revocación');
 console.log('\n10) Error del proveedor se traduce a español, sin filtrar el mensaje crudo');
 process.env.XPAG_BASE_URL = 'http://127.0.0.1:8787';
 r = res(); await checkout(req('POST', { product:'azucar', name:'Test Usuario', email:'t@c.com', method:'oxxo' }), r);
-const guardar = (await import('../api/_xpag.js'));
+const guardar = (await import('../../api/_xpag.js'));
 ok(typeof guardar.mensajeDeError('amount_below_min') === 'string' && !guardar.mensajeDeError('amount_below_min').includes('Valor'), 'amount_below_min traducido');
 
 console.log(`\n${fallos === 0 ? 'TODAS LAS PRUEBAS PASARON' : fallos + ' PRUEBA(S) FALLARON'}`);
