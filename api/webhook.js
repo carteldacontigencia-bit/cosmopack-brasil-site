@@ -1,96 +1,92 @@
-/* POST /api/webhook — receptor del webhook de XPag.
-   ────────────────────────────────────────────────────────────────
-   La documentación de XPag no describe firma HMAC en el webhook. Sin
-   firma, cualquiera que descubra esta URL podría postear
-   {"status":"confirmed"} y llevarse el producto. Por eso este handler
-   NO confía en el cuerpo: lo usa sólo como aviso de "algo cambió" y
-   vuelve a preguntarle a XPag por /consult-transaction. Sólo libera
-   cuando XPag confirma.
-   ──────────────────────────────────────────────────────────────── */
+/* POST /api/webhook?k=<WEBHOOK_KEY>
+   ─────────────────────────────────────────────────────────────────
+   La documentacion de XPag no describe firma HMAC en el webhook. Sin
+   firma, quien descubra la URL podria postear {"status":"confirmed"} y
+   llevarse el producto. Por eso:
+     1. la URL lleva un secreto (WEBHOOK_KEY), comparado en tiempo
+        constante;
+     2. el cuerpo NO se cree: se usa solo como aviso de "algo cambio" y
+        se vuelve a preguntar por /consult-transaction.
+   Solo se libera cuando XPag responde confirmed.
+   ───────────────────────────────────────────────────────────────── */
+import { timingSafeEqual } from 'node:crypto';
+import { guard } from './_lib/guard.js';
+import { cfg } from './_lib/env.js';
+import { estadoDe } from './_lib/xpag.js';
 
-import { aplicarCors, leerJson, xpag, normalizarEstado } from './_xpag.js';
+function claveValida(dada) {
+  const esperada = cfg.webhookKey;
+  if (!esperada) return false;
+  const a = Buffer.from(String(dada || ''));
+  const b = Buffer.from(esperada);
+  return a.length === b.length && timingSafeEqual(a, b);
+}
 
 export default async function handler(req, res) {
-  if (aplicarCors(req, res)) return;
-  if (req.method !== 'POST') return res.status(405).end();
+  /* checkOrigin:false — el POST viene del gateway, no de un navegador. */
+  const g = await guard(req, res, { method: 'POST', rate: 300, windowMs: 60_000, checkOrigin: false });
+  if (!g) return;
 
-  const evento = await leerJson(req);
+  if (!claveValida(req.query?.k)) {
+    console.warn('[webhook] clave de URL invalida');
+    return res.status(404).end();
+  }
 
-  /* Se responde 200 de inmediato en todos los casos: si devolvemos error,
-     XPag reintenta y no hay nada que reintentar de su lado. */
+  const ev = g.body;
+
+  /* Siempre 200: devolver error solo provoca reintentos que no arreglan
+     nada de nuestro lado. */
   const responder = (nota) => {
     console.log('[webhook]', nota, {
-      type: evento.type, status_recibido: evento.status,
-      external_id: evento.external_id, e2e: evento.e2e,
+      type: ev.type, status_recibido: ev.status,
+      external_id: ev.external_id, e2e: ev.e2e, origin: ev.origin,
     });
     res.status(200).json({ received: true });
   };
 
-  if (evento.type !== 'cashin') return responder('no es cashin, ignorado');
+  if (ev.type !== 'cashin') return responder('no es cashin, ignorado');
 
-  const ref = evento.transaction_id || evento.request_number || evento.external_id;
+  const ref = ev.transaction_id || ev.request_number || ev.external_id;
   if (!ref) return responder('sin identificador, ignorado');
 
-  /* MED: una entrada ya confirmada fue disputada por el pagador. Llega en
-     el MISMO transaction_id de la cobranza original y el líquido se
-     retira del saldo, así que el acceso se revoca. */
-  if (evento.status === 'med') {
-    await revocarAcceso({ external_id: evento.external_id, e2e: evento.e2e, motivo: 'med' });
+  /* MED: una entrada confirmada fue disputada. Llega en el MISMO
+     transaction_id y el liquido se retira del saldo, asi que se revoca. */
+  if (ev.status === 'med') {
+    await revocar({ external_id: ev.external_id, e2e: ev.e2e });
     return responder('MED: acceso revocado');
   }
 
-  const esTransaccion = Boolean(evento.transaction_id || evento.request_number);
-  const query = esTransaccion
-    ? `transaction_id=${encodeURIComponent(ref)}`
-    : `external_id=${encodeURIComponent(ref)}`;
-
-  let verificado;
+  const porTx = Boolean(ev.transaction_id || ev.request_number);
+  let est;
   try {
-    const r = await xpag(`/consult-transaction?${query}`);
-    if (r.httpStatus >= 400) return responder(`consulta devolvió ${r.httpStatus}, no se libera`);
-    verificado = normalizarEstado(r.data);
-  } catch {
-    return responder('no se pudo verificar contra XPag, no se libera');
+    est = await estadoDe(porTx ? { transactionId: ref } : { externalId: ref });
+  } catch (e) {
+    return responder(`no se pudo verificar (${e.code || e.name}), no se libera`);
   }
 
-  if (verificado.status !== 'confirmed') {
-    return responder(`XPag dice "${verificado.status}", no se libera`);
-  }
+  if (est.status !== 'confirmed') return responder(`XPag dice "${est.status}", no se libera`);
 
   await entregar({
-    external_id: verificado.external_id || evento.external_id,
-    e2e: verificado.e2e || evento.e2e,
-    amount: verificado.amount,
-    currency: verificado.currency,
+    external_id: est.external_id || ev.external_id,
+    e2e: est.e2e || ev.e2e,
+    amount: est.amount, currency: est.currency,
   });
-
   return responder('verificado y entregado');
 }
 
-/* ── Entrega ────────────────────────────────────────────────────
-   Aquí va lo que pasa cuando el pago es real: mandar el correo con el
-   PDF, dar de alta en el área de miembros, avisar por WhatsApp.
+/* La entrega en si la hace /api/access cuando el comprador abre su
+   enlace: verifica la firma, reconsulta y redirige. Es lo que permite
+   que el pago por OXXO, que confirma horas despues, funcione sin
+   almacenar nada.
 
-   Dos cosas que hacen falta antes de enchufar un correo aquí:
-
-   1. IDEMPOTENCIA. El webhook puede llegar más de una vez para el mismo
-      pago. Hay que guardar el `e2e` (único por pago, es la llave de
-      reconciliación que indica la documentación) y salir temprano si ya
-      se entregó, o el comprador recibe el correo tres veces.
-
-   2. ALMACENAMIENTO. Para mandar el correo hace falta el email del
-      comprador, que se captura en /api/checkout y no viaja en el webhook.
-      Hay que guardar { external_id → email } al crear la cobranza.
-
-   Mientras no haya almacén, el flujo funciona igual: la página del
-   checkout consulta /api/status y muestra el acceso en pantalla cuando
-   XPag confirma. Esto sólo queda registrado en los logs.            */
+   Este gancho queda para lo que SI necesita empujarse desde el servidor
+   (avisar por WhatsApp, o el Purchase server-side del pixel con
+   e2e como id de evento). Sin las variables de entorno correspondientes
+   no hace nada. */
 async function entregar(pago) {
   console.log('[entrega] PAGO CONFIRMADO', pago);
-  // TODO: guardar e2e para no duplicar, y enviar el acceso por correo.
 }
 
-async function revocarAcceso(info) {
+async function revocar(info) {
   console.warn('[entrega] REVOCAR ACCESO', info);
-  // TODO: bloquear la descarga / dar de baja al comprador.
 }

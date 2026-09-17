@@ -4,18 +4,35 @@ import { cfg } from './env.js';
 
 const MAX_BODY = 4 * 1024;
 
-/* Límite por IP en memoria. En serverless cada instancia tiene el suyo,
-   así que frena ráfagas de un mismo cliente, no un ataque distribuido;
-   para eso hace falta el firewall de la plataforma. Se dice aquí para no
-   dar una sensación de protección que no existe. */
+/* Límite por IP en memoria.
+   ────────────────────────────────────────────────────────────────
+   Dos limitaciones que conviene tener presentes en lugar de suponer
+   una protección que no existe:
+
+   1. En serverless cada instancia lleva su propio contador, así que
+      esto frena ráfagas de un mismo cliente, no un ataque distribuido.
+      Para eso hace falta el firewall de la plataforma.
+
+   2. Las operadoras móviles de México comparten IP pública entre
+      muchísimos clientes (NAT). Un límite apretado no frena al
+      atacante y sí puede bloquear a compradores reales de la misma
+      operadora en un pico de tráfico. Por eso el valor por defecto es
+      holgado y se puede subir con RATE_CREATE sin tocar el código. */
 const golpes = new Map();
 
-function limitar(ip, max, ventanaMs) {
+/* La clave incluye el endpoint, no solo la IP.
+   Con un unico contador por IP, la consulta de estado —que corre cada 6
+   segundos mientras la persona espera— se comia el presupuesto de
+   /api/create y /api/contact, y el comprador acababa bloqueandose a si
+   mismo. Cada ruta lleva su propio balde. */
+function limitar(clave, max, ventanaMs) {
   const ahora = Date.now();
-  const previo = golpes.get(ip);
+  const previo = golpes.get(clave);
   if (!previo || ahora - previo.desde > ventanaMs) {
-    golpes.set(ip, { desde: ahora, n: 1 });
-    if (golpes.size > 5000) for (const [k, v] of golpes) if (ahora - v.desde > ventanaMs) golpes.delete(k);
+    golpes.set(clave, { desde: ahora, n: 1 });
+    if (golpes.size > 5000) {
+      for (const [k, v] of golpes) if (ahora - v.desde > ventanaMs) golpes.delete(k);
+    }
     return true;
   }
   previo.n += 1;
@@ -63,7 +80,8 @@ export async function guard(req, res, {
   }
 
   const ip = clientIp(req);
-  if (!limitar(ip, rate, windowMs)) {
+  const ruta = (req.url || '').split('?')[0] || 'sin-ruta';
+  if (!limitar(`${ip}|${ruta}`, rate, windowMs)) {
     res.setHeader('Retry-After', String(Math.ceil(windowMs / 1000)));
     res.status(429).json({ ok: false, error: 'rate' });
     return null;

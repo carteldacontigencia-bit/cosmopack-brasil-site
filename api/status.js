@@ -1,44 +1,37 @@
-/* GET /api/status?external_id=... — el navegador pregunta cada pocos
-   segundos si ya cayó el pago. La respuesta sale de XPag, no de una
-   base de datos nuestra, así que no puede quedar desincronizada. */
-
-import { aplicarCors, xpag, normalizarEstado } from './_xpag.js';
+/* GET /api/status?t=<token de acceso>
+   El navegador pregunta si ya cayo el pago. La respuesta sale de XPag,
+   no de un almacen propio, asi que no puede quedar desincronizada.
+   Se acepta SOLO el token firmado: sin el no se puede sondear el estado
+   de ventas ajenas probando identificadores. */
+import { guard, fallo } from './_lib/guard.js';
+import { estadoDe } from './_lib/xpag.js';
+import { externalIdDeToken } from './_lib/order.js';
 
 export default async function handler(req, res) {
-  if (aplicarCors(req, res)) return;
-  if (req.method !== 'GET') {
-    return res.status(405).json({ ok: false, error: 'Método no permitido' });
-  }
+  const g = await guard(req, res, { method: 'GET', rate: 90, windowMs: 60_000 });
+  if (!g) return;
 
-  const externalId = String(req.query?.external_id || '').trim();
-  const txId = String(req.query?.transaction_id || '').trim();
-  if (!externalId && !txId) {
-    return res.status(400).json({ ok: false, error: 'Falta el identificador.' });
-  }
+  const externalId = externalIdDeToken(req.query?.t);
+  if (!externalId) return fallo(res, 400, 'err_token');
 
-  /* Preferimos transaction_id: en cobranza dinámica devuelve el registro
-     único. external_id devuelve una lista; normalizarEstado cubre las dos. */
-  const query = txId
-    ? `transaction_id=${encodeURIComponent(txId)}`
-    : `external_id=${encodeURIComponent(externalId)}`;
+  const txId = typeof req.query?.tx === 'string' && /^[\w.-]{1,64}$/.test(req.query.tx)
+    ? req.query.tx : null;
 
-  let r;
+  let est;
   try {
-    r = await xpag(`/consult-transaction?${query}`);
-  } catch {
-    return res.status(502).json({ ok: false, status: 'unknown' });
-  }
-
-  /* 404 = todavía no hay depósito registrado. Para el comprador eso es
-     "seguimos esperando", no un error. */
-  if (r.httpStatus === 404) {
-    return res.status(200).json({ ok: true, status: 'pending' });
-  }
-  if (r.httpStatus >= 400) {
+    est = await estadoDe({ transactionId: txId, externalId });
+  } catch (e) {
+    console.error('[status] consulta fallo:', e.code || e.name);
     return res.status(200).json({ ok: true, status: 'unknown' });
   }
 
-  const estado = normalizarEstado(r.data);
-  res.setHeader('Cache-Control', 'no-store');
-  res.status(200).json({ ok: true, status: estado.status, amount: estado.amount, currency: estado.currency });
+  res.status(200).json({
+    ok: true,
+    status: est.status,
+    amount: est.amount ?? null,
+    currency: est.currency ?? null,
+    /* e2e es unico por pago: el front lo usa como id de evento del pixel
+       para no contar la misma compra dos veces. */
+    event_id: est.status === 'confirmed' ? (est.e2e || externalId) : null,
+  });
 }

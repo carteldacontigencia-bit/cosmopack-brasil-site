@@ -1,0 +1,135 @@
+# Checkout propio — SPEI y OXXO (MXN) sobre XPag
+
+Página estática más funciones serverless en `/api`. Sin tarjeta, sin
+registro, sin login. **Sin base de datos.**
+
+## Archivos
+
+```
+api/_lib/env.js        configuración (getters, lee el entorno en vivo)
+api/_lib/guard.js      método, origen, tamaño del cuerpo, límite por IP
+api/_lib/xpag.js       cliente de XPag y error_code → clave de traducción
+api/_lib/order.js      external_id por venta y enlace de acceso firmado
+api/_lib/sanitize.js   nombre, importe, método, trampa, WhatsApp MX
+api/_lib/offers.js     TABLA DE PRECIOS (única fuente de verdad)
+
+api/config.js          valores públicos para el front
+api/create.js          crea la cobranza → CLABE o referencia OXXO
+api/status.js          ¿ya pagó? (pregunta a XPag, no a un almacén)
+api/access.js          puerta de entrega: verifica, reconsulta, redirige
+api/webhook.js         recibe el aviso de XPag y lo VERIFICA
+api/contact.js         WhatsApp opcional, después de la referencia
+
+checkout.html          la pantalla
+assets/app.js          lógica: persistencia, sondeo, copiar, bancos
+assets/i18n.js         TODOS los textos, es y en, en un solo archivo
+assets/pixel.js        Meta Pixel
+assets/checkout.css    estilos
+
+test/                  mock de XPag + tres suites
+vercel.json            cabeceras de seguridad y rutas
+.env.example           las variables que hay que llenar
+```
+
+## Desplegar
+
+1. Importar el repo en Vercel. Sin framework, sin build command.
+2. Copiar las variables de `.env.example` en Settings → Environment
+   Variables. Generar los dos secretos con `openssl rand -base64 48`.
+3. Empezar con `XPAG_SANDBOX=1`. La pantalla muestra una banda naranja y
+   ninguna petición toca dinero real.
+4. Probar: abrir `/pago`, generar una referencia, y confirmarla con
+   `POST /sandbox/simulate` de XPag (`outcome`: `paid`, `failed`,
+   `expired` — conviene probar los tres).
+5. Cambiar a credenciales propias y **borrar** `XPAG_SANDBOX`.
+
+## Sin base de datos: cómo funciona la entrega
+
+El enlace de acceso es `/api/access?t=<external_id>.<firma HMAC>`.
+
+Al abrirlo, el servidor verifica la firma (comparación en tiempo
+constante) y **reconsulta el pago a XPag**. Sólo redirige a los PDFs si
+XPag responde `confirmed`.
+
+Eso resuelve el caso del OXXO, que confirma horas después: la persona
+vuelve con el mismo enlace y entra. No hay estado local que pueda
+desincronizarse del pago real, y no hay servicio extra que mantener.
+
+El enlace se guarda en el aparato por 24 h, así que si el navegador
+descarta la pestaña mientras la persona está en el app del banco, al
+volver encuentra la misma CLABE.
+
+**La página de los PDFs necesita una ruta aleatoria y `noindex`.** El
+redirect verifica el pago, pero no puede impedir que alguien comparta la
+URL final una vez que la tiene.
+
+## Decisiones de seguridad
+
+**El precio vive en el servidor.** `api/_lib/offers.js` es la única
+fuente. El navegador manda un id de oferta, nunca un importe. Probado:
+mandar `amount: 1` en el cuerpo no cambia nada.
+
+**El webhook no se cree nada.** La documentación de XPag no describe
+firma HMAC. Así que la URL lleva un secreto (`WEBHOOK_KEY`, comparado en
+tiempo constante) **y** el cuerpo se trata sólo como aviso de que algo
+cambió: el handler vuelve a preguntar por `/consult-transaction` y
+libera únicamente con `confirmed`. Una prueba forja un webhook que dice
+`confirmed` sin que nadie haya pagado y comprueba que no se entrega.
+
+**El estado sólo se consulta con el token firmado**, para que nadie pueda
+sondear ventas ajenas probando identificadores.
+
+**Los errores salen por clave de traducción**, nunca con el texto del
+proveedor ni con el detalle interno.
+
+**MED (disputa)** llega en el mismo `transaction_id` y revoca el acceso.
+
+## Límite por IP: dos cosas que no protege
+
+1. En serverless cada instancia lleva su contador, así que frena ráfagas
+   de un mismo cliente, no un ataque distribuido. Para eso hace falta el
+   firewall de la plataforma.
+2. Las operadoras móviles de México comparten IP entre muchos clientes
+   (NAT). Por eso el valor por defecto es holgado (30/min, ajustable con
+   `RATE_CREATE`): un límite apretado no frena al atacante y sí bloquea
+   compradores reales en un pico.
+
+Cada endpoint lleva su propio balde. Antes compartían uno y el sondeo de
+estado —que corre cada 6 s mientras la persona espera— se comía el cupo
+de crear la cobranza.
+
+## Pruebas
+
+```bash
+node test/mock-xpag.mjs &      # mock del API de XPag en :8787
+node test/lib.test.mjs         # 62 · validación y firma del acceso
+node test/api.test.mjs         # 46 · los seis handlers
+node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
+node test/checkout.e2e.mjs     # 39 · la pantalla en Chromium
+```
+
+El mock reproduce las respuestas de la documentación campo por campo,
+porque `api.xpag.global` no es alcanzable desde el entorno de build.
+
+**Lo que las pruebas NO demuestran:** que XPag real devuelva los campos
+con los nombres que el código lee. Eso se confirma corriendo, desde una
+máquina con salida a internet, una petición al sandbox y comparando la
+respuesta con `test/mock-xpag.mjs`.
+
+## Lo que afecta la conversión
+
+- **El nombre del beneficiario va arriba, antes de la CLABE.** Si no
+  coincide con `BRAND_NAME`, la pantalla explica que el banco mostrará
+  otro nombre. Es el principal motivo de abandono en México.
+- **La cuenta regresiva de validez es una política nuestra**
+  (`REF_HOURS`), no un dato de XPag, que no expone vencimiento para MXN.
+  Al llegar a cero la pantalla ofrece generar otra referencia pero
+  **sigue consultando**: declarar muerta una referencia que quizá siga
+  viva cuesta ventas.
+- **El formulario pide sólo el nombre.** El WhatsApp se pide después, ya
+  con la referencia en pantalla. Quien paga en OXXO y pierde el enlace
+  pierde el acceso, así que ese campo es la red de seguridad.
+- **Copiar tiene plan B**: si el navegador bloquea el portapapeles, se
+  selecciona el texto y se dice qué hacer.
+- **La CLABE nunca se parte** en dos renglones: un número cortado se
+  teclea mal y el pago no se concilia.
