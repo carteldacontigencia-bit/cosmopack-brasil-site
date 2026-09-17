@@ -334,6 +334,48 @@
 </script>
 
 <style>
+/* ===== RESPONSIVO =====
+   Ajustes medidos en Chromium a 320/360/390/414/540/640/768/900/1024/1280/1440.
+   Van aqui y no en lp.css porque esa hoja la comparte la pagina de Raices. */
+
+/* 1. TITULAR. lp.css fija el suelo del clamp en 2.4rem, que nunca baja: a
+      360px el h1 medía 445px de alto y terminaba en y=548, o sea que en un
+      celular de 640px no se alcanzaba a ver ni la linea dorada ni la portada.
+      Dos tramos, continuos en 641px (35.2px a los dos lados). */
+.heroi h1{ font-size:clamp(1.65rem, 5.4vw, 2.2rem); }
+@media (min-width:641px){ .heroi h1{ font-size:clamp(2.2rem, 4.6vw, 4rem); } }
+
+/* 2. REJILLAS. lp.css pasa de 1 columna a 3 y 4 de golpe en 900px, asi que
+      entre 641 y 1023 todo quedaba en una sola columna de 810px de ancho.
+      Se agrega el tramo de 2 columnas que faltaba. Especificidad .grade.gN
+      (0,2,0) para ganarle al max-width:900px de lp.css sin tocarlo. */
+@media (min-width:641px){
+  .grade.g2, .grade.g3, .grade.g4{ grid-template-columns:repeat(2,1fr); }
+}
+@media (min-width:1024px){
+  .grade.g3{ grid-template-columns:repeat(3,1fr); }
+}
+/* g4 a 4 columnas solo cuando cada tarjeta pasa de 230px: a 1024 median 212px
+   y el texto quedaba en tiras de tres palabras. */
+@media (min-width:1140px){
+  .grade.g4{ grid-template-columns:repeat(4,1fr); }
+}
+
+/* 3. IMAGEN DE TARJETA. Altura fija de 190px: en columna ancha daba una
+      franja de 808x190 (mas de 4:1). Por proporcion se mantiene 16:9 siempre. */
+.dentro .card img{ height:auto; aspect-ratio:16/9; object-fit:cover; }
+
+/* 4. CABECERA. height fijo de 62px y la marca ocupa 61px en dos lineas a
+      360px: un caracter mas y se recorta. */
+header .wrap{ height:auto; min-height:62px; padding-block:9px; }
+@media (max-width:400px){ .marca{ font-size:.95rem; line-height:1.35; } }
+
+/* 5. La notificacion flotante se apoya en el borde inferior; en iPhone con
+      barra de gestos queda debajo de ella. */
+@media (max-width:640px){
+  .notif-compra{ bottom:calc(8px + env(safe-area-inset-bottom, 0px)); }
+}
+
 /* ===== PORTADA VERTICAL =====
    El cartel es A4 (1060x1500). lp.css dimensiona .produto pensando en una
    portada cuadrada, asi que aqui se acota el ancho para que el alto no se
