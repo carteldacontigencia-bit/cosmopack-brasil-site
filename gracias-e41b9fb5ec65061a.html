@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Esta pagina NO puede indexarse: quien llegue a la URL entra sin
+     pagar, porque el redirect verifica el pago pero no puede impedir que
+     alguien comparta el enlace final. La ruta es aleatoria por lo mismo. -->
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Tu material</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314463F'/%3E%3Cpath d='M9 17l5 5 9-11' stroke='%23EFD48A' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/checkout.css">
+<style>
+  .hero { text-align: center; padding: 34px 22px; }
+  .hero .tic { width: 58px; height: 58px; border-radius: 50%; background: var(--exito); color: #fff;
+    display: grid; place-items: center; font-size: 1.9rem; margin: 0 auto 16px; }
+  .hero h1 { font-family: var(--display); font-weight: 800; color: var(--exito); font-size: 1.7rem; line-height: 1.2; }
+  .hero p { color: var(--tinta-suave); margin-top: 10px; }
+
+  .archivos { display: grid; gap: 12px; margin-top: 4px; }
+  .archivo {
+    display: flex; align-items: center; gap: 14px; text-decoration: none;
+    background: var(--blanco); border: 1.5px solid var(--borde); border-radius: 12px;
+    padding: 16px 18px; color: var(--tinta);
+  }
+  .archivo:hover { border-color: var(--verde); background: var(--verde-claro); }
+  .archivo .icono {
+    width: 42px; height: 42px; flex: none; border-radius: 10px; background: var(--verde);
+    color: var(--oro); display: grid; place-items: center; font: 700 .72rem var(--sans);
+  }
+  .archivo b { display: block; font-family: var(--display); color: var(--verde); }
+  .archivo span { font-size: .86rem; color: var(--tinta-tenue); }
+  .archivo .flecha { margin-left: auto; color: var(--verde); font-size: 1.3rem; }
+
+  .pendiente { border-style: dashed; opacity: .6; }
+  .pendiente .icono { background: var(--borde); color: var(--tinta-tenue); }
+
+  .consejo { background: #FFFCF4; border: 2px solid var(--oro); border-radius: 14px; padding: 20px 22px; }
+  .consejo b { font-family: var(--display); color: var(--verde); display: block; margin-bottom: 6px; }
+  .consejo p { font-size: .94rem; color: var(--tinta-suave); }
+</style>
+</head>
+<body>
+
+<header><div class="in">
+  <span class="marca">Tu material</span>
+  <span class="candado">Acceso confirmado</span>
+</div></header>
+
+<main>
+  <div class="tarjeta hero">
+    <div class="tic" aria-hidden="true">&#10003;</div>
+    <h1>¡Listo! Tu pago quedó confirmado</h1>
+    <p>Descarga tus archivos aquí abajo. Son tuyos para siempre.</p>
+  </div>
+
+  <div class="tarjeta">
+    <div class="guarda-t" style="margin-bottom:14px">Tus descargas</div>
+
+    <div class="archivos">
+      <!-- ══════════════════════════════════════════════════════════
+           AQUI VAN LOS PDFs.
+
+           1. Sube los archivos a la carpeta  descargas/
+           2. Copia este bloque una vez por PDF y cambia href, titulo
+              y el tamano.
+           3. Borra los bloques con clase "pendiente".
+           ══════════════════════════════════════════════════════════
+
+      <a class="archivo" href="/descargas/NOMBRE-DEL-ARCHIVO.pdf" download>
+        <span class="icono">PDF</span>
+        <span>
+          <b>Titulo del material</b>
+          <span>Una linea de que es · 2.4 MB</span>
+        </span>
+        <span class="flecha" aria-hidden="true">&darr;</span>
+      </a>
+      -->
+
+      <div class="archivo pendiente">
+        <span class="icono">PDF</span>
+        <span>
+          <b>Aún no hay archivos</b>
+          <span>Sube los PDFs a <code>descargas/</code> y descomenta el bloque de arriba.</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="consejo">
+    <b>Guarda esta página</b>
+    <p>Agrégala a favoritos o mándate el enlace por WhatsApp. Puedes volver
+      cuando quieras y descargar otra vez, desde el celular o la computadora.</p>
+  </div>
+
+  <p class="legal" style="margin-top:20px">
+    ¿Algún archivo no abre? Escríbenos y lo resolvemos.
+  </p>
+</main>
+
+</body>
+</html>

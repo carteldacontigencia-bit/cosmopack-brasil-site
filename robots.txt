@@ -1,0 +1,8 @@
+# La pagina de entrega y los archivos no deben aparecer en buscadores.
+# El redirect verifica el pago, pero no puede impedir que alguien
+# comparta la URL final una vez que la tiene.
+User-agent: *
+Disallow: /gracias-
+Disallow: /descargas/
+Disallow: /pago
+Disallow: /api/
