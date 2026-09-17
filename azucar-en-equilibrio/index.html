@@ -24,7 +24,7 @@
     <p class="linha-dourada">Dile adiós a la idea de que ya no hay nada más que hacer</p>
     <p class="sub-heroi">con tés, aguas, mistelas y cataplasmas milenarias que la Abuela Mei enseña desde hace más de 40 años — cada una con su dosis, su hora y quién no debe tomarla.</p>
 
-    <img class="produto" src="assets/capa-azucar.png" width="1600" height="1600" alt="Azúcar en Equilibrio — 55 Remedios Naturales de la Abuela Mei">
+    <img class="produto" src="assets/capa-azucar.png" width="1060" height="1500" alt="Azúcar en Equilibrio — Raíces de la Naturaleza: tu aliado natural para mantener niveles saludables de glucosa">
 
     <div class="promessa-box">
       <strong>55 remedios</strong> ordenados por lo que sientes — el sueño de después de comer, la sed de noche, los pies dormidos, el antojo de dulce — cada uno con su dosis y con la advertencia de quién no debe tomarlo.
@@ -334,6 +334,17 @@
 </script>
 
 <style>
+/* ===== PORTADA VERTICAL =====
+   El cartel es A4 (1060x1500). lp.css dimensiona .produto pensando en una
+   portada cuadrada, asi que aqui se acota el ancho para que el alto no se
+   coma la primera pantalla, y se le da el marco de la referencia. */
+.heroi .produto{
+  max-width:min(430px,86vw);
+  border-radius:12px;
+  box-shadow:0 18px 50px rgba(80,70,50,.22);
+}
+@media(max-width:640px){ .heroi .produto{ max-width:88vw; } }
+
 /* ===== BONO EXCLUSIVO ===== */
 .bonus-exclusivo{
   padding:60px 0;
