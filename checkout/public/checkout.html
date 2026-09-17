@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Finalizar compra — Azúcar en Equilibrio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --creme:#FBF7EF; --creme2:#F3ECDE; --verde:#3A5240; --verde-e:#2A3C2F;
+  --sage:#4E6455; --tinta:#3D3A33; --cinza:#6B6355; --linha:#E4DAC6;
+  --dourado:#EFD48A; --realce:#7E5E12; --exito:#2F6B3A;
+  --titulo:'Plus Jakarta Sans',system-ui,sans-serif;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--creme2);color:var(--tinta);line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:var(--titulo);font-weight:800;color:var(--verde);line-height:1.2;text-wrap:balance}
+img{max-width:100%;height:auto;display:block}
+
+header{background:var(--verde);color:#F0EBDD;padding:14px 0}
+header .in{width:min(680px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header .marca{font-family:var(--titulo);font-weight:700;font-size:1rem}
+header .seguro{font-size:.82rem;color:#C3CFC1}
+
+main{width:min(680px,92vw);margin:0 auto;padding:28px 0 60px}
+
+.resumen{background:#fff;border:1px solid var(--linha);border-radius:16px;padding:20px 22px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.resumen .prod{font-weight:600;max-width:60ch}
+.resumen .total{font-family:var(--titulo);font-weight:800;font-size:1.9rem;color:var(--verde);white-space:nowrap}
+.resumen .total small{display:block;font-family:var(--sans);font-size:.72rem;font-weight:600;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase}
+
+.tarjeta{background:#fff;border:1px solid var(--linha);border-radius:16px;padding:26px 24px;box-shadow:0 2px 10px rgba(80,70,50,.06)}
+.tarjeta h2{font-size:1.25rem;margin-bottom:4px}
+.tarjeta .pie{color:var(--cinza);font-size:.95rem;margin-bottom:20px}
+
+label{display:block;font-weight:600;font-size:.92rem;margin:16px 0 6px;color:var(--verde)}
+input[type=text],input[type=email]{width:100%;font:inherit;padding:14px 15px;border:1.5px solid var(--linha);
+  border-radius:10px;background:var(--creme);color:var(--tinta)}
+input:focus-visible{outline:3px solid var(--verde);outline-offset:2px}
+.ayuda{font-size:.84rem;color:var(--cinza);margin-top:5px}
+.err{font-size:.86rem;color:#A8522F;font-weight:600;margin-top:6px;display:none}
+.err.on{display:block}
+
+fieldset{border:0;margin:22px 0 0}
+legend{font-weight:600;font-size:.92rem;color:var(--verde);margin-bottom:8px}
+.metodos{display:grid;gap:10px}
+.metodo{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--linha);border-radius:12px;
+  padding:14px 16px;cursor:pointer;background:var(--creme)}
+.metodo:has(input:checked){border-color:var(--verde);background:#F2F6F1}
+.metodo input{margin-top:4px;accent-color:var(--verde);width:18px;height:18px;flex:none}
+.metodo b{display:block;font-family:var(--titulo);color:var(--verde)}
+.metodo span{font-size:.88rem;color:var(--cinza)}
+
+.btn{width:100%;margin-top:24px;border:0;cursor:pointer;font-family:var(--titulo);font-weight:800;
+  font-size:1.05rem;color:#FFF6EC;padding:19px 20px;border-radius:12px;
+  background:linear-gradient(180deg,#C4693F 0%,#A8522F 100%);box-shadow:0 10px 26px rgba(168,82,47,.3)}
+.btn:hover:not(:disabled){transform:translateY(-1px)}
+.btn:disabled{opacity:.6;cursor:progress}
+.legal{margin-top:16px;font-size:.82rem;color:var(--cinza);text-align:center}
+
+/* ── Instrucciones de pago ── */
+.oculto{display:none}
+.paso{background:var(--verde-e);color:#E9E3D5;border-radius:16px;padding:24px 22px;margin-bottom:18px}
+.paso h2{color:#F5F0E3;font-size:1.2rem;margin-bottom:6px}
+.paso p{color:#C3CFC1;font-size:.95rem}
+.dato{background:#34492F;border:1px solid #4C6449;border-radius:12px;padding:16px 18px;margin-top:14px}
+.dato .k{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#A8B5A6;font-weight:700}
+.dato .v{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1.32rem;color:#F5F0E3;
+  overflow-wrap:break-word;margin-top:4px;font-variant-numeric:tabular-nums}
+/* La CLABE son 18 dígitos que el comprador va a teclear en su banco. Se
+   agrupa de 4 en 4 y el cuerpo se ajusta al ancho, para que NUNCA se corte
+   en medio de un grupo: un "6 / 7" partido en dos renglones se teclea mal. */
+.dato .v.clabe{font-size:clamp(.95rem,4.2vw,1.32rem);word-break:keep-all;white-space:nowrap;
+  overflow-x:auto;letter-spacing:.02em;padding-bottom:2px}
+.dato .v.chico{font-size:1.05rem;font-family:var(--sans);overflow-wrap:break-word}
+.copiar{margin-top:10px;background:var(--dourado);color:#23331F;border:0;border-radius:999px;
+  padding:9px 18px;font:700 .86rem var(--sans);cursor:pointer}
+.copiar.hecho{background:#BFE0C0}
+.aviso{margin-top:16px;border-left:3px solid var(--dourado);padding:4px 0 4px 14px;font-size:.92rem;color:#E9E3D5}
+.barcode{background:#fff;border-radius:10px;padding:14px;margin-top:14px}
+
+.espera{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--linha);
+  border-radius:14px;padding:16px 18px;font-size:.95rem;color:var(--cinza)}
+.punto{width:11px;height:11px;border-radius:50%;background:var(--dourado);flex:none;animation:lat 1.4s ease-in-out infinite}
+@keyframes lat{0%,100%{opacity:.35}50%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.punto{animation:none}}
+
+.exito{background:#fff;border:2px solid var(--exito);border-radius:16px;padding:28px 24px;text-align:center}
+.exito .tic{width:56px;height:56px;border-radius:50%;background:var(--exito);color:#fff;display:grid;
+  place-items:center;font-size:1.8rem;margin:0 auto 14px}
+.exito h2{color:var(--exito)}
+
+.sandbox{background:#7E5E12;color:#FFF6E2;text-align:center;font:700 .82rem var(--sans);padding:8px 14px}
+</style>
+</head>
+<body>
+
+<div id="avisoSandbox" class="sandbox oculto">Modo de prueba — ningún cargo real</div>
+
+<header><div class="in">
+  <span class="marca" id="marca">Azúcar en Equilibrio</span>
+  <span class="seguro">🔒 Pago seguro · Garantía de 7 días</span>
+</div></header>
+
+<main>
+  <div class="resumen">
+    <div class="prod" id="resumenProd">Cargando…</div>
+    <div class="total"><small>Total</small><span id="resumenTotal">—</span></div>
+  </div>
+
+  <!-- PASO 1 — datos -->
+  <section class="tarjeta" id="formulario">
+    <h2>¿A dónde te mandamos el libro?</h2>
+    <p class="pie">Es digital: llega a tu correo en cuanto se confirma el pago.</p>
+
+    <form id="form" novalidate>
+      <label for="name">Nombre completo</label>
+      <input type="text" id="name" name="name" autocomplete="name" required>
+      <p class="err" id="errName"></p>
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required>
+      <p class="ayuda">Revísalo bien: ahí te llega el acceso.</p>
+      <p class="err" id="errEmail"></p>
+
+      <fieldset>
+        <legend>¿Cómo quieres pagar?</legend>
+        <div class="metodos">
+          <label class="metodo">
+            <input type="radio" name="method" value="spei" checked>
+            <span><b>Transferencia SPEI</b>
+            <span>Desde tu app del banco. Se confirma en minutos.</span></span>
+          </label>
+          <label class="metodo">
+            <input type="radio" name="method" value="oxxo">
+            <span><b>Efectivo en OXXO</b>
+            <span>Te damos una referencia y pagas en la tienda.</span></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <button class="btn" id="enviar" type="submit">Continuar al pago</button>
+      <p class="err" id="errGeneral" style="text-align:center"></p>
+      <p class="legal">Al continuar aceptas recibir el material en el correo que escribiste.</p>
+    </form>
+  </section>
+
+  <!-- PASO 2 — instrucciones -->
+  <section id="instrucciones" class="oculto">
+    <div class="paso" id="panelSpei">
+      <h2>Transfiere desde tu banco</h2>
+      <p>Abre tu app, elige <b>transferir a otra cuenta (SPEI)</b> y usa estos datos.</p>
+
+      <div class="dato">
+        <div class="k">CLABE</div>
+        <div class="v clabe" id="vClabe">—</div>
+        <button class="copiar" type="button" data-copia="vClabe">Copiar CLABE</button>
+      </div>
+      <div class="dato">
+        <div class="k">Importe exacto</div>
+        <div class="v" id="vMonto">—</div>
+      </div>
+      <div class="dato" id="cajaBanco">
+        <div class="k">Banco</div><div class="v chico" id="vBanco">—</div>
+      </div>
+      <div class="dato" id="cajaBenef">
+        <div class="k">Beneficiario</div><div class="v chico" id="vBenef">—</div>
+      </div>
+      <div class="dato oculto" id="cajaRefSpei">
+        <div class="k">Referencia</div><div class="v chico" id="vRefSpei">—</div>
+      </div>
+
+      <p class="aviso">Transfiere el <b>importe exacto</b>. Si mandas otra cantidad, el pago no se
+      relaciona con tu compra y hay que resolverlo a mano.</p>
+    </div>
+
+    <div class="paso oculto" id="panelOxxo">
+      <h2>Paga en cualquier OXXO</h2>
+      <p>Muestra esta referencia en la caja y paga en efectivo.</p>
+
+      <div class="dato">
+        <div class="k">Referencia OXXO</div>
+        <div class="v" id="vRefOxxo">—</div>
+        <button class="copiar" type="button" data-copia="vRefOxxo">Copiar referencia</button>
+      </div>
+      <div class="dato">
+        <div class="k">Importe exacto</div>
+        <div class="v" id="vMontoOxxo">—</div>
+      </div>
+      <div class="barcode oculto" id="cajaBarcode">
+        <img id="vBarcode" alt="Código de barras para pagar en OXXO">
+      </div>
+
+      <p class="aviso">Paga el <b>importe exacto</b>. El cajero puede tardar unas horas en
+      reflejar el pago; en cuanto entre, te llega el correo.</p>
+    </div>
+
+    <div class="espera" id="espera">
+      <span class="punto"></span>
+      <span id="textoEspera">Esperando tu pago… esta página se actualiza sola.</span>
+    </div>
+
+    <p class="legal">Guarda esta pantalla. Tu número de pedido es <b id="vPedido">—</b>.</p>
+  </section>
+
+  <!-- PASO 3 — confirmado -->
+  <section id="confirmado" class="exito oculto">
+    <div class="tic">✓</div>
+    <h2>¡Pago confirmado!</h2>
+    <p style="margin-top:10px;color:var(--cinza)">Ya te mandamos el acceso a
+      <b id="vEmailOk"></b>. Si no lo ves en unos minutos, revisa spam o correo no deseado.</p>
+    <p class="legal" style="margin-top:18px">Pedido <b id="vPedidoOk"></b></p>
+  </section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var CATALOGO = {
+    azucar: { nombre: 'Azúcar en Equilibrio — 55 Remedios Naturales', extra: 'Ebook + 3 bonos · acceso vitalicio' },
+    raices: { nombre: 'Raíces Olvidadas — 55 Remedios Naturales', extra: 'Ebook + bonos · acceso vitalicio' },
+    pulmones: { nombre: 'Pulmones Libres — método para dejar de fumar', extra: 'Guía + 3 bonos · acceso vitalicio' }
+  };
+
+  var params = new URLSearchParams(location.search);
+  var producto = CATALOGO[params.get('p')] ? params.get('p') : 'azucar';
+  var info = CATALOGO[producto];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var mostrar = function (el) { el.classList.remove('oculto'); };
+  var esconder = function (el) { el.classList.add('oculto'); };
+
+  $('resumenProd').innerHTML = '<b>' + info.nombre + '</b><br><span style="color:var(--cinza);font-size:.9rem">' + info.extra + '</span>';
+  $('marca').textContent = info.nombre.split('—')[0].trim();
+  document.title = 'Finalizar compra — ' + $('marca').textContent;
+
+  function pesos(n) {
+    return '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' MXN';
+  }
+
+  var pedido = null;
+  var timer = null;
+
+  /* El importe lo dice el servidor, que es quien lo cobra. Así la pantalla
+     no puede quedar mostrando un precio viejo. */
+  fetch('/api/checkout?product=' + encodeURIComponent(producto))
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d && d.ok) { $('resumenTotal').textContent = pesos(d.amount); }
+      else { $('resumenTotal').textContent = ''; }
+    })
+    .catch(function () { $('resumenTotal').textContent = ''; });
+
+  function limpiarErrores() {
+    ['errName', 'errEmail', 'errGeneral'].forEach(function (id) {
+      $(id).textContent = ''; $(id).classList.remove('on');
+    });
+  }
+  function marcarError(id, msg) {
+    $(id).textContent = msg; $(id).classList.add('on');
+  }
+
+  /* ── Enviar el formulario ── */
+  $('form').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    limpiarErrores();
+
+    var nombre = $('name').value.trim();
+    var email = $('email').value.trim();
+    var metodo = (document.querySelector('input[name=method]:checked') || {}).value || 'spei';
+
+    if (nombre.length < 3) { marcarError('errName', 'Escribe tu nombre completo.'); $('name').focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { marcarError('errEmail', 'Ese correo no se ve bien.'); $('email').focus(); return; }
+
+    var boton = $('enviar');
+    boton.disabled = true;
+    boton.textContent = 'Generando tu pago…';
+
+    fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ product: producto, name: nombre, email: email, method: metodo })
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (!res.ok || !res.d.ok) {
+          marcarError('errGeneral', res.d.error || 'No pudimos generar el pago.');
+          boton.disabled = false;
+          boton.textContent = res.d.retryable ? 'Intentar de nuevo' : 'Continuar al pago';
+          return;
+        }
+        pedido = res.d;
+        pedido.email = email;
+        pintarInstrucciones();
+      })
+      .catch(function () {
+        marcarError('errGeneral', 'Se cayó la conexión. Revisa tu internet e intenta otra vez.');
+        boton.disabled = false;
+        boton.textContent = 'Intentar de nuevo';
+      });
+  });
+
+  function pintarInstrucciones() {
+    if (pedido.sandbox) mostrar($('avisoSandbox'));
+    esconder($('formulario'));
+    mostrar($('instrucciones'));
+    $('vPedido').textContent = pedido.external_id;
+
+    if (pedido.method === 'oxxo') {
+      esconder($('panelSpei'));
+      mostrar($('panelOxxo'));
+      $('vRefOxxo').textContent = pedido.reference || '—';
+      $('vMontoOxxo').textContent = pesos(pedido.amount);
+      if (pedido.barcode) {
+        $('vBarcode').src = pedido.barcode;
+        mostrar($('cajaBarcode'));
+      }
+      $('textoEspera').textContent = 'Esperando el pago en tienda. Puedes cerrar esta página: te avisamos por correo.';
+    } else {
+      $('vClabe').textContent = (pedido.clabe || '—').replace(/(.{4})/g, '$1 ').trim();
+      $('vClabe').dataset.plano = pedido.clabe || '';
+      $('vMonto').textContent = pesos(pedido.amount);
+      if (pedido.bank_name) $('vBanco').textContent = pedido.bank_name; else esconder($('cajaBanco'));
+      if (pedido.beneficiary) $('vBenef').textContent = pedido.beneficiary; else esconder($('cajaBenef'));
+      if (pedido.reference) { $('vRefSpei').textContent = pedido.reference; mostrar($('cajaRefSpei')); }
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    arrancarConsulta();
+  }
+
+  /* ── Copiar ── */
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-copia]');
+    if (!b) return;
+    var el = $(b.dataset.copia);
+    var texto = el.dataset.plano || el.textContent.trim();
+    var listo = function () {
+      var antes = b.textContent;
+      b.textContent = '¡Copiado!';
+      b.classList.add('hecho');
+      setTimeout(function () { b.textContent = antes; b.classList.remove('hecho'); }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(listo, respaldoCopia);
+    } else { respaldoCopia(); }
+    function respaldoCopia() {
+      var ta = document.createElement('textarea');
+      ta.value = texto; ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed'; ta.style.left = '-9999px';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); listo(); } catch (e) { /* sin portapapeles */ }
+      document.body.removeChild(ta);
+    }
+  });
+
+  /* ── Consulta de estado ──
+     Cada 6 s durante 20 min; luego baja a cada minuto (OXXO puede tardar
+     horas, y no tiene sentido machacar el endpoint). */
+  function arrancarConsulta() {
+    var inicio = Date.now();
+    var intervalo = 6000;
+
+    function tic() {
+      fetch('/api/status?external_id=' + encodeURIComponent(pedido.external_id) +
+            (pedido.transaction_id ? '&transaction_id=' + encodeURIComponent(pedido.transaction_id) : ''))
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d.status === 'confirmed') { confirmar(); return; }
+          if (d.status === 'expired' || d.status === 'failed') {
+            $('textoEspera').textContent = 'Este pago venció. Recarga la página para generar uno nuevo.';
+            clearTimeout(timer);
+            return;
+          }
+          reprogramar();
+        })
+        .catch(reprogramar);
+    }
+
+    function reprogramar() {
+      if (Date.now() - inicio > 20 * 60 * 1000) intervalo = 60000;
+      timer = setTimeout(tic, intervalo);
+    }
+
+    timer = setTimeout(tic, intervalo);
+  }
+
+  function confirmar() {
+    clearTimeout(timer);
+    esconder($('instrucciones'));
+    mostrar($('confirmado'));
+    $('vEmailOk').textContent = pedido.email;
+    $('vPedidoOk').textContent = pedido.external_id;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+})();
+</script>
+
+</body>
+</html>
