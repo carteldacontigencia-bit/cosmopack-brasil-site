@@ -127,3 +127,29 @@ La prueba que más importa es la 7: un webhook falsificado que dice
 `{"status":"confirmed"}` sin que nadie haya pagado **no** libera el
 producto, porque el handler vuelve a preguntarle a XPag y recibe
 `pending`.
+
+### Antes de cobrar de verdad: verificar el contrato
+
+Las pruebas de arriba corren contra el mock, así que confirman la lógica
+pero **no** que XPag devuelva los campos con los nombres que el código
+lee. Eso lo confirma:
+
+```bash
+node test/verificar-contrato.mjs
+```
+
+Pega el sandbox real y comprueba, uno por uno, los campos de los que
+dependen los handlers: `clabe`, `bank_name`, `beneficiary`,
+`payee_data.reference`, `payee_data.barcode`, `transaction_id`, `status`,
+`error_code`, y si `/consult-transaction?external_id=` responde con
+`payments[]` o con un objeto suelto. También distingue un bloqueo de
+proxy de un error de XPag, para no reportar verde en falso.
+
+Con credenciales propias en vez del sandbox:
+
+```bash
+XPAG_CLIENT_ID=... XPAG_CLIENT_SECRET=... node test/verificar-contrato.mjs
+```
+
+Ahí las cobranzas que crea son **reales** (quedan pendientes, nadie las
+paga). Con el sandbox no se mueve nada.
