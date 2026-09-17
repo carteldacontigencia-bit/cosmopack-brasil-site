@@ -1,37 +1,44 @@
 /* ══════════════════════════════════════════════════════════════════
-   lp.css — RECONSTRUCCIÓN
-   Este archivo NO es el lp.css original: es una reconstrucción hecha a
-   partir de los colores que aparecen en el bloque <style> incrustado de
-   la página original (#C0492E, #2B2B2B, #5C4A3D, #8A7868, #2F4434,
-   #F5EFE1, #EAE1CD, #C9D6C8, #F5F0E3, #C3CFC1) y de las clases que usa
-   el HTML. Si consigues el lp.css real, sustituye este archivo entero.
+   lp.css — reconstrucción a partir de capturas de la página original.
+   Si consigues el lp.css real, sustituye este archivo entero.
    ══════════════════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap');
 
 :root{
-  /* tokens que el HTML ya usaba en línea */
+  /* tokens que el HTML usa en línea */
   --brand:#C0492E;
   --brand-dark:#8B2E20;
   --ink:#2B2B2B;
   --ink-soft:#5C4A3D;
   --ink-mute:#8A7868;
   --verde:#2F4434;
-  --cinza:#5C4A3D;
-  --sage-cl:#E4EBE1;
+  --cinza:#6B5F52;
+  --sage-cl:#DCE5DA;
   --serif:'Playfair Display',Georgia,serif;
 
-  /* complementos */
-  --crema:#F7F2E7;
+  /* complementos deducidos de las capturas */
+  --dourado:#A8832F;
+  --dourado-cl:#F7E7C0;
+  --dourado-brillo:#E3C57F;
+  --salvia:#7E8E7B;
+  --crema:#FBF6ED;        /* héroe, comparación */
+  --beige:#F2EBDD;        /* dolor, adentro */
   --crema-2:#F5EFE1;
   --crema-3:#EAE1CD;
+  --card-bg:#FCF9F2;
+  --verde-hondo:#2C3F33;
+  --verde-panel:#35493B;
   --blanco:#FFFFFF;
-  --borde:#E2D6BF;
+  --borde:#E8DCC6;
   --sage-borde:#C9D6C8;
   --claro:#F5F0E3;
   --verde-mute:#C3CFC1;
+  --chip:#E7E2D8;
+  --chip-ink:#8A8073;
+  --display:'Plus Jakarta Sans',system-ui,sans-serif;
   --sans:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
-  --radio:14px;
+  --radio:16px;
   --sombra:0 10px 30px rgba(43,31,24,.10), 0 2px 8px rgba(43,31,24,.06);
 }
 
@@ -39,26 +46,35 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
   background:var(--crema);
-  color:var(--ink);
+  color:var(--cinza);
   font-family:var(--sans);
   font-size:16px;
-  line-height:1.65;
+  line-height:1.62;
   overflow-x:hidden;
 }
 img{max-width:100%;height:auto;display:block}
 a{color:inherit;text-decoration:none}
-h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.15;letter-spacing:-.01em}
-mark{background:transparent;color:var(--brand);font-weight:inherit}
+
+/* Títulos: sans bold. La serifa sólo vive dentro del bloque de bonos. */
+h1,h2{
+  font-family:var(--display);font-weight:800;
+  line-height:1.16;letter-spacing:-.022em;color:var(--verde);
+  text-wrap:balance;
+}
+h3{font-family:var(--display);font-weight:700;line-height:1.25;color:var(--verde)}
+mark{background:transparent;color:var(--dourado);font-weight:inherit}
+strong,b{font-weight:700}
 
 .wrap{max-width:1140px;margin:0 auto;padding:0 20px}
-.estreito{max-width:760px;margin:0 auto;padding:0 20px}
+.estreito{max-width:720px;margin:0 auto;padding:0 20px}
 .centro{text-align:center}
 .olho{
-  display:inline-block;font:700 12px/1 var(--sans);letter-spacing:.12em;
-  text-transform:uppercase;color:var(--brand);margin-bottom:12px;
+  display:inline-block;font:700 .78rem/1 var(--sans);letter-spacing:.16em;
+  text-transform:uppercase;color:var(--salvia);margin-bottom:14px;
 }
-.sub{font-size:1.05rem;color:var(--ink-soft);max-width:640px;margin-left:auto;margin-right:auto}
-section{padding:64px 0}
+.sub{font-size:1.02rem;color:var(--cinza);max-width:620px;margin-left:auto;margin-right:auto}
+.sub strong,.sub b{color:var(--dourado)}
+section{padding:60px 0}
 @media(max-width:640px){section{padding:44px 0}}
 
 /* ── Rejilla y tarjetas ─────────────────────────────── */
@@ -70,132 +86,195 @@ section{padding:64px 0}
 @media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}}
 
 .card{
-  background:var(--blanco);border:1px solid var(--borde);border-radius:var(--radio);
-  padding:24px;box-shadow:0 4px 14px rgba(43,31,24,.06);
+  background:var(--blanco);border:0;border-radius:var(--radio);
+  padding:26px;box-shadow:0 2px 10px rgba(43,31,24,.04);
 }
-.card .emoji{font-size:30px;display:block;margin-bottom:10px}
-.card h3{font-size:1.15rem;margin-bottom:6px}
-.card p{color:var(--ink-soft);font-size:.98rem}
+.card .emoji{font-size:28px;display:block;margin-bottom:16px;line-height:1}
+.card h3{font-size:1.12rem;margin-bottom:6px}
+.card p{color:var(--cinza);font-size:.98rem}
+
+/* Píldora dorada clara — .tag de los bonos 2 y 3 */
+.tag{
+  display:inline-block;padding:5px 13px;border-radius:999px;
+  background:var(--dourado-cl);color:var(--brand);
+  font:700 11px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;
+}
 
 /* ── Encabezado ─────────────────────────────────────── */
-header{background:var(--verde);color:var(--claro);padding:14px 0;position:sticky;top:0;z-index:40}
-.marca{font-family:var(--serif);font-size:1.05rem;text-align:center;letter-spacing:.02em}
+header{
+  background:var(--crema);border-bottom:1px solid var(--borde);
+  padding:18px 0;position:sticky;top:0;z-index:40;
+}
+.marca{
+  font-family:var(--display);font-weight:700;font-size:1rem;
+  color:var(--verde);text-align:center;
+}
 
 /* ── Héroe ──────────────────────────────────────────── */
-.heroi{
-  background:linear-gradient(180deg,var(--crema) 0%,var(--crema-3) 100%);
-  padding:56px 0 0;text-align:center;
-}
-.heroi h1{font-size:clamp(1.75rem,4.6vw,3rem);max-width:820px;margin:0 auto;text-wrap:balance}
-.coracao{color:var(--brand);font-size:1.4rem;margin:22px 0 8px}
+.heroi{background:var(--crema);padding:44px 0 0;text-align:center}
+.heroi h1{font-size:clamp(1.95rem,5.6vw,3.1rem);max-width:800px;margin:0 auto}
+.coracao{color:var(--dourado);font-size:1.3rem;margin:28px 0 12px}
 .linha-dourada{
-  font-family:var(--serif);font-style:italic;
-  font-size:clamp(1.1rem,2.4vw,1.4rem);color:var(--verde);
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(1.05rem,2.6vw,1.35rem);color:var(--dourado);
+  max-width:500px;margin:0 auto;line-height:1.3;
 }
-.sub-heroi{color:var(--ink-soft);max-width:640px;margin:10px auto 0;font-size:1.05rem}
-.produto{max-width:420px;margin:30px auto 0}
+.sub-heroi{color:var(--ink-mute);max-width:540px;margin:16px auto 0;font-size:1rem}
+.produto{max-width:460px;margin:30px auto 0;border-radius:12px;overflow:hidden}
 .promessa-box{
-  background:var(--sage-cl);border:1px solid var(--sage-borde);border-radius:var(--radio);
-  padding:20px 24px;max-width:680px;margin:28px auto 0;color:var(--verde);font-size:1.02rem;
+  background:var(--verde);color:var(--claro);
+  border-radius:10px;padding:20px 24px;max-width:580px;margin:26px auto 0;
+  font-size:1rem;line-height:1.55;
 }
-.beneficios{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:840px;margin:28px auto 0}
-.beneficio{background:var(--blanco);border:1px solid var(--borde);border-radius:12px;padding:16px 10px;text-align:center}
-.beneficio i{font-style:normal;font-size:26px;display:block;margin-bottom:6px}
-.beneficio span{font-size:.86rem;color:var(--ink-soft);font-weight:500;line-height:1.35;display:block}
-@media(max-width:640px){.beneficios{grid-template-columns:repeat(2,1fr)}}
+.promessa-box strong{color:var(--dourado-brillo)}
+
+/* Medallones circulares, sin tarjeta */
+.beneficios{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px 16px;
+  max-width:820px;margin:40px auto 0;
+}
+.beneficio{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.beneficio i{
+  font-style:normal;font-size:26px;line-height:1;
+  width:58px;height:58px;border-radius:50%;
+  background:var(--blanco);border:1px solid var(--dourado-brillo);
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.beneficio span{
+  font:700 .78rem/1.35 var(--sans);letter-spacing:.07em;text-transform:uppercase;
+  color:var(--verde);display:block;max-width:150px;
+}
+@media(max-width:640px){.beneficios{grid-template-columns:repeat(2,1fr);gap:28px 12px}}
+
 .faixa{
-  margin-top:44px;background:var(--verde);color:var(--claro);padding:18px 20px;text-align:center;
-  font-family:var(--serif);font-style:italic;font-size:clamp(1rem,2.2vw,1.25rem);
+  margin-top:48px;background:var(--verde);color:var(--claro);
+  padding:22px 20px;text-align:center;
+  font:700 .95rem/1.5 var(--sans);letter-spacing:.11em;text-transform:uppercase;
 }
 
 /* ── Dolor ──────────────────────────────────────────── */
-.dor{background:var(--crema)}
+.dor{background:var(--beige)}
+.dor .card p{color:#4A4038;font-size:1rem;line-height:1.6}
 
 /* ── Comparación ────────────────────────────────────── */
-.comparar{background:var(--blanco)}
+.comparar{background:var(--crema)}
 .col-ruim,.col-bom{border-radius:var(--radio);padding:26px}
-.col-ruim{background:#FAF2F0;border:1px solid #E9CFC8}
+.col-ruim{background:var(--card-bg)}
 .col-bom{background:var(--sage-cl);border:1px solid var(--sage-borde)}
-.col-ruim h3,.col-bom h3{font-size:1.2rem;margin-bottom:16px}
-.col-bom h3{color:var(--verde)}
+.col-ruim h3,.col-bom h3{font-size:1.12rem;margin-bottom:14px;display:flex;gap:8px;align-items:center}
 .lista{list-style:none}
-.lista li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;font-size:.98rem;color:var(--ink-soft)}
-.ic{flex-shrink:0;font-weight:700;line-height:1.6}
-.col-ruim .ic{color:var(--brand)}
-.col-bom .ic{color:var(--verde)}
+.lista li{display:flex;gap:12px;align-items:flex-start;padding:9px 0;font-size:.97rem;color:var(--cinza)}
+.lista strong,.lista b{color:var(--dourado)}
+/* chips circulares */
+.ic{
+  flex-shrink:0;width:24px;height:24px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;line-height:1;margin-top:2px;
+}
+.col-ruim .ic{background:var(--chip);color:var(--chip-ink)}
+.col-bom .ic{background:var(--verde);color:#fff}
 
 /* ── Adentro ────────────────────────────────────────── */
-.dentro{background:var(--crema-3)}
-.dentro .card{padding:0;overflow:hidden}
-.dentro .card img{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--borde)}
-.dentro .txt{padding:20px 22px}
+.dentro{background:var(--beige)}
+.dentro .card{padding:14px;overflow:hidden;background:var(--blanco)}
+.dentro .card img{width:100%;height:auto;border-radius:8px;background:var(--crema-3)}
+.dentro .txt{padding:16px 8px 6px}
+.dentro .txt h3{font-size:1.16rem;margin-bottom:6px}
+.dentro .txt p{color:var(--cinza)}
 
 /* ── Oferta ─────────────────────────────────────────── */
-.oferta{background:var(--verde)}
-.oferta h2{color:var(--claro);font-size:clamp(1.6rem,3.4vw,2.3rem)}
+.oferta{background:var(--verde-hondo)}
+.oferta h2{color:var(--claro);font-size:clamp(1.6rem,3.6vw,2.3rem)}
 .caixa{
-  max-width:640px;margin:0 auto;background:var(--blanco);
-  border-radius:18px;padding:36px 32px;text-align:center;
-  box-shadow:0 18px 44px rgba(0,0,0,.22);
+  max-width:620px;margin:0 auto;
+  background:var(--verde-panel);border:1px solid rgba(245,240,227,.14);
+  border-radius:18px;padding:34px 28px;text-align:center;
 }
 @media(max-width:640px){.caixa{padding:28px 20px}}
-.promo{font-size:1rem;color:var(--ink-soft)}
-.hoje{background:var(--brand);color:#fff;padding:2px 10px;border-radius:6px;font-weight:700}
-.data-hoje{font-size:.9rem;color:var(--ink-mute);margin:6px 0 24px;font-weight:500}
-.recebe{text-align:left;background:var(--crema-2);border:1px solid var(--borde);border-radius:12px;padding:22px;margin-bottom:20px}
-.recebe h3{font-size:1.1rem;margin-bottom:14px}
-.recebe ul,.selos{list-style:none}
-.recebe li,.selos li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:.96rem;color:var(--ink-soft)}
-.v{color:var(--verde);font-weight:700;flex-shrink:0}
-.selos{text-align:left;margin-bottom:24px}
-.preco-de{font-size:1rem;color:var(--ink-mute);text-decoration:line-through}
-.preco{
-  font-family:var(--serif);font-weight:800;font-size:clamp(3rem,9vw,4.4rem);
-  color:var(--brand);line-height:1;margin:4px 0 6px;
+.promo{font-size:1rem;color:var(--claro)}
+.promo b,.promo strong{color:var(--dourado-brillo)}
+.hoje{
+  background:var(--dourado-brillo);color:var(--verde);
+  padding:4px 12px;border-radius:999px;
+  font:700 .78rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;
 }
-.preco span{font-size:.42em;vertical-align:super;margin-right:4px}
+.data-hoje{
+  display:inline-block;background:var(--claro);color:var(--verde);
+  padding:12px 26px;border-radius:999px;margin:18px 0 26px;
+  font:700 1rem/1.2 var(--sans);
+}
+.recebe{text-align:left;margin-bottom:22px}
+.recebe h3{color:var(--claro);font-size:1.05rem;margin-bottom:6px;text-align:center}
+.recebe ul,.selos{list-style:none}
+.recebe li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:14px 0;font-size:.97rem;color:var(--claro);
+  border-bottom:1px solid rgba(245,240,227,.14);
+}
+.recebe li:last-child{border-bottom:0}
+.recebe li strong{color:var(--dourado-brillo)}
+.selos{text-align:left;margin-bottom:24px}
+.selos li{display:flex;gap:12px;align-items:flex-start;padding:7px 0;font-size:.95rem;color:var(--verde-mute)}
+.selos li b{color:var(--claro)}
+.v{color:var(--claro);font-weight:700;flex-shrink:0}
+.preco-de{font-size:.98rem;color:var(--verde-mute)}
+.preco{
+  font-family:var(--serif);font-weight:800;font-size:clamp(3rem,9vw,4.2rem);
+  color:var(--claro);line-height:1;margin:4px 0 6px;
+}
+.preco span{font-size:.4em;vertical-align:super;margin-right:4px;color:var(--dourado-brillo)}
 .preco small{font-size:.32em;font-weight:700;vertical-align:baseline}
-.pagamento{font-size:.92rem;color:var(--ink-soft);margin-bottom:24px}
-.pos-botao{margin-top:14px;font-size:.88rem;color:var(--ink-mute)}
-.fecho-oferta{margin-top:24px;padding-top:20px;border-top:1px dashed var(--borde);font-size:.95rem;color:var(--ink-soft)}
+.pagamento{font-size:.9rem;color:var(--verde-mute);margin-bottom:24px}
+.pos-botao{margin-top:14px;font-size:.86rem;color:var(--verde-mute)}
+.fecho-oferta{margin-top:24px;padding-top:20px;border-top:1px dashed rgba(245,240,227,.2);font-size:.94rem;color:var(--verde-mute)}
 
 /* ── Botones ────────────────────────────────────────── */
 .btn,.btn-compra{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  background:var(--brand);color:#fff;font:700 1.05rem/1.25 var(--sans);text-align:center;
-  padding:18px 34px;border-radius:999px;border:0;cursor:pointer;
-  box-shadow:0 8px 22px rgba(192,73,46,.32);
+  font:700 1.05rem/1.3 var(--sans);letter-spacing:.01em;text-align:center;
+  padding:20px 34px;border-radius:999px;border:0;cursor:pointer;
   transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
 }
-.btn:hover,.btn-compra:hover{background:var(--brand-dark);transform:translateY(-2px);box-shadow:0 12px 28px rgba(192,73,46,.4)}
+.btn{background:var(--verde);color:var(--claro);box-shadow:0 8px 22px rgba(47,68,52,.28)}
+.btn:hover{background:#25382C;transform:translateY(-2px)}
+/* El botón de compra vive sobre el panel verde: va en dorado.
+   (Es la única pieza de la que no recibí captura.) */
+.btn-compra{
+  width:100%;background:var(--dourado-brillo);color:var(--verde);
+  box-shadow:0 8px 22px rgba(0,0,0,.22);
+}
+.btn-compra:hover{background:#F0D699;transform:translateY(-2px)}
 .btn:active,.btn-compra:active{transform:translateY(0)}
-.btn.grande{font-size:1.15rem;padding:20px 40px}
-.btn-compra{width:100%}
-@media(max-width:640px){.btn{width:100%;padding:18px 22px;font-size:1rem}}
+.btn.grande{font-size:1.08rem;padding:21px 40px}
+@media(max-width:640px){.btn,.btn-compra{width:100%;padding:19px 20px;font-size:1rem}}
 
 /* ── Testimonios ────────────────────────────────────── */
-.depo{background:var(--crema)}
-.nota{margin-top:14px;font-size:.95rem;color:var(--ink-soft)}
-.estrelas{color:#E0A32E;letter-spacing:2px}
-.print{border-radius:var(--radio);overflow:hidden;border:1px solid var(--borde);background:var(--blanco);box-shadow:var(--sombra)}
+.depo{background:var(--beige)}
+.nota{margin-top:14px;font-size:.94rem;color:var(--ink-mute)}
+.estrelas{color:var(--dourado);letter-spacing:2px}
+.print{border-radius:var(--radio);overflow:hidden;background:var(--blanco);box-shadow:0 4px 16px rgba(43,31,24,.10)}
 
 /* ── FAQ ────────────────────────────────────────────── */
-.faq{background:var(--blanco)}
-details{background:var(--crema-2);border:1px solid var(--borde);border-radius:12px;padding:18px 22px;margin-bottom:12px}
-details[open]{border-color:var(--brand)}
+.faq{background:var(--crema)}
+details{
+  background:transparent;border:0;border-bottom:1px solid var(--borde);
+  border-radius:0;padding:20px 2px;margin-bottom:0;
+}
+details:first-of-type{border-top:1px solid var(--borde)}
 summary{
-  font-family:var(--serif);font-weight:700;font-size:1.05rem;cursor:pointer;list-style:none;
-  display:flex;justify-content:space-between;gap:14px;align-items:center;
+  font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--verde);
+  cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;gap:16px;align-items:center;
 }
 summary::-webkit-details-marker{display:none}
-summary::after{content:'+';color:var(--brand);font-size:1.5rem;line-height:1;font-family:var(--sans)}
+summary::after{content:'+';color:var(--verde);font-size:1.4rem;line-height:1;font-family:var(--sans);font-weight:500}
 details[open] summary::after{content:'–'}
-details p{margin-top:12px;color:var(--ink-soft);font-size:.98rem}
+details p{margin-top:12px;color:var(--cinza);font-size:.96rem}
 
 /* ── Cierre ─────────────────────────────────────────── */
-.fecho{background:linear-gradient(180deg,var(--crema-3) 0%,var(--crema) 100%);text-align:center}
-.fecho h2{font-size:clamp(1.6rem,4vw,2.5rem);text-wrap:balance}
+.fecho{background:var(--crema-3);text-align:center}
+.fecho h2{font-size:clamp(1.6rem,4.2vw,2.5rem)}
 
 /* ── Pie ────────────────────────────────────────────── */
-footer{background:var(--verde);color:var(--verde-mute);padding:36px 0;text-align:center;font-size:.86rem}
-footer p+p{margin-top:10px;max-width:660px;margin-left:auto;margin-right:auto;line-height:1.6}
+footer{background:var(--verde);color:var(--verde-mute);padding:36px 0;text-align:center;font-size:.85rem}
+footer p+p{margin-top:10px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.6}
