@@ -35,7 +35,7 @@ function credentials() {
 export const PRODUCTS = {
   azucar: {
     name: 'Azúcar en Equilibrio — 55 Remedios Naturales',
-    amount: 47.9,
+    amount: 100.0,
     currency: 'MXN',
     description: 'Azúcar en Equilibrio (ebook + 3 bonos)',
   },
