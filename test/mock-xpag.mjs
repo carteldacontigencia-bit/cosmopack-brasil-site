@@ -91,9 +91,9 @@ const server = http.createServer(async (req, res) => {
     return json(200, { ok: true, balances: { MXN: { available: 9999, blocked: 0 } } });
   }
 
-  /* Atajo de prueba: marcar pagado y avisar al webhook, como hace
-     /sandbox/simulate en el sandbox real. */
-  if (url.pathname === '/__simular' && req.method === 'POST') {
+  /* /sandbox/simulate es el endpoint REAL del sandbox de XPag.
+     /__simular es el atajo interno de las pruebas; los dos caen aqui. */
+  if ((url.pathname === '/__simular' || url.pathname === '/sandbox/simulate') && req.method === 'POST') {
     const p = pagos.get(body.transaction_id) || porExterno.get(body.external_id);
     if (!p) return json(404, { ok: false });
     p.status = body.outcome === 'paid' ? 'confirmed' : (body.outcome || 'failed');

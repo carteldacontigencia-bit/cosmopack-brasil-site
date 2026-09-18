@@ -302,6 +302,61 @@ for (const d of ['azucar-en-equilibrio']) {
   await ctx2.close();
 }
 
+/* ── 14. EL CAMINO COMPLETO: pagar → recibir ──
+   Lo unico que de verdad importa y lo ultimo que faltaba probar. Se
+   hace con el boton de simulacion, que es el mismo camino que sigue un
+   pago real: XPag marca confirmado, el sondeo de la pantalla lo
+   descubre solo, y el enlace firmado entrega los PDFs.
+   Nada aqui se empuja a mano: si la pantalla cambia, es porque
+   funciono. */
+console.log('\n14) De pagar a recibir, sin tocar nada');
+{
+  const ctx3 = await nav.newContext({ viewport: { width: 390, height: 844 } });
+  const p3 = await ctx3.newPage();
+  await p3.goto(`${URL_BASE}/pago`, { waitUntil: 'load' });
+  await p3.fill('#name', 'Ana Lopez');
+  await p3.click('#enviar');
+  await p3.waitForSelector('#secPago:not([hidden])', { timeout: 8000 });
+
+  const clabe = (await p3.textContent('#vClabe')).replace(/\s/g, '');
+  ok(/^\d{18}$/.test(clabe), 'la CLABE tiene 18 digitos', clabe);
+
+  const botonSim = await p3.$('button.sim[data-outcome="paid"]');
+  ok(Boolean(botonSim), 'en sandbox aparece el boton de simular');
+  ok(await p3.isVisible('#simBotones'), 'y esta visible');
+
+  await botonSim.click();
+
+  /* La pantalla de exito NO se fuerza: la descubre el sondeo. */
+  await p3.waitForSelector('#secOk:not([hidden])', { timeout: 15000 });
+  ok(true, 'la pantalla pasa a confirmada sola, por el sondeo');
+
+  /* Y el enlace de entrega tiene que llevar a los PDFs de verdad. */
+  const href = await p3.getAttribute('#confBtn', 'href');
+  ok(/^\/api\/access\?t=/.test(href), 'el boton lleva al enlace firmado', href);
+
+  const entrega = await fetch(URL_BASE + href, { redirect: 'manual' });
+  ok(entrega.status === 302, 'el enlace redirige, no da error', entrega.status);
+  const destino = entrega.headers.get('location');
+  ok(/gracias-/.test(destino || ''), 'y va a la pagina de entrega', destino);
+
+  await ctx3.close();
+}
+
+/* Un token valido NO basta si el pago no confirmo: el enlace
+   reconsulta a XPag cada vez. */
+{
+  const r = await fetch(`${URL_BASE}/api/create`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Origin: URL_BASE },
+    body: JSON.stringify({ offer: 'principal', name: 'Sin Pagar', method: 'spei' }),
+  });
+  const pendiente = await r.json();
+  const sinPagar = await fetch(`${URL_BASE}/api/access?t=${encodeURIComponent(pendiente.access_token)}`, { redirect: 'manual' });
+  ok(sinPagar.status !== 302 || !/gracias-/.test(sinPagar.headers.get('location') || ''),
+    'sin pagar, el mismo enlace NO entrega', sinPagar.status);
+}
+
 console.log('violaciones de la politica:', csp.length ? csp : 'ninguna');
 if (csp.length) fallos += csp.length;
 

@@ -13,7 +13,16 @@
 </head>
 <body>
 
-<div id="avisoPrueba" class="prueba" hidden></div>
+<div id="avisoPrueba" class="prueba" hidden>
+  <span id="avisoPruebaTxt"></span>
+  <!-- Solo existen en sandbox: /api/simular responde 404 sin
+       XPAG_SANDBOX, asi que al pasar a produccion desaparecen. -->
+  <span id="simBotones" hidden>
+    <button type="button" class="sim" data-outcome="paid">Simular pago</button>
+    <button type="button" class="sim" data-outcome="expired">Simular vencida</button>
+    <span id="simNota"></span>
+  </span>
+</div>
 
 <header><div class="in">
   <span class="marca" id="marca">&nbsp;</span>

@@ -78,7 +78,7 @@ function pintarTextos() {
   for (const b of document.querySelectorAll('[data-copia]')) {
     b.textContent = b.dataset.copia === 'vClabe' ? t('copiar_clabe') : t('copiar');
   }
-  $('avisoPrueba').textContent = t('modo_prueba');
+  $('avisoPruebaTxt').textContent = t('modo_prueba');
 }
 
 /* ── Arranque ───────────────────────────────────────────────────── */
@@ -152,6 +152,9 @@ function mostrarPago() {
   ver($('secOk'), false);
   ver($('secPago'));
   ver($('avisoPrueba'), Boolean(orden.sandbox || cfg.sandbox));
+  /* Los botones de simulacion aparecen cuando ya hay una cobranza que
+     simular, no antes. */
+  ver($('simBotones'), Boolean(orden.sandbox || cfg.sandbox));
 
   const importe = pesos(orden.amount, orden.currency);
   const concepto = orden.reference || orden.external_id;
@@ -297,6 +300,43 @@ function arrancarReloj() {
   relojTimer = setInterval(tic, 1000);
 }
 
+let consultarAhora = () => {};
+
+/* ── Simulacion (solo sandbox) ───────────────────────────────
+   Prueba lo unico que no se puede probar de otra forma: que el
+   comprador reciba los PDFs solo, cuando el pago confirma. El endpoint
+   responde 404 sin XPAG_SANDBOX, asi que esto se apaga solo al pasar a
+   produccion.
+
+   No toca la pantalla a mano: deja que el sondeo normal descubra el
+   cambio, que es exactamente lo que pasa con un pago real. Si la
+   pantalla cambia sola despues de pulsar, la entrega funciona. */
+document.querySelectorAll('button.sim').forEach((b) => {
+  b.addEventListener('click', async () => {
+    if (!orden?.access_token) return;
+    const botones = document.querySelectorAll('button.sim');
+    botones.forEach((x) => { x.disabled = true; });
+    $('simNota').textContent = '...';
+    try {
+      const r = await fetch('/api/simular', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ t: orden.access_token, outcome: b.dataset.outcome }),
+      });
+      const d = await r.json();
+      /* El detalle crudo se muestra a proposito: si XPag espera otros
+         nombres de campo, se ve aqui en vez de fallar en silencio. */
+      $('simNota').textContent = d.ok
+        ? 'XPag acepto. Esperando que la pantalla lo note sola...'
+        : `XPag respondio ${d.http || r.status}: ${JSON.stringify(d.respuesta || d)}`.slice(0, 220);
+      if (d.ok) consultarAhora();
+    } catch {
+      $('simNota').textContent = 'No se pudo llamar a /api/simular';
+    }
+    botones.forEach((x) => { x.disabled = false; });
+  });
+});
+
 /* ── Consulta de estado ─────────────────────────────────────────── */
 function arrancarConsulta() {
   clearTimeout(timer);
@@ -326,6 +366,8 @@ function arrancarConsulta() {
   }
 
   programar();
+  /* Deja que la simulacion fuerce una consulta inmediata. */
+  consultarAhora = () => { clearTimeout(timer); consultar(); };
 
   /* El momento en que alguien vuelve del app del banco. */
   document.addEventListener('visibilitychange', () => {

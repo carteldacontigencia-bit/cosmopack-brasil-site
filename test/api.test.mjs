@@ -325,5 +325,34 @@ const trasContacto = res();
 await contact(reqIp('POST', { t: pedido.access_token, whatsapp: '5512345678' }, {}, '/api/contact'), trasContacto);
 ok(trasContacto.code === 200, 'ni el de guardar el contacto', trasContacto.code);
 
+console.log('\n21) El simulador no existe fuera de sandbox');
+{
+  /* Esta suite corre SIN XPAG_SANDBOX. El endpoint tiene que responder
+     404 antes de mirar nada: sin esto, cualquiera podria marcar su
+     propio pago como confirmado y llevarse el producto. No hay una
+     bandera aparte que alguien pueda olvidar encendida -- se apaga solo
+     al quitar XPAG_SANDBOX. */
+  const simular = (await import('../api/simular.js')).default;
+  delete process.env.XPAG_SANDBOX;
+
+  const q1 = res();
+  await simular(req('POST', { t: pedido.access_token, outcome: 'paid' }), q1);
+  ok(q1.code === 404, 'sin XPAG_SANDBOX responde 404', q1.code);
+  ok(q1.body === null, 'y no dice nada de por que', q1.body);
+
+  /* Con token invalido tampoco, y por el mismo 404: no distingue. */
+  const q2 = res();
+  await simular(req('POST', { t: 'basura', outcome: 'paid' }), q2);
+  ok(q2.code === 404, 'un token invalido recibe el mismo 404', q2.code);
+
+  /* Y con sandbox encendido si atiende, para que la prueba demuestre
+     que el 404 viene de la bandera y no de que el modulo este roto. */
+  process.env.XPAG_SANDBOX = '1';
+  const q3 = res();
+  await simular(req('POST', { t: 'basura', outcome: 'paid' }), q3);
+  ok(q3.code === 400, 'en sandbox si atiende (y rechaza el token malo)', q3.code);
+  delete process.env.XPAG_SANDBOX;
+}
+
 console.log(`\n${fallos === 0 ? 'TODAS LAS PRUEBAS PASARON' : fallos + ' FALLARON'}`);
 process.exit(fallos ? 1 : 0);

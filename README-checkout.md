@@ -19,6 +19,7 @@ api/status.js          ¿ya pagó? (pregunta a XPag, no a un almacén)
 api/access.js          puerta de entrega: verifica, reconsulta, redirige
 api/webhook.js         recibe el aviso de XPag y lo VERIFICA
 api/contact.js         WhatsApp opcional, después de la referencia
+api/simular.js         SOLO SANDBOX: confirma un pago de prueba
 
 checkout.html          la pantalla
 assets/app.js          lógica: persistencia, sondeo, copiar, bancos
@@ -67,6 +68,25 @@ para entrar.
 
 En sandbox no pide `XPAG_CLIENT_ID` ni `XPAG_CLIENT_SECRET`: ahí las
 credenciales son las públicas de XPag y van en el código.
+
+## Probar la entrega sin ir a un OXXO
+
+En sandbox, la banda naranja de la pantalla de pago trae dos botones:
+**Simular pago** y **Simular vencida**. Llaman a `/api/simular`, que a
+su vez llama al `POST /sandbox/simulate` de XPag.
+
+El botón **no toca la pantalla**. Deja que el sondeo normal descubra el
+cambio, que es exactamente lo que pasa con un pago real: si la pantalla
+pasa sola a confirmada, la entrega funciona.
+
+`/api/simular` **no existe fuera de sandbox**: responde 404 antes de
+mirar el cuerpo, la firma o cualquier otra cosa. Al quitar
+`XPAG_SANDBOX` se apaga solo — no hay una segunda bandera que alguien
+pueda olvidar encendida. Una prueba lo comprueba con y sin la variable.
+
+Devuelve la respuesta cruda de XPag, y sólo ahí: es su trabajo. Si
+`/sandbox/simulate` espera otros nombres de campo, se ve en pantalla en
+lugar de fallar en silencio.
 
 ## Sin base de datos: cómo funciona la entrega
 
@@ -145,9 +165,9 @@ de crear la cobranza.
 ```bash
 node test/mock-xpag.mjs &      # mock del API de XPag en :8787
 node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
-node test/api.test.mjs         # 60 · los seis handlers
+node test/api.test.mjs         # 64 · los handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
-node test/checkout.e2e.mjs     # 67 · la pantalla, la entrega, la politica
+node test/checkout.e2e.mjs     # 75 · la pantalla, la entrega, la politica
 ```
 
 El mock reproduce las respuestas de la documentación campo por campo,

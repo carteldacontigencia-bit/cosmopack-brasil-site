@@ -35,6 +35,15 @@ h2 { font-family: var(--display); font-weight: 800; line-height: 1.2; color: var
 [hidden] { display: none !important; }
 
 .prueba { background: #7E5E12; color: #FFF6E2; text-align: center; font: 700 .82rem var(--sans); padding: 8px 14px; }
+/* Botones de simulacion: solo en sandbox, nunca en produccion. */
+.prueba .sim {
+  margin-left: 8px; padding: 4px 10px; border-radius: 6px; cursor: pointer;
+  border: 1px solid #FFF6E2; background: transparent; color: #FFF6E2;
+  font: 700 .78rem var(--sans);
+}
+.prueba .sim:hover { background: #FFF6E2; color: #7E5E12; }
+.prueba .sim[disabled] { opacity: .5; cursor: progress; }
+#simNota { display: block; margin-top: 4px; font-weight: 400; }
 
 header { background: var(--verde); color: #E4EFEB; padding: 14px 0; padding-top: calc(14px + env(safe-area-inset-top, 0px)); }
 header .in { width: min(660px, 92vw); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }

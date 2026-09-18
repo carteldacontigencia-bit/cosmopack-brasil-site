@@ -55,7 +55,7 @@ function cabecerasDe(ruta) {
   return out;
 }
 const rutas = {};
-for (const n of ['config', 'create', 'status', 'access', 'webhook', 'contact']) {
+for (const n of ['config', 'create', 'status', 'access', 'webhook', 'contact', 'simular']) {
   rutas['/api/' + n] = (await import(`../api/${n}.js`)).default;
 }
 
