@@ -333,6 +333,33 @@ const trasContacto = res();
 await contact(reqIp('POST', { t: pedido.access_token, whatsapp: '5512345678' }, {}, '/api/contact'), trasContacto);
 ok(trasContacto.code === 200, 'ni el de guardar el contacto', trasContacto.code);
 
+console.log('\n20b) El diagnostico dice a donde apunta PUBLIC_URL');
+{
+  /* La URL del webhook se arma con PUBLIC_URL. Si apunta a un dominio
+     viejo, XPag avisa a un sitio que ya no existe: el SPEI sigue
+     funcionando porque la pantalla pregunta sola, pero el OXXO deja de
+     entregarse -- y no hay ningun error visible. Por eso el host sale en
+     el diagnostico, para verlo sin entrar a la consola de Vercel. */
+  const config = (await import('../api/config.js')).default;
+
+  const q = res();
+  await config({ ...req('GET'), method: 'GET' }, q);
+  ok(q.body.public_url_host === '127.0.0.1:8080', 'muestra el host de PUBLIC_URL', q.body.public_url_host);
+
+  /* Nunca la URL entera ni nada mas: es el host y punto. */
+  ok(!JSON.stringify(q.body).includes('/gracias-'), 'no filtra la ruta de entrega');
+
+  const guardado = process.env.PUBLIC_URL;
+  delete process.env.PUBLIC_URL;
+  delete process.env.SITE_ORIGIN;
+  const q2 = res();
+  await config({ ...req('GET'), method: 'GET' }, q2);
+  ok(q2.body.public_url_host === null, 'sin PUBLIC_URL devuelve null, no revienta', q2.body.public_url_host);
+  ok(q2.body.avisos.includes('PUBLIC_URL'), 'y lo reclama en avisos');
+  process.env.PUBLIC_URL = guardado;
+  process.env.SITE_ORIGIN = guardado;
+}
+
 console.log('\n21) El simulador no existe fuera de sandbox');
 {
   /* Esta suite corre SIN XPAG_SANDBOX. El endpoint tiene que responder

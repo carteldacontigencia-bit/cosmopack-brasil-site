@@ -56,6 +56,13 @@ otras cosas:
 
 - `faltan` — sin esas variables **no se puede vender**. `listo` es
   `false` mientras quede alguna.
+También devuelve `public_url_host`: el host al que apunta `PUBLIC_URL`.
+Sólo el host, que es la dirección pública del sitio. Con él se ve de un
+vistazo si la URL del webhook que se le manda a XPag llega aquí. Si
+apunta a un dominio viejo, el SPEI sigue funcionando —la pantalla
+pregunta sola— pero **el OXXO deja de entregarse**, sin ningún error
+visible, y eso sólo se descubre cuando alguien ya pagó.
+
 - `avisos` — se vende, pero se pierde algo: sin `META_CAPI_TOKEN` las
   ventas por OXXO no llegan a Meta; sin `BRAND_NAME` la pantalla no
   puede explicar el nombre del beneficiario.
@@ -171,7 +178,7 @@ de crear la cobranza.
 ```bash
 node test/mock-xpag.mjs &      # mock del API de XPag en :8787
 node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
-node test/api.test.mjs         # 66 · los handlers
+node test/api.test.mjs         # 70 · los handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
 node test/checkout.e2e.mjs     # 89 · la pantalla, la entrega, la politica
 ```

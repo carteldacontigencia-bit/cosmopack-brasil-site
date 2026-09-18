@@ -5,6 +5,8 @@ import { guard } from './_lib/guard.js';
 import { cfg, isSandbox, estadoDelEntorno } from './_lib/env.js';
 import { OFERTAS, publica } from './_lib/offers.js';
 
+const hostDe = (u) => { try { return new URL(u).host; } catch { return null; } };
+
 export default async function handler(req, res) {
   const g = await guard(req, res, { method: 'GET', rate: 60, windowMs: 60_000 });
   if (!g) return;
@@ -23,6 +25,14 @@ export default async function handler(req, res) {
     faltan: entorno.faltan,
     avisos: entorno.avisos,
     brand: cfg.brand || null,
+    /* SOLO el host de PUBLIC_URL, que es publico por definicion: es la
+       direccion del propio sitio. Sirve para ver de un vistazo si apunta
+       aqui. Si no apunta, la URL del webhook que se le manda a XPag va a
+       un sitio equivocado y el OXXO deja de entregarse solo -- sin error
+       visible en ninguna parte, porque el SPEI sigue funcionando por el
+       sondeo. Es el tipo de fallo que solo aparece cuando alguien ya
+       pago. */
+    public_url_host: hostDe(cfg.publicUrl),
     pixel_id: process.env.META_PIXEL_ID || null,
     /* Horas de validez que se muestran en pantalla. La documentación de
        XPag no expone vencimiento para MXN, así que este número es una
