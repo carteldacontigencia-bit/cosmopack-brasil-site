@@ -87,6 +87,23 @@ volver encuentra la misma CLABE.
 redirect verifica el pago, pero no puede impedir que alguien comparta la
 URL final una vez que la tiene.
 
+Los archivos van en `descargas/<segmento aleatorio>/`, no sueltos en
+`descargas/`: `/descargas/Azucar-en-Equilibrio.pdf` es el nombre del
+producto y cualquiera lo escribe. Con el segmento, el archivo está tan
+protegido como la propia página de entrega. Una prueba comprueba que sin
+el segmento la ruta da 404.
+
+`entregables/` —el generador de los PDFs, con los mismos archivos en
+`out/` bajo nombres adivinables— está en `.vercelignore`. Vercel no
+ejecuta Python: si subiera, serviría esos `.pdf` tal cual y el producto
+entero quedaría gratis en `/entregables/out/`.
+
+Al regenerar los PDFs hay que copiarlos otra vez:
+
+```bash
+cp entregables/out/*.pdf descargas/e41b9fb5ec65061a/
+```
+
 ## Decisiones de seguridad
 
 **El precio vive en el servidor.** `api/_lib/offers.js` es la única
@@ -129,7 +146,7 @@ node test/mock-xpag.mjs &      # mock del API de XPag en :8787
 node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
 node test/api.test.mjs         # 60 · los seis handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
-node test/checkout.e2e.mjs     # 39 · la pantalla en Chromium
+node test/checkout.e2e.mjs     # 47 · la pantalla y la entrega en Chromium
 ```
 
 El mock reproduce las respuestas de la documentación campo por campo,

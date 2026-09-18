@@ -164,6 +164,30 @@ ok(/who is|payment/i.test(enTexto), 'el sitio responde en ingles con ?lang=en', 
 await p.goto(`${URL_BASE}/pago`, { waitUntil: 'load' });
 ok(/nombre|pago/i.test((await p.textContent('#tForm')).trim()), 'por defecto en espanol');
 
+/* ── 11. Pagina de entrega ──
+   Un enlace roto aqui es una venta cobrada y un producto no entregado,
+   asi que se comprueba que CADA archivo baja de verdad, no solo que el
+   <a> existe. */
+console.log('\n11) Pagina de entrega');
+await p.goto(`${URL_BASE}/gracias-e41b9fb5ec65061a.html`, { waitUntil: 'load' });
+const enlaces = await p.$$eval('a.archivo', (as) => as.map((a) => ({
+  href: a.getAttribute('href'),
+  titulo: a.querySelector('b')?.textContent.trim(),
+})));
+ok(enlaces.length === 4, 'los 4 entregables estan en la pagina', enlaces.length);
+ok(!(await p.$('.pendiente')), 'ya no queda ningun bloque "pendiente"');
+
+for (const { href, titulo } of enlaces) {
+  const r = await fetch(URL_BASE + href);
+  const buf = Buffer.from(await r.arrayBuffer());
+  ok(r.status === 200 && buf.slice(0, 5).toString() === '%PDF-',
+    `baja un PDF real: ${titulo}`, `${r.status} · ${(buf.length / 1048576).toFixed(1)} MB`);
+}
+
+/* El producto entero no puede quedar en una ruta adivinable. */
+const desnudo = await fetch(`${URL_BASE}/descargas/Azucar-en-Equilibrio.pdf`);
+ok(desnudo.status === 404, 'sin el segmento aleatorio no se baja nada', desnudo.status);
+
 console.log('\nerrores de JS en la pagina:', errores.length ? errores : 'ninguno');
 if (errores.length) fallos += errores.length;
 await nav.close();
