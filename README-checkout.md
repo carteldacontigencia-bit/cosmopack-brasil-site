@@ -147,7 +147,7 @@ node test/mock-xpag.mjs &      # mock del API de XPag en :8787
 node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
 node test/api.test.mjs         # 60 · los seis handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
-node test/checkout.e2e.mjs     # 75 · la pantalla, la entrega, la politica
+node test/checkout.e2e.mjs     # 67 · la pantalla, la entrega, la politica
 ```
 
 El mock reproduce las respuestas de la documentación campo por campo,

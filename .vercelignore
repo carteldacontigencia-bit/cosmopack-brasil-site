@@ -10,3 +10,14 @@ entregables/
 
 # Restos del sitio viejo, pesados y sin uso.
 cosmopack-site.zip
+
+# Bloque guardado fuera de la pagina, no es una pagina.
+*-desactivado.html
+
+# Paginas todavia sin terminar: les faltan TODAS las imagenes y su liga
+# de pago es un marcador (FALTA-LIGA-DE-RAICES, FALTA-LIGA-DE-97-MXN).
+# Publicadas serian una pagina rota con un boton muerto, que es peor que
+# no tenerla. Para publicarlas: pon las imagenes en su assets/, cambia
+# el marcador por la liga real y borra la linea de aqui.
+raices-olvidadas/
+pulmones-libres/
