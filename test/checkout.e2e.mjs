@@ -302,6 +302,42 @@ for (const d of ['azucar-en-equilibrio']) {
   await ctx2.close();
 }
 
+/* ── 13a. Una cobranza del sandbox no puede sobrevivir a produccion ──
+   Paso de verdad: al quitar XPAG_SANDBOX, el navegador seguia
+   ensenando la cobranza vieja guardada en el aparato -- con la CLABE de
+   una cuenta de pruebas y la banda naranja encima. Un comprador real
+   habria transferido dinero a una cuenta que no cobra. */
+console.log('\n13a) Cobranza guardada de otro entorno');
+{
+  const ctxS = await nav.newContext({ viewport: { width: 390, height: 844 } });
+  const pS = await ctxS.newPage();
+  await pS.goto(`${URL_BASE}/pago`, { waitUntil: 'load' });
+  await pS.fill('#name', 'Ana Lopez');
+  await pS.click('#enviar');
+  await pS.waitForSelector('#secPago:not([hidden])', { timeout: 8000 });
+  const clabeVieja = (await pS.textContent('#vClabe')).trim();
+
+  /* Vuelve a entrar en el MISMO aparato: la referencia tiene que seguir
+     ahi, que es justo para lo que se guarda. */
+  await pS.reload({ waitUntil: 'load' });
+  await pS.waitForSelector('#secPago:not([hidden])', { timeout: 8000 });
+  ok((await pS.textContent('#vClabe')).trim() === clabeVieja,
+    'en el mismo entorno la referencia sobrevive a recargar');
+
+  /* Ahora el servidor deja de estar en sandbox. */
+  await pS.route('**/api/config', async (r) => {
+    const orig = await r.fetch();
+    const d = await orig.json();
+    await r.fulfill({ json: { ...d, sandbox: false } });
+  });
+  await pS.reload({ waitUntil: 'load' });
+  await pS.waitForSelector('#secForm:not([hidden])', { timeout: 8000 });
+  ok(true, 'al cambiar de entorno vuelve al formulario, no a la CLABE vieja');
+  ok(!(await pS.isVisible('#avisoPrueba')), 'y la banda de prueba desaparece');
+  ok(!(await pS.isVisible('#simBotones')), 'y los botones de simular tambien');
+  await ctxS.close();
+}
+
 /* ── 13b. La pantalla del OXXO no es la del banco ── */
 console.log('\n13b) OXXO');
 {

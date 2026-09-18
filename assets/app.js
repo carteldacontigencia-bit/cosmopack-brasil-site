@@ -100,7 +100,19 @@ async function arrancar() {
   }
 
   const guardada = leerOrden();
-  if (guardada) { orden = guardada; mostrarPago(); return; }
+  /* Una cobranza guardada del sandbox NO puede sobrevivir al paso a
+     produccion, ni al reves. Su CLABE apunta a una cuenta de pruebas:
+     quien la tuviera en el aparato veria datos viejos y transferiria
+     dinero real a una cuenta que no cobra. Si la bandera no coincide con
+     la del servidor, se tira y se empieza de cero. */
+  if (guardada && Boolean(guardada.sandbox) !== Boolean(cfg.sandbox)) {
+    console.warn('[checkout] cobranza guardada de otro entorno, descartada');
+    olvidarOrden();
+  } else if (guardada) {
+    orden = guardada;
+    mostrarPago();
+    return;
+  }
 
   ver($('secForm'));
   if (oferta) pixel.iniciarCheckout({ value: oferta.amount, currency: oferta.currency, externalId: 'form' });
@@ -151,10 +163,13 @@ function mostrarPago() {
   ver($('secForm'), false);
   ver($('secOk'), false);
   ver($('secPago'));
-  ver($('avisoPrueba'), Boolean(orden.sandbox || cfg.sandbox));
+  ver($('avisoPrueba'), Boolean(cfg.sandbox));
   /* Los botones de simulacion aparecen cuando ya hay una cobranza que
      simular, no antes. */
-  ver($('simBotones'), Boolean(orden.sandbox || cfg.sandbox));
+  /* Los botones dependen del servidor de AHORA, no de lo que dijera la
+     cobranza guardada: /api/simular responde 404 fuera de sandbox, asi
+     que ensenarlos seria ofrecer algo que no existe. */
+  ver($('simBotones'), Boolean(cfg.sandbox));
 
   const importe = pesos(orden.amount, orden.currency);
   const concepto = orden.reference || orden.external_id;

@@ -104,6 +104,12 @@ El enlace se guarda en el aparato por 24 h, así que si el navegador
 descarta la pestaña mientras la persona está en el app del banco, al
 volver encuentra la misma CLABE.
 
+**Pero no sobrevive a un cambio de entorno.** Al quitar `XPAG_SANDBOX`,
+una cobranza guardada del sandbox se descarta: su CLABE apunta a una
+cuenta de pruebas, y enseñarla en producción haría que alguien
+transfiriera dinero real a una cuenta que no cobra. La pantalla vuelve
+al formulario y se genera una nueva.
+
 **La página de los PDFs necesita una ruta aleatoria y `noindex`.** El
 redirect verifica el pago, pero no puede impedir que alguien comparta la
 URL final una vez que la tiene.
@@ -167,7 +173,7 @@ node test/mock-xpag.mjs &      # mock del API de XPag en :8787
 node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
 node test/api.test.mjs         # 64 · los handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
-node test/checkout.e2e.mjs     # 82 · la pantalla, la entrega, la politica
+node test/checkout.e2e.mjs     # 86 · la pantalla, la entrega, la politica
 ```
 
 El mock reproduce las respuestas de la documentación campo por campo,
