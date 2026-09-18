@@ -18,6 +18,12 @@ const simular = (payload) => fetch('http://127.0.0.1:8787/__simular', {
   body: JSON.stringify(payload),
 }).then((r) => r.json());
 
+/* El precio se lee del servidor, que es su unica fuente. Escrito a mano
+   aqui, cada cambio de precio rompia las pruebas por el motivo
+   equivocado. */
+const { OFERTAS } = await import('../api/_lib/offers.js');
+const PRECIO = String(OFERTAS.principal.amount);
+
 const nav = await chromium.launch({ executablePath: CHROME });
 
 /* Una violacion de CSP no lanza excepcion: el navegador la anota en la
@@ -41,7 +47,7 @@ console.log('\n1) SPEI en movil (390px)');
 let { ctx, p } = await pagina();
 await p.goto(`${URL_BASE}/pago`, { waitUntil: 'load' });
 
-ok((await p.textContent('#ofTotal')).includes('100'), 'el total sale del servidor', (await p.textContent('#ofTotal')).trim());
+ok((await p.textContent('#ofTotal')).includes(PRECIO), 'el total sale del servidor', (await p.textContent('#ofTotal')).trim());
 ok(Boolean(await p.getAttribute('#website', 'tabindex')), 'el campo trampa esta fuera del recorrido de teclado');
 const trampa = await p.evaluate(() => {
   const r = document.getElementById('website').getBoundingClientRect();
@@ -63,7 +69,7 @@ const lineasClabe = await p.evaluate(() => {
   return Math.round(e.getBoundingClientRect().height / parseFloat(getComputedStyle(e).lineHeight));
 });
 ok(lineasClabe === 1, 'la CLABE no se parte en dos renglones', lineasClabe);
-ok((await p.textContent('#vImporte')).includes('100'), 'importe exacto visible');
+ok((await p.textContent('#vImporte')).includes(PRECIO), 'importe exacto visible');
 ok((await p.textContent('#vBanco')).includes('STP'), 'banco destino visible');
 
 /* El nombre del extracto, que es el principal motivo de abandono */
@@ -88,7 +94,7 @@ await p.click('#chipsBanco .chip:nth-child(1)');
 await p.waitForSelector('#pasos:not([hidden])');
 const pasos = await p.$$eval('#pasosLista li', (els) => els.map((e) => e.textContent.trim()));
 ok(pasos.length >= 5, 'el paso a paso tiene varios pasos', pasos.length);
-ok(pasos.some((s) => s.includes('100')), 'un paso lleva el importe ya puesto', pasos.find((s) => s.includes('100')));
+ok(pasos.some((x) => x.includes(PRECIO)), 'un paso lleva el importe ya puesto', pasos.find((x) => x.includes(PRECIO)));
 ok(pasos.some((s) => /REF123456|PRINCIPAL-/.test(s)), 'un paso lleva el concepto ya puesto', pasos.find((s) => /REF123456|PRINCIPAL-/.test(s)));
 ok(!pasos.some((s) => s.includes('{importe}') || s.includes('{concepto}')), 'no quedan marcadores sin sustituir');
 
@@ -300,6 +306,28 @@ for (const d of ['azucar-en-equilibrio']) {
   ok(!/vovomei|utmify|clarity\.ms/i.test(html.replace(/<!--[\s\S]*?-->/g, '')),
     `${d}: sin rastros del original en el codigo`);
   await ctx2.close();
+}
+
+/* ── 12b. La pagina de venta y el cobro dicen el mismo precio ──
+   Son dos archivos distintos: el precio real vive en offers.js y el de
+   la pagina esta escrito en el HTML. Si se separan, la persona hace
+   clic en "$140" y la pantalla de pago le pide otra cosa -- que es el
+   momento exacto en que deja de confiar y se va. */
+console.log('\n12b) El precio coincide en los dos lados');
+{
+  const html = await (await fetch(`${URL_BASE}/azucar-en-equilibrio/`)).text();
+  const sinComentarios = html.replace(/<!--[\s\S]*?-->/g, '');
+
+  const enElBloque = (sinComentarios.match(/<div class="preco"><span>\$<\/span>(\d+)<\/div>/) || [])[1];
+  ok(enElBloque === PRECIO, 'el bloque de oferta lleva el precio del servidor', { pagina: enElBloque, servidor: PRECIO });
+
+  const enElBoton = (sinComentarios.match(/POR \$(\d+)/) || [])[1];
+  ok(enElBoton === PRECIO, 'y el boton de compra tambien', { boton: enElBoton, servidor: PRECIO });
+
+  /* El precio tachado tiene que ser MAYOR que el que se cobra, o el
+     descuento no existe y el bloque miente. */
+  const ancla = (sinComentarios.match(/De \$(\d+) MXN por/) || [])[1];
+  ok(ancla && Number(ancla) > Number(PRECIO), 'el precio tachado es mayor que el que se cobra', { tachado: ancla, cobrado: PRECIO });
 }
 
 /* ── 13a. Una cobranza del sandbox no puede sobrevivir a produccion ──

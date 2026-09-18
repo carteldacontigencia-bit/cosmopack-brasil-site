@@ -8,7 +8,7 @@ export const LIMITES = { min: 10, max: 10000 };
 export const OFERTAS = {
   principal: {
     id: 'principal',
-    amount: 100,
+    amount: 140,
     currency: 'MXN',
     /* Clave de traduccion, no texto: el idioma lo resuelve el front. */
     nombreClave: 'oferta_principal_nombre',
