@@ -1,0 +1,4 @@
+.venv/
+entregables/.tmp/
+__pycache__/
+*.pyc
