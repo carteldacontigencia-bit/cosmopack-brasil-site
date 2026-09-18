@@ -167,7 +167,7 @@ node test/mock-xpag.mjs &      # mock del API de XPag en :8787
 node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
 node test/api.test.mjs         # 64 · los handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
-node test/checkout.e2e.mjs     # 75 · la pantalla, la entrega, la politica
+node test/checkout.e2e.mjs     # 82 · la pantalla, la entrega, la politica
 ```
 
 El mock reproduce las respuestas de la documentación campo por campo,
@@ -254,3 +254,10 @@ entra igual.
   selecciona el texto y se dice qué hacer.
 - **La CLABE nunca se parte** en dos renglones: un número cortado se
   teclea mal y el pago no se concilia.
+- **Sólo se agrupa de 4 en 4 lo que son puros dígitos.** La CLABE sí: los
+  espacios ayudan a teclear sin saltarse un número. Una referencia con
+  letras no, porque `sbx_ b8ca 210d` parece rota y deja la duda de si los
+  espacios van tecleados. El valor que se copia va siempre sin espacios.
+- **En OXXO no se muestra el beneficiario.** Esa caja es del banco, y su
+  título decía "antes de ir a tu banco". En la caja de la tienda se
+  entrega efectivo contra una referencia y nadie enseña un nombre.

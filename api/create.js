@@ -107,7 +107,14 @@ export default async function handler(req, res) {
   if (metodo === 'oxxo') {
     const pd = d.payee_data || {};
     salida.reference = pd.reference || d.reference || null;
-    salida.barcode = pd.barcode || null;
+    salida.barcode = pd.barcode || pd.barcode_url || d.barcode || null;
+    /* En la caja del OXXO, escanear un codigo de barras es mucho menos
+       propenso a error que teclear la referencia. Si XPag no lo manda,
+       queda anotado QUE nombres de campo si vinieron, para saber si lo
+       llama de otra manera en vez de suponerlo. */
+    if (!salida.barcode) {
+      console.warn('[create] OXXO sin barcode. payee_data:', Object.keys(pd), 'raiz:', Object.keys(d));
+    }
     if (!salida.reference) {
       console.error('[create] OXXO sin referencia:', Object.keys(d));
       return fallo(res, 502, 'err_oxxo');

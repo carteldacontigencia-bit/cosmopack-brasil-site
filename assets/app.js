@@ -161,7 +161,10 @@ function mostrarPago() {
 
   /* El nombre del extracto. Si no coincide con la marca, se explica; es
      la diferencia entre transferir y abandonar. */
-  if (orden.beneficiary) {
+  /* Solo en SPEI. En la caja del OXXO nadie enseña un beneficiario: se
+     entrega efectivo contra una referencia. El titulo decia "antes de ir
+     a tu banco", que ahi no significa nada. */
+  if (orden.beneficiary && orden.method !== 'oxxo') {
     const marca = orden.brand || cfg.brand;
     $('benefNombre').textContent = orden.beneficiary;
     $('benefTexto').textContent = marca && marca.trim() && marca.trim().toLowerCase() !== orden.beneficiary.trim().toLowerCase()
@@ -201,7 +204,15 @@ function mostrarPago() {
 
 /* La CLABE son 18 dígitos que se teclean en el banco: agrupados de 4 en
    4 se leen sin perder la cuenta. */
-const agrupar = (s) => String(s || '').replace(/(.{4})/g, '$1 ').trim();
+/* Agrupa de 4 en 4 SOLO si son puros digitos, como la CLABE: los
+   espacios ayudan a teclear sin saltarse un numero. Una referencia con
+   letras o guion bajo se muestra tal cual -- partida quedaba
+   "sbx_ b8ca 210d", que parece rota y hace dudar de si los espacios son
+   parte del codigo. */
+const agrupar = (s) => {
+  const v = String(s || '');
+  return /^\d+$/.test(v) ? v.replace(/(.{4})/g, '$1 ').trim() : v;
+};
 
 function pintarChipsBanco(importe, concepto) {
   const cont = $('chipsBanco');

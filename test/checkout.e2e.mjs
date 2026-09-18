@@ -302,6 +302,52 @@ for (const d of ['azucar-en-equilibrio']) {
   await ctx2.close();
 }
 
+/* ── 13b. La pantalla del OXXO no es la del banco ── */
+console.log('\n13b) OXXO');
+{
+  const ctxO = await nav.newContext({ viewport: { width: 390, height: 844 } });
+  const pO = await ctxO.newPage();
+  await pO.goto(`${URL_BASE}/pago`, { waitUntil: 'load' });
+  await pO.check('input[name="method"][value="oxxo"]');
+  await pO.fill('#name', 'Luis Hernandez');
+  await pO.click('#enviar');
+  await pO.waitForSelector('#secPago:not([hidden])', { timeout: 8000 });
+
+  ok(await pO.isVisible('#panelOxxo'), 'muestra el panel de OXXO');
+  ok(!(await pO.isVisible('#panelSpei')), 'y no el de transferencia');
+
+  /* La caja del beneficiario es cosa del banco: en la caja del OXXO se
+     entrega efectivo contra una referencia y nadie enseña un nombre. El
+     titulo decia "antes de ir a tu banco". */
+  ok(!(await pO.isVisible('#cajaBenef')), 'sin la caja de beneficiario, que es del banco');
+
+  /* Una referencia con letras no se parte en grupos de 4: "sbx_ b8ca
+     210d" parece rota y hace dudar de si los espacios van tecleados. */
+  const refTexto = (await pO.textContent('#vRefOxxo')).trim();
+  const refPlana = await pO.getAttribute('#vRefOxxo', 'data-plano');
+  ok(/^\d+$/.test(refPlana) || !/\s/.test(refTexto),
+    'la referencia con letras se muestra entera, sin espacios', refTexto);
+  ok(refPlana && refPlana.length > 6, 'y el valor a copiar va sin espacios', refPlana);
+
+  await ctxO.close();
+
+  /* Y ahora la forma que devuelve el sandbox REAL: con letras. Hace
+     falta un contexto nuevo porque la pantalla recuerda la referencia
+     anterior en el aparato y se salta el formulario -- que es
+     justamente lo que tiene que hacer con un comprador real. */
+  const ctxO2 = await nav.newContext({ viewport: { width: 390, height: 844 } });
+  const pO2 = await ctxO2.newPage();
+  await pO2.goto(`${URL_BASE}/pago`, { waitUntil: 'load' });
+  await pO2.check('input[name="method"][value="oxxo"]');
+  await pO2.fill('#name', 'Prueba Sandbox');
+  await pO2.click('#enviar');
+  await pO2.waitForSelector('#secPago:not([hidden])', { timeout: 8000 });
+  const conLetras = (await pO2.textContent('#vRefOxxo')).trim();
+  ok(/^sbx_/.test(conLetras), 'llega una referencia con letras', conLetras);
+  ok(!/\s/.test(conLetras), 'y se muestra entera, sin partir en grupos de 4', conLetras);
+  await ctxO2.close();
+}
+
 /* ── 14. EL CAMINO COMPLETO: pagar → recibir ──
    Lo unico que de verdad importa y lo ultimo que faltaba probar. Se
    hace con el boton de simulacion, que es el mismo camino que sigue un

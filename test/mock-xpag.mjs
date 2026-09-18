@@ -45,7 +45,15 @@ const server = http.createServer(async (req, res) => {
         awaiting_instruction: false, transfer_type: 'REFERENCE',
         payee_data: {
           transferType: 'REFERENCE',
-          reference: '8204240000119882',
+          /* La documentacion muestra una referencia NUMERICA, pero el
+             sandbox real devuelve 'sbx_<hex>' -- con letras y guion
+             bajo. Las dos formas existen, asi que el mock da la segunda
+             cuando el pagador se llama 'Prueba Sandbox'. Sirve para
+             comprobar que la pantalla no parte en grupos de 4 algo que
+             no son puros digitos. */
+          reference: (body.name || body.payerData?.name || '').includes('Prueba Sandbox')
+            ? 'sbx_' + Math.random().toString(16).slice(2, 10) + 'ff6f4932'
+            : '8204240000119882',
           barcode: 'https://static.muwe.mx/abc.png',
         },
       });
