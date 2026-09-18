@@ -220,13 +220,21 @@ ok(Boolean((await fetch(`${URL_BASE}/api/config`)).headers.get('content-security
    JavaScript dentro del HTML. Aplicarles la politica estricta las deja
    sin formato -- ya paso con la pagina de entrega. Reescribirlas es
    posible; hacerlo a escondidas con una cabecera, no. */
-for (const ruta of ['/azucar-en-equilibrio/', '/index.html.html']) {
+for (const ruta of ['/azucar-en-equilibrio/', '/raices-olvidadas/']) {
   const r = await fetch(URL_BASE + ruta);
   ok(r.headers.get('content-security-policy') === null,
     `${ruta}: sin politica estricta, no se rompe`);
   ok(r.headers.get('x-content-type-options') === 'nosniff',
     `${ruta}: pero si las cabeceras que no rompen nada`);
 }
+
+/* La raiz del dominio ya no puede ser un 404: la pagina de Cosmo Pack
+   se borro y el sitio pasa a ser el de las ofertas. Redireccion, no
+   reescritura, para que la pagina de venta tenga UNA sola direccion y
+   no se parta la medicion entre / y /azucar-en-equilibrio/. */
+const raiz = await fetch(URL_BASE + '/', { redirect: 'manual' });
+ok([301, 302, 307, 308].includes(raiz.status), 'la raiz redirige, no da 404', raiz.status);
+ok(raiz.headers.get('location') === '/azucar-en-equilibrio/', 'y va a la pagina de venta', raiz.headers.get('location'));
 
 /* Y la prueba definitiva: que los estilos LLEGUEN a aplicarse. */
 await p.goto(`${URL_BASE}/gracias-e41b9fb5ec65061a.html`, { waitUntil: 'load' });

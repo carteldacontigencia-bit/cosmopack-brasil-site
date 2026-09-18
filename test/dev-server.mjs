@@ -24,7 +24,10 @@ const RAIZ = new URL('../', import.meta.url).pathname;
    perfecta aqui y salia SIN FORMATO publicada, porque la politica
    declara style-src 'self' y el navegador bloquea el bloque en linea.
    Eso ya paso una vez con la pagina de entrega. */
-const REGLAS = JSON.parse(fs.readFileSync(path.join(RAIZ, 'vercel.json'), 'utf8')).headers || [];
+const VERCEL = JSON.parse(fs.readFileSync(path.join(RAIZ, 'vercel.json'), 'utf8'));
+const REGLAS = VERCEL.headers || [];
+const REDIRECTS = VERCEL.redirects || [];
+const REWRITES = VERCEL.rewrites || [];
 /* Los "source" que usa este vercel.json —/(.*), /api/(.*) y la
    alternancia de gracias/descargas— ya son expresiones regulares
    validas, asi que se usan tal cual. Vercel acepta mas sintaxis
@@ -74,7 +77,15 @@ http.createServer(async (req, res) => {
     }
   }
 
-  let f = url.pathname === '/' || url.pathname === '/pago' ? '/checkout.html' : url.pathname;
+  /* Redirecciones y reescrituras salen del propio vercel.json, no de
+     una copia a mano: si se cambian alli, la prueba las sigue. */
+  const red = REDIRECTS.find((r) => r.source === url.pathname);
+  if (red) {
+    res.writeHead(red.permanent ? 308 : 307, { Location: red.destination });
+    return res.end();
+  }
+  const rw = REWRITES.find((r) => r.source === url.pathname);
+  let f = rw ? rw.destination : url.pathname;
   /* Vercel sirve /carpeta/ como /carpeta/index.html. Sin esto las
      paginas de venta no se podian probar aqui: daban 404. */
   if (f.endsWith('/')) f += 'index.html';

@@ -5,6 +5,13 @@
       "maxDuration": 15
     }
   },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/azucar-en-equilibrio/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/pago",
