@@ -249,8 +249,23 @@ for (const d of ['raices-olvidadas', 'azucar-en-equilibrio', 'pulmones-libres'])
     const h = new URL(r.url()).hostname;
     if (!PERMITIDOS.includes(h)) ajenos.add(h);
   });
+  /* Se intercepta el script de Meta: en las pruebas no hay salida a
+     internet, y lo que interesa es QUE eventos se piden, no que Meta
+     conteste. */
+  const eventos = [];
+  await p2.route('https://connect.facebook.net/**', (r) => r.fulfill({ body: '', contentType: 'text/javascript' }));
+  await p2.addInitScript(() => {
+    window.__ev = [];
+    window.fbq = function () { window.__ev.push([...arguments]); };
+    window.fbq.queue = []; window.fbq.loaded = true; window.fbq.push = window.fbq;
+  });
   await p2.goto(`${URL_BASE}/${d}/`, { waitUntil: 'load' });
   ok(ajenos.size === 0, `${d}: no llama a ningun tercero`, [...ajenos]);
+
+  const disparados = await p2.evaluate(() => window.__ev.map((e) => e.slice(0, 2).join(' ')));
+  ok(disparados.some((e) => e.includes('init 4479089439026636')), `${d}: inicia el pixel correcto`);
+  ok(disparados.some((e) => e.includes('track PageView')), `${d}: manda PageView`);
+  ok(disparados.some((e) => e.includes('track ViewContent')), `${d}: manda ViewContent`);
   const html = await (await fetch(`${URL_BASE}/${d}/`)).text();
   ok(!/vovomei|utmify|clarity\.ms/i.test(html.replace(/<!--[\s\S]*?-->/g, '')),
     `${d}: sin rastros del original en el codigo`);

@@ -2,7 +2,10 @@
 <html lang="es-MX">
 <head>
 <meta charset="utf-8">
-<!-- TRACKING: pega aquí tus scripts (GTM, Meta Pixel, Clarity, UTM tracker) -->
+<!-- Meta Pixel. PageView y ViewContent para todo visitante; los
+     eventos de checkout se limitan al trafico de anuncio y viven en
+     assets/pixel.js. -->
+<script src="/assets/lp-pixel.js" data-producto="Azúcar en Equilibrio" data-valor="100" data-moneda="MXN"></script>
 
 <!-- CHECKOUT: checkout propio (SPEI + OXXO) en /checkout?p=azucar
      El precio vive en api/_xpag.js, no aquí: si cambia uno hay que
