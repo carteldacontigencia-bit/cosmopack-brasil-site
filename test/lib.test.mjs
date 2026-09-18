@@ -82,5 +82,51 @@ try { tokenDeAcceso('X'); } catch { lanzo = true; }
 ok(lanzo, 'firmar sin secreto lanza error');
 ok(externalIdDeToken(tok) === null, 'verificar sin secreto devuelve null (no entrega)');
 
+console.log('\nDiagnostico de entorno');
+{
+  const { estadoDelEntorno } = await import('../api/_lib/env.js');
+  const guardado = { ...process.env };
+  const limpiar = () => {
+    for (const k of ['XPAG_SANDBOX', 'XPAG_CLIENT_ID', 'XPAG_CLIENT_SECRET',
+      'ACCESS_SECRET', 'PRODUCT_URL', 'WEBHOOK_KEY', 'PUBLIC_URL', 'SITE_ORIGIN',
+      'BRAND_NAME', 'META_PIXEL_ID', 'META_CAPI_TOKEN']) delete process.env[k];
+  };
+
+  limpiar();
+  const vacio = estadoDelEntorno();
+  ok(vacio.listo === false, 'con todo vacio no esta listo');
+  ok(vacio.faltan.includes('ACCESS_SECRET'), 'reclama ACCESS_SECRET');
+  ok(vacio.faltan.includes('PRODUCT_URL'), 'reclama PRODUCT_URL');
+  ok(vacio.faltan.includes('XPAG_CLIENT_ID'), 'fuera de sandbox reclama las credenciales');
+
+  /* En sandbox las credenciales son publicas y van en el codigo, asi que
+     no deben aparecer como faltantes: si aparecieran, la persona iria a
+     buscar unas llaves que todavia no necesita. */
+  limpiar();
+  process.env.XPAG_SANDBOX = '1';
+  const caja = estadoDelEntorno();
+  ok(!caja.faltan.includes('XPAG_CLIENT_ID'), 'en sandbox no pide credenciales propias');
+  ok(!caja.faltan.includes('XPAG_CLIENT_SECRET'), 'ni el secreto');
+
+  /* Minimo para vender en sandbox. */
+  process.env.ACCESS_SECRET = 'x';
+  process.env.PRODUCT_URL = 'https://ejemplo/x.html';
+  const minimo = estadoDelEntorno();
+  ok(minimo.listo === true, 'sandbox + ACCESS_SECRET + PRODUCT_URL ya esta listo');
+  ok(minimo.faltan.length === 0, 'sin faltantes', minimo.faltan);
+  ok(minimo.avisos.includes('META_PIXEL_ID'), 'pero avisa del pixel');
+  ok(minimo.avisos.includes('WEBHOOK_KEY'), 'y del webhook');
+
+  /* Nunca debe salir un valor, solo nombres. */
+  process.env.BRAND_NAME = 'Marca Secreta';
+  const conMarca = estadoDelEntorno();
+  const texto = JSON.stringify(conMarca);
+  ok(!texto.includes('Marca Secreta'), 'el diagnostico no filtra ningun valor');
+  ok(!conMarca.avisos.includes('BRAND_NAME'), 'deja de avisar de BRAND_NAME al ponerla');
+
+  limpiar();
+  Object.assign(process.env, guardado);
+}
+
 console.log(`\n${fallos === 0 ? 'TODAS LAS PRUEBAS PASARON' : fallos + ' FALLARON'}`);
 process.exit(fallos ? 1 : 0);

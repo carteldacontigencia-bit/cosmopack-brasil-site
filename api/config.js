@@ -2,7 +2,7 @@
    Sólo valores PUBLICOS: el Pixel ID es público por naturaleza (va en el
    HTML de cualquier sitio). Aquí nunca sale una credencial. */
 import { guard } from './_lib/guard.js';
-import { cfg, isSandbox } from './_lib/env.js';
+import { cfg, isSandbox, estadoDelEntorno } from './_lib/env.js';
 import { OFERTAS, publica } from './_lib/offers.js';
 
 export default async function handler(req, res) {
@@ -10,9 +10,15 @@ export default async function handler(req, res) {
   if (!g) return;
 
   res.setHeader('Cache-Control', 'public, max-age=120');
+  const entorno = estadoDelEntorno();
   res.status(200).json({
     ok: true,
     sandbox: isSandbox(),
+    /* Qué casillas de Vercel siguen vacías. Sólo nombres, nunca
+       valores: sirve para configurar sin adivinar. */
+    listo: entorno.listo,
+    faltan: entorno.faltan,
+    avisos: entorno.avisos,
     brand: cfg.brand || null,
     pixel_id: process.env.META_PIXEL_ID || null,
     /* Horas de validez que se muestran en pantalla. La documentación de

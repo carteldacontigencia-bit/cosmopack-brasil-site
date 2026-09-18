@@ -43,6 +43,30 @@ vercel.json            cabeceras de seguridad y rutas
    `expired` — conviene probar los tres).
 5. Cambiar a credenciales propias y **borrar** `XPAG_SANDBOX`.
 
+## Saber qué falta configurar: `/api/config`
+
+Abrir `https://TU-SITIO/api/config` en el navegador. Responde, entre
+otras cosas:
+
+```json
+{ "sandbox": true, "listo": true, "faltan": [], "avisos": ["META_CAPI_TOKEN"] }
+```
+
+- `faltan` — sin esas variables **no se puede vender**. `listo` es
+  `false` mientras quede alguna.
+- `avisos` — se vende, pero se pierde algo: sin `META_CAPI_TOKEN` las
+  ventas por OXXO no llegan a Meta; sin `BRAND_NAME` la pantalla no
+  puede explicar el nombre del beneficiario.
+
+Salen **sólo los nombres**, nunca los valores ni su longitud. Los
+nombres ya están en `.env.example`, que es público, y todo lo que puede
+faltar falla cerrado: sin `WEBHOOK_KEY` el webhook responde 404 a todo,
+sin `ACCESS_SECRET` no se firma ningún enlace. Saber que falta no sirve
+para entrar.
+
+En sandbox no pide `XPAG_CLIENT_ID` ni `XPAG_CLIENT_SECRET`: ahí las
+credenciales son las públicas de XPag y van en el código.
+
 ## Sin base de datos: cómo funciona la entrega
 
 El enlace de acceso es `/api/access?t=<external_id>.<firma HMAC>`.
@@ -102,8 +126,8 @@ de crear la cobranza.
 
 ```bash
 node test/mock-xpag.mjs &      # mock del API de XPag en :8787
-node test/lib.test.mjs         # 62 · validación y firma del acceso
-node test/api.test.mjs         # 46 · los seis handlers
+node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
+node test/api.test.mjs         # 60 · los seis handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
 node test/checkout.e2e.mjs     # 39 · la pantalla en Chromium
 ```

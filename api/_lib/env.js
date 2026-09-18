@@ -31,3 +31,33 @@ export function requireConfig(...claves) {
     throw e;
   }
 }
+
+/* ── Diagnóstico de entorno ───────────────────────────────────────────
+   Devuelve QUÉ VARIABLES FALTAN, por nombre. Nunca el valor, nunca la
+   longitud. Los nombres ya están publicados en .env.example, así que no
+   revelan nada; y todo lo que puede faltar falla cerrado (sin
+   WEBHOOK_KEY el webhook responde 404 a todo, sin ACCESS_SECRET no se
+   firma ningún enlace), de modo que saber que falta no sirve para
+   entrar. Existe porque, sin esto, configurar Vercel es adivinar a
+   ciegas: la pantalla da un error genérico y no dice cuál casilla
+   quedó vacía. */
+export function estadoDelEntorno() {
+  const hay = (k) => Boolean(process.env[k]);
+  const faltan = [];   /* sin esto no se puede vender */
+  const avisos = [];   /* se vende, pero se pierde algo */
+
+  if (!isSandbox()) {
+    if (!hay('XPAG_CLIENT_ID')) faltan.push('XPAG_CLIENT_ID');
+    if (!hay('XPAG_CLIENT_SECRET')) faltan.push('XPAG_CLIENT_SECRET');
+  }
+  if (!hay('ACCESS_SECRET')) faltan.push('ACCESS_SECRET');
+  if (!hay('PRODUCT_URL')) faltan.push('PRODUCT_URL');
+
+  if (!hay('WEBHOOK_KEY')) avisos.push('WEBHOOK_KEY');
+  if (!hay('PUBLIC_URL') && !hay('SITE_ORIGIN')) avisos.push('PUBLIC_URL');
+  if (!hay('BRAND_NAME')) avisos.push('BRAND_NAME');
+  if (!hay('META_PIXEL_ID')) avisos.push('META_PIXEL_ID');
+  if (!hay('META_CAPI_TOKEN')) avisos.push('META_CAPI_TOKEN');
+
+  return { listo: faltan.length === 0, faltan, avisos };
+}
