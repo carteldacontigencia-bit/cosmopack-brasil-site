@@ -9,7 +9,10 @@ export default async function handler(req, res) {
   const g = await guard(req, res, { method: 'GET', rate: 60, windowMs: 60_000 });
   if (!g) return;
 
-  res.setHeader('Cache-Control', 'public, max-age=120');
+  /* El Cache-Control lo pone vercel.json: no-store para todo /api/*.
+     Antes este handler pedia 120s de cache y quedaban dos reglas
+     peleando por la misma cabecera. Ademas la respuesta ahora lleva el
+     diagnostico del entorno, que no debe quedarse guardado en un CDN. */
   const entorno = estadoDelEntorno();
   res.status(200).json({
     ok: true,

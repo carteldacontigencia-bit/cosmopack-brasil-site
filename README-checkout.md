@@ -25,6 +25,7 @@ assets/app.js          lógica: persistencia, sondeo, copiar, bancos
 assets/i18n.js         TODOS los textos, es y en, en un solo archivo
 assets/pixel.js        Meta Pixel
 assets/checkout.css    estilos
+assets/gracias.css     estilos de la pagina de entrega
 
 test/                  mock de XPag + tres suites
 vercel.json            cabeceras de seguridad y rutas
@@ -146,7 +147,7 @@ node test/mock-xpag.mjs &      # mock del API de XPag en :8787
 node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
 node test/api.test.mjs         # 60 · los seis handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
-node test/checkout.e2e.mjs     # 47 · la pantalla y la entrega en Chromium
+node test/checkout.e2e.mjs     # 53 · la pantalla, la entrega y la politica
 ```
 
 El mock reproduce las respuestas de la documentación campo por campo,
@@ -156,6 +157,21 @@ porque `api.xpag.global` no es alcanzable desde el entorno de build.
 con los nombres que el código lee. Eso se confirma corriendo, desde una
 máquina con salida a internet, una petición al sandbox y comparando la
 respuesta con `test/mock-xpag.mjs`.
+
+## Nada de CSS dentro del HTML
+
+La política del sitio declara `style-src 'self'`, sin `'unsafe-inline'`.
+Un bloque `<style>` o un atributo `style=` en el HTML queda **bloqueado
+por el navegador** y la página sale sin formato. Pasó con la página de
+entrega: en local se veía perfecta y publicada eran links sueltos.
+
+El servidor de pruebas ahora lee `vercel.json` y aplica las mismas
+cabeceras, así que la diferencia entre local y producción desapareció.
+Dos pruebas lo cubren: que no haya `<style>` ni `style=` en las páginas,
+y que un card de descarga calcule `display: flex` de verdad.
+
+Debilitar la política para permitir CSS en línea sería la otra salida, y
+es peor: `'unsafe-inline'` abre la puerta a inyección de estilos.
 
 ## El Purchase de Meta se manda dos veces, a propósito
 

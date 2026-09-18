@@ -20,9 +20,17 @@ const simular = (payload) => fetch('http://127.0.0.1:8787/__simular', {
 
 const nav = await chromium.launch({ executablePath: CHROME });
 
+/* Una violacion de CSP no lanza excepcion: el navegador la anota en la
+   consola y sigue, con la pagina rota. Por eso se vigila aparte. */
+const csp = [];
+
 async function pagina(ancho = 390) {
   const ctx = await nav.newContext({ viewport: { width: ancho, height: 844 } });
   const p = await ctx.newPage();
+  p.on('console', (m) => {
+    const t = m.text();
+    if (/Content Security Policy|Refused to (apply|load|execute)/i.test(t)) csp.push(t.slice(0, 160));
+  });
   p.on('pageerror', (e) => errores.push('pageerror: ' + e.message));
   p.on('console', (m) => { if (m.type() === 'error' && !/favicon|ERR_CERT|fbevents/.test(m.text())) errores.push('console: ' + m.text()); });
   return { ctx, p };
@@ -187,6 +195,29 @@ for (const { href, titulo } of enlaces) {
 /* El producto entero no puede quedar en una ruta adivinable. */
 const desnudo = await fetch(`${URL_BASE}/descargas/Azucar-en-Equilibrio.pdf`);
 ok(desnudo.status === 404, 'sin el segmento aleatorio no se baja nada', desnudo.status);
+
+/* ── 12. La politica de seguridad de verdad ──
+   El servidor de pruebas aplica las cabeceras de vercel.json, asi que
+   aqui se ve lo mismo que en produccion. Esto existe porque la pagina
+   de entrega salio publicada SIN FORMATO: tenia los estilos dentro del
+   HTML y la politica declara style-src 'self', sin 'unsafe-inline'. En
+   local se veia perfecta. */
+console.log('\n12) Politica de seguridad');
+for (const ruta of ['/pago', '/gracias-e41b9fb5ec65061a.html']) {
+  const r = await fetch(URL_BASE + ruta);
+  const html = await r.text();
+  ok(!/<style[\s>]/i.test(html), `${ruta}: sin bloque <style> en el HTML`);
+  ok(!/\sstyle=["']/i.test(html), `${ruta}: sin atributos style=`);
+  ok(Boolean(r.headers.get('content-security-policy')), `${ruta}: sirve la politica`);
+}
+
+/* Y la prueba definitiva: que los estilos LLEGUEN a aplicarse. */
+await p.goto(`${URL_BASE}/gracias-e41b9fb5ec65061a.html`, { waitUntil: 'load' });
+const caja = await p.$eval('a.archivo', (a) => getComputedStyle(a).display);
+ok(caja === 'flex', 'los cards de descarga se ven como cards, no como texto suelto', caja);
+
+console.log('violaciones de la politica:', csp.length ? csp : 'ninguna');
+if (csp.length) fallos += csp.length;
 
 console.log('\nerrores de JS en la pagina:', errores.length ? errores : 'ninguno');
 if (errores.length) fallos += errores.length;

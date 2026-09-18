@@ -17,6 +17,27 @@ process.env.REF_HOURS ||= '24';
 process.env.RATE_CREATE ||= '500';
 
 const RAIZ = new URL('../', import.meta.url).pathname;
+
+/* Las MISMAS cabeceras que Vercel aplica en produccion, leidas del
+   propio vercel.json. Sin esto el servidor de pruebas era mas permisivo
+   que el sitio real: una pagina con <style> dentro del HTML se veia
+   perfecta aqui y salia SIN FORMATO publicada, porque la politica
+   declara style-src 'self' y el navegador bloquea el bloque en linea.
+   Eso ya paso una vez con la pagina de entrega. */
+const REGLAS = JSON.parse(fs.readFileSync(path.join(RAIZ, 'vercel.json'), 'utf8')).headers || [];
+/* Los "source" que usa este vercel.json —/(.*), /api/(.*) y la
+   alternancia de gracias/descargas— ya son expresiones regulares
+   validas, asi que se usan tal cual. Vercel acepta mas sintaxis
+   (:parametros, modificadores); si algun dia se usa alguna, hay que
+   traducirla aqui. */
+const aRegex = (fuente) => new RegExp('^' + fuente + '$');
+function cabecerasDe(ruta) {
+  const out = {};
+  for (const r of REGLAS) {
+    if (aRegex(r.source).test(ruta)) for (const h of r.headers) out[h.key] = h.value;
+  }
+  return out;
+}
 const rutas = {};
 for (const n of ['config', 'create', 'status', 'access', 'webhook', 'contact']) {
   rutas['/api/' + n] = (await import(`../api/${n}.js`)).default;
@@ -36,6 +57,11 @@ http.createServer(async (req, res) => {
   const h = rutas[url.pathname];
   if (h) {
     req.query = Object.fromEntries(url.searchParams);
+    /* Las cabeceras de vercel.json tambien valen para /api/*. Ningun
+       handler pone las mismas claves, asi que no hay que decidir cual
+       gana -- y es a proposito: una regla por cabecera, en un solo
+       sitio. */
+    for (const [k, v] of Object.entries(cabecerasDe(url.pathname))) res.setHeader(k, v);
     const setHeader = res.setHeader.bind(res);
     res.status = (c) => { res.statusCode = c; return res; };
     res.json = (o) => { setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(o)); return res; };
@@ -52,7 +78,10 @@ http.createServer(async (req, res) => {
   const abs = path.join(RAIZ, path.normalize(f).replace(/^(\.\.[/\\])+/, ''));
   try {
     const buf = fs.readFileSync(abs);
-    res.writeHead(200, { 'Content-Type': TIPOS[path.extname(abs)] || 'application/octet-stream' });
+    res.writeHead(200, {
+      'Content-Type': TIPOS[path.extname(abs)] || 'application/octet-stream',
+      ...cabecerasDe(url.pathname),
+    });
     res.end(buf);
   } catch {
     res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
