@@ -1,0 +1,539 @@
+/* ============================================================
+   Azúcar en Equilibrio · Abuela Mei
+   Hoja de estilo de impresión — compartida por el ebook y los 3 bonos.
+
+   Decisiones que no son de gusto, son de legibilidad:
+   - Lectora de 45 a 70+. El cuerpo va en 12pt, no en 10pt como
+     la mayoría de los ebooks. En A5 eso da 58 caracteres por
+     línea, que es el ancho donde el ojo no pierde el renglón.
+   - Página A5 (148x210mm) y no A4: leído en celular a ancho
+     completo, un A4 en 12pt obliga a hacer zoom. Para imprimir
+     en A4 salen dos páginas por hoja.
+   - La advertencia de cada remedio nunca va en gris chico.
+     Es el dato que evita un accidente, así que lleva barra de
+     color y el mismo tamaño que el resto.
+   ============================================================ */
+
+@page {
+  size: 148mm 210mm;
+  margin: 15mm 13mm 17mm;
+}
+
+:root {
+  --creme:   #FBF7EF;
+  --creme2:  #F3ECDE;
+  --creme3:  #EFE6D3;
+  --verde:   #3A5240;
+  --verde-e: #2A3C2F;
+  --sage:    #4E6455;
+  --sage-cl: #DDE5DC;
+  --tinta:   #3D3A33;
+  --cinza:   #6B6355;
+  --linha:   #E4DAC6;
+  --dourado: #EFD48A;
+  --realce:  #7E5E12;
+  --terra:   #A8522F;
+  --terra-cl:#FBEDE6;
+
+  --titulo: 'Plus Jakarta Sans', 'Liberation Sans', sans-serif;
+  --sans:   'Inter', 'Liberation Sans', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { background: var(--creme); }
+
+body {
+  font-family: var(--sans);
+  font-size: 12pt;
+  line-height: 1.6;
+  color: var(--tinta);
+  background: var(--creme);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  text-rendering: geometricPrecision;
+}
+
+p { margin-bottom: 0.62em; text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
+strong, b { font-weight: 700; color: var(--verde-e); }
+em { font-style: italic; }
+a { color: var(--realce); text-decoration: none; }
+
+h1, h2, h3, h4 {
+  font-family: var(--titulo);
+  color: var(--verde);
+  line-height: 1.18;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+/* ---------- utilidades de página ---------- */
+.salto        { break-before: page; }
+.nueva-hoja   { break-before: page; }
+.no-cortar    { break-inside: avoid; }
+.centro       { text-align: center; }
+.sangrar      { break-before: page; }
+
+/* ============================================================
+   PORTADA — se imprime aparte, con margen 0
+   ============================================================ */
+.portada {
+  width: 148mm; height: 210mm;
+  background: var(--verde-e);
+  color: var(--creme);
+  padding: 22mm 16mm 16mm;
+  display: flex; flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+/* Halo dorado detrás del título, igual que el héroe de la página de ventas */
+.portada::before {
+  content: '';
+  position: absolute; top: -40mm; left: 50%; transform: translateX(-50%);
+  width: 200mm; height: 130mm;
+  background: radial-gradient(ellipse at center, rgba(239,212,138,.16), transparent 68%);
+}
+.portada-sello {
+  font-family: var(--sans); font-size: 8.5pt; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--dourado);
+  border: 1px solid rgba(239,212,138,.45);
+  border-radius: 99px; padding: 5px 15px;
+  align-self: center; position: relative;
+}
+.portada-hoja { text-align: center; font-size: 22pt; color: var(--dourado); margin: 9mm 0 4mm; position: relative; }
+.portada h1 {
+  font-family: var(--titulo); font-weight: 800;
+  font-size: 37pt; line-height: 1.04;
+  color: var(--creme); text-align: center;
+  position: relative;
+}
+.portada h1 span { color: var(--dourado); }
+.portada-linea {
+  width: 34mm; height: 2px; background: var(--dourado);
+  margin: 7mm auto; position: relative; opacity: .7;
+}
+.portada-sub {
+  text-align: center; font-size: 13pt; line-height: 1.5;
+  color: #C9D6C4; max-width: 105mm; margin: 0 auto;
+  position: relative;
+}
+.portada-pie { margin-top: auto; text-align: center; position: relative; }
+.portada-cuenta {
+  display: inline-block; background: var(--dourado); color: var(--verde-e);
+  font-family: var(--titulo); font-weight: 800; font-size: 11pt;
+  border-radius: 99px; padding: 7px 20px; margin-bottom: 7mm;
+}
+.portada-autor {
+  font-family: var(--titulo); font-style: italic; font-weight: 500;
+  font-size: 15pt; color: var(--creme);
+}
+.portada-nota {
+  font-size: 8pt; line-height: 1.45; color: #9FB09E;
+  margin-top: 6mm; max-width: 100mm; margin-inline: auto;
+}
+
+/* ============================================================
+   APERTURA DE CAPÍTULO
+   ============================================================ */
+.apertura {
+  break-before: page;
+  padding-top: 9mm; padding-bottom: 6mm;
+  border-bottom: 1px solid var(--linha);
+  margin-bottom: 6mm;
+}
+.apertura-num {
+  font-family: var(--titulo); font-weight: 800; font-size: 9pt;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--sage); margin-bottom: 4mm;
+}
+.apertura h2 { font-size: 23pt; font-weight: 800; margin-bottom: 3.5mm; }
+.apertura-sub { font-size: 12pt; color: var(--cinza); line-height: 1.55; }
+.apertura-cuantos {
+  display: inline-block; margin-top: 4mm;
+  background: var(--sage-cl); color: var(--verde-e);
+  font-size: 9pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  border-radius: 99px; padding: 4px 13px;
+}
+
+/* ---------- títulos dentro del texto ---------- */
+h2.seccion {
+  font-size: 19pt; font-weight: 800;
+  margin: 9mm 0 4mm; break-after: avoid;
+}
+h3.sub {
+  font-size: 13.5pt; font-weight: 700; color: var(--verde-e);
+  margin: 6mm 0 2.5mm; break-after: avoid;
+}
+h4.mini {
+  font-family: var(--sans); font-size: 9pt; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--sage);
+  margin: 5mm 0 2mm; break-after: avoid;
+}
+
+/* ============================================================
+   FICHA DE REMEDIO
+   ============================================================ */
+.remedio {
+  break-before: page;
+  break-inside: avoid;
+  background: #fff;
+  border: 1px solid var(--linha);
+  border-radius: 4mm;
+  padding: 5.5mm 5.5mm 5mm;
+  margin-bottom: 0;
+  /* La hoja útil son 178mm. La ficha más alta medía 218mm a 122mm de ancho
+     — se partía en dos y dejaba una página casi vacía por remedio. Todo lo
+     de aquí abajo está apretado para que la más alta quepa, y el min-height
+     iguala las 55 para que todas llenen su hoja. */
+  min-height: 174mm;
+  display: flex;
+  flex-direction: column;
+}
+.remedio-top { display: flex; gap: 3.5mm; align-items: baseline; margin-bottom: 1mm; }
+.remedio-num {
+  font-family: var(--titulo); font-weight: 800; font-size: 13.5pt;
+  color: var(--dourado); -webkit-text-stroke: .3px var(--realce);
+  flex: none; min-width: 10mm;
+}
+.remedio h3 {
+  font-family: var(--titulo); font-weight: 800; font-size: 13pt;
+  color: var(--verde); line-height: 1.14;
+}
+.remedio-tipo {
+  display: inline-block; margin-bottom: 2.5mm;
+  font-size: 7.5pt; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--sage); background: var(--sage-cl);
+  border-radius: 99px; padding: 2.5px 9px;
+}
+.remedio-para {
+  font-size: 10.5pt; color: var(--cinza); font-style: italic;
+  line-height: 1.45; margin-bottom: 3mm;
+  padding-left: 2.5mm; border-left: 2px solid var(--linha);
+}
+.fila { display: flex; gap: 2.5mm; margin-bottom: 2mm; font-size: 10.5pt; line-height: 1.42; }
+.fila:last-child { margin-bottom: 0; }
+.fila-et {
+  flex: none; width: 21mm;
+  font-size: 8pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--sage); padding-top: 1mm;
+}
+.fila-va { flex: 1; }
+.fila-va ul { list-style: none; }
+.fila-va li { padding-left: 3.5mm; position: relative; margin-bottom: .2mm; }
+.fila-va li::before {
+  content: '·'; position: absolute; left: .8mm; top: -.4mm;
+  color: var(--realce); font-weight: 700; font-size: 12pt;
+}
+.fila-va ol { padding-left: 4.5mm; }
+.fila-va ol li { padding-left: 0; margin-bottom: .6mm; }
+.fila-va ol li::before { content: none; }
+
+/* dosis y hora destacadas: son las dos que se buscan de reojo */
+.fila-clave .fila-va { font-weight: 600; color: var(--verde-e); }
+
+/* la advertencia cierra la ficha, al pie y con barra terracota: en las 55
+   páginas queda siempre en el mismo lugar */
+.fila-adv {
+  margin-top: auto; padding: 2.8mm 3.4mm;
+  background: var(--terra-cl);
+  border-left: 3px solid var(--terra);
+  border-radius: 0 2mm 2mm 0;
+  display: block; font-size: 10pt; line-height: 1.4;
+}
+.fila-adv .fila-et { width: auto; display: block; color: var(--terra); margin-bottom: .8mm; padding-top: 0; }
+.fila-adv strong { color: #7E3A1C; }
+
+/* ============================================================
+   CAJAS
+   ============================================================ */
+.caja {
+  break-inside: avoid;
+  background: var(--creme2); border: 1px solid var(--linha);
+  border-radius: 3mm; padding: 5mm; margin: 5mm 0;
+  font-size: 11pt; line-height: 1.55;
+}
+.caja h4 {
+  font-family: var(--titulo); font-weight: 800; font-size: 12.5pt;
+  color: var(--verde); margin-bottom: 2.5mm;
+}
+.caja-verde { background: var(--verde); border-color: var(--verde-e); color: #EDE7D9; }
+.caja-verde h4 { color: var(--dourado); }
+.caja-verde strong { color: var(--dourado); }
+
+.caja-alerta {
+  background: var(--terra-cl); border: 1.5px solid var(--terra);
+  border-radius: 3mm; padding: 5mm; margin: 5mm 0;
+  break-inside: avoid; font-size: 11pt; line-height: 1.55;
+}
+.caja-alerta h4 {
+  font-family: var(--titulo); font-weight: 800; font-size: 13pt;
+  color: #8B3A18; margin-bottom: 2.5mm;
+}
+.caja-alerta strong { color: #7E3A1C; }
+
+.caja-suave {
+  background: var(--sage-cl); border: 1px solid #C9D6C8;
+  border-radius: 3mm; padding: 5mm; margin: 5mm 0;
+  break-inside: avoid; font-size: 11pt; line-height: 1.55;
+}
+.caja-suave h4 { font-family: var(--titulo); font-weight: 800; font-size: 12.5pt; color: var(--verde-e); margin-bottom: 2.5mm; }
+
+/* ---------- listas de cuerpo ---------- */
+.lista { list-style: none; margin: 3mm 0; }
+.lista li {
+  position: relative; padding-left: 7mm; margin-bottom: 2.2mm;
+  font-size: 11.5pt; line-height: 1.55;
+}
+.lista li::before {
+  content: '✓'; position: absolute; left: 0; top: 0;
+  color: var(--sage); font-weight: 700; font-size: 11pt;
+}
+.lista-no li::before { content: '✕'; color: var(--terra); }
+.lista-pt li::before { content: '·'; font-size: 15pt; line-height: .8; }
+ol.lista-num { padding-left: 7mm; margin: 3mm 0; }
+ol.lista-num li { margin-bottom: 2.2mm; font-size: 11.5pt; line-height: 1.55; padding-left: 1mm; }
+
+/* ============================================================
+   TABLAS (Guía del Mercado)
+   ============================================================ */
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: 10pt; margin: 4mm 0;
+}
+thead { display: table-header-group; }
+tr { break-inside: avoid; }
+th {
+  background: var(--verde); color: var(--creme);
+  font-family: var(--sans); font-weight: 700; font-size: 8.5pt;
+  letter-spacing: .06em; text-transform: uppercase;
+  text-align: left; padding: 2.6mm 3mm;
+}
+td { padding: 2.6mm 3mm; border-bottom: 1px solid var(--linha); vertical-align: top; line-height: 1.45; }
+tr:nth-child(even) td { background: #fff; }
+td strong { color: var(--verde-e); }
+
+/* ============================================================
+   FICHA DE INGREDIENTE (Guía del Mercado)
+   ============================================================ */
+.ingrediente {
+  break-inside: avoid; background: #fff; border: 1px solid var(--linha);
+  border-radius: 4mm; padding: 5.5mm; margin-bottom: 5mm;
+}
+.ingrediente h3 {
+  font-family: var(--titulo); font-weight: 800; font-size: 14pt;
+  color: var(--verde); margin-bottom: 1mm;
+}
+.ingrediente .otros {
+  font-size: 9.5pt; color: var(--cinza); font-style: italic; margin-bottom: 3.5mm;
+}
+.ing-fila { display: flex; gap: 3mm; margin-bottom: 2.2mm; font-size: 10.5pt; line-height: 1.5; }
+.ing-fila .et {
+  flex: none; width: 27mm; font-size: 8.5pt; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--sage); padding-top: 1mm;
+}
+.ing-fila .va { flex: 1; }
+.precio {
+  display: inline-block; background: var(--sage-cl); color: var(--verde-e);
+  font-weight: 700; border-radius: 99px; padding: 1.5px 9px; font-size: 10pt;
+}
+.ing-ojo {
+  margin-top: 3mm; padding: 3mm 3.5mm; background: var(--creme2);
+  border-left: 3px solid var(--realce); border-radius: 0 2mm 2mm 0; font-size: 10.5pt; line-height: 1.5;
+}
+.ing-ojo b { color: var(--realce); }
+
+/* ============================================================
+   DÍA DEL RETO (Bono 1)
+   ============================================================ */
+.dia {
+  break-inside: avoid; background: #fff; border: 1px solid var(--linha);
+  border-radius: 4mm; padding: 5mm; margin-bottom: 4.5mm;
+}
+.dia-top { display: flex; align-items: center; gap: 3mm; margin-bottom: 3mm; }
+.dia-num {
+  flex: none; width: 13mm; height: 13mm; border-radius: 50%;
+  background: var(--verde); color: var(--dourado);
+  font-family: var(--titulo); font-weight: 800; font-size: 13pt;
+  display: flex; align-items: center; justify-content: center;
+}
+.dia-tit { flex: 1; }
+.dia-tit h3 { font-family: var(--titulo); font-weight: 800; font-size: 12.5pt; color: var(--verde); line-height: 1.2; }
+.dia-tit .dia-eti { font-size: 8.5pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sage); }
+.dia-marca {
+  flex: none; width: 8mm; height: 8mm; border: 1.5px solid var(--sage);
+  border-radius: 1.5mm; background: var(--creme);
+}
+.momento { display: flex; gap: 3mm; font-size: 10.5pt; line-height: 1.5; margin-bottom: 2mm; }
+.momento:last-child { margin-bottom: 0; }
+.momento .cuando {
+  flex: none; width: 21mm; font-size: 8.5pt; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--realce); padding-top: 1mm;
+}
+.momento .que { flex: 1; }
+.dia-gesto {
+  margin-top: 3mm; padding-top: 2.8mm; border-top: 1px dashed var(--linha);
+  font-size: 10.5pt; line-height: 1.5; color: var(--cinza);
+}
+.dia-gesto b { color: var(--sage); font-style: normal; }
+
+/* ============================================================
+   ÍNDICE
+   ============================================================ */
+.indice { margin-top: 5mm; }
+.indice-grupo {
+  font-family: var(--sans); font-size: 8.5pt; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--sage);
+  margin: 6mm 0 2.5mm; break-after: avoid;
+}
+.idx {
+  display: flex; align-items: baseline; gap: 2mm;
+  font-size: 11pt; line-height: 1.5; margin-bottom: 1.6mm;
+}
+.idx-t { flex: none; max-width: 92mm; }
+.idx-p { flex: none; font-weight: 700; color: var(--verde); font-variant-numeric: tabular-nums; }
+.idx-l { flex: 1; border-bottom: 1px dotted #C9BFA8; transform: translateY(-1mm); }
+.idx-cap .idx-t { font-family: var(--titulo); font-weight: 800; font-size: 12pt; color: var(--verde); }
+
+/* ============================================================
+   MISCELÁNEA
+   ============================================================ */
+.firma {
+  font-family: var(--titulo); font-style: italic; font-weight: 500;
+  font-size: 14pt; color: var(--sage); margin-top: 6mm;
+}
+.entrada {
+  font-size: 13pt; line-height: 1.55; color: var(--cinza);
+  margin-bottom: 5mm;
+}
+.entrada strong { color: var(--verde-e); }
+.capitular::first-letter {
+  font-family: var(--titulo); font-weight: 800; font-size: 34pt;
+  float: left; line-height: .84; padding: 1mm 2mm 0 0; color: var(--realce);
+}
+.regla { height: 1px; background: var(--linha); margin: 7mm 0; border: 0; }
+.filete { text-align: center; color: var(--dourado); font-size: 13pt; margin: 6mm 0; }
+.filete::before { content: '· · ·'; letter-spacing: .3em; color: var(--realce); }
+
+/* hoja de registro imprimible */
+.registro { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin-top: 4mm; }
+.registro th { font-size: 8pt; padding: 2.4mm 2mm; }
+.registro td { height: 9mm; border: 1px solid var(--linha); background: #fff; }
+
+/* marca invisible para numerar el índice en la segunda pasada */
+/* La marca tiene que seguir siendo TEXTO para que pypdf la lea: con
+   color:transparent Chromium ni la dibuja y se pierde el índice. Así que
+   va en 1pt, apretada, y del color del fondo que le toque. */
+.ancla { color: var(--creme); font-size: 1pt; line-height: 0; letter-spacing: -0.4pt; }
+.remedio .ancla, .dia .ancla, .ingrediente .ancla, .caja .ancla { color: #fff; }
+.semana .ancla { color: var(--verde); }
+
+/* colofón / cierre — se imprime aparte, con margen 0, igual que la portada */
+.cierre {
+  width: 148mm; height: 210mm;
+  background: var(--verde-e); color: #EDE7D9;
+  padding: 26mm 16mm 18mm;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.cierre h2 { color: var(--dourado); font-size: 21pt; margin-bottom: 5mm; line-height: 1.16; }
+.cierre p { color: #C9D6C4; font-size: 11pt; line-height: 1.58; margin-bottom: .6em; }
+.cierre strong { color: var(--dourado); }
+.cierre .firma { color: var(--dourado); }
+.cierre .legal {
+  margin-top: auto; padding-top: 6mm; border-top: 1px solid #4C6449;
+  font-size: 7.8pt; line-height: 1.48; color: #9FB09E;
+}
+.cierre .legal b { color: #C9D6C4; }
+
+/* ============================================================
+   TABLERO DE 30 DÍAS (Bono 1)
+   ============================================================ */
+.tablero {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 2.5mm;
+  margin: 5mm 0; break-inside: avoid;
+}
+.tablero div {
+  aspect-ratio: 1; border: 1px solid var(--linha); border-radius: 2mm;
+  background: #fff; display: flex; align-items: center; justify-content: center;
+  font-family: var(--titulo); font-weight: 700; font-size: 10pt; color: var(--cinza);
+}
+.tablero div.sem1 { border-color: #C9D6C8; }
+.tablero div.sem2 { border-color: #BFD0C6; }
+.tablero div.sem3 { border-color: #B5CAC4; }
+.tablero div.sem4 { border-color: #AAC4C2; }
+
+/* semana: portadilla corta, sin salto de hoja completo */
+.semana {
+  break-before: page; break-inside: avoid;
+  background: var(--verde); color: #EDE7D9;
+  border-radius: 4mm; padding: 6mm; margin-bottom: 5mm;
+}
+.semana .eti {
+  font-size: 8.5pt; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--dourado); margin-bottom: 2mm;
+}
+.semana h2 { color: #F5F0E3; font-size: 19pt; margin-bottom: 3mm; }
+.semana p { font-size: 10.5pt; line-height: 1.55; color: #C9D6C4; }
+.semana strong { color: var(--dourado); }
+.semana .compra {
+  margin-top: 4mm; padding-top: 3.5mm; border-top: 1px solid #4C6449;
+  font-size: 10pt; color: #C9D6C4;
+}
+.semana .compra b { color: var(--dourado); }
+
+/* ============================================================
+   RELOJ DE 10 MINUTOS y TARJETA RECORTABLE (Bono 3)
+   ============================================================ */
+.paso {
+  display: flex; gap: 4mm; margin-bottom: 4mm; break-inside: avoid;
+}
+.paso-min {
+  flex: none; width: 17mm; text-align: right;
+  font-family: var(--titulo); font-weight: 800; font-size: 11pt;
+  color: var(--terra); padding-top: .6mm;
+}
+.paso-cuerpo {
+  flex: 1; padding-left: 4mm; border-left: 2px solid var(--linha);
+  padding-bottom: 1mm;
+}
+.paso-cuerpo h4 {
+  font-family: var(--titulo); font-weight: 800; font-size: 12pt;
+  color: var(--verde); margin-bottom: 1.2mm;
+}
+.paso-cuerpo p { font-size: 11pt; line-height: 1.5; }
+
+/* tarjeta para recortar y pegar en la cocina */
+.tarjeta {
+  break-inside: avoid; margin: 6mm 0;
+  border: 1.5px dashed var(--sage); border-radius: 3mm;
+  padding: 6mm; background: #fff;
+}
+.tarjeta h4 {
+  font-family: var(--titulo); font-weight: 800; font-size: 13pt;
+  color: var(--verde); margin-bottom: 3mm; text-align: center;
+}
+.tarjeta .tijera {
+  text-align: center; font-size: 8.5pt; color: var(--cinza);
+  letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2mm;
+}
+.tarjeta ol { padding-left: 6mm; }
+.tarjeta li { font-size: 11pt; line-height: 1.5; margin-bottom: 1.6mm; }
+
+/* comparación antojo / azúcar baja */
+.dos { display: flex; gap: 4mm; break-inside: avoid; margin: 5mm 0; }
+.dos > div { flex: 1; border-radius: 3mm; padding: 5mm; }
+.dos .col-antojo { background: var(--sage-cl); border: 1px solid #C9D6C8; }
+.dos .col-baja { background: var(--terra-cl); border: 1.5px solid var(--terra); }
+.dos h4 {
+  font-family: var(--titulo); font-weight: 800; font-size: 12pt; margin-bottom: 2.5mm;
+}
+.dos .col-antojo h4 { color: var(--verde-e); }
+.dos .col-baja h4 { color: #8B3A18; }
+.dos ul { list-style: none; }
+.dos li {
+  font-size: 10pt; line-height: 1.45; margin-bottom: 1.8mm;
+  padding-left: 4mm; position: relative;
+}
+.dos li::before { content: '·'; position: absolute; left: 0; font-weight: 700; font-size: 13pt; line-height: .8; }

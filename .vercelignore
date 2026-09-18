@@ -1,0 +1,12 @@
+# Lo que NO debe subir al sitio.
+
+# El generador de los PDFs: codigo fuente, fuentes tipograficas y la
+# carpeta out/ con los mismos PDFs bajo nombres adivinables. Vercel no
+# ejecuta Python, asi que estos archivos se servirian TAL CUAL, y
+# /entregables/out/Azucar-en-Equilibrio.pdf seria el producto entero
+# gratis para quien escriba la ruta. Los PDFs que si se sirven estan en
+# descargas/, detras de un segmento aleatorio.
+entregables/
+
+# Restos del sitio viejo, pesados y sin uso.
+cosmopack-site.zip
