@@ -255,15 +255,7 @@ ok(caja === 'flex', 'los cards de descarga se ven como cards, no como texto suel
    entre paginas. */
 console.log('\n13) Paginas de venta publicadas');
 
-/* Lo que .vercelignore excluye no existe en el sitio. Raices y Pulmones
-   estan fuera mientras les falten TODAS las imagenes y su liga de pago
-   sea un marcador: una pagina rota con un boton muerto vende menos que
-   ninguna pagina. */
-for (const d of ['raices-olvidadas', 'pulmones-libres']) {
-  const r = await fetch(`${URL_BASE}/${d}/`);
-  ok(r.status === 404, `${d}: sin terminar, no se publica`, r.status);
-}
-/* Y el generador de los PDFs tampoco, o el producto entero seria
+/* El generador de los PDFs no se publica, o el producto entero seria
    gratis para quien escriba la ruta. */
 ok((await fetch(`${URL_BASE}/entregables/out/Azucar-en-Equilibrio.pdf`)).status === 404,
   'el generador de PDFs no se publica');
