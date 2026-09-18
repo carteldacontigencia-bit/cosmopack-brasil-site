@@ -147,7 +147,7 @@ node test/mock-xpag.mjs &      # mock del API de XPag en :8787
 node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
 node test/api.test.mjs         # 60 · los seis handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
-node test/checkout.e2e.mjs     # 53 · la pantalla, la entrega y la politica
+node test/checkout.e2e.mjs     # 58 · la pantalla, la entrega y la politica
 ```
 
 El mock reproduce las respuestas de la documentación campo por campo,
@@ -158,9 +158,25 @@ con los nombres que el código lee. Eso se confirma corriendo, desde una
 máquina con salida a internet, una petición al sandbox y comparando la
 respuesta con `test/mock-xpag.mjs`.
 
-## Nada de CSS dentro del HTML
+## La política estricta sólo cubre donde hay dinero
 
-La política del sitio declara `style-src 'self'`, sin `'unsafe-inline'`.
+`/pago`, `/checkout.html`, `/gracias-*` y `/api/*` llevan
+`Content-Security-Policy`. El resto del sitio —las páginas de venta y el
+sitio viejo de Cosmo Pack— **no**, y es a propósito: llevan CSS y
+JavaScript dentro del HTML, así que la política estricta las dejaría sin
+formato. Todas reciben igual las cabeceras que no rompen nada (HSTS,
+nosniff, Referrer-Policy, X-Frame-Options, Permissions-Policy).
+
+Ampliarla al resto exige reescribir esas páginas: la de Azúcar tiene 23
+atributos `style=` y un `<script>` en línea; el sitio de Cosmo Pack,
+otros 4 y uno. Es trabajo real, no una línea de configuración.
+
+Dos pruebas vigilan las dos mitades: que las pantallas de pago sirvan la
+política, y que las páginas de venta **no** la reciban.
+
+## Nada de CSS dentro del HTML (en las pantallas de pago)
+
+La política de esas pantallas declara `style-src 'self'`, sin `'unsafe-inline'`.
 Un bloque `<style>` o un atributo `style=` en el HTML queda **bloqueado
 por el navegador** y la página sale sin formato. Pasó con la página de
 entrega: en local se veía perfecta y publicada eran links sueltos.

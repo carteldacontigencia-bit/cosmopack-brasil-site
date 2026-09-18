@@ -75,6 +75,9 @@ http.createServer(async (req, res) => {
   }
 
   let f = url.pathname === '/' || url.pathname === '/pago' ? '/checkout.html' : url.pathname;
+  /* Vercel sirve /carpeta/ como /carpeta/index.html. Sin esto las
+     paginas de venta no se podian probar aqui: daban 404. */
+  if (f.endsWith('/')) f += 'index.html';
   const abs = path.join(RAIZ, path.normalize(f).replace(/^(\.\.[/\\])+/, ''));
   try {
     const buf = fs.readFileSync(abs);

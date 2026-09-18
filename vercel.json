@@ -16,10 +16,6 @@
       "source": "/(.*)",
       "headers": [
         {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; script-src 'self' https://connect.facebook.net; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://static.muwe.mx https://www.facebook.com; connect-src 'self' https://www.facebook.com; object-src 'none'; upgrade-insecure-requests"
-        },
-        {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
         },
@@ -42,6 +38,15 @@
         {
           "key": "Cross-Origin-Opener-Policy",
           "value": "same-origin"
+        }
+      ]
+    },
+    {
+      "source": "/(checkout.html|pago|gracias-.*|api/.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; script-src 'self' https://connect.facebook.net; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://static.muwe.mx https://www.facebook.com; connect-src 'self' https://www.facebook.com; object-src 'none'; upgrade-insecure-requests"
         }
       ]
     },

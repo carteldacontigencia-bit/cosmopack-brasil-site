@@ -203,12 +203,29 @@ ok(desnudo.status === 404, 'sin el segmento aleatorio no se baja nada', desnudo.
    HTML y la politica declara style-src 'self', sin 'unsafe-inline'. En
    local se veia perfecta. */
 console.log('\n12) Politica de seguridad');
+
+/* Donde hay dinero: politica estricta, y las paginas escritas para
+   cumplirla. */
 for (const ruta of ['/pago', '/gracias-e41b9fb5ec65061a.html']) {
   const r = await fetch(URL_BASE + ruta);
   const html = await r.text();
   ok(!/<style[\s>]/i.test(html), `${ruta}: sin bloque <style> en el HTML`);
   ok(!/\sstyle=["']/i.test(html), `${ruta}: sin atributos style=`);
-  ok(Boolean(r.headers.get('content-security-policy')), `${ruta}: sirve la politica`);
+  ok(Boolean(r.headers.get('content-security-policy')), `${ruta}: sirve la politica estricta`);
+}
+ok(Boolean((await fetch(`${URL_BASE}/api/config`)).headers.get('content-security-policy')),
+  '/api/config: sirve la politica estricta');
+
+/* Y donde NO: las paginas de venta y el sitio viejo llevan CSS y
+   JavaScript dentro del HTML. Aplicarles la politica estricta las deja
+   sin formato -- ya paso con la pagina de entrega. Reescribirlas es
+   posible; hacerlo a escondidas con una cabecera, no. */
+for (const ruta of ['/azucar-en-equilibrio/', '/index.html.html']) {
+  const r = await fetch(URL_BASE + ruta);
+  ok(r.headers.get('content-security-policy') === null,
+    `${ruta}: sin politica estricta, no se rompe`);
+  ok(r.headers.get('x-content-type-options') === 'nosniff',
+    `${ruta}: pero si las cabeceras que no rompen nada`);
 }
 
 /* Y la prueba definitiva: que los estilos LLEGUEN a aplicarse. */
