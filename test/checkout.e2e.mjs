@@ -322,6 +322,73 @@ console.log('\n12b) El precio coincide en los dos lados');
   ok(ancla && Number(ancla) > Number(PRECIO), 'el precio tachado es mayor que el que se cobra', { tachado: ancla, cobrado: PRECIO });
 }
 
+/* ── 12c. Order bumps en pantalla ── */
+console.log('\n12c) Order bumps');
+{
+  const ctxB = await nav.newContext({ viewport: { width: 390, height: 844 } });
+  const pB = await ctxB.newPage();
+  await pB.goto(`${URL_BASE}/pago`, { waitUntil: 'load' });
+
+  const cajas = await pB.$$('#bumps input[type=checkbox]');
+  ok(cajas.length === 2, 'se ensenan dos extras, no tres', cajas.length);
+
+  /* Marcados de origen convierten mas y aqui son un problema: con
+     transferencia, un importe distinto al esperado ya dentro del app del
+     banco es abandono, y ademas es cobro no autorizado expresamente. */
+  const marcadas = await pB.$$eval('#bumps input:checked', (x) => x.length);
+  ok(marcadas === 0, 'ninguno viene marcado de origen', marcadas);
+
+  ok((await pB.textContent('#ofTotal')).includes(PRECIO), 'el total empieza en el precio base');
+
+  await cajas[0].check();
+  const conUno = (await pB.textContent('#ofTotal')).trim();
+  ok(conUno.includes('229'), 'al marcar, el total sube en pantalla', conUno);
+
+  await cajas[0].uncheck();
+  ok((await pB.textContent('#ofTotal')).includes(PRECIO), 'al desmarcar, vuelve');
+
+  /* Y lo que manda es el servidor: se marca uno y se comprueba el
+     importe que llega a la pantalla de pago. */
+  await cajas[1].check();
+  await pB.fill('#name', 'Ana Lopez');
+  await pB.click('#enviar');
+  await pB.waitForSelector('#secPago:not([hidden])', { timeout: 8000 });
+  const importe = (await pB.textContent('#vImporte')).trim();
+  ok(importe.includes('199'), 'la referencia se genera por el total con extra', importe);
+
+  /* Camino completo con extra: pagar y recibir los archivos de mas. */
+  await pB.click('button.sim[data-outcome="paid"]');
+  await pB.waitForSelector('#secOk:not([hidden])', { timeout: 15000 });
+  const href = await pB.getAttribute('#confBtn', 'href');
+  const r = await fetch(URL_BASE + href, { redirect: 'manual' });
+  const destino = r.headers.get('location') || '';
+  ok(/[?&]x=/.test(destino), 'el enlace de entrega lleva el extra comprado');
+
+  /* La pagina de entrega tiene que ensenarlo, y el archivo bajar. */
+  await pB.goto(destino, { waitUntil: 'load' });
+  const extras = await pB.$$eval('#extras a.archivo', (as) => as.map((a) => a.getAttribute('href')));
+  ok(extras.length === 1, 'la pagina de entrega ensena un extra', extras.length);
+  const pdf = await fetch(URL_BASE + extras[0]);
+  const buf = Buffer.from(await pdf.arrayBuffer());
+  ok(pdf.status === 200 && buf.slice(0, 5).toString() === '%PDF-',
+    'y el archivo baja de verdad', `${pdf.status} · ${(buf.length / 1048576).toFixed(1)} MB`);
+
+  /* Sin el parametro, la pagina no ensena nada de mas. */
+  await pB.goto(`${URL_BASE}/gracias-e41b9fb5ec65061a.html`, { waitUntil: 'load' });
+  ok(!(await pB.isVisible('#cajaExtras')), 'sin comprar extras, la pagina no los ensena');
+
+  /* Y el HTML de la pagina NO puede llevar las rutas escritas, o
+     cualquiera que compre lo principal se las lleva gratis. */
+  const html = await (await fetch(`${URL_BASE}/gracias-e41b9fb5ec65061a.html`)).text();
+  for (const carpeta of ['c7f2a91e40b8d356', '5b04e8c2d1f7a690', '9a3e17d6b085c4f2']) {
+    ok(!html.includes(carpeta), `la ruta del extra no esta en el HTML (${carpeta.slice(0, 6)}...)`);
+  }
+  const js = await (await fetch(`${URL_BASE}/assets/extras.js`)).text();
+  ok(!/c7f2a91e|5b04e8c2|9a3e17d6/.test(js), 'ni en el JavaScript de la pagina');
+
+  await ctxB.close();
+}
+
 /* ── 13a. Una cobranza del sandbox no puede sobrevivir a produccion ──
    Paso de verdad: al quitar XPAG_SANDBOX, el navegador seguia
    ensenando la cobranza vieja guardada en el aparato -- con la CLABE de

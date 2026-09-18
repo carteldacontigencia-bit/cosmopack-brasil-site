@@ -8,9 +8,31 @@
 import { createHmac, timingSafeEqual, randomUUID } from 'node:crypto';
 import { cfg, requireConfig } from './env.js';
 
-export function nuevoExternalId(ofertaId) {
+/* Los bumps comprados van DENTRO del external_id, y el external_id va
+   firmado. Eso es lo que sustituye a la base de datos: cuando la
+   persona vuelve horas despues con su enlace, el propio enlace dice que
+   compro, y la firma impide que le agregue uno a mano.
+
+   Las iniciales, no los nombres, para que quepa: C=corazon, N=noches,
+   M=manos. Van en orden fijo y sin repetir. */
+const INICIAL = { corazon: 'C', noches: 'N', manos: 'M' };
+const POR_INICIAL = Object.fromEntries(
+  Object.entries(INICIAL).map(([id, l]) => [l, id]));
+
+export function nuevoExternalId(ofertaId, bumps = []) {
   const r = randomUUID().replace(/-/g, '').slice(0, 12);
-  return `${ofertaId}-${Date.now().toString(36)}-${r}`.toUpperCase();
+  const extra = bumps.map((b) => INICIAL[b]).filter(Boolean).join('');
+  const sufijo = extra ? `-X${extra}` : '';
+  return `${ofertaId}-${Date.now().toString(36)}-${r}${sufijo}`.toUpperCase();
+}
+
+/* Lee del external_id que bumps se pagaron. Si alguien edita el enlace
+   para agregarse uno, la firma deja de cuadrar y no entra nada. */
+export function bumpsDeExternalId(externalId) {
+  const m = /-X([CNM]+)$/.exec(String(externalId || ''));
+  if (!m) return [];
+  const ids = [...new Set(m[1].split(''))].map((l) => POR_INICIAL[l]).filter(Boolean);
+  return Object.keys(INICIAL).filter((id) => ids.includes(id));
 }
 
 const b64u = (b) => Buffer.from(b).toString('base64url');

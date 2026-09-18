@@ -4,7 +4,7 @@
 import { guard, fallo } from './_lib/guard.js';
 import { cfg, isSandbox } from './_lib/env.js';
 import { xpag, claveDeError, REINTENTABLES } from './_lib/xpag.js';
-import { getOferta, publica } from './_lib/offers.js';
+import { getOferta, publica, bumpsLimpios, totalCon, BUMPS } from './_lib/offers.js';
 import { nuevoExternalId, tokenDeAcceso } from './_lib/order.js';
 import { nombreLimpio, metodoLimpio, cayoEnLaTrampa } from './_lib/sanitize.js';
 
@@ -33,7 +33,13 @@ export default async function handler(req, res) {
   const oferta = getOferta(body.offer);
   if (!oferta) return fallo(res, 400, 'err_offer');
 
-  const externalId = nuevoExternalId(oferta.id);
+  /* El navegador manda ids de bump, nunca importes. Lo que no conoce
+     esta tabla se ignora en silencio: no hay nada que explicarle a quien
+     esta probando. */
+  const bumps = bumpsLimpios(body.bumps);
+  const importe = totalCon(oferta, bumps);
+
+  const externalId = nuevoExternalId(oferta.id, bumps);
 
   let token;
   try { token = tokenDeAcceso(externalId); }
@@ -48,9 +54,11 @@ export default async function handler(req, res) {
      cobranza y el pagador no puede pagar otra cantidad. */
   const payload = {
     currency: oferta.currency,
-    amount: oferta.amount,
+    amount: importe,
     external_id: externalId,
-    description: oferta.descripcion,
+    description: bumps.length
+      ? `${oferta.descripcion} + ${bumps.map((b) => BUMPS[b].descripcion).join(' + ')}`
+      : oferta.descripcion,
     ...(webhookUrl ? { webhook_url: webhookUrl } : {}),
   };
   if (metodo === 'oxxo') {
@@ -95,7 +103,8 @@ export default async function handler(req, res) {
     transaction_id: d.transaction_id || d.request_number || null,
     access_token: token,
     offer: publica(oferta),
-    amount: oferta.amount,
+    bumps,
+    amount: importe,
     currency: oferta.currency,
     /* La documentacion pide mostrar banco y beneficiario junto a la CLABE:
        que el pagador vea STP y el nombre sube la conversion del SPEI. */

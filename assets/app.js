@@ -24,7 +24,7 @@ const CLAVE_ORDEN = 'vm_orden';
 const CLAVE_BANCO = 'vm_banco';
 const VIDA_MS = 24 * 60 * 60 * 1000;
 
-let cfg = { brand: null, pixel_id: null, ref_hours: 24, sandbox: false, offers: [] };
+let cfg = { brand: null, pixel_id: null, ref_hours: 24, sandbox: false, offers: [], bumps: [] };
 let oferta = null;
 let orden = null;
 let pixel = crearPixel(null);
@@ -97,6 +97,7 @@ async function arrancar() {
   if (oferta) {
     $('ofNombre').textContent = t(oferta.nombreClave);
     $('ofTotal').textContent = pesos(oferta.amount, oferta.currency);
+    pintarBumps();
   }
 
   const guardada = leerOrden();
@@ -136,7 +137,7 @@ $('form').addEventListener('submit', async (ev) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        offer: oferta?.id, name: nombre, method: metodo,
+        offer: oferta?.id, name: nombre, method: metodo, bumps: bumpsMarcados(),
         website: $('website').value,
       }),
     });
@@ -362,6 +363,64 @@ document.querySelectorAll('button.sim').forEach((b) => {
     botones.forEach((x) => { x.disabled = false; });
   });
 });
+
+/* ── Order bumps ─────────────────────────────────────
+   Van DESMARCADOS a proposito. Marcados de origen convierten mas, pero
+   aqui se paga por transferencia: ver un importe distinto al esperado ya
+   dentro del app del banco es abandono, y no te enteras de por que. En
+   Mexico ademas es cobro no autorizado expresamente, que es tema de
+   PROFECO.
+
+   El total de la pantalla es solo informativo. Quien cobra es el
+   servidor, que suma de su propia tabla: el navegador manda ids, nunca
+   cantidades. */
+function bumpsMarcados() {
+  return [...document.querySelectorAll('#bumps input:checked')].map((i) => i.value);
+}
+
+function totalConBumps() {
+  const extra = bumpsMarcados()
+    .reduce((s, id) => s + (cfg.bumps.find((b) => b.id === id)?.amount || 0), 0);
+  return (oferta?.amount || 0) + extra;
+}
+
+function pintarBumps() {
+  const cont = $('bumps');
+  if (!cont || !Array.isArray(cfg.bumps) || !cfg.bumps.length || !oferta) return;
+  cont.textContent = '';
+
+  for (const b of cfg.bumps) {
+    const lab = document.createElement('label');
+    lab.className = 'bump';
+
+    const inp = document.createElement('input');
+    inp.type = 'checkbox';
+    inp.value = b.id;
+    inp.checked = false;
+
+    const txt = document.createElement('span');
+    const nombre = document.createElement('b');
+    nombre.textContent = t(b.nombreClave);
+    const mas = document.createElement('span');
+    mas.className = 'bump-mas';
+    mas.textContent = '  +' + pesos(b.amount, oferta.currency);
+    nombre.appendChild(mas);
+    const desc = document.createElement('span');
+    desc.className = 'bump-txt';
+    desc.textContent = t(b.textoClave);
+    txt.append(nombre, desc);
+
+    inp.addEventListener('change', () => {
+      $('ofTotal').textContent = pesos(totalConBumps(), oferta.currency);
+    });
+
+    lab.append(inp, txt);
+    cont.appendChild(lab);
+  }
+
+  $('lBumps').textContent = t('l_bumps');
+  ver($('fsBumps'));
+}
 
 /* ── Consulta de estado ─────────────────────────────────────────── */
 function arrancarConsulta() {

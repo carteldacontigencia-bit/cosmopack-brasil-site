@@ -360,6 +360,71 @@ console.log('\n20b) El diagnostico dice a donde apunta PUBLIC_URL');
   process.env.SITE_ORIGIN = guardado;
 }
 
+console.log('\n20c) Order bumps');
+{
+  const { BUMPS, totalCon, OFERTAS } = await import('../api/_lib/offers.js');
+  const { bumpsDeExternalId } = await import('../api/_lib/order.js');
+
+  /* El importe lo pone el servidor sumando de su tabla. */
+  const q1 = res();
+  await create(req('POST', { offer: 'principal', name: 'Ana Lopez', method: 'spei',
+                             bumps: ['corazon', 'noches'] }), q1);
+  const esperado = totalCon(OFERTAS.principal, ['corazon', 'noches']);
+  ok(q1.body.amount === esperado, 'cobra la suma de la tabla del servidor',
+    { cobrado: q1.body.amount, esperado });
+  ok(q1.body.bumps.join(',') === 'corazon,noches', 'devuelve cuales se compraron', q1.body.bumps);
+
+  /* Lo que el navegador mande que no este en la tabla, se ignora. */
+  const q2 = res();
+  await create(req('POST', { offer: 'principal', name: 'Ana Lopez', method: 'spei',
+                             bumps: ['corazon', 'inventado', 'CORAZON', 42, null] }), q2);
+  ok(q2.body.bumps.join(',') === 'corazon', 'ignora ids inventados y no repite', q2.body.bumps);
+  ok(q2.body.amount === OFERTAS.principal.amount + BUMPS.corazon.amount,
+    'y cobra solo el que existe', q2.body.amount);
+
+  /* Mandar un importe desde el navegador no cambia nada. */
+  const q3 = res();
+  await create(req('POST', { offer: 'principal', name: 'Ana Lopez', method: 'spei',
+                             bumps: ['corazon'], amount: 1, price: 1 }), q3);
+  ok(q3.body.amount === OFERTAS.principal.amount + BUMPS.corazon.amount,
+    'un importe mandado por el cliente se ignora', q3.body.amount);
+
+  /* Lo comprado viaja dentro del external_id firmado. */
+  ok(bumpsDeExternalId(q1.body.external_id).join(',') === 'corazon,noches',
+    'el external_id recuerda los bumps, sin base de datos');
+
+  /* ── Lo que de verdad importa: que no se cuelen ──
+     Alguien que compro solo lo principal edita su enlace para agregarse
+     un bump. La firma tiene que romperse. */
+  const qSolo = res();
+  await create(req('POST', { offer: 'principal', name: 'Ana Lopez', method: 'spei' }), qSolo);
+  await simular({ transaction_id: qSolo.body.transaction_id, outcome: 'paid' });
+
+  const limpio = res();
+  await access(req('GET', null, { t: qSolo.body.access_token }), limpio);
+  ok(limpio.code === 302, 'quien pago lo principal entra', limpio.code);
+  ok(!/[?&]x=/.test(limpio.headers.Location || ''),
+    'y NO recibe la ruta de ningun extra', limpio.headers.Location);
+
+  const idForjado = qSolo.body.external_id + 'M';
+  const tokenForjado = Buffer.from(idForjado).toString('base64url')
+    + '.' + qSolo.body.access_token.split('.')[1];
+  const forjado = res();
+  await access(req('GET', null, { t: tokenForjado }), forjado);
+  ok(forjado.code !== 302, 'agregarse un bump a mano rompe la firma y no entrega nada', forjado.code);
+
+  /* Y quien SI lo compro, recibe la ruta. */
+  await simular({ transaction_id: q1.body.transaction_id, outcome: 'paid' });
+  const conBump = res();
+  await access(req('GET', null, { t: q1.body.access_token }), conBump);
+  const loc = conBump.headers.Location || '';
+  ok(/[?&]x=/.test(loc), 'quien compro extras recibe su lista', loc.slice(0, 60) + '...');
+  const payload = JSON.parse(Buffer.from(loc.split('x=')[1], 'base64url').toString());
+  ok(payload.length === 2, 'con los dos extras', payload.map((p) => p.t));
+  ok(payload.every((p) => p.r.startsWith('descargas/') && p.r.includes('/')),
+    'cada uno con su ruta de descarga');
+}
+
 console.log('\n21) El simulador no existe fuera de sandbox');
 {
   /* Esta suite corre SIN XPAG_SANDBOX. El endpoint tiene que responder

@@ -95,6 +95,41 @@ Devuelve la respuesta cruda de XPag, y sólo ahí: es su trabajo. Si
 `/sandbox/simulate` espera otros nombres de campo, se ve en pantalla en
 lugar de fallar en silencio.
 
+## Order bumps: por qué van antes del pago
+
+Con SPEI y OXXO **no existe el upsell de un clic**. Cobrar otra vez
+significa que la persona vuelva al app del banco, o peor, que vuelva al
+OXXO. Eso no lo hace nadie, y no te enteras: parece que "no pegó".
+
+Por eso todo lo que sube el ticket ocurre **antes de generar la
+referencia**, que es el único momento en que cambiar el importe cuesta
+cero.
+
+**Van desmarcados.** Marcados convierten más, y aquí cuestan caro: ver
+en el app del banco un importe distinto al esperado es abandono en el
+último paso, y en México un cobro no autorizado expresamente es materia
+de PROFECO. Además el público es de 45 a 70 años, el que más llama a
+reclamar un cargo que no entendió — y esa llamada la contestas tú.
+
+**Se enseñan dos, no tres.** Tres marean y tumban la conversión de la
+oferta principal, que es la que paga el anuncio. `BUMPS_VISIBLES` decide
+cuáles; el tercero sirve para el rescate de quien no pagó.
+
+### Qué compró, sin base de datos
+
+Los bumps se guardan **dentro del `external_id`**, que va firmado:
+`PRINCIPAL-MU7B73RS-37A554460659-XCN`. Al volver con su enlace, el
+propio enlace dice qué compró. Agregarse una letra a mano rompe la firma
+y no entrega nada — hay una prueba que lo intenta.
+
+### La ruta es el permiso
+
+Cada extra vive en `descargas/<segmento aleatorio>/`. Esa ruta **no
+aparece en el HTML ni en el JavaScript** de la página de entrega: la
+manda `/api/access` en la redirección, y sólo a quien pagó. Quien compró
+sólo lo principal nunca la ve y no puede adivinarla. Cuatro pruebas
+vigilan que ninguna ruta se filtre al código de la página.
+
 ## Sin base de datos: cómo funciona la entrega
 
 El enlace de acceso es `/api/access?t=<external_id>.<firma HMAC>`.
@@ -178,7 +213,7 @@ de crear la cobranza.
 ```bash
 node test/mock-xpag.mjs &      # mock del API de XPag en :8787
 node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
-node test/api.test.mjs         # 70 · los handlers
+node test/api.test.mjs         # 82 · los handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
 node test/checkout.e2e.mjs     # 89 · la pantalla, la entrega, la politica
 ```

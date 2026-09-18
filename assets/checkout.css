@@ -185,3 +185,21 @@ legend { font-weight: 600; font-size: .9rem; color: var(--verde); margin-bottom:
   .tarjeta, .panel, .guarda, .benef, .exito { padding: 20px 16px; }
   .fila { flex-direction: column; }
 }
+
+
+/* ── Order bumps ─────────────────────────────────────────────────
+   Desmarcados de origen: con transferencia, un importe distinto al
+   esperado ya dentro del app del banco es abandono seguro -- y en
+   Mexico, cobro no autorizado expresamente es tema de PROFECO. */
+.bumps { display: grid; gap: 10px; }
+.bump {
+  display: flex; gap: 12px; align-items: flex-start; cursor: pointer;
+  border: 2px dashed var(--oro); border-radius: 12px;
+  background: #FFFCF4; padding: 14px 16px;
+}
+.bump:hover { background: #FFF8E8; }
+.bump input { width: 22px; height: 22px; flex: none; margin-top: 2px; accent-color: var(--verde); }
+.bump b { display: block; font-family: var(--display); color: var(--verde); font-size: .98rem; }
+.bump .bump-txt { font-size: .86rem; color: var(--tinta-suave); display: block; margin-top: 3px; }
+.bump .bump-mas { font-weight: 700; color: var(--verde); white-space: nowrap; }
+.bump input:checked ~ span .bump-mas { color: var(--exito); }

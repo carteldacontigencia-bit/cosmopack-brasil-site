@@ -3,7 +3,7 @@
    HTML de cualquier sitio). Aquí nunca sale una credencial. */
 import { guard } from './_lib/guard.js';
 import { cfg, isSandbox, estadoDelEntorno } from './_lib/env.js';
-import { OFERTAS, publica } from './_lib/offers.js';
+import { OFERTAS, publica, BUMPS, BUMPS_VISIBLES, bumpPublico } from './_lib/offers.js';
 
 const hostDe = (u) => { try { return new URL(u).host; } catch { return null; } };
 
@@ -39,5 +39,9 @@ export default async function handler(req, res) {
        política nuestra, configurable, no un dato del gateway. */
     ref_hours: Number(process.env.REF_HOURS || 24),
     offers: Object.values(OFERTAS).map(publica),
+    /* Solo los que se ensenan en el checkout, y solo su id, importe y
+       claves de texto. La ruta del archivo NO sale de aqui: esa la
+       manda /api/access, y solo a quien pago. */
+    bumps: BUMPS_VISIBLES.filter((id) => BUMPS[id]).map((id) => bumpPublico(BUMPS[id])),
   });
 }

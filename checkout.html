@@ -68,6 +68,16 @@
         </div>
       </fieldset>
 
+      <!-- Los extras. Se marcan ANTES de generar la referencia porque es
+           el unico momento en que subir el importe no cuesta nada: con
+           SPEI y OXXO, despues del pago habria que transferir otra vez.
+           Van DESMARCADOS: con transferencia, ver un importe distinto al
+           esperado ya dentro del app del banco es abandono seguro. -->
+      <fieldset id="fsBumps" hidden>
+        <legend id="lBumps"></legend>
+        <div class="bumps" id="bumps"></div>
+      </fieldset>
+
       <button class="btn" id="enviar" type="submit"></button>
       <p class="err centro" id="errGeneral" role="alert"></p>
       <p class="legal" id="legalForm"></p>

@@ -11,7 +11,9 @@ process.env.ACCESS_SECRET ||= 'secreto-de-prueba-largo-y-aleatorio';
 process.env.WEBHOOK_KEY ||= 'clave-de-webhook-de-prueba';
 process.env.PUBLIC_URL ||= 'http://127.0.0.1:8080';
 process.env.BRAND_NAME ||= 'Marca de Prueba';
-process.env.PRODUCT_URL ||= 'http://127.0.0.1:8080/gracias-prueba.html';
+/* La pagina de entrega REAL, no una de mentira: asi las pruebas ven lo
+   mismo que ve la compradora, incluidos los extras. */
+process.env.PRODUCT_URL ||= 'http://127.0.0.1:8080/gracias-e41b9fb5ec65061a.html';
 process.env.REF_HOURS ||= '24';
 /* Las pruebas se repiten desde 127.0.0.1: sin esto el limitador las frena. */
 process.env.RATE_CREATE ||= '500';

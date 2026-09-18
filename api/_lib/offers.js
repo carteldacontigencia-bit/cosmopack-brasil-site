@@ -17,6 +17,78 @@ export const OFERTAS = {
   },
 };
 
+/* ── Order bumps ──────────────────────────────────────────────────
+   Extras que se marcan ANTES de generar la referencia. Con SPEI y OXXO
+   ese es el unico momento en que subir el importe no cuesta nada: la
+   persona todavia no ha tecleado nada en el banco. Un upsell despues
+   del pago la obligaria a hacer una segunda transferencia, o a volver
+   al OXXO -- y eso no lo hace nadie.
+
+   El importe vive aqui, igual que el de la oferta principal y por el
+   mismo motivo. El navegador manda ids, nunca cantidades.
+
+   'ruta' es la carpeta de descarga, con su segmento aleatorio: saber la
+   ruta ES el permiso. Por eso no aparece nunca en el HTML de la pagina
+   de entrega -- se la manda /api/access solo a quien pago. */
+export const BUMPS = {
+  corazon: {
+    id: 'corazon',
+    amount: 89,
+    nombreClave: 'bump_corazon_nombre',
+    textoClave: 'bump_corazon_texto',
+    descripcion: 'Recetario del Corazon',
+    archivo: 'Recetario-del-Corazon.pdf',
+    ruta: 'descargas/c7f2a91e40b8d356',
+    paginas: 41,
+  },
+  noches: {
+    id: 'noches',
+    amount: 59,
+    nombreClave: 'bump_noches_nombre',
+    textoClave: 'bump_noches_texto',
+    descripcion: 'Las Noches de la Abuela',
+    archivo: 'Las-Noches-de-la-Abuela.pdf',
+    ruta: 'descargas/5b04e8c2d1f7a690',
+    paginas: 29,
+  },
+  manos: {
+    id: 'manos',
+    amount: 59,
+    nombreClave: 'bump_manos_nombre',
+    textoClave: 'bump_manos_texto',
+    descripcion: 'Manos y Rodillas',
+    archivo: 'Manos-y-Rodillas.pdf',
+    ruta: 'descargas/9a3e17d6b085c4f2',
+    paginas: 29,
+  },
+};
+
+/* Cuales se ENSENAN en el checkout. Tres marean y tumban la conversion
+   de la oferta principal, que es la que paga el anuncio: se dejan dos y
+   se rotan. El tercero sirve para el rescate de quien no pago. */
+export const BUMPS_VISIBLES = ['corazon', 'noches'];
+
+/* Acepta solo ids conocidos, sin repetir y en orden fijo: asi el
+   external_id que se arma con ellos es siempre el mismo para la misma
+   compra. */
+export function bumpsLimpios(lista) {
+  if (!Array.isArray(lista)) return [];
+  const vistos = new Set();
+  for (const x of lista) {
+    const id = String(x || '').toLowerCase();
+    if (BUMPS[id]) vistos.add(id);
+  }
+  return Object.keys(BUMPS).filter((id) => vistos.has(id));
+}
+
+export const totalCon = (oferta, ids) =>
+  oferta.amount + ids.reduce((s, id) => s + BUMPS[id].amount, 0);
+
+export const bumpPublico = (b) => ({
+  id: b.id, amount: b.amount,
+  nombreClave: b.nombreClave, textoClave: b.textoClave,
+});
+
 export const OFERTA_POR_DEFECTO = 'principal';
 
 export function getOferta(id) {

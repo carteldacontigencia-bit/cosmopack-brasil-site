@@ -104,6 +104,15 @@ export const TEXTOS = {
     err_red: 'Se cayó la conexión. Revisa tu internet e intenta otra vez.',
     err_generic: 'No pudimos generar el pago. Intenta de nuevo.',
 
+    l_bumps: '¿Quieres agregar algo más?',
+    bump_corazon_nombre: 'Recetario del Corazón',
+    bump_corazon_texto: 'Presión y colesterol. 24 remedios en 41 páginas, con su dosis, su hora y su advertencia.',
+    bump_noches_nombre: 'Las Noches de la Abuela',
+    bump_noches_texto: 'Para dormir y para los despertares de madrugada. 18 remedios en 29 páginas.',
+    bump_manos_nombre: 'Manos y Rodillas',
+    bump_manos_texto: 'Para la mano tiesa de la mañana y la rodilla de la escalera. 18 remedios en 29 páginas.',
+    bump_agregar: 'Sí, agregar',
+
     modo_prueba: 'Modo de prueba — ningún cargo real',
     seguro: 'Pago seguro',
   },
@@ -198,6 +207,15 @@ export const TEXTOS = {
     err_contact: 'Enter a valid WhatsApp number or email.',
     err_red: 'The connection dropped. Check your internet and try again.',
     err_generic: 'We could not create the payment. Please try again.',
+
+    l_bumps: 'Want to add anything else?',
+    bump_corazon_nombre: 'Heart Recipe Book',
+    bump_corazon_texto: 'Blood pressure and cholesterol. 24 remedies over 41 pages, each with its dose, its time and its warning.',
+    bump_noches_nombre: "Grandma's Nights",
+    bump_noches_texto: 'For falling asleep and for waking at 3am. 18 remedies over 29 pages.',
+    bump_manos_nombre: 'Hands and Knees',
+    bump_manos_texto: 'For stiff morning hands and the knee on the stairs. 18 remedies over 29 pages.',
+    bump_agregar: 'Yes, add it',
 
     modo_prueba: 'Test mode — no real charge',
     seguro: 'Secure payment',
