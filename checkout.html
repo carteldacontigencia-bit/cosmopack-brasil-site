@@ -156,25 +156,22 @@
       <p class="aviso suave" id="oxxoDemora"></p>
     </div>
 
-    <!-- Guarda tu acceso: lo que salva al comprador de OXXO -->
-    <div class="guarda">
-      <div class="guarda-t" id="guardaTitulo"></div>
-      <p id="guardaP"></p>
-      <div class="v chico enlace" id="vEnlace">—</div>
-      <button class="copiar" type="button" data-copia="vEnlace"></button>
-      <p class="manual" id="manualEnlace" hidden></p>
+    <!-- Aqui iba "Guarda tu acceso" con el enlace firmado, y debajo el
+         campo de WhatsApp. Se quitaron a peticion del vendedor.
 
-      <div class="contacto">
-        <div class="guarda-t" id="contactoTitulo"></div>
-        <p id="contactoP"></p>
-        <div class="fila">
-          <input type="tel" id="whatsapp" inputmode="tel" autocomplete="tel">
-          <button class="copiar" type="button" id="btnContacto"></button>
-        </div>
-        <p class="ok" id="contactoOk" hidden></p>
-        <p class="err" id="errContacto" role="alert"></p>
-      </div>
-    </div>
+         El campo de WhatsApp ademas prometia algo que no pasaba: decia
+         "te lo mandamos" y /api/contact solo anotaba el numero en el
+         log, sin enviar nada.
+
+         LO QUE ESTO CUESTA: quien paga en OXXO vuelve horas despues. Si
+         vuelve en el MISMO navegador y dentro de 24 h, la pantalla
+         recuerda su cobranza y entra sin problema. Si borro el
+         historial, cambio de telefono o tardo mas de un dia, ya no
+         tiene por donde volver.
+
+         PARA DEVOLVERLO: recuperar este bloque del commit anterior. El
+         codigo que lo llenaba sigue en assets/app.js, protegido para no
+         romperse sin el. -->
 
     <div class="espera">
       <span class="punto"></span>

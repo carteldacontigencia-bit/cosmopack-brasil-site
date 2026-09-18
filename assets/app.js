@@ -71,9 +71,11 @@ function pintarTextos() {
   for (const [id, clave] of Object.entries(pares)) { const el = $(id); if (el) el.textContent = t(clave); }
   $('enviar').textContent = t('btn_continuar');
   $('btnNueva').textContent = t('btn_nueva');
-  $('btnContacto').textContent = t('contacto_btn');
   $('name').placeholder = t('ph_nombre');
-  $('whatsapp').placeholder = t('ph_whatsapp');
+  /* Estos dos viven en el bloque "Guarda tu acceso", que se quito de la
+     pantalla. Si vuelve el HTML, vuelven a llenarse solos. */
+  if ($('btnContacto')) $('btnContacto').textContent = t('contacto_btn');
+  if ($('whatsapp')) $('whatsapp').placeholder = t('ph_whatsapp');
   $('vBarcode').alt = t('k_ref_oxxo');
   for (const b of document.querySelectorAll('[data-copia]')) {
     b.textContent = b.dataset.copia === 'vClabe' ? t('copiar_clabe') : t('copiar');
@@ -208,9 +210,13 @@ function mostrarPago() {
     pintarChipsBanco(importe, concepto);
   }
 
+  /* El bloque "Guarda tu acceso" se quito de la pantalla. Este codigo se
+     queda, protegido, para que devolverlo sea recuperar el HTML y ya. */
   const enlace = `${location.origin}/api/access?t=${encodeURIComponent(orden.access_token)}`;
-  $('vEnlace').textContent = enlace;
-  $('vEnlace').dataset.plano = enlace;
+  if ($('vEnlace')) {
+    $('vEnlace').textContent = enlace;
+    $('vEnlace').dataset.plano = enlace;
+  }
 
   $('txtPedido').textContent = t('pedido', { id: orden.external_id });
   arrancarReloj();
@@ -483,8 +489,10 @@ function confirmar(d) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* ── Contacto opcional, después de tener la referencia ──────────── */
-$('btnContacto').addEventListener('click', async () => {
+/* ── Contacto opcional, después de tener la referencia ──────────────
+   El bloque se quito de la pantalla, asi que este manejador solo se
+   engancha si el HTML vuelve. */
+$('btnContacto')?.addEventListener('click', async () => {
   $('errContacto').textContent = '';
   const valor = $('whatsapp').value.trim();
   if (!valor) { $('errContacto').textContent = t('err_contact'); return; }

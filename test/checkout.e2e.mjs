@@ -110,13 +110,11 @@ ok(portapapeles === '012345678901234567', 'copia los 18 digitos SIN espacios', p
 /* ── 4. La referencia SOBREVIVE a que se descarte la pestana ── */
 console.log('\n4) Persistencia (se recarga como si el navegador hubiera descartado la pestana)');
 const pedidoAntes = (await p.textContent('#txtPedido')).trim();
-const enlaceAntes = (await p.textContent('#vEnlace')).trim();
 await p.reload({ waitUntil: 'load' });
 await p.waitForSelector('#secPago:not([hidden])', { timeout: 8000 });
 ok(await p.isHidden('#secForm'), 'no vuelve a pedir el formulario');
 ok((await p.textContent('#vClabe')).trim() === clabe, 'la MISMA CLABE tras recargar', (await p.textContent('#vClabe')).trim());
 ok((await p.textContent('#txtPedido')).trim() === pedidoAntes, 'el mismo numero de pedido');
-ok((await p.textContent('#vEnlace')).trim() === enlaceAntes, 'el mismo enlace de acceso');
 
 /* ── 5. Validez con cuenta regresiva ── */
 console.log('\n5) Validez');
@@ -125,13 +123,19 @@ ok(/\d{2}:\d{2}:\d{2}/.test(validez1), 'muestra cuenta regresiva', validez1);
 await p.waitForTimeout(1600);
 ok((await p.textContent('#txtValidez')).trim() !== validez1, 'el reloj avanza');
 
-/* ── 6. Guarda tu acceso ── */
-console.log('\n6) Enlace de acceso y contacto opcional');
-ok(enlaceAntes.includes('/api/access?t='), 'el enlace apunta a la puerta de entrega', enlaceAntes.slice(0, 60));
-await p.fill('#whatsapp', '55 1234 5678');
-await p.click('#btnContacto');
-await p.waitForSelector('#contactoOk:not([hidden])', { timeout: 5000 });
-ok(true, 'acepta el WhatsApp opcional despues de tener la referencia');
+/* ── 6. El bloque "Guarda tu acceso" ya no esta ──
+   Se quito a peticion del vendedor. El campo de WhatsApp ademas decia
+   "te lo mandamos" y /api/contact nunca mando nada: solo anotaba el
+   numero en el log.
+
+   Lo que esto cuesta esta medido justo abajo, en la prueba 7: quien
+   vuelve en el mismo navegador sigue entrando. Quien borre el
+   historial o cambie de telefono, ya no. */
+console.log('\n6) El bloque de enlace y WhatsApp ya no se ensena');
+ok(!(await p.$('#vEnlace')), 'no se ensena el enlace de acceso en pantalla');
+ok(!(await p.$('#whatsapp')), 'ni el campo de WhatsApp');
+ok(!(await p.$('#btnContacto')), 'ni su boton');
+ok(errores.length === 0, 'y el codigo que los llenaba no revienta sin ellos', errores);
 
 /* ── 7. Vuelve del banco: consulta al recuperar visibilidad ── */
 console.log('\n7) Pago confirmado al volver a la pestana');
