@@ -24,6 +24,19 @@ const RAIZ = new URL('../', import.meta.url).pathname;
    perfecta aqui y salia SIN FORMATO publicada, porque la politica
    declara style-src 'self' y el navegador bloquea el bloque en linea.
    Eso ya paso una vez con la pagina de entrega. */
+/* Lo que .vercelignore excluye no llega al sitio, asi que aqui tampoco.
+   Sin esto las pruebas comprobaban paginas que en produccion no
+   existen. Se soportan prefijos de carpeta y comodines simples, que es
+   todo lo que usa este archivo. */
+const IGNORADOS = fs.readFileSync(path.join(RAIZ, '.vercelignore'), 'utf8')
+  .split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));
+const estaIgnorado = (ruta) => IGNORADOS.some((pat) => {
+  const limpio = ruta.replace(/^\//, '');
+  if (pat.endsWith('/')) return limpio.startsWith(pat);
+  if (pat.includes('*')) return new RegExp('^' + pat.replace(/\./g, '\\.').replace(/\*/g, '.*') + '$').test(limpio.split('/').pop());
+  return limpio === pat;
+});
+
 const VERCEL = JSON.parse(fs.readFileSync(path.join(RAIZ, 'vercel.json'), 'utf8'));
 const REGLAS = VERCEL.headers || [];
 const REDIRECTS = VERCEL.redirects || [];
@@ -79,6 +92,10 @@ http.createServer(async (req, res) => {
 
   /* Redirecciones y reescrituras salen del propio vercel.json, no de
      una copia a mano: si se cambian alli, la prueba las sigue. */
+  if (estaIgnorado(url.pathname)) {
+    res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+    return res.end('<p>no encontrado</p>');
+  }
   const red = REDIRECTS.find((r) => r.source === url.pathname);
   if (red) {
     res.writeHead(red.permanent ? 308 : 307, { Location: red.destination });

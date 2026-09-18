@@ -220,7 +220,7 @@ ok(Boolean((await fetch(`${URL_BASE}/api/config`)).headers.get('content-security
    JavaScript dentro del HTML. Aplicarles la politica estricta las deja
    sin formato -- ya paso con la pagina de entrega. Reescribirlas es
    posible; hacerlo a escondidas con una cabecera, no. */
-for (const ruta of ['/azucar-en-equilibrio/', '/raices-olvidadas/']) {
+for (const ruta of ['/azucar-en-equilibrio/']) {
   const r = await fetch(URL_BASE + ruta);
   ok(r.headers.get('content-security-policy') === null,
     `${ruta}: sin politica estricta, no se rompe`);
@@ -247,9 +247,22 @@ ok(caja === 'flex', 'los cards de descarga se ven como cards, no como texto suel
    nuestros visitantes iban a sus cuentas. Se quitaron. Esta prueba
    existe para que no vuelvan sin que nadie lo note al copiar bloques
    entre paginas. */
-console.log('\n13) Sin rastreadores ajenos');
+console.log('\n13) Paginas de venta publicadas');
+
+/* Lo que .vercelignore excluye no existe en el sitio. Raices y Pulmones
+   estan fuera mientras les falten TODAS las imagenes y su liga de pago
+   sea un marcador: una pagina rota con un boton muerto vende menos que
+   ninguna pagina. */
+for (const d of ['raices-olvidadas', 'pulmones-libres']) {
+  const r = await fetch(`${URL_BASE}/${d}/`);
+  ok(r.status === 404, `${d}: sin terminar, no se publica`, r.status);
+}
+/* Y el generador de los PDFs tampoco, o el producto entero seria
+   gratis para quien escriba la ruta. */
+ok((await fetch(`${URL_BASE}/entregables/out/Azucar-en-Equilibrio.pdf`)).status === 404,
+  'el generador de PDFs no se publica');
 const PERMITIDOS = ['127.0.0.1', 'fonts.googleapis.com', 'fonts.gstatic.com', 'connect.facebook.net'];
-for (const d of ['raices-olvidadas', 'azucar-en-equilibrio', 'pulmones-libres']) {
+for (const d of ['azucar-en-equilibrio']) {
   const ctx2 = await nav.newContext({ viewport: { width: 390, height: 844 } });
   const p2 = await ctx2.newPage();
   const ajenos = new Set();
@@ -269,6 +282,15 @@ for (const d of ['raices-olvidadas', 'azucar-en-equilibrio', 'pulmones-libres'])
   });
   await p2.goto(`${URL_BASE}/${d}/`, { waitUntil: 'load' });
   ok(ajenos.size === 0, `${d}: no llama a ningun tercero`, [...ajenos]);
+
+  /* Ninguna imagen rota. La pagina de Azucar salio publicada con los 11
+     archivos de assets/ ausentes: cuadros grises donde iba la portada y
+     las vistas del libro. Una portada rota en una pagina de venta es
+     dinero de anuncio tirado. */
+  const rotas = await p2.evaluate(() => [...document.images]
+    .filter((i) => !(i.complete && i.naturalWidth > 0))
+    .map((i) => (i.currentSrc || i.getAttribute('src') || '').split('/').pop()));
+  ok(rotas.length === 0, `${d}: sin imagenes rotas`, rotas);
 
   const disparados = await p2.evaluate(() => window.__ev.map((e) => e.slice(0, 2).join(' ')));
   ok(disparados.some((e) => e.includes('init 4479089439026636')), `${d}: inicia el pixel correcto`);
