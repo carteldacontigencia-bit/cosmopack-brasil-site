@@ -255,6 +255,14 @@ ok(/^[a-f0-9]{64}$/.test(ev.user_data?.fn || ''), 'nombre del pagador en SHA-256
 const crudo = JSON.stringify(enviados[0]);
 ok(!crudo.includes('Luis') && !crudo.includes('Hernandez'), 'NINGUN dato personal viaja en claro');
 ok(crudo.includes('token-de-prueba'), 'el token va en el cuerpo, no en la URL');
+/* El pais no es una suposicion: SPEI y OXXO solo existen en Mexico. Es
+   una señal de coincidencia mas, y aqui hacen falta, porque el evento
+   del servidor no lleva las cookies _fbp/_fbc del navegador. */
+ok(/^[a-f0-9]{64}$/.test(ev.user_data?.country || ''), 'manda pais, que el carril de pago ya implica');
+/* Y ni un solo campo puede ir sin cifrar, hoy ni cuando alguien agregue
+   otro mañana. */
+const sinCifrar = Object.entries(ev.user_data || {}).filter(([, v]) => !/^[a-f0-9]{64}$/.test(String(v)));
+ok(sinCifrar.length === 0, 'TODOS los campos de user_data van en SHA-256', sinCifrar.map(([k]) => k));
 
 console.log('\n17) Un pago confirmado dos veces no manda dos Purchase distintos');
 await fetch('http://127.0.0.1:8788/__limpiar');

@@ -171,7 +171,7 @@ de crear la cobranza.
 ```bash
 node test/mock-xpag.mjs &      # mock del API de XPag en :8787
 node test/lib.test.mjs         # 74 · validación, firma del acceso, diagnóstico
-node test/api.test.mjs         # 64 · los handlers
+node test/api.test.mjs         # 66 · los handlers
 node test/dev-server.mjs &     # sirve el sitio y enruta /api/* en :8080
 node test/checkout.e2e.mjs     # 89 · la pantalla, la entrega, la politica
 ```

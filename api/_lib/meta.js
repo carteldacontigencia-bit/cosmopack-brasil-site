@@ -44,6 +44,11 @@ export async function enviarCompra({ eventId, value, currency, externalId, payer
 
   const user_data = {};
   if (externalId) user_data.external_id = hash(externalId);
+  /* Pais: no es una suposicion. SPEI y OXXO son carriles que solo
+     existen en Mexico, asi que quien paga por aqui esta en Mexico. Es
+     una señal de coincidencia mas, y sin este envio del servidor la
+     venta por OXXO no llegaria a Meta en absoluto. */
+  if ((currency || 'MXN') === 'MXN') user_data.country = hash('mx');
   if (payerName) {
     /* Meta quiere nombre y apellido por separado. Si sólo viene uno, va
        como nombre y ya. */
