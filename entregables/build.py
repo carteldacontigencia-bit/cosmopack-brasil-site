@@ -38,7 +38,8 @@ FUENTES = (AQUI / "assets/fonts/fonts.css").read_text(encoding="utf-8")
 SALIDA = AQUI / "out"
 TMP = AQUI / ".tmp"
 
-ENTREGABLES = ["ebook", "bono1_reto30", "bono2_mercado", "bono3_sos"]
+ENTREGABLES = ["ebook", "bono1_reto30", "bono2_mercado", "bono3_sos",
+                "corazon", "noches", "manos"]
 
 # margen del cuerpo; tiene que coincidir con el @page de print.css
 MARGEN = {"top": "15mm", "bottom": "17mm", "left": "13mm", "right": "13mm"}

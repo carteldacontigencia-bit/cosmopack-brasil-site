@@ -12,6 +12,28 @@ layout: para mudar uma dose você edita um arquivo de conteúdo, não o HTML.
 | `Bono-2-Guia-del-Mercado.pdf` | 31 | Guia de compras: como reconhecer, preço justo em MXN, substitutos |
 | `Bono-3-SOS-Antojo-de-Dulce.pdf` | 19 | Protocolo de 10 minutos + 12 resgates + cartão recortável |
 
+## Order bumps (produtos separados, não incluídos na oferta principal)
+
+| Arquivo | Páginas | O que é |
+|---|---|---|
+| `Recetario-del-Corazon.pdf` | 41 | 24 remédios para pressão e colesterol, em 4 capítulos |
+| `Las-Noches-de-la-Abuela.pdf` | 29 | 18 remédios e gestos para dormir, em 3 capítulos |
+| `Manos-y-Rodillas.pdf` | 29 | 18 remédios para dor articular, em 3 capítulos |
+
+Os três seguem os mesmos critérios do livro principal e trazem cada um o
+seu capítulo de triagem próprio, porque cada tema tem o seu risco:
+
+- **Corazón** — a pressão alta não se sente. O capítulo de segurança abre
+  com medir, não com tomar. Fora o orozuz (sobe a pressão, derruba o
+  potássio) e fora a toranja de todas as receitas (choca com estatinas e
+  amlodipino).
+- **Noches** — levantar 3 vezes para urinar pode ser açúcar alto ou
+  próstata, e ronco com pausas pode ser apneia. Os dois vão na triagem,
+  antes de qualquer chá, senão o bônus entretém em vez de ajudar.
+- **Manos** — articulação vermelha, quente e inchada de repente pode ser
+  gota ou infecção, que se trata em horas. E a árnica nunca se toma:
+  tem página própria.
+
 Todos em espanhol do México, A5 (148×210 mm), corpo 12pt — tamanho escolhido
 para leitura no celular sem zoom, que é o público de 45 a 70+ da página de
 vendas. Cada PDF tem marcadores (índice lateral do leitor de PDF), metadados
