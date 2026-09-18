@@ -260,7 +260,7 @@ a:focus-visible, summary:focus-visible, .btn:focus-visible {
 }
 
 
-/* ============ bloco de oferta, no molde da vovomei.com.br ============ */
+/* ============ bloco de oferta ============ */
 
 .oferta { background: var(--verde-e); color: #E9E3D5; }
 .oferta h2, .oferta h3 { color: #F5F0E3; }

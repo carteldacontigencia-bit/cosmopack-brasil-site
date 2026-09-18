@@ -233,6 +233,30 @@ await p.goto(`${URL_BASE}/gracias-e41b9fb5ec65061a.html`, { waitUntil: 'load' })
 const caja = await p.$eval('a.archivo', (a) => getComputedStyle(a).display);
 ok(caja === 'flex', 'los cards de descarga se ven como cards, no como texto suelto', caja);
 
+/* ── 13. Ningun rastreador ajeno ──
+   Raices se tradujo de otra pagina y venia con el Google Tag Manager, el
+   Microsoft Clarity y el UTMify del dueño original: los datos de
+   nuestros visitantes iban a sus cuentas. Se quitaron. Esta prueba
+   existe para que no vuelvan sin que nadie lo note al copiar bloques
+   entre paginas. */
+console.log('\n13) Sin rastreadores ajenos');
+const PERMITIDOS = ['127.0.0.1', 'fonts.googleapis.com', 'fonts.gstatic.com', 'connect.facebook.net'];
+for (const d of ['raices-olvidadas', 'azucar-en-equilibrio', 'pulmones-libres']) {
+  const ctx2 = await nav.newContext({ viewport: { width: 390, height: 844 } });
+  const p2 = await ctx2.newPage();
+  const ajenos = new Set();
+  p2.on('request', (r) => {
+    const h = new URL(r.url()).hostname;
+    if (!PERMITIDOS.includes(h)) ajenos.add(h);
+  });
+  await p2.goto(`${URL_BASE}/${d}/`, { waitUntil: 'load' });
+  ok(ajenos.size === 0, `${d}: no llama a ningun tercero`, [...ajenos]);
+  const html = await (await fetch(`${URL_BASE}/${d}/`)).text();
+  ok(!/vovomei|utmify|clarity\.ms/i.test(html.replace(/<!--[\s\S]*?-->/g, '')),
+    `${d}: sin rastros del original en el codigo`);
+  await ctx2.close();
+}
+
 console.log('violaciones de la politica:', csp.length ? csp : 'ninguna');
 if (csp.length) fallos += csp.length;
 
