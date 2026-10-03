@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulmones Libres — Deja el cigarro con un método natural, sin parches y sin nicotina de reemplazo</title>
+<meta name="description" content="Guía paso a paso para dejar de fumar: protocolo hora por hora para las primeras 72 horas, apoyo natural para la ansiedad y rutina para no cambiar el cigarro por comida.">
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     CONFIGURA AQUÍ ANTES DE PUBLICAR
+     ───────────────────────────────────────────────────────────────
+     1. CHECKOUT ..... FALTA. Esta página cuesta $97 MXN y la liga de pago
+                       que hay (xpag.global/pay/UGgNzbVn) es de las páginas de
+                       $47.90. Genera una liga aparte por $97 en el panel de
+                       XPag y reemplaza  FALTA-LIGA-DE-97-MXN  (3 botones).
+     2. PRECIOS ...... busca  $97  y  $397 .
+     3. LUGARES ...... el bloque #lugares es un número FIJO que tú controlas
+                       (data-ocupados). No sube solo. Actualízalo conforme
+                       vendas, o bórralo si no vas a respetar el límite de 100.
+     4. CIFRAS ....... cada dato lleva el comentario  ⚠ CIFRA . No publiques
+                       ninguno que no puedas comprobar con tus propios números.
+     5. TESTIMONIOS .. assets/testimonio-1..4.jpg deben ser capturas REALES,
+                       con permiso. Si no las tienes, borra #testimonios.
+     6. IMÁGENES ..... assets/portada.png y assets/beneficio-01..05.jpg
+     7. PIXELES ...... pega tus scripts donde dice "TRACKING".
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<!-- Meta Pixel. PageView y ViewContent para todo visitante; los
+     eventos de checkout se limitan al trafico de anuncio y viven en
+     assets/pixel.js. -->
+<script src="/assets/lp-pixel.js" data-producto="Pulmones Libres" data-valor="97" data-moneda="MXN"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --aire:#F1F6F6;
+  --aire-2:#E3EDEC;
+  --blanco:#FFFFFF;
+  --profundo:#12403D;
+  --profundo-2:#0C2E2C;
+  --menta:#2E7D6F;
+  --menta-claro:#E0EFEB;
+  --menta-borde:#BBD8D1;
+  --acento:#E4572E;
+  --acento-osc:#BE401F;
+  --tinta:#17211F;
+  --tinta-suave:#4A5A56;
+  --tinta-tenue:#7C8C88;
+  --borde:#D7E3E1;
+  --alerta:#FAF0EC;
+  --alerta-borde:#EFCDC0;
+  --display:'Plus Jakarta Sans',system-ui,sans-serif;
+  --sans:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
+  --sombra:0 10px 30px rgba(18,64,61,.10), 0 2px 8px rgba(18,64,61,.06);
+  --radio:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--aire);color:var(--tinta);
+  font-family:var(--sans);font-size:16px;line-height:1.65;overflow-x:hidden;
+  padding-bottom:0;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.15;letter-spacing:-.02em}
+mark{background:transparent;color:var(--acento);font-weight:inherit}
+
+.wrap{max-width:1140px;margin:0 auto;padding:0 20px}
+.estrecho{max-width:760px;margin:0 auto;padding:0 20px}
+.centro{text-align:center}
+.ojo{
+  display:inline-block;font:700 12px/1 var(--sans);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--acento);margin-bottom:12px;
+}
+.sub{font-size:1.05rem;color:var(--tinta-suave);max-width:660px;margin-left:auto;margin-right:auto}
+section{padding:64px 0}
+@media(max-width:640px){section{padding:44px 0}}
+
+.grade{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.g2,.g3{grid-template-columns:1fr}}
+
+.card{
+  background:var(--blanco);border:1px solid var(--borde);border-radius:var(--radio);
+  padding:24px;box-shadow:0 4px 14px rgba(18,64,61,.06);
+}
+.card .emoji{font-size:30px;display:block;margin-bottom:10px}
+.card h3{font-size:1.12rem;margin-bottom:6px}
+.card p{color:var(--tinta-suave);font-size:.98rem}
+
+/* ── Botón ─────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--acento);color:#fff;
+  font:700 1.05rem/1.25 var(--sans);text-align:center;
+  padding:18px 34px;border-radius:999px;border:0;cursor:pointer;
+  box-shadow:0 8px 22px rgba(228,87,46,.32);
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.btn:hover{background:var(--acento-osc);transform:translateY(-2px);box-shadow:0 12px 28px rgba(228,87,46,.4)}
+.btn:active{transform:translateY(0)}
+.btn.grande{font-size:1.12rem;padding:20px 40px}
+@media(max-width:640px){.btn{width:100%;padding:18px 20px;font-size:1rem}}
+
+/* ── Encabezado ────────────────────────────────────── */
+header{background:var(--profundo);color:var(--aire);padding:14px 0;position:sticky;top:0;z-index:40}
+.marca{font-family:var(--display);font-weight:700;font-size:1.05rem;text-align:center;letter-spacing:.01em}
+
+/* ── Héroe ─────────────────────────────────────────── */
+.heroi{background:linear-gradient(180deg,var(--aire) 0%,var(--aire-2) 100%);padding:56px 0 0;text-align:center}
+.heroi h1{font-size:clamp(1.8rem,4.8vw,3.1rem);max-width:860px;margin:0 auto}
+.heroi h1 .linea2{display:block;margin-top:10px;color:var(--profundo)}
+.sub-heroi{color:var(--tinta-suave);max-width:680px;margin:20px auto 0;font-size:1.05rem}
+.producto{max-width:440px;margin:30px auto 0}
+.micro{
+  display:inline-flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;
+  margin-top:18px;font-size:.9rem;color:var(--menta);font-weight:600;
+}
+.promesa-box{
+  background:var(--menta-claro);border:1px solid var(--menta-borde);border-radius:var(--radio);
+  padding:20px 24px;max-width:700px;margin:28px auto 0;color:var(--profundo);font-size:1.02rem;
+}
+.faja{
+  margin-top:44px;background:var(--profundo);color:var(--aire);padding:18px 20px;text-align:center;
+  font-family:var(--display);font-weight:700;font-size:clamp(1rem,2.2vw,1.22rem);
+}
+
+/* ── Línea de tiempo ───────────────────────────────── */
+.tiempo{background:var(--profundo);color:var(--aire)}
+.tiempo h2{color:#fff;font-size:clamp(1.6rem,3.6vw,2.4rem)}
+.tiempo .sub{color:#A9C6C2}
+.tl{max-width:760px;margin:40px auto 0;position:relative;padding-left:26px}
+.tl::before{content:'';position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:rgba(169,198,194,.35)}
+.tl-item{position:relative;padding:0 0 26px 22px}
+.tl-item::before{
+  content:'';position:absolute;left:-26px;top:7px;width:14px;height:14px;border-radius:50%;
+  background:var(--acento);border:3px solid var(--profundo);box-shadow:0 0 0 2px var(--acento);
+}
+.tl-cuando{font-family:var(--display);font-weight:800;font-size:1.05rem;color:#fff}
+.tl-que{color:#A9C6C2;font-size:.98rem;margin-top:3px}
+.tl-nota{
+  max-width:760px;margin:10px auto 0;font-size:.82rem;color:#8FB0AC;font-style:italic;text-align:center;
+}
+
+/* ── Bonos ─────────────────────────────────────────── */
+.bonos{background:var(--aire-2)}
+.bo-tag{
+  display:inline-block;padding:6px 16px;border-radius:999px;background:var(--acento);color:#fff;
+  font:700 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;
+}
+/* Lugares: número FIJO, lo actualizas tú. No sube solo. Bórralo si no vas
+   a respetar de verdad el límite de 100. */
+.lugares{
+  max-width:560px;margin:0 auto 32px;background:var(--blanco);
+  border:2px solid var(--alerta-borde);border-radius:var(--radio);
+  padding:18px 22px;text-align:center;box-shadow:0 6px 20px rgba(228,87,46,.10);
+}
+.lug-tit{font:600 12px/1.2 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--tinta-suave)}
+.lug-num{font-family:var(--display);font-weight:800;font-size:2.1rem;color:var(--acento);line-height:1;margin:10px 0 4px}
+.lug-num small{font-family:var(--sans);font-weight:600;font-size:.85rem;color:var(--tinta-suave);display:block;margin-top:6px}
+.lug-barra{height:10px;background:rgba(228,87,46,.14);border-radius:999px;overflow:hidden;margin:12px 0 8px}
+.lug-fill{height:100%;background:linear-gradient(90deg,var(--acento) 0%,var(--acento-osc) 100%);border-radius:999px}
+.lug-nota{font-size:.8rem;color:var(--tinta-tenue);font-style:italic}
+
+.bo-hero{
+  max-width:860px;margin:0 auto;background:var(--blanco);
+  border:1px solid var(--menta-borde);border-radius:16px;padding:32px 30px;box-shadow:var(--sombra);
+}
+.bo-hero-tag{
+  display:inline-block;font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--acento);margin-bottom:10px;
+}
+.bo-hero h3{font-size:clamp(1.5rem,3vw,2rem);margin-bottom:12px}
+.bo-hero-sub{color:var(--tinta-suave);margin-bottom:22px}
+.bo-horas{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:640px){.bo-horas{grid-template-columns:1fr}}
+.bo-hora{padding:16px;border-radius:10px;background:var(--menta-claro);border:1px solid var(--menta-borde)}
+.bo-hora b{display:block;font-family:var(--display);font-weight:800;color:var(--profundo);margin-bottom:4px}
+.bo-hora p{font-size:.88rem;line-height:1.5;color:var(--tinta-suave)}
+.bo-otros{max-width:860px;margin:22px auto 0}
+.bo-otros .tag{
+  display:inline-block;font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;
+  color:var(--acento);margin-bottom:10px;
+}
+.gratis{
+  display:inline-block;margin-top:12px;padding:5px 13px;border-radius:999px;
+  background:var(--acento);color:#fff;font:700 12px/1 var(--sans);letter-spacing:.04em;
+}
+.bo-valor{
+  max-width:540px;margin:30px auto 0;text-align:center;padding:24px 26px;
+  border-radius:var(--radio);background:var(--profundo);color:var(--aire);
+}
+.bo-de{display:block;font-size:.9rem;color:#A9C6C2;margin-bottom:6px;text-decoration:line-through}
+.bo-por{display:block;font-family:var(--display);font-weight:800;font-size:2rem}
+.bo-nota{display:block;margin-top:10px;font-size:.85rem;color:#A9C6C2;font-style:italic}
+
+/* ── Dolor ─────────────────────────────────────────── */
+.dolor{background:var(--aire)}
+.dolor-intro{
+  max-width:720px;margin:0 auto 40px;text-align:center;
+}
+.dolor-intro h2{font-size:clamp(1.7rem,4vw,2.6rem)}
+.dolor-intro p{margin-top:16px;color:var(--tinta-suave);font-size:1.06rem}
+
+/* ── Comparación ───────────────────────────────────── */
+.comparar{background:var(--blanco)}
+.col-mal,.col-bien{border-radius:var(--radio);padding:26px}
+.col-mal{background:var(--alerta);border:1px solid var(--alerta-borde)}
+.col-bien{background:var(--menta-claro);border:1px solid var(--menta-borde)}
+.col-mal h3,.col-bien h3{font-size:1.18rem;margin-bottom:16px}
+.col-bien h3{color:var(--profundo)}
+.lista{list-style:none}
+.lista li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;font-size:.98rem;color:var(--tinta-suave)}
+.ic{flex-shrink:0;font-weight:700;line-height:1.6}
+.col-mal .ic{color:var(--acento)}
+.col-bien .ic{color:var(--menta)}
+
+/* ── Beneficios ────────────────────────────────────── */
+.beneficios{background:var(--aire-2)}
+.beneficios .card{padding:0;overflow:hidden}
+.beneficios .card img{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--borde)}
+.beneficios .txt{padding:20px 22px}
+
+/* ── Oferta ────────────────────────────────────────── */
+.oferta{background:var(--profundo)}
+.oferta h2{color:#fff;font-size:clamp(1.6rem,3.4vw,2.3rem)}
+.caja{
+  max-width:640px;margin:0 auto;background:var(--blanco);border-radius:18px;
+  padding:36px 32px;text-align:center;box-shadow:0 18px 44px rgba(0,0,0,.24);
+}
+@media(max-width:640px){.caja{padding:28px 20px}}
+.promo{font-size:1rem;color:var(--tinta-suave)}
+.hoy{background:var(--acento);color:#fff;padding:2px 10px;border-radius:6px;font-weight:700}
+.fecha-hoy{font-size:.9rem;color:var(--tinta-tenue);margin:6px 0 24px;font-weight:500}
+.recibes{text-align:left;background:var(--aire);border:1px solid var(--borde);border-radius:12px;padding:22px;margin-bottom:20px}
+.recibes h3{font-size:1.08rem;margin-bottom:14px}
+.recibes ul,.sellos{list-style:none}
+.recibes li,.sellos li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:.96rem;color:var(--tinta-suave)}
+.v{color:var(--menta);font-weight:700;flex-shrink:0}
+.sellos{text-align:left;margin-bottom:24px}
+.precio-antes{font-size:1rem;color:var(--tinta-tenue);text-decoration:line-through}
+.precio{
+  font-family:var(--display);font-weight:800;font-size:clamp(3rem,9vw,4.4rem);
+  color:var(--acento);line-height:1;margin:4px 0 6px;
+}
+.precio span{font-size:.42em;vertical-align:super;margin-right:4px}
+.precio small{font-size:.28em;font-weight:700;color:var(--tinta-suave);margin-left:8px}
+.pago{font-size:.92rem;color:var(--tinta-suave);margin-bottom:24px}
+.pos-boton{margin-top:14px;font-size:.88rem;color:var(--tinta-tenue)}
+.cierre-oferta{margin-top:24px;padding-top:20px;border-top:1px dashed var(--borde);font-size:.95rem;color:var(--tinta-suave)}
+
+/* ── Testimonios ───────────────────────────────────── */
+.testi{background:var(--aire)}
+.nota-estrellas{margin-top:14px;font-size:.95rem;color:var(--tinta-suave)}
+.estrellas{color:#E0A32E;letter-spacing:2px}
+.print{border-radius:var(--radio);overflow:hidden;border:1px solid var(--borde);background:var(--blanco);box-shadow:var(--sombra)}
+
+/* ── FAQ ───────────────────────────────────────────── */
+.faq{background:var(--blanco)}
+details{background:var(--aire);border:1px solid var(--borde);border-radius:12px;padding:18px 22px;margin-bottom:12px}
+details[open]{border-color:var(--menta)}
+summary{
+  font-family:var(--display);font-weight:700;font-size:1.02rem;cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;gap:14px;align-items:center;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'+';color:var(--acento);font-size:1.5rem;line-height:1;font-family:var(--sans)}
+details[open] summary::after{content:'–'}
+details p{margin-top:12px;color:var(--tinta-suave);font-size:.98rem}
+
+/* ── Cierre ────────────────────────────────────────── */
+.cierre{background:linear-gradient(180deg,var(--aire-2) 0%,var(--aire) 100%);text-align:center}
+.cierre h2{font-size:clamp(1.7rem,4.2vw,2.6rem)}
+
+/* ── Ayuda real ────────────────────────────────────── */
+.ayuda{background:var(--menta-claro);border-top:1px solid var(--menta-borde)}
+.ayuda-caja{max-width:760px;margin:0 auto;text-align:center;color:var(--profundo)}
+.ayuda-caja h3{font-size:1.15rem;margin-bottom:10px}
+.ayuda-caja p{font-size:.95rem;color:var(--tinta-suave)}
+.ayuda-caja b{color:var(--profundo)}
+
+/* ── Pie ───────────────────────────────────────────── */
+footer{background:var(--profundo-2);color:#9FBAB6;padding:36px 0 96px;text-align:center;font-size:.86rem}
+footer p+p{margin-top:10px;max-width:700px;margin-left:auto;margin-right:auto;line-height:1.6}
+footer .aviso{font-size:.8rem;opacity:.9}
+@media(min-width:861px){footer{padding-bottom:36px}}
+
+/* ── Barra fija móvil ──────────────────────────────── */
+.barra-fija{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:rgba(255,255,255,.97);border-top:1px solid var(--borde);
+  padding:10px 14px;box-shadow:0 -4px 18px rgba(18,64,61,.12);
+  display:flex;gap:12px;align-items:center;justify-content:space-between;
+}
+.barra-fija .bf-precio{font-family:var(--display);font-weight:800;color:var(--profundo);font-size:1.05rem;white-space:nowrap}
+.barra-fija .bf-precio small{display:block;font-family:var(--sans);font-weight:500;font-size:.7rem;color:var(--tinta-tenue);text-decoration:line-through}
+.barra-fija .btn{padding:14px 20px;font-size:.95rem;width:auto;flex:1}
+@media(min-width:861px){.barra-fija{display:none}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><div class="marca">Pulmones Libres</div></div></header>
+
+<!-- ============ 1. HÉROE ============ -->
+<section class="heroi">
+  <div class="estrecho">
+    <h1>A las 72 horas ya no queda <mark>nicotina</mark> en tu cuerpo.
+      <span class="linea2">Los primeros 21 días deciden si vuelves a encender uno.</span></h1>
+
+    <p class="sub-heroi">Deja de toser en las mañanas, de esconder el cigarro de tus hijos y de sentir que tu cuerpo ya no es tuyo. El método natural que acompaña justo los días en que casi todo el mundo recae — sin parches, sin nicotina de reemplazo y sin cambiar el cigarro por comida.</p>
+    <!-- ⚠ CIFRA: si ya tienes un número real de compradores, aquí va
+         "el método que más de X mexicanos ya usaron". No lo publiques antes. -->
+
+    <img class="producto" src="assets/portada.png" width="1400" height="1400" alt="Pulmones Libres — guía para dejar de fumar">
+
+    <div class="micro">
+      <span>🫁 Sin nicotina</span><span>🌿 Solo raíz, planta y método</span><span>📵 Sin parches ni chicles</span>
+    </div>
+
+    <div class="promesa-box">
+      Un <strong>protocolo hora por hora</strong> para las primeras 72 horas, apoyo natural para la ansiedad y una rutina para las 3 semanas siguientes — que es cuando el hábito, no la nicotina, es el que te hace recaer.
+    </div>
+  </div>
+  <div class="faja">Hoy puede ser el último día que dependes de un cigarro.</div>
+</section>
+
+<!-- ============ 2. LÍNEA DE TIEMPO REAL ============
+     Sustituye al bloque de "prueba social en vivo" de la estructura
+     original. Estos son datos públicos y verificables de la recuperación
+     tras dejar de fumar (CDC / OMS / NHS). Conviene igual o mejor que una
+     notificación simulada, y además es cierto. -->
+<section class="tiempo">
+  <div class="wrap centro">
+    <div class="ojo" style="color:#FF9E7D">Lo que pasa de verdad</div>
+    <h2>Tu cuerpo empieza a repararse <mark style="color:#FF9E7D">desde el primer cigarro que no te fumas</mark></h2>
+    <p class="sub" style="margin-top:14px">No es motivación de cartel. Es lo que la medicina ya documentó que ocurre cuando alguien deja de fumar.</p>
+
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-cuando">A los 20 minutos</div>
+        <div class="tl-que">Tu pulso y tu presión empiezan a bajar.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-cuando">A las 12 horas</div>
+        <div class="tl-que">El monóxido de carbono en tu sangre vuelve a su nivel normal. Tu sangre transporta oxígeno otra vez como debe.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-cuando">A las 48–72 horas</div>
+        <div class="tl-que">Ya no queda nicotina en tu cuerpo. Vuelven el gusto y el olfato. Y es también cuando la ansiedad pega más fuerte — por eso el Bono 1 cubre exactamente estas horas.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-cuando">De 2 semanas a 3 meses</div>
+        <div class="tl-que">Mejora tu circulación y tu capacidad respiratoria. Subir escaleras deja de costarte lo mismo.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-cuando">De 1 a 9 meses</div>
+        <div class="tl-que">Baja la tos y la falta de aire. Los cilios de tus vías respiratorias vuelven a trabajar y tu pulmón se defiende mejor de infecciones.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-cuando">Al año</div>
+        <div class="tl-que">Tu riesgo de enfermedad del corazón cae aproximadamente a la mitad del de alguien que sigue fumando.</div>
+      </div>
+    </div>
+    <p class="tl-nota">Tiempos de recuperación descritos por CDC y OMS. La velocidad varía en cada persona y según los años que llevaste fumando.</p>
+  </div>
+</section>
+
+<!-- ============ 3. BONOS + LUGARES ============ -->
+<section class="bonos">
+  <div class="wrap">
+    <div class="centro" style="margin-bottom:26px">
+      <span class="bo-tag">Bono exclusivo</span>
+      <h2>Además de la guía, <mark>3 protocolos</mark> que te sostienen la mano</h2>
+      <p class="sub" style="margin-top:14px">En el momento exacto en que más ganas de fumar sientes.</p>
+    </div>
+
+    <!-- LUGARES: número fijo. Cámbialo a mano conforme vendas.
+         Si no vas a respetar el límite de 100, borra este bloque entero. -->
+    <div class="lugares" id="lugares" data-ocupados="63" data-total="100">
+      <div class="lug-tit">🔥 Lugares con los 3 bonos incluidos</div>
+      <div class="lug-num"><span id="lugNum">63</span> <small>de 100 lugares ocupados</small></div>
+      <div class="lug-barra"><div class="lug-fill" id="lugFill" style="width:63%"></div></div>
+      <div class="lug-nota">Al llegar a 100, los bonos vuelven a venderse por separado.</div>
+    </div>
+
+    <div class="bo-hero">
+      <div class="bo-hero-tag">🎁 Bono 1 · El principal</div>
+      <h3>Protocolo de <mark>72 Horas Sin Ansiedad</mark></h3>
+      <p class="bo-hero-sub">Las primeras 72 horas son las que tiran para atrás a la mayoría de la gente que lo intenta sin apoyo. Este protocolo te dice, hora por hora, qué tomar y qué hacer cuando la ansiedad pega más fuerte — para que no tengas que improvisar justo en el peor momento.</p>
+      <!-- ⚠ CIFRA: la estructura original decía "el 90% recae en 72 horas".
+           No publiques ese número sin fuente. Lo que sí es cierto y está
+           documentado: la recaída se concentra en los primeros días. -->
+
+      <div class="bo-horas">
+        <div class="bo-hora"><b>Hora 0 – 12</b><p>Qué tomar el primer día y cómo pasar los tres primeros antojos, que son los más duros.</p></div>
+        <div class="bo-hora"><b>Hora 12 – 48</b><p>El pico de irritabilidad y de insomnio. Qué hacer de noche, cuando nadie te está viendo.</p></div>
+        <div class="bo-hora"><b>Hora 48 – 72</b><p>Vuelven el gusto y el olfato. Cómo aprovechar ese cambio para no soltar lo avanzado.</p></div>
+      </div>
+
+      <div class="gratis">$300 MXN · HOY INCLUIDO</div>
+    </div>
+
+    <div class="bo-otros grade g2">
+      <div class="card">
+        <div class="tag">🎁 Bono 2</div>
+        <h3>Guía de Manos y Boca Ocupadas</h3>
+        <p>Sustitutos naturales para el gesto: el cigarro con el café, el de después de comer, el de la salida del trabajo. Romper el gesto es lo que de verdad rompe el hábito — no solo la dependencia química.</p>
+        <div class="gratis">$290 MXN · HOY INCLUIDO</div>
+      </div>
+      <div class="card">
+        <div class="tag">🎁 Bono 3</div>
+        <h3>SOS Antojo de Emergencia</h3>
+        <p>Qué hacer en los primeros 60 segundos de un antojo fuerte, para que se te pase antes de que agarres un cigarro. Guárdalo en el celular: sirve de nada si no lo encuentras rápido.</p>
+        <div class="gratis">$300 MXN · HOY INCLUIDO</div>
+      </div>
+    </div>
+
+    <div class="bo-valor">
+      <span class="bo-de">Valor de los 3 bonos por separado: $890 MXN</span>
+      <span class="bo-por">HOY INCLUIDOS</span>
+      <span class="bo-nota">dentro del paquete, sin costo adicional</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. AGITACIÓN DEL DOLOR ============ -->
+<section class="dolor">
+  <div class="wrap">
+    <div class="dolor-intro">
+      <div class="ojo">¿Te suena conocido?</div>
+      <h2>El cigarro ya no te da placer. <mark>Te da vergüenza.</mark></h2>
+      <p>Te despiertas tosiendo. Sales a la calle a escondidas. Le bajas el número cuando te preguntan cuántos llevas hoy. Y en el fondo sabes que cada cajetilla te acerca a algo que después ya no se arregla.</p>
+    </div>
+    <div class="grade g3">
+      <div class="card"><span class="emoji">🚬</span><p>¿Fumas el primero antes de desayunar, porque ya no aguantas el cuerpo pidiendo nicotina?</p></div>
+      <div class="card"><span class="emoji">😷</span><p>¿Te falta el aire al subir escaleras y le echas la culpa a la edad, no al cigarro?</p></div>
+      <div class="card"><span class="emoji">🙈</span><p>¿Escondes las colillas, el olor, los intentos fallidos — porque ya perdiste la cuenta de cuántas veces dijiste "este es el último"?</p></div>
+      <div class="card"><span class="emoji">💸</span><p>¿Sacaste la cuenta de cuánto se te fue en cigarro este año y te dio coraje contigo?</p></div>
+      <div class="card"><span class="emoji">👶</span><p>¿Tus hijos o tu pareja ya te lo pidieron, y sientes que les fallas cada vez que enciendes uno?</p></div>
+      <div class="card" style="background:var(--menta-claro);border-color:var(--menta-borde);display:grid;place-items:center;text-align:center">
+        <p style="font-family:var(--display);font-weight:700;font-size:1.12rem;color:var(--profundo)">Si respondiste que sí a una sola de estas, esto es para ti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. COMPARACIÓN ============ -->
+<section class="comparar">
+  <div class="wrap">
+    <div class="centro" style="margin-bottom:40px">
+      <div class="ojo">La diferencia está aquí</div>
+      <h2>Dejarlo <mark>a puro aguante</mark> es lo que ya no te funcionó</h2>
+      <p class="sub" style="margin-top:14px">No porque te falte carácter. Porque nadie te dio un plan para las horas exactas en que el cuerpo te lo cobra.</p>
+    </div>
+    <div class="grade g2">
+      <div class="col-mal">
+        <h3>❌ Aguantarse y ya</h3>
+        <ul class="lista">
+          <li><span class="ic">✕</span> La ansiedad se queda intacta: solo la estás tapando.</li>
+          <li><span class="ic">✕</span> Nadie te dice qué hacer a las 3 de la mañana del segundo día.</li>
+          <li><span class="ic">✕</span> El gesto sigue ahí — el café, la salida, la sobremesa.</li>
+          <li><span class="ic">✕</span> Y cuando recaes, te queda la idea de que el problema eres tú.</li>
+        </ul>
+      </div>
+      <div class="col-bien">
+        <h3>✅ Método natural con protocolo</h3>
+        <ul class="lista">
+          <li><span class="ic">✓</span> Apoyo natural para la ansiedad, hora por hora, los días críticos.</li>
+          <li><span class="ic">✓</span> Sustitutos para el gesto, no solo para la nicotina.</li>
+          <li><span class="ic">✓</span> Rutina de noche, para cortar el cigarro asociado al final del día.</li>
+          <li><span class="ic">✓</span> Guía para que el "cambio de vicio" no termine siendo la comida.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="sub centro" style="margin-top:24px;font-size:.92rem">¿Ya usas parche, chicle o un medicamento que te recetaron? Esto no los reemplaza — se usa junto con ellos. Mira las preguntas frecuentes.</p>
+  </div>
+</section>
+
+<!-- ============ 6. BENEFICIOS POR SÍNTOMA ============ -->
+<section class="beneficios">
+  <div class="wrap">
+    <div class="centro" style="margin-bottom:40px">
+      <div class="ojo">Lo que hay adentro</div>
+      <h2>Para cada parte difícil de dejarlo, una respuesta concreta</h2>
+      <p class="sub" style="margin-top:14px">Nada de "échale ganas". Qué tomar, a qué hora y qué hacer con las manos.</p>
+    </div>
+    <div class="grade g3">
+      <div class="card">
+        <img src="assets/beneficio-01.jpg" width="1200" height="670" alt="Apoyo natural para la ansiedad">
+        <div class="txt"><h3>Para la ansiedad de dejarlo</h3><p>Combinaciones naturales que ayudan a bajar el impulso en minutos, sin nicotina de reemplazo.</p></div>
+      </div>
+      <div class="card">
+        <img src="assets/beneficio-02.jpg" width="1200" height="670" alt="Para la tos y la flema de las primeras semanas">
+        <div class="txt"><h3>Para la tos y la flema de las primeras semanas</h3><p>Infusiones que alivian la garganta justo cuando la tos empeora antes de mejorar — que es señal de que tus vías respiratorias volvieron a trabajar.</p></div>
+      </div>
+      <div class="card">
+        <img src="assets/beneficio-03.jpg" width="1200" height="670" alt="Rutina para las mañanas">
+        <div class="txt"><h3>Para la mañana, que es el peor momento</h3><p>Qué poner en el lugar del primer cigarro del día, el que más cuesta soltar.</p></div>
+      </div>
+      <div class="card">
+        <img src="assets/beneficio-04.jpg" width="1200" height="670" alt="Para no subir de peso">
+        <div class="txt"><h3>Para no subir de peso al dejarlo</h3><p>El miedo número uno de quien quiere dejar de fumar. Qué comer y qué tomar para que el cambio no sea al refri.</p></div>
+      </div>
+      <div class="card">
+        <img src="assets/beneficio-05.jpg" width="1200" height="670" alt="Rutina nocturna">
+        <div class="txt"><h3>Para dormir sin pensar en el cigarro</h3><p>Rutina de noche que corta el hábito asociado a la última calada del día — y ayuda con el insomnio de los primeros días.</p></div>
+      </div>
+      <div class="card" style="display:grid;place-items:center;text-align:center;padding:28px;background:var(--profundo)">
+        <p style="font-family:var(--display);font-weight:700;font-size:1.1rem;color:#fff">Todo en un solo lugar, para que no tengas que buscar nada el día que más lo necesitas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. OFERTA ============ -->
+<section class="oferta" id="comprar">
+  <div class="wrap">
+    <div class="centro" style="margin-bottom:30px">
+      <h2>Acceso inmediato y de por vida</h2>
+    </div>
+
+    <div class="caja">
+      <p class="promo">Con el <b>precio de lanzamiento</b> válido <span class="hoy">HOY</span></p>
+      <div class="fecha-hoy" id="fecha-hoy">&nbsp;</div>
+
+      <div class="recibes">
+        <h3>Esto recibes hoy:</h3>
+        <ul>
+          <li><span class="v">✓</span> <span>Guía completa <strong>Pulmones Libres</strong> — el método paso a paso</span></li>
+          <li><span class="v">✓</span> <span><strong>Bono 1</strong> — Protocolo de 72 Horas Sin Ansiedad</span></li>
+          <li><span class="v">✓</span> <span><strong>Bono 2</strong> — Guía de Manos y Boca Ocupadas</span></li>
+          <li><span class="v">✓</span> <span><strong>Bono 3</strong> — SOS Antojo de Emergencia</span></li>
+        </ul>
+      </div>
+
+      <ul class="sellos">
+        <li><span class="v">✓</span> <span><b>Acceso inmediato y de por vida</b> — celular, tablet o computadora</span></li>
+        <li><span class="v">✓</span> <span><b>Garantía de 7 días</b> — si no te sirve, te devolvemos cada peso</span></li>
+      </ul>
+
+      <div class="precio-antes">Antes $397 MXN</div>
+      <div class="precio"><span>$</span>97<small>MXN</small></div>
+      <div class="pago">Pago único. Transferencia SPEI o efectivo en OXXO.</div>
+
+      <a href="FALTA-LIGA-DE-97-MXN" class="btn grande">QUIERO DEJAR DE FUMAR HOY →</a>
+      <p class="pos-boton">Acceso inmediato después del pago.</p>
+
+      <div class="cierre-oferta">
+        Menos de lo que cuestan <b>tres cajetillas</b>. Y es lo último que gastas en esto.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. TESTIMONIOS ============
+     ⚠ Capturas REALES de clientes reales, con su permiso. Si todavía no las
+     tienes, borra esta sección completa en lugar de inventarla. -->
+<section class="testi" id="testimonios">
+  <div class="wrap">
+    <div class="centro" style="margin-bottom:36px">
+      <div class="ojo">Opiniones reales</div>
+      <h2>Gente que ya fumó <mark>su último cigarro</mark></h2>
+      <p class="sub" style="margin-top:14px">Mensajes tal como llegaron al WhatsApp.</p>
+      <!-- ⚠ CIFRA: pon tu calificación y tu número real de clientes, o borra la línea. -->
+      <div class="nota-estrellas"><span class="estrellas">★★★★★</span> según las reseñas de nuestros clientes</div>
+    </div>
+    <div class="grade g2">
+      <figure class="print"><img src="assets/testimonio-1.jpg" width="900" height="900" alt="Mensaje de un cliente"></figure>
+      <figure class="print"><img src="assets/testimonio-2.jpg" width="900" height="900" alt="Mensaje de un cliente"></figure>
+      <figure class="print"><img src="assets/testimonio-3.jpg" width="900" height="900" alt="Mensaje de un cliente"></figure>
+      <figure class="print"><img src="assets/testimonio-4.jpg" width="900" height="900" alt="Mensaje de un cliente"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 9. PREGUNTAS ============ -->
+<section class="faq">
+  <div class="estrecho">
+    <div class="centro" style="margin-bottom:32px">
+      <div class="ojo">Preguntas frecuentes</div>
+      <h2>¿Tienes dudas?</h2>
+    </div>
+    <details open><summary>¿Voy a sentir el síndrome de abstinencia igual?</summary>
+      <p>Vas a sentirlo — sería mentirte decir lo contrario. El protocolo está hecho para que esas primeras 72 horas, que es cuando más gente recae, no te agarren improvisando: te dice hora por hora qué tomar y qué hacer. No lo elimina por arte de magia; te da herramientas para atravesarlo.</p></details>
+    <details><summary>¿Sirve si ya llevo muchos años fumando?</summary>
+      <p>Sí. El método no depende de cuántos años llevas, depende de que sigas el protocolo los primeros días. Eso sí: mientras más años fumaste, más vale que tu médico revise cómo están tus pulmones — dejarlo ayuda siempre, a cualquier edad, pero el daño que ya exista necesita revisión médica, no un té.</p></details>
+    <details><summary>¿Voy a subir de peso?</summary>
+      <p>Es el miedo número uno y por eso viene una parte dedicada solo a esto: qué comer y qué tomar para que las manos y la boca no se vayan directo al refri. Subir algo de peso es común al dejar de fumar; la guía busca que sea lo menos posible y que no sea el motivo por el que vuelvas a encender uno.</p></details>
+    <details><summary>¿Esto reemplaza el parche, el chicle o el medicamento que me recetó mi doctor?</summary>
+      <p>No, y no queremos que lo dejes por esto. Si tu médico te dio un tratamiento para dejar de fumar, síguelo — este material se usa junto con él, para la parte del hábito y del día a día. Si estás pensando en suspender algo que te recetaron, háblalo con tu médico primero.</p></details>
+    <details><summary>¿Cuándo recibo el acceso?</summary>
+      <p>Inmediato. En cuanto se aprueba el pago, todo llega a tu correo y se queda para siempre en tu celular, tablet o computadora.</p></details>
+    <details><summary>¿Tiene garantía?</summary>
+      <p>Sí, 7 días. Si no te sirve, te devolvemos el 100% de tu dinero sin preguntas.</p></details>
+  </div>
+</section>
+
+<!-- ============ 10. CIERRE ============ -->
+<section class="cierre">
+  <div class="estrecho">
+    <h2>Hoy puedes fumar el <mark>último cigarro</mark> de tu vida</h2>
+    <p class="sub" style="margin:18px auto 30px">No a puro aguante. Con un plan para las horas exactas en que el cuerpo te lo va a cobrar.</p>
+    <a href="FALTA-LIGA-DE-97-MXN" class="btn grande">Quiero dejarlo →</a>
+    <p style="margin-top:20px;font-size:.95rem;color:var(--tinta-suave)">🔒 Pago seguro · Acceso inmediato · Garantía de 7 días</p>
+  </div>
+</section>
+
+<!-- ============ AYUDA REAL ============
+     Vale la pena dejarlo: da credibilidad, te protege y a alguien le sirve. -->
+<section class="ayuda">
+  <div class="wrap">
+    <div class="ayuda-caja">
+      <h3>¿Quieres apoyo además de esta guía?</h3>
+      <p>En México hay ayuda gratuita para dejar de fumar a través de <b>CONADIC</b> y de las clínicas de cesación del sector salud. Si tienes una condición respiratoria o del corazón, empieza por ahí. Esta guía acompaña ese proceso; no lo sustituye.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Pulmones Libres</p>
+    <p class="aviso">Guía de apoyo natural de uso complementario. No es un medicamento y no sustituye la consulta, el diagnóstico ni el tratamiento médico. Los resultados varían de una persona a otra. Si tienes una condición respiratoria o cardiovascular, estás embarazada o tomas medicamento de forma continua, consulta a tu médico antes de iniciar cualquier proceso de cesación.</p>
+  </div>
+</footer>
+
+<!-- Barra fija sólo en móvil -->
+<div class="barra-fija">
+  <div class="bf-precio">$97 MXN<small>$397</small></div>
+  <a href="FALTA-LIGA-DE-97-MXN" class="btn">Quiero dejarlo →</a>
+</div>
+
+<script>
+/* Fecha de hoy en horario del centro de México, sin depender del reloj
+   de quien visita la página. */
+(function () {
+  var el = document.getElementById('fecha-hoy');
+  if (!el) return;
+  var txt = new Intl.DateTimeFormat('es-MX', {
+    timeZone: 'America/Mexico_City',
+    weekday: 'long', day: '2-digit', month: 'long', year: 'numeric'
+  }).format(new Date());
+  el.textContent = txt.charAt(0).toUpperCase() + txt.slice(1);
+})();
+
+/* Lugares ocupados: lee el número FIJO que tú pones en data-ocupados y
+   dibuja la barra. No sube solo, no guarda nada en el navegador.
+   Para actualizarlo, cambia data-ocupados en el HTML. */
+(function () {
+  var caja = document.getElementById('lugares');
+  if (!caja) return;
+  var ocupados = parseInt(caja.getAttribute('data-ocupados'), 10);
+  var total = parseInt(caja.getAttribute('data-total'), 10) || 100;
+  if (isNaN(ocupados)) { caja.style.display = 'none'; return; }
+  ocupados = Math.max(0, Math.min(ocupados, total));
+  document.getElementById('lugNum').textContent = ocupados;
+  document.getElementById('lugFill').style.width = Math.round(ocupados / total * 100) + '%';
+})();
+</script>
+
+</body>
+</html>
