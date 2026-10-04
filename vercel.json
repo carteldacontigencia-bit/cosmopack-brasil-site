@@ -16,6 +16,14 @@
     {
       "source": "/pago",
       "destination": "/checkout.html"
+    },
+    {
+      "source": "/cosmopack",
+      "destination": "/cosmopack/index.html"
+    },
+    {
+      "source": "/cosmopack/",
+      "destination": "/cosmopack/index.html"
     }
   ],
   "headers": [
