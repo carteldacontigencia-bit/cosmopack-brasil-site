@@ -529,7 +529,7 @@ var PRODUTO = {
       return;
     }
     var link = P.linksPorTamanho[tamanho] || P.linkPagamento;
-    if (!link) { alert("Link de pagamento ainda não configurado."); return; }
+    if (!link) { $("size-warning").textContent = "Link de pagamento ainda não configurado."; return; }
     try {
       var u = new URL(link);
       if (!P.linksPorTamanho[tamanho]) u.searchParams.set("tamanho", tamanho);
