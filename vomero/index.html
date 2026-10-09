@@ -86,9 +86,21 @@ button{font:inherit;color:inherit;cursor:pointer}
 .size{height:46px;border:1px solid var(--line);border-radius:4px;background:#fff;font-weight:700}
 .size[aria-pressed="true"]{border-color:var(--text);background:var(--text);color:#fff}
 .size:disabled{color:#bbb;text-decoration:line-through;cursor:not-allowed}
-.qty{display:inline-flex;border:1px solid var(--line);border-radius:4px}
-.qty button{width:44px;height:44px;background:none;border:0;font-size:18px}
-.qty output{width:44px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.offers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.offer{position:relative;text-align:left;border:1.5px solid var(--line);border-radius:6px;background:#fff;padding:12px;line-height:1.3}
+.offer[aria-pressed="true"]{border-color:var(--text);box-shadow:inset 0 0 0 1px var(--text)}
+.offer__qty{display:block;font-weight:900;font-size:15px}
+.offer__price{display:block;font-weight:900;font-size:18px;margin-top:4px}
+.offer__each{display:block;color:var(--muted);font-size:12px}
+.offer__tag{position:absolute;top:-9px;right:8px;background:var(--ok);color:#fff;font-size:10px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:3px}
+.pair{margin-top:22px;padding:16px;border:1px solid var(--line);border-radius:6px}
+.pair[hidden]{display:none}
+.pair__title{margin:0;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.pair .field{margin-top:14px}
+.colors{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:8px}
+.color{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:4px;background:#fff;padding:8px;font-size:12px;font-weight:700;text-align:left;line-height:1.2}
+.color[aria-pressed="true"]{border-color:var(--text);box-shadow:inset 0 0 0 1px var(--text)}
+.swatch{flex:0 0 22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,.15)}
 .shipping{margin-top:22px;padding:12px 14px;border:1px dashed var(--ok);border-radius:4px;font-size:14px}
 .shipping b{color:var(--ok)}
 
@@ -244,19 +256,37 @@ button{font:inherit;color:inherit;cursor:pointer}
       </div>
 
       <div class="field">
-        <div class="field__label">
-          <span>Tamanho do calçado: <b id="size-value">selecione</b></span>
-          <button class="link-btn" data-open="modal-size">VER MEDIDAS</button>
-        </div>
-        <div class="sizes" id="sizes"></div>
+        <div class="field__label"><span>Escolha a quantidade:</span></div>
+        <div class="offers" id="offers"></div>
       </div>
 
-      <div class="field">
-        <div class="field__label"><span>Quantidade:</span></div>
-        <div class="qty">
-          <button id="qty-minus" aria-label="Diminuir quantidade">−</button>
-          <output id="qty">1</output>
-          <button id="qty-plus" aria-label="Aumentar quantidade">+</button>
+      <div class="pair" id="pair-1">
+        <p class="pair__title" id="pair-1-title">Seu par</p>
+        <div class="field">
+          <div class="field__label"><span>Cor: <b data-value="cor">selecione</b></span></div>
+          <div class="colors" data-list="cor"></div>
+        </div>
+        <div class="field">
+          <div class="field__label">
+            <span>Tamanho: <b data-value="tamanho">selecione</b></span>
+            <button class="link-btn" data-open="modal-size">VER MEDIDAS</button>
+          </div>
+          <div class="sizes" data-list="tamanho"></div>
+        </div>
+      </div>
+
+      <div class="pair" id="pair-2" hidden>
+        <p class="pair__title">2º par</p>
+        <div class="field">
+          <div class="field__label"><span>Cor: <b data-value="cor">selecione</b></span></div>
+          <div class="colors" data-list="cor"></div>
+        </div>
+        <div class="field">
+          <div class="field__label">
+            <span>Tamanho: <b data-value="tamanho">selecione</b></span>
+            <button class="link-btn" data-open="modal-size">VER MEDIDAS</button>
+          </div>
+          <div class="sizes" data-list="tamanho"></div>
         </div>
       </div>
 
@@ -283,7 +313,7 @@ button{font:inherit;color:inherit;cursor:pointer}
       <p>Quando você usa nossos calçados, você se junta a um grupo de pessoas que valorizam a moda autêntica e de alta qualidade. Seja você também um ícone de estilo com os calçados da <strong>LUMENNA STORE</strong>.</p>
 
       <h3>Sobre o calçado</h3>
-      <p>O <strong>Vomero Premium Sail Coconut Milk</strong> traduz o conceito de sofisticação silenciosa em forma de sneaker. Com uma base em tons neutros e suaves — <em>Sail</em> e <em>Coconut Milk</em> —, o modelo combina elegância minimalista com tecnologia de conforto de alto desempenho. A entressola macia e o cabedal em materiais premium criam uma pisada leve e confortável para o dia a dia.</p>
+      <p>O <strong>Vomero Premium</strong> combina visual marcante com tecnologia de conforto de alto desempenho. Disponível em seis cores: Bege/Laranja, Blue Tint, Preto/Laranja, Bege/Vermelho, Black Volt e Hyper Pink. A entressola macia e o cabedal em materiais premium criam uma pisada leve e confortável para o dia a dia.</p>
 
       <h3>Faça sua compra com segurança</h3>
       <p>Nós valorizamos a segurança dos nossos clientes, e por isso garantimos que todas as compras em nosso site são realizadas em um ambiente seguro e confiável.</p>
@@ -332,7 +362,7 @@ button{font:inherit;color:inherit;cursor:pointer}
     <div class="footer__grid">
       <div>
         <h3>Central de atendimento</h3>
-        <p>Atendimento: seg. a sex. 9h às 19h | sábado 9h às 18h<br>CNPJ: 00.000.000/0000-00</p>
+        <p>Atendimento: seg. a sex. 9h às 19h | sábado 9h às 18h<br>CNPJ: 32.254.004/0001-92</p>
         <p>E-mail: <a href="mailto:contato@lumennastore.com">contato@lumennastore.com</a></p>
       </div>
       <div>
@@ -422,17 +452,26 @@ button{font:inherit;color:inherit;cursor:pointer}
    CONFIGURAÇÃO DO PRODUTO. Edite só este bloco.
    ===================================================================== */
 var PRODUTO = {
-  nome: "Vomero Premium Sail Coconut Milk Branco",
-  preco: 899.90,          // preço de venda
-  precoAntigo: 1299.90,   // preço riscado ("de"). Use 0 para esconder.
+  nome: "Vomero Premium",
   descontoPix: 0.05,      // 5% no PIX
 
-  // Link de pagamento (Kiwify, Mercado Pago, Yampi, Shopify etc.).
-  // Se cada tamanho tiver um link diferente, preencha "linksPorTamanho".
-  linkPagamento: "",
-  linksPorTamanho: {
-    // "38": "https://...",
-  },
+  // Ofertas de quantidade. "pares" = quantos pares o cliente escolhe.
+  // precoAntigo: preço riscado ("de"). Use 0 para esconder.
+  // link: link de pagamento dessa oferta (Kiwify, Mercado Pago, Yampi etc.).
+  ofertas: [
+    { pares: 1, preco: 129.90, precoAntigo: 0, link: "" },
+    { pares: 2, preco: 189.90, precoAntigo: 0, link: "" }
+  ],
+
+  // Cores: nome e as cores da bolinha (uma ou duas).
+  cores: [
+    { nome: "Bege/Laranja",  bolinha: ["#d9c7a7", "#f26a21"] },
+    { nome: "Blue Tint",     bolinha: ["#b9d3ea"] },
+    { nome: "Preto/Laranja", bolinha: ["#1c1b1b", "#f26a21"] },
+    { nome: "Bege/Vermelho", bolinha: ["#d9c7a7", "#d22630"] },
+    { nome: "Black Volt",    bolinha: ["#1c1b1b", "#d7f205"] },
+    { nome: "Hyper Pink",    bolinha: ["#ff5fa8"] }
+  ],
 
   tamanhos: ["34","35","36","37","38","39","40","41","42","43","44"],
   esgotados: [],          // ex.: ["34","44"]
@@ -453,31 +492,34 @@ var PRODUTO = {
   var brl = function (v) { return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); };
   var $ = function (id) { return document.getElementById(id); };
 
-  // Textos e preços
+  // Textos
   $("product-name").textContent = P.nome;
   $("sticky-name").textContent = P.nome;
-  $("price").textContent = brl(P.preco);
-  $("sticky-price").textContent = brl(P.preco);
-  if (P.precoAntigo > P.preco) {
-    $("price-old").textContent = brl(P.precoAntigo);
-    $("price-off").textContent = "-" + Math.round((1 - P.preco / P.precoAntigo) * 100) + "%";
-  } else {
-    $("price-old").remove(); $("price-off").remove();
-  }
-  $("parcela").textContent = brl(P.preco * P.juros[12] / 12);
-  $("pix-total").textContent = brl(P.preco * (1 - P.descontoPix));
-  $("boleto-total").textContent = brl(P.preco);
   $("year").textContent = new Date().getFullYear();
 
-  var li = "";
-  for (var n = 1; n <= 12; n++) {
-    var total = P.preco * P.juros[n];
-    var semJuros = P.juros[n] === 1;
-    li += "<li><span>" + (n === 1 ? "À vista " + brl(total)
-         : n + "x " + (semJuros ? "sem juros " : "") + "de " + brl(total / n))
-       + "</span><span>Total: " + brl(total) + "</span></li>";
+  // Preços da oferta escolhida
+  var oferta = P.ofertas[0];
+  function mostrarPrecos() {
+    var preco = oferta.preco;
+    $("price").textContent = brl(preco);
+    $("sticky-price").textContent = brl(preco);
+    var temDe = oferta.precoAntigo > preco;
+    $("price-old").textContent = temDe ? brl(oferta.precoAntigo) : "";
+    $("price-off").textContent = temDe ? "-" + Math.round((1 - preco / oferta.precoAntigo) * 100) + "%" : "";
+    $("price-old").hidden = $("price-off").hidden = !temDe;
+    $("parcela").textContent = brl(preco * P.juros[12] / 12);
+    $("pix-total").textContent = brl(preco * (1 - P.descontoPix));
+    $("boleto-total").textContent = brl(preco);
+    var li = "";
+    for (var n = 1; n <= 12; n++) {
+      var total = preco * P.juros[n];
+      var semJuros = P.juros[n] === 1;
+      li += "<li><span>" + (n === 1 ? "À vista " + brl(total)
+           : n + "x " + (semJuros ? "sem juros " : "") + "de " + brl(total / n))
+         + "</span><span>Total: " + brl(total) + "</span></li>";
+    }
+    $("plist").innerHTML = li;
   }
-  $("plist").innerHTML = li;
 
   // Galeria
   var gallery = $("gallery"), thumbs = $("thumbs");
@@ -502,38 +544,70 @@ var PRODUTO = {
     });
   }, { passive: true });
 
-  // Tamanhos
-  var tamanho = null;
-  $("sizes").innerHTML = P.tamanhos.map(function (t) {
-    var off = P.esgotados.indexOf(t) > -1;
-    return '<button class="size" aria-pressed="false" data-size="' + t + '"' + (off ? " disabled" : "") + ">" + t + "</button>";
+  // Ofertas (1 par / 2 pares)
+  var unit = P.ofertas[0].preco;
+  $("offers").innerHTML = P.ofertas.map(function (o, i) {
+    var economia = unit * o.pares - o.preco;
+    return '<button class="offer" aria-pressed="' + (i === 0) + '" data-i="' + i + '">' +
+      (economia > 0.009 ? '<span class="offer__tag">Economize ' + brl(economia) + "</span>" : "") +
+      '<span class="offer__qty">' + o.pares + (o.pares > 1 ? " pares" : " par") + "</span>" +
+      '<span class="offer__price">' + brl(o.preco) + "</span>" +
+      (o.pares > 1 ? '<span class="offer__each">' + brl(o.preco / o.pares) + " cada</span>" : '<span class="offer__each">&nbsp;</span>') +
+      "</button>";
   }).join("");
-  $("sizes").addEventListener("click", function (e) {
-    var b = e.target.closest(".size"); if (!b || b.disabled) return;
-    tamanho = b.dataset.size;
-    this.querySelectorAll(".size").forEach(function (s) { s.setAttribute("aria-pressed", s === b ? "true" : "false"); });
-    $("size-value").textContent = tamanho;
+  $("offers").addEventListener("click", function (e) {
+    var b = e.target.closest(".offer"); if (!b) return;
+    oferta = P.ofertas[+b.dataset.i];
+    this.querySelectorAll(".offer").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    $("pair-2").hidden = oferta.pares < 2;
+    $("pair-1-title").textContent = oferta.pares < 2 ? "Seu par" : "1º par";
     $("size-warning").textContent = "";
+    mostrarPrecos();
   });
+  mostrarPrecos();
 
-  // Quantidade
-  var qtd = 1;
-  $("qty-minus").onclick = function () { qtd = Math.max(1, qtd - 1); $("qty").textContent = qtd; };
-  $("qty-plus").onclick = function () { qtd = Math.min(10, qtd + 1); $("qty").textContent = qtd; };
+  // Cor e tamanho de cada par
+  var escolhas = [{}, {}];
+  [$("pair-1"), $("pair-2")].forEach(function (box, idx) {
+    box.querySelector('[data-list="cor"]').innerHTML = P.cores.map(function (c) {
+      var bg = c.bolinha.length > 1
+        ? "linear-gradient(135deg," + c.bolinha[0] + " 50%," + c.bolinha[1] + " 50%)"
+        : c.bolinha[0];
+      return '<button class="color" aria-pressed="false" data-v="' + c.nome + '"><span class="swatch" style="background:' + bg + '"></span>' + c.nome + "</button>";
+    }).join("");
+    box.querySelector('[data-list="tamanho"]').innerHTML = P.tamanhos.map(function (t) {
+      var off = P.esgotados.indexOf(t) > -1;
+      return '<button class="size" aria-pressed="false" data-v="' + t + '"' + (off ? " disabled" : "") + ">" + t + "</button>";
+    }).join("");
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-v]"); if (!b || b.disabled) return;
+      var list = b.parentNode, campo = list.dataset.list;
+      escolhas[idx][campo] = b.dataset.v;
+      list.querySelectorAll("[data-v]").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      box.querySelector('[data-value="' + campo + '"]').textContent = b.dataset.v;
+      $("size-warning").textContent = "";
+    });
+  });
 
   // Comprar
   function comprar() {
-    if (!tamanho) {
-      $("size-warning").textContent = "Selecione o tamanho do calçado.";
-      $("sizes").scrollIntoView({ behavior: "smooth", block: "center" });
-      return;
+    for (var i = 0; i < oferta.pares; i++) {
+      var falta = !escolhas[i].cor ? "a cor" : !escolhas[i].tamanho ? "o tamanho" : "";
+      if (falta) {
+        var qual = oferta.pares > 1 ? " do " + (i + 1) + "º par" : "";
+        $("size-warning").textContent = "Selecione " + falta + qual + ".";
+        $("pair-" + (i + 1)).scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
     }
-    var link = P.linksPorTamanho[tamanho] || P.linkPagamento;
-    if (!link) { $("size-warning").textContent = "Link de pagamento ainda não configurado."; return; }
+    if (!oferta.link) { $("size-warning").textContent = "Link de pagamento ainda não configurado."; return; }
+    var link = oferta.link;
     try {
       var u = new URL(link);
-      if (!P.linksPorTamanho[tamanho]) u.searchParams.set("tamanho", tamanho);
-      if (qtd > 1) u.searchParams.set("quantidade", qtd);
+      for (var k = 0; k < oferta.pares; k++) {
+        u.searchParams.set("cor" + (k + 1), escolhas[k].cor);
+        u.searchParams.set("tamanho" + (k + 1), escolhas[k].tamanho);
+      }
       link = u.toString();
     } catch (err) {}
     window.location.href = link;
