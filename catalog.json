@@ -1,0 +1,70 @@
+{
+  "_leia": "Fonte única de produtos e frete. A página lê este arquivo e o servidor (api/) também, para calcular o valor do PIX. Preços em CENTAVOS (4990 = R$ 49,90).",
+  "products": [
+    {
+      "id": "produto-1",
+      "name": "[Produto 1]",
+      "price": 4990,
+      "compareAt": 6990,
+      "description": "[Descrição curta do produto 1: o que é, tamanho, para quem.]",
+      "images": ["/img/placeholder.svg", "/img/placeholder.svg", "/img/placeholder.svg"],
+      "variants": {
+        "label": "Cor",
+        "options": [
+          { "id": "opcao-a", "name": "[Opção A]" },
+          { "id": "opcao-b", "name": "[Opção B]" }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "produto-2",
+      "name": "[Produto 2]",
+      "price": 5990,
+      "compareAt": null,
+      "description": "[Descrição curta do produto 2.]",
+      "images": ["/img/placeholder.svg", "/img/placeholder.svg"],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          { "id": "p", "name": "P" },
+          { "id": "m", "name": "M" },
+          { "id": "g", "name": "G", "price": 6490 }
+        ]
+      },
+      "maxPerCpf": 2
+    },
+    {
+      "id": "produto-3",
+      "name": "[Produto 3]",
+      "price": 3990,
+      "compareAt": null,
+      "description": "[Descrição curta do produto 3.]",
+      "images": ["/img/placeholder.svg"],
+      "variants": null,
+      "maxPerCpf": null
+    },
+    {
+      "id": "produto-4",
+      "name": "[Produto 4]",
+      "price": 2990,
+      "compareAt": 3990,
+      "description": "[Descrição curta do produto 4.]",
+      "images": ["/img/placeholder.svg"],
+      "variants": null,
+      "maxPerCpf": null
+    }
+  ],
+  "shipping": {
+    "_leia": "Cada faixa vale a partir de minItems itens no carrinho. A faixa com maior minItems atingido define o preço de cada opção.",
+    "options": [
+      { "id": "economica", "name": "Econômica", "days": "[7 a 12 dias úteis]" },
+      { "id": "expressa", "name": "Expressa", "days": "[3 a 5 dias úteis]" }
+    ],
+    "tiers": [
+      { "minItems": 1, "prices": { "economica": 1990, "expressa": 2990 } },
+      { "minItems": 2, "prices": { "economica": 1990, "expressa": 1990 } },
+      { "minItems": 3, "prices": { "economica": 0, "expressa": 1990 } }
+    ]
+  }
+}

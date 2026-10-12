@@ -1,17 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
   "functions": {
     "api/*.js": {
       "maxDuration": 15
     }
   },
-  "redirects": [
-    {
-      "source": "/",
-      "destination": "/azucar-en-equilibrio/",
-      "permanent": false
-    }
-  ],
   "rewrites": [
     {
       "source": "/pago",
