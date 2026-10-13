@@ -54,7 +54,7 @@ section{padding:40px 0}
 .header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
 .header .wrap{height:var(--header-h);display:flex;align-items:center;justify-content:space-between}
 .logo{text-decoration:none;display:flex;align-items:center}
-.logo img{height:40px;width:auto;border-radius:8px}
+.logo img{height:40px;width:auto}
 .cart-btn{position:relative;display:grid;place-items:center;width:44px;height:44px;border:0;background:none;border-radius:50%}
 .cart-btn svg{width:26px;height:26px}
 .cart-count{position:absolute;top:2px;right:0;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--brand);color:var(--brand-text);font-size:.72rem;font-weight:700;display:grid;place-items:center;line-height:1}
@@ -94,7 +94,7 @@ section{padding:40px 0}
 
 /* Sobre */
 .about-grid{display:grid;gap:20px;align-items:center}
-.about-grid img{border-radius:var(--radius);aspect-ratio:4/3;object-fit:cover;background:var(--bg-alt);width:100%}
+.about-grid img{width:100%;max-width:260px;object-fit:contain;margin:0 auto}
 .about-grid p{color:var(--muted)}
 
 /* Avaliações */
@@ -292,7 +292,7 @@ fbq('track','PageView');
 
 <header class="header">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="Defanti Store, início"><img src="/img/logo.jpg" alt="Defanti Store" width="120" height="40"></a>
+    <a class="logo" href="/" aria-label="Defanti Store, início"><img src="/img/logo.png" alt="Defanti Store"></a>
     <button class="cart-btn" id="cartBtn" type="button" aria-label="Abrir carrinho" aria-controls="cart" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
       <span class="cart-count" id="cartCount" data-zero aria-hidden="true">0</span>
@@ -329,7 +329,7 @@ fbq('track','PageView');
 
   <section class="about" aria-labelledby="about-title">
     <div class="wrap about-grid">
-      <img src="/img/logo.jpg" alt="Logo Defanti Store" loading="lazy" decoding="async" style="max-width:280px;border-radius:12px">
+      <img src="/img/logo.png" alt="Logo Defanti Store" loading="lazy" decoding="async">
       <div>
         <h2 id="about-title">Sobre a Defanti Store</h2>
         <p>Somos uma loja de calçados femininos com mais de 1 milhão de itens vendidos. Trabalhamos com as melhores marcas — Vizzano, Moleca, Beira Rio, Modare, Melissa, Arezzo, Schutz, Santa Lolla — todas 100% originais com nota fiscal.</p>
