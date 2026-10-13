@@ -1,70 +1,928 @@
 {
-  "_leia": "Fonte única de produtos e frete. A página lê este arquivo e o servidor (api/) também, para calcular o valor do PIX. Preços em CENTAVOS (4990 = R$ 49,90).",
+  "_leia": "Fonte única de produtos e frete. Preços em CENTAVOS (2990 = R$ 29,90). A página e o servidor leem este arquivo.",
+  "store": {
+    "name": "Defanti Store",
+    "tagline": "100% Originais · +1M de itens vendidos",
+    "topbar": "🔥 Preço de atacado · Sem quantidade mínima · Pagamento via PIX"
+  },
   "products": [
     {
-      "id": "produto-1",
-      "name": "[Produto 1]",
-      "price": 4990,
-      "compareAt": 6990,
-      "description": "[Descrição curta do produto 1: o que é, tamanho, para quem.]",
-      "images": ["/img/placeholder.svg", "/img/placeholder.svg", "/img/placeholder.svg"],
-      "variants": {
-        "label": "Cor",
-        "options": [
-          { "id": "opcao-a", "name": "[Opção A]" },
-          { "id": "opcao-b", "name": "[Opção B]" }
-        ]
-      },
-      "maxPerCpf": null
-    },
-    {
-      "id": "produto-2",
-      "name": "[Produto 2]",
-      "price": 5990,
-      "compareAt": null,
-      "description": "[Descrição curta do produto 2.]",
-      "images": ["/img/placeholder.svg", "/img/placeholder.svg"],
+      "id": "7200-102",
+      "brand": "Modare",
+      "name": "Sandália Modare Espelho Dourado 7200.102",
+      "price": 2990,
+      "compareAt": 8990,
+      "discount": 67,
+      "rating": 5.0,
+      "reviews": 33,
+      "description": "Sandália Modare com espelho dourado. Design moderno e confortável, ideal para o dia a dia com um toque de elegância.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
       "variants": {
         "label": "Tamanho",
         "options": [
-          { "id": "p", "name": "P" },
-          { "id": "m", "name": "M" },
-          { "id": "g", "name": "G", "price": 6490 }
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
         ]
       },
-      "maxPerCpf": 2
-    },
-    {
-      "id": "produto-3",
-      "name": "[Produto 3]",
-      "price": 3990,
-      "compareAt": null,
-      "description": "[Descrição curta do produto 3.]",
-      "images": ["/img/placeholder.svg"],
-      "variants": null,
       "maxPerCpf": null
     },
     {
-      "id": "produto-4",
-      "name": "[Produto 4]",
+      "id": "5556-109",
+      "brand": "Moleca",
+      "name": "Papete Moleca Casual Crochê 5556.109",
       "price": 2990,
-      "compareAt": 3990,
-      "description": "[Descrição curta do produto 4.]",
-      "images": ["/img/placeholder.svg"],
-      "variants": null,
+      "compareAt": 8990,
+      "discount": 67,
+      "rating": 5.0,
+      "reviews": 19,
+      "description": "Papete Moleca casual com detalhe em crochê. Leveza e estilo para compor looks despojados.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "6510-130",
+      "brand": "Vizzano",
+      "name": "Papete Vizzano Detalhe Fivela 6510.130",
+      "price": 2990,
+      "compareAt": 8990,
+      "discount": 67,
+      "rating": 5.0,
+      "reviews": 9,
+      "description": "Papete Vizzano com detalhe de fivela que combina conforto e estilo. Design moderno e versátil, ideal para o dia a dia.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "6459-118",
+      "brand": "Vizzano",
+      "name": "Sandália Vizzano Tiras Strass Prateado 6459.118",
+      "price": 2990,
+      "compareAt": 8990,
+      "discount": 67,
+      "rating": 5.0,
+      "reviews": 3,
+      "description": "Sandália Vizzano com tiras em strass prateado. Brilho e sofisticação para qualquer ocasião.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "5490-128",
+      "brand": "Moleca",
+      "name": "Papete Moleca Tiras em Strass 5490.128",
+      "price": 2990,
+      "compareAt": 8990,
+      "discount": 67,
+      "rating": 5.0,
+      "reviews": 5,
+      "description": "Papete Moleca com tiras em strass. Combina brilho e conforto no dia a dia.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "8523-115",
+      "brand": "Beira Rio",
+      "name": "Sandália Beira Rio Pepita de Ouro 8523.115",
+      "price": 3490,
+      "compareAt": 8990,
+      "discount": 61,
+      "rating": 5.0,
+      "reviews": 3,
+      "description": "Sandália Beira Rio Pepita de Ouro. Plataforma confortável com acabamento premium.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "2358-113",
+      "brand": "Moleca",
+      "name": "Papete Molekinha Detalhe Dourado 2358.113",
+      "price": 3490,
+      "compareAt": 8990,
+      "discount": 61,
+      "rating": 5.0,
+      "reviews": 0,
+      "description": "Papete Molekinha com detalhe dourado. Estilo e conforto para os pequenos.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "8523-116",
+      "brand": "Beira Rio",
+      "name": "Sandália Papete Beira Rio Detalhe Dourado 8523.116",
+      "price": 3490,
+      "compareAt": 8990,
+      "discount": 61,
+      "rating": 5.0,
+      "reviews": 2,
+      "description": "Sandália Beira Rio com detalhe dourado. Plataforma moderna e versátil.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "32823",
+      "brand": "Melissa",
+      "name": "Sandália Melissa Kick Off Sandal 32823",
+      "price": 3490,
+      "compareAt": 8990,
+      "discount": 61,
+      "rating": 5.0,
+      "reviews": 1,
+      "description": "Sandália Melissa Kick Off. O conforto e o design icônico da Melissa em uma sandália plataforma.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "5490-132",
+      "brand": "Moleca",
+      "name": "Papete Moleca Detalhe Lacinho 5490.132",
+      "price": 3490,
+      "compareAt": 8990,
+      "discount": 61,
+      "rating": 5.0,
+      "reviews": 1,
+      "description": "Papete Moleca com detalhe de lacinho. Feminina e confortável para o dia a dia.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "8523-118",
+      "brand": "Beira Rio",
+      "name": "Sandália Beira Rio Tiras de Strass 8523.118",
+      "price": 3990,
+      "compareAt": 8990,
+      "discount": 56,
+      "rating": 5.0,
+      "reviews": 1,
+      "description": "Sandália Beira Rio com tiras de strass. Brilho e conforto em uma plataforma versátil.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "z191330001",
+      "brand": "Arezzo",
+      "name": "Sandália Arezzo Flatform Marrocos Up Z191330001",
+      "price": 3990,
+      "compareAt": 8990,
+      "discount": 56,
+      "rating": 0,
+      "reviews": 0,
+      "description": "Sandália Arezzo Flatform Marrocos Up. Plataforma trançada com design sofisticado da Arezzo.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "a119030104",
+      "brand": "Arezzo",
+      "name": "Sandália Arezzo A119030104",
+      "price": 3990,
+      "compareAt": 8990,
+      "discount": 56,
+      "rating": 5.0,
+      "reviews": 2,
+      "description": "Sandália Arezzo com design clean e minimalista. Elegância e qualidade premium.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "s207330214",
+      "brand": "Schutz",
+      "name": "Papete Schutz Detalhe da Marca S207330214",
+      "price": 3990,
+      "compareAt": 8990,
+      "discount": 56,
+      "rating": 0,
+      "reviews": 0,
+      "description": "Papete Schutz com detalhe da marca. Plataforma premium com acabamento sofisticado.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "334ge",
+      "brand": "Azzem",
+      "name": "Papete Azzem Fivela Dupla 334GE",
+      "price": 3990,
+      "compareAt": 8990,
+      "discount": 56,
+      "rating": 0,
+      "reviews": 0,
+      "description": "Papete Azzem com fivela dupla. Conforto e estilo com design arrojado.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "5490-127",
+      "brand": "Moleca",
+      "name": "Sandália Moleca Rasteirinha Detalhe Strass 5490.127",
+      "price": 3590,
+      "compareAt": 8990,
+      "discount": 60,
+      "rating": 5.0,
+      "reviews": 28,
+      "description": "Sandália Moleca rasteirinha com detalhe em strass. Leve e brilhante para o verão.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "7162-330",
+      "brand": "Modare",
+      "name": "Sandália Modare Rasteira H 7162.330",
+      "price": 3590,
+      "compareAt": 8990,
+      "discount": 60,
+      "rating": 5.0,
+      "reviews": 32,
+      "description": "Sandália Modare rasteira com design em H. Conforto Modare para uso diário.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "7213-100",
+      "brand": "Modare",
+      "name": "Chinelo Modare Detalhe da Marca Dourado 7213.100",
+      "price": 3590,
+      "compareAt": 8990,
+      "discount": 60,
+      "rating": 5.0,
+      "reviews": 78,
+      "description": "Chinelo Modare com detalhe da marca em dourado. Conforto e elegância em um chinelo premium.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "0106-0d67",
+      "brand": "Santa Lolla",
+      "name": "Sandália Santa Lolla Flip Flop Corrente Dourada 0106.0D67",
+      "price": 3590,
+      "compareAt": 8990,
+      "discount": 60,
+      "rating": 5.0,
+      "reviews": 70,
+      "description": "Sandália Santa Lolla flip flop com corrente dourada. Tendência e conforto em um design marcante.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
+    },
+    {
+      "id": "6371-1105",
+      "brand": "Vizzano",
+      "name": "Sandália Rasteira Vizzano Cravejada 6371.1105",
+      "price": 3590,
+      "compareAt": 8990,
+      "discount": 60,
+      "rating": 5.0,
+      "reviews": 12,
+      "description": "Sandália rasteira Vizzano cravejada. Brilho e sofisticação em uma rasteira confortável.",
+      "images": [
+        "/img/placeholder.svg"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
       "maxPerCpf": null
     }
   ],
   "shipping": {
-    "_leia": "Cada faixa vale a partir de minItems itens no carrinho. A faixa com maior minItems atingido define o preço de cada opção.",
+    "_leia": "Cada faixa vale a partir de minItems itens no carrinho.",
     "options": [
-      { "id": "economica", "name": "Econômica", "days": "[7 a 12 dias úteis]" },
-      { "id": "expressa", "name": "Expressa", "days": "[3 a 5 dias úteis]" }
+      {
+        "id": "economica",
+        "name": "Econômica",
+        "days": "7 a 12 dias úteis"
+      },
+      {
+        "id": "expressa",
+        "name": "Expressa",
+        "days": "3 a 5 dias úteis"
+      }
     ],
     "tiers": [
-      { "minItems": 1, "prices": { "economica": 1990, "expressa": 2990 } },
-      { "minItems": 2, "prices": { "economica": 1990, "expressa": 1990 } },
-      { "minItems": 3, "prices": { "economica": 0, "expressa": 1990 } }
+      {
+        "minItems": 1,
+        "prices": {
+          "economica": 1990,
+          "expressa": 2990
+        }
+      },
+      {
+        "minItems": 2,
+        "prices": {
+          "economica": 1990,
+          "expressa": 1990
+        }
+      },
+      {
+        "minItems": 3,
+        "prices": {
+          "economica": 0,
+          "expressa": 1990
+        }
+      }
     ]
   }
 }

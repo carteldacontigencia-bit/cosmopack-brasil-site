@@ -3,26 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>[Nome da loja]</title>
-<meta name="description" content="[Descrição da loja em uma frase, aparece no Google.]">
-<meta name="theme-color" content="#ffffff">
+<title>Defanti Store — Calçados Originais a Preço de Atacado</title>
+<meta name="description" content="Defanti Store: sandálias e papetes das melhores marcas com até 93% de desconto. 100% originais, pagamento via PIX.">
+<meta name="theme-color" content="#E91E8C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" href="/catalog.json" as="fetch" crossorigin>
 <style>
-/* ── IDENTIDADE VISUAL ─────────────────────────────────────────────
-   Provisório, em preto e branco, até você mandar cores, fontes e logo.
-   Para trocar a identidade, mude só estas variáveis. */
+/* ── IDENTIDADE VISUAL — Defanti Store ──────────────────────────── */
 :root{
   --bg:#ffffff;
-  --bg-alt:#f5f5f5;
-  --text:#141414;
+  --bg-alt:#fdf2f8;       /* rosa bem claro */
+  --text:#1a1a1a;
   --muted:#666666;
-  --line:#e3e3e3;
-  --brand:#141414;        /* botões principais */
-  --brand-text:#ffffff;   /* texto sobre --brand */
-  --accent:#141414;       /* destaques: preço, barra de frete */
+  --line:#f0d6e8;
+  --brand:#E91E8C;        /* rosa/magenta do logo */
+  --brand-text:#ffffff;
+  --brand-dark:#c4167a;   /* hover */
+  --gold:#D4A843;         /* dourado do logo */
+  --accent:#E91E8C;
   --danger:#b3261e;
   --ok:#1e7a3c;
-  --font-body:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-body:'Poppins',system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --font-title:var(--font-body);
   --radius:12px;
   --header-h:56px;
@@ -40,7 +43,7 @@ h1,h2,h3{font-family:var(--font-title);line-height:1.2;margin:0 0 .5em}
 section{padding:40px 0}
 .section-title{font-size:1.5rem;text-align:center}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;border:1.5px solid var(--brand);background:var(--brand);color:var(--brand-text);font-weight:600;text-decoration:none;transition:opacity .15s}
-.btn:hover{opacity:.88}
+.btn:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .btn-ghost{background:transparent;color:var(--brand)}
 .btn-block{width:100%}
@@ -77,13 +80,17 @@ section{padding:40px 0}
 
 /* Produtos */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg);text-align:left;padding:0}
+.card{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg);text-align:left;padding:0}
 .card-img{aspect-ratio:1;background:var(--bg-alt)}
 .card-img img{width:100%;height:100%;object-fit:cover}
-.card-body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
-.card-name{font-weight:600;font-size:.95rem;line-height:1.3}
+.card-badge{position:absolute;top:8px;left:8px;background:#e53935;color:#fff;font-size:.75rem;font-weight:700;padding:3px 8px;border-radius:4px;z-index:1}
+.card-body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card-brand{font-size:.75rem;text-transform:uppercase;color:var(--muted);letter-spacing:.04em}
+.card-name{font-weight:600;font-size:.88rem;line-height:1.3;text-transform:uppercase}
+.card-stars{color:var(--gold);font-size:.75rem;letter-spacing:1px}
+.card-stars small{color:var(--muted);letter-spacing:0;font-size:.8em}
 .price{font-weight:700;color:var(--accent)}
-.price s{color:var(--muted);font-weight:400;font-size:.85em;margin-right:6px}
+.price s{color:var(--muted);font-weight:400;font-size:.85em;margin-right:6px;text-decoration:line-through}
 .card .btn{min-height:40px;margin-top:auto;font-size:.9rem}
 .skeleton{aspect-ratio:3/4;border-radius:var(--radius);background:linear-gradient(90deg,var(--bg-alt),#fafafa,var(--bg-alt));background-size:200% 100%;animation:sk 1.2s infinite}
 @keyframes sk{to{background-position:-200% 0}}
@@ -97,7 +104,7 @@ section{padding:40px 0}
 .reviews{background:var(--bg-alt)}
 .rating{text-align:center;margin-bottom:20px}
 .rating strong{font-size:2.2rem;display:block;line-height:1}
-.stars{color:var(--accent);letter-spacing:2px}
+.stars{color:var(--gold);letter-spacing:2px}
 .review-list{display:grid;gap:12px}
 .review{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
 .review p{margin:.4em 0}
@@ -124,8 +131,14 @@ dialog::backdrop{background:rgba(0,0,0,.5)}
 .thumbs button[aria-current="true"]{border-color:var(--brand)}
 .thumbs img{width:100%;height:100%;object-fit:cover}
 .pinfo{padding:16px 16px 0;flex:1}
+.pinfo .pm-brand{font-size:.82rem;text-transform:uppercase;color:var(--muted);letter-spacing:.04em;margin-bottom:2px}
 .pinfo h2{font-size:1.35rem;margin-bottom:.25em}
 .pinfo .price{font-size:1.25rem}
+.pinfo .pm-discount{display:inline-block;background:#e53935;color:#fff;font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:8px;vertical-align:middle}
+.pinfo .pm-stars{color:var(--gold);font-size:.85rem;letter-spacing:1px;margin-top:4px}
+.pinfo .pm-stars small{color:var(--muted);letter-spacing:0;font-size:.85em}
+.pinfo .pm-stock{color:var(--ok);font-size:.88rem;margin-top:6px}
+.pinfo .pm-stock::before{content:"● ";font-size:.6em;vertical-align:middle}
 .pinfo .desc{color:var(--muted);white-space:pre-line}
 .pinfo .limit{font-size:.85rem;color:var(--muted)}
 fieldset{border:0;margin:16px 0 0;padding:0}
@@ -193,11 +206,11 @@ body.locked{overflow:hidden}
 </head>
 <body>
 
-<div class="topbar" id="topbar">[Texto da faixa de aviso]</div>
+<div class="topbar" id="topbar">🔥 Preço de atacado · Sem quantidade mínima · Pagamento via PIX</div>
 
 <header class="header">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="[Nome da loja], início">[Nome da loja]</a>
+    <a class="logo" href="/" aria-label="Defanti Store, início">Defanti Store</a>
     <button class="cart-btn" id="cartBtn" type="button" aria-label="Abrir carrinho" aria-controls="cart" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
       <span class="cart-count" id="cartCount" data-zero aria-hidden="true">0</span>
@@ -210,12 +223,12 @@ body.locked{overflow:hidden}
     <div class="hero-media">
       <!-- Troque pela imagem (WebP, até ~150 KB) ou por um vídeo:
            <video src="/img/hero.mp4" poster="/img/hero.webp" autoplay muted loop playsinline></video> -->
-      <img src="/img/placeholder.svg" alt="[Descrição da imagem principal]" width="800" height="800" fetchpriority="high">
+      <img src="/img/placeholder.svg" alt="Calçados originais Defanti Store" width="800" height="800" fetchpriority="high">
     </div>
     <div class="hero-text">
-      <h1>[Título principal da promoção]</h1>
-      <p>[Subtítulo: o benefício em uma frase.]</p>
-      <a class="btn" href="#produtos">[Ver produtos]</a>
+      <h1>Calçados originais a preço de atacado</h1>
+      <p>Sandálias e papetes das melhores marcas com até 93% de desconto. Sem quantidade mínima.</p>
+      <a class="btn" href="#produtos">Ver produtos</a>
     </div>
   </section>
 
@@ -223,9 +236,9 @@ body.locked{overflow:hidden}
     <div class="wrap">
       <h2 class="section-title" id="rules-title">Como funciona a promoção</h2>
       <ul>
-        <li><span class="ico" aria-hidden="true">1</span><div><b>Pagamento via PIX</b><span>[Aprovação na hora. Pedido separado assim que o PIX é confirmado.]</span></div></li>
-        <li><span class="ico" aria-hidden="true">2</span><div><b>Limites</b><span>[Até X unidades por CPF em produtos selecionados.]</span></div></li>
-        <li><span class="ico" aria-hidden="true">3</span><div><b>Prazo</b><span>[Promoção válida até dd/mm ou enquanto durar o estoque.]</span></div></li>
+        <li><span class="ico" aria-hidden="true">1</span><div><b>Pagamento via PIX</b><span>Aprovação na hora. Pedido separado assim que o PIX é confirmado.</span></div></li>
+        <li><span class="ico" aria-hidden="true">2</span><div><b>100% Originais</b><span>Todas as marcas com nota fiscal e garantia de fábrica.</span></div></li>
+        <li><span class="ico" aria-hidden="true">3</span><div><b>Enquanto durar</b><span>Promoção válida enquanto durar o estoque. Aproveite!</span></div></li>
       </ul>
     </div>
   </section>
@@ -241,10 +254,11 @@ body.locked{overflow:hidden}
 
   <section class="about" aria-labelledby="about-title">
     <div class="wrap about-grid">
-      <img src="/img/placeholder.svg" alt="[Foto da loja ou da equipe]" width="800" height="600" loading="lazy" decoding="async">
+      <img src="/img/placeholder.svg" alt="Defanti Store — fachada da loja" width="800" height="600" loading="lazy" decoding="async">
       <div>
-        <h2 id="about-title">[Sobre a loja]</h2>
-        <p>[Quem somos, desde quando, o que nos diferencia. Dois ou três parágrafos curtos.]</p>
+        <h2 id="about-title">Sobre a Defanti Store</h2>
+        <p>Somos uma loja de calçados femininos com mais de 1 milhão de itens vendidos. Trabalhamos com as melhores marcas — Vizzano, Moleca, Beira Rio, Modare, Melissa, Arezzo, Schutz, Santa Lolla — todas 100% originais com nota fiscal.</p>
+        <p>Nosso compromisso é oferecer preço de atacado para todos, sem quantidade mínima. Seja para uso próprio ou para revenda, aqui você encontra o melhor preço do Brasil.</p>
       </div>
     </div>
   </section>
@@ -275,7 +289,7 @@ body.locked{overflow:hidden}
       <a href="/entrega">Entrega</a>
     </nav>
     <p>[Razão social] · CNPJ [00.000.000/0000-00]</p>
-    <p>[Endereço completo, CEP, Cidade/UF]</p>
+    <p>Rua Alberto Siqueira, 2671 — Duque de Caxias/RJ</p>
     <p>[E-mail de atendimento]</p>
   </div>
 </footer>
@@ -290,8 +304,11 @@ body.locked{overflow:hidden}
     </div>
     <div class="pside">
       <div class="pinfo">
+        <div class="pm-brand" id="pm-brand"></div>
         <h2 id="pm-name"></h2>
         <div class="price" id="pm-price"></div>
+        <div class="pm-stars" id="pm-stars"></div>
+        <div class="pm-stock">Em estoque, pronto para enviar</div>
         <p class="desc" id="pm-desc"></p>
         <p class="limit" id="pm-limit" hidden></p>
         <fieldset id="pm-variants" hidden>
@@ -395,7 +412,7 @@ body.locked{overflow:hidden}
   }
 
   /* ── carrinho ───────────────────────────────────────────────── */
-  var CART_KEY = 'loja.carrinho.v1';
+  var CART_KEY = 'defanti.carrinho.v1';
   var cart = [];   // [{ p: id do produto, v: id da variação ou null, q: quantidade }]
 
   function loadCart() {
@@ -531,13 +548,23 @@ body.locked{overflow:hidden}
   }
 
   /* ── grade ──────────────────────────────────────────────────── */
+  function starsHtml(rating, reviews) {
+    if (!reviews) return '';
+    var full = Math.floor(rating), half = rating % 1 >= 0.5 ? 1 : 0;
+    return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(5 - full - half) +
+      ' <small>(' + reviews + ')</small>';
+  }
   function renderGrid() {
     $('#grid').innerHTML = CATALOG.products.map(function (p) {
-      return '<article class="card">' +
+      var badge = p.discount ? '<span class="card-badge">-' + p.discount + '%</span>' : '';
+      return '<article class="card">' + badge +
         '<a class="card-img" href="#p-' + esc(p.id) + '" data-open="' + esc(p.id) + '" aria-label="Ver ' + esc(p.name) + '">' +
           '<img src="' + esc(p.images[0]) + '" alt="' + esc(p.name) + '" width="400" height="400" loading="lazy" decoding="async"></a>' +
-        '<div class="card-body"><div class="card-name">' + esc(p.name) + '</div>' +
-        '<div class="price">' + (p.variants && hasVariablePrice(p) ? 'a partir de ' : '') + priceHtml(p, minPrice(p)) + '</div>' +
+        '<div class="card-body">' +
+        (p.brand ? '<div class="card-brand">' + esc(p.brand) + '</div>' : '') +
+        '<div class="card-name">' + esc(p.name) + '</div>' +
+        (p.reviews ? '<div class="card-stars">' + starsHtml(p.rating, p.reviews) + '</div>' : '') +
+        '<div class="price">' + priceHtml(p, minPrice(p)) + '</div>' +
         '<button class="btn" type="button" data-open="' + esc(p.id) + '">Comprar</button></div></article>';
     }).join('');
   }
@@ -557,13 +584,17 @@ body.locked{overflow:hidden}
   }
   function updateModalPrice() {
     var vid = selectedVariant();
-    $('#pm-price').innerHTML = priceHtml(current, vid ? unitPrice(current, vid) : minPrice(current));
+    var cents = vid ? unitPrice(current, vid) : minPrice(current);
+    var disc = current.discount ? '<span class="pm-discount">-' + current.discount + '%</span>' : '';
+    $('#pm-price').innerHTML = priceHtml(current, cents) + disc;
   }
   function openProduct(pid) {
     var p = PRODUCTS[pid];
     if (!p) return;
     current = p;
+    $('#pm-brand').textContent = p.brand || '';
     $('#pm-name').textContent = p.name;
+    $('#pm-stars').innerHTML = p.reviews ? starsHtml(p.rating, p.reviews) : '';
     $('#pm-desc').textContent = p.description || '';
     $('#pm-error').textContent = '';
     $('#pm-track').innerHTML = p.images.map(function (src, i) {
@@ -665,8 +696,8 @@ body.locked{overflow:hidden}
     .then(function (data) {
       CATALOG = data;
       data.products.forEach(function (p) { PRODUCTS[p.id] = p; });
-      var ft = freeTier(), bar = $('#topbar');
-      if (ft && /^\[/.test(bar.textContent)) bar.textContent = 'Frete grátis a partir de ' + ft.minItems + ' itens · Pagamento via PIX';
+      var bar = $('#topbar');
+      if (data.store && data.store.topbar) bar.textContent = data.store.topbar;
       renderGrid();
       loadCart();
       renderCart();
