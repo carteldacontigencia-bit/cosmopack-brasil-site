@@ -667,50 +667,6 @@
       "maxPerCpf": null
     },
     {
-      "id": "5490-127",
-      "brand": "Moleca",
-      "name": "Sandália Moleca Rasteirinha Detalhe Strass 5490.127",
-      "price": 3590,
-      "compareAt": 8990,
-      "discount": 60,
-      "rating": 5.0,
-      "reviews": 28,
-      "description": "Sandália Moleca rasteirinha com detalhe em strass. Leve e brilhante para o verão.",
-      "images": [
-        "/img/placeholder.svg"
-      ],
-      "variants": {
-        "label": "Tamanho",
-        "options": [
-          {
-            "id": "34",
-            "name": "34"
-          },
-          {
-            "id": "35",
-            "name": "35"
-          },
-          {
-            "id": "36",
-            "name": "36"
-          },
-          {
-            "id": "37",
-            "name": "37"
-          },
-          {
-            "id": "38",
-            "name": "38"
-          },
-          {
-            "id": "39",
-            "name": "39"
-          }
-        ]
-      },
-      "maxPerCpf": null
-    },
-    {
       "id": "7162-330",
       "brand": "Modare",
       "name": "Sandália Modare Rasteira H 7162.330",
