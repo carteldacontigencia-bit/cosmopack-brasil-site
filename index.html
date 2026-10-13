@@ -94,7 +94,7 @@ section{padding:40px 0}
 
 /* Sobre */
 .about-grid{display:grid;gap:20px;align-items:center}
-.about-grid img{border-radius:var(--radius);aspect-ratio:4/3;object-fit:cover;background:var(--bg-alt);width:100%}
+.about-grid img{border-radius:var(--radius);object-fit:contain;width:100%;max-width:200px;margin:0 auto}
 .about-grid p{color:var(--muted)}
 
 /* Avaliações */
@@ -329,7 +329,7 @@ fbq('track','PageView');
 
   <section class="about" aria-labelledby="about-title">
     <div class="wrap about-grid">
-      <img src="/img/logo.jpg" alt="Logo Defanti Store" loading="lazy" decoding="async" style="max-width:280px;border-radius:12px">
+      <img src="/img/logo.jpg" alt="Logo Defanti Store" loading="lazy" decoding="async">
       <div>
         <h2 id="about-title">Sobre a Defanti Store</h2>
         <p>Somos uma loja de calçados femininos com mais de 1 milhão de itens vendidos. Trabalhamos com as melhores marcas — Vizzano, Moleca, Beira Rio, Modare, Melissa, Arezzo, Schutz, Santa Lolla — todas 100% originais com nota fiscal.</p>
