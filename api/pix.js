@@ -1,12 +1,12 @@
 /* POST /api/pix — Gera cobrança PIX.
    Calcula o preço no servidor (nunca confia no browser).
-   Gateway configurado via PAYMENT_GATEWAY env var. */
+   Gateway: Skale Pay (api.skalepayments.com.br) */
 
 import { calcTotal, calcShipping, findProduct, cors } from './_defanti/catalog.js';
 
 const GATEWAY = process.env.PAYMENT_GATEWAY || 'mock';
 const GATEWAY_KEY = process.env.GATEWAY_API_KEY || '';
-const GATEWAY_URL = process.env.GATEWAY_API_URL || '';
+const SKALE_API = 'https://api.skalepayments.com.br';
 
 function validateCPF(cpf) {
   const d = cpf.replace(/\D/g, '');
@@ -44,10 +44,45 @@ async function createPixMock(order) {
   };
 }
 
-async function createPixReal(order) {
-  // Placeholder — will be implemented when gateway is chosen
-  // Supports: pagarme, mercadopago, asaas
-  throw new Error('Gateway "' + GATEWAY + '" não configurado. Defina PAYMENT_GATEWAY e GATEWAY_API_KEY.');
+async function createPixSkalePay(order) {
+  const resp = await fetch(`${SKALE_API}/v1/charges`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${GATEWAY_KEY}`
+    },
+    body: JSON.stringify({
+      amount: order.total,
+      method: 'pix',
+      customer: {
+        name: order.customer.name,
+        document: order.customer.cpf,
+        email: order.customer.email,
+        phone: order.customer.phone || undefined
+      },
+      description: `Pedido ${order.code} - Defanti Store`,
+      external_id: order.code,
+      postback_url: (process.env.SITE_URL || 'https://defantistore.vercel.app') + '/api/postback'
+    })
+  });
+
+  if (!resp.ok) {
+    const errBody = await resp.text();
+    console.error('[pix] skalepay error status=' + resp.status + ' body=' + errBody.slice(0, 200));
+    throw new Error('Erro no gateway de pagamento.');
+  }
+
+  const data = await resp.json();
+
+  return {
+    ok: true,
+    pixId: data.id || data.charge_id || data.transaction_id,
+    orderCode: order.code,
+    pixCode: data.pix_code || data.pix?.code || data.qr_code || data.brcode || '',
+    qrImage: data.pix_qrcode || data.pix?.qr_code_url || data.qr_code_url || '',
+    qrCode: data.pix_code || data.pix?.code || data.qr_code || data.brcode || '',
+    expiresIn: data.expires_in || data.pix?.expires_in || 1800
+  };
 }
 
 export default async function handler(req, res) {
@@ -61,7 +96,6 @@ export default async function handler(req, res) {
       return res.status(400).json({ ok: false, error: 'Dados incompletos.' });
     }
 
-    // Validate customer
     const { name, cpf, email, phone } = body.customer;
     if (!name || name.trim().split(/\s+/).length < 2) {
       return res.status(400).json({ ok: false, error: 'Nome completo obrigatório.' });
@@ -73,14 +107,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ ok: false, error: 'E-mail inválido.' });
     }
 
-    // Validate items exist and recalculate prices server-side
     for (const item of body.items) {
       const p = findProduct(item.id);
       if (!p) return res.status(400).json({ ok: false, error: `Produto "${item.id}" não encontrado.` });
       if (item.qty < 1 || item.qty > 10) {
         return res.status(400).json({ ok: false, error: 'Quantidade inválida.' });
       }
-      // Check per-CPF limit
       if (p.maxPerCpf) {
         const totalQty = body.items.filter(i => i.id === item.id).reduce((s, i) => s + i.qty, 0);
         if (totalQty > p.maxPerCpf) {
@@ -89,7 +121,6 @@ export default async function handler(req, res) {
       }
     }
 
-    // Server-side price calculation
     const subtotal = calcTotal(body.items);
     const tier = calcShipping(body.items);
     const shippingId = body.shipping?.id;
@@ -107,14 +138,15 @@ export default async function handler(req, res) {
       createdAt: new Date().toISOString()
     };
 
-    // No PII in logs
-    console.log('[pix] order=' + order.code + ' total=' + total + ' items=' + body.items.length);
+    console.log('[pix] order=' + order.code + ' total=' + total + ' items=' + body.items.length + ' gateway=' + GATEWAY);
 
     let result;
-    if (GATEWAY === 'mock') {
+    if (GATEWAY === 'skalepay') {
+      result = await createPixSkalePay(order);
+    } else if (GATEWAY === 'mock') {
       result = await createPixMock(order);
     } else {
-      result = await createPixReal(order);
+      return res.status(500).json({ ok: false, error: 'Gateway não configurado.' });
     }
 
     return res.status(200).json(result);

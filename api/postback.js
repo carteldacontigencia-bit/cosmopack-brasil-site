@@ -1,17 +1,33 @@
 /* POST /api/postback — Webhook do gateway de pagamento.
-   Recebe notificação de PIX pago. Deve SEMPRE re-consultar
-   o gateway antes de confiar no payload (evita fraude).
+   Recebe notificação de PIX pago. Re-consulta o gateway
+   antes de confiar no payload (evita fraude).
    Dispara evento Purchase no Meta CAPI se confirmado.
    Nunca loga PII — apenas código do pedido e status. */
 
 const GATEWAY = process.env.PAYMENT_GATEWAY || 'mock';
 const GATEWAY_KEY = process.env.GATEWAY_API_KEY || '';
+const SKALE_API = 'https://api.skalepayments.com.br';
 const META_PIXEL_ID = process.env.META_PIXEL_ID || '';
 const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN || '';
 
 async function verifyWithGateway(pixId) {
   if (GATEWAY === 'mock') return { verified: true, status: 'paid' };
-  // Re-query gateway API to confirm payment
+
+  if (GATEWAY === 'skalepay') {
+    const resp = await fetch(`${SKALE_API}/v1/charges/${encodeURIComponent(pixId)}`, {
+      method: 'GET',
+      headers: { 'Authorization': `Bearer ${GATEWAY_KEY}` }
+    });
+    if (!resp.ok) {
+      console.error('[postback] skalepay verify error status=' + resp.status);
+      return { verified: false, status: 'error' };
+    }
+    const data = await resp.json();
+    const rawStatus = (data.status || data.payment_status || '').toLowerCase();
+    const isPaid = rawStatus === 'paid' || rawStatus === 'confirmed' || rawStatus === 'approved';
+    return { verified: isPaid, status: isPaid ? 'paid' : rawStatus };
+  }
+
   throw new Error('Gateway não configurado para verificação.');
 }
 
@@ -52,7 +68,6 @@ async function sendPurchaseEvent(order, req) {
         body: JSON.stringify(eventData)
       }
     );
-    const result = await resp.json();
     console.log('[postback] capi event_id=purchase_' + order.code + ' status=' + resp.status);
   } catch (err) {
     console.error('[postback] capi error order=' + order.code, err.message);
@@ -64,7 +79,7 @@ export default async function handler(req, res) {
 
   try {
     const body = req.body;
-    const pixId = body?.pixId || body?.id || body?.data?.id;
+    const pixId = body?.id || body?.charge_id || body?.pixId || body?.data?.id;
     if (!pixId) return res.status(400).json({ error: 'Missing pixId' });
 
     console.log('[postback] received pixId=' + String(pixId).slice(0, 20));
@@ -77,7 +92,6 @@ export default async function handler(req, res) {
 
     console.log('[postback] confirmed paid pixId=' + String(pixId).slice(0, 20));
 
-    // Send Purchase event to Meta CAPI (only on confirmed payment)
     if (body.order) {
       await sendPurchaseEvent(body.order, req);
     }
