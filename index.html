@@ -94,6 +94,7 @@ section{padding:40px 0}
 
 /* Sobre */
 .about-grid{display:grid;gap:20px;align-items:center}
+.about-grid img{border-radius:var(--radius);aspect-ratio:4/3;object-fit:cover;background:var(--bg-alt);width:100%}
 .about-grid p{color:var(--muted)}
 
 /* Avaliações */
@@ -261,7 +262,7 @@ body.locked{overflow:hidden}
   .hero-media{max-height:620px}
   .rules ul{grid-template-columns:repeat(3,1fr)}
   .grid{grid-template-columns:repeat(3,1fr);gap:20px}
-
+  .about-grid{grid-template-columns:1fr 1fr;gap:40px}
   .review-list{grid-template-columns:repeat(3,1fr)}
   .pmodal{width:min(920px,calc(100% - 48px));height:auto;max-height:calc(100% - 48px);margin:auto;border-radius:16px}
   .pmodal-inner{display:grid;grid-template-columns:1fr 1fr;min-height:0}
@@ -327,10 +328,13 @@ fbq('track','PageView');
   </section>
 
   <section class="about" aria-labelledby="about-title">
-    <div class="wrap" style="max-width:680px">
-      <h2 id="about-title" style="text-align:center">Sobre a Defanti Store</h2>
-      <p style="color:var(--muted)">Somos uma loja de calçados femininos com mais de 1 milhão de itens vendidos. Trabalhamos com as melhores marcas — Vizzano, Moleca, Beira Rio, Modare, Melissa, Arezzo, Schutz, Santa Lolla — todas 100% originais com nota fiscal.</p>
-      <p style="color:var(--muted)">Nosso compromisso é oferecer preço de atacado para todos, sem quantidade mínima. Seja para uso próprio ou para revenda, aqui você encontra o melhor preço do Brasil.</p>
+    <div class="wrap about-grid">
+      <img src="/img/logo.jpg" alt="Logo Defanti Store" loading="lazy" decoding="async" style="max-width:280px;border-radius:12px">
+      <div>
+        <h2 id="about-title">Sobre a Defanti Store</h2>
+        <p>Somos uma loja de calçados femininos com mais de 1 milhão de itens vendidos. Trabalhamos com as melhores marcas — Vizzano, Moleca, Beira Rio, Modare, Melissa, Arezzo, Schutz, Santa Lolla — todas 100% originais com nota fiscal.</p>
+        <p>Nosso compromisso é oferecer preço de atacado para todos, sem quantidade mínima. Seja para uso próprio ou para revenda, aqui você encontra o melhor preço do Brasil.</p>
+      </div>
     </div>
   </section>
 
