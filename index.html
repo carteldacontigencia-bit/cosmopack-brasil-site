@@ -64,11 +64,9 @@ section{padding:40px 0}
 
 /* Hero */
 .hero{padding:0}
-.hero-media{aspect-ratio:4/3;background:var(--bg-alt);overflow:hidden}
-.hero-media img,.hero-media video{width:100%;height:100%;object-fit:cover}
-.hero-text{padding:28px 16px 36px;text-align:center}
-.hero h1{font-size:1.9rem}
-.hero p{color:var(--muted);margin:0 auto 22px;max-width:36ch}
+.hero-media{background:var(--bg-alt);overflow:hidden}
+.hero-media img,.hero-media video{width:100%;height:auto;display:block}
+.hero-text{display:none}
 
 /* Regras */
 .rules{background:var(--bg-alt)}
@@ -257,11 +255,8 @@ body.locked{overflow:hidden}
 .ck-success .order-code{font-size:1.2rem;font-weight:700;letter-spacing:.05em;background:var(--bg-alt);padding:10px 20px;border-radius:var(--radius);display:inline-block;margin:12px 0}
 
 @media (min-width:720px){
-  .hero{display:grid;grid-template-columns:1.1fr 1fr;align-items:center}
-  .hero-media{aspect-ratio:auto;height:min(78vh,620px)}
-  .hero-text{text-align:left;padding:40px}
-  .hero h1{font-size:2.6rem}
-  .hero p{margin-left:0}
+  .hero{display:block}
+  .hero-media{max-height:620px}
   .rules ul{grid-template-columns:repeat(3,1fr)}
   .grid{grid-template-columns:repeat(3,1fr);gap:20px}
   .about-grid{grid-template-columns:1fr 1fr;gap:40px}
@@ -304,16 +299,9 @@ fbq('track','PageView');
 
 <main>
   <section class="hero">
-    <div class="hero-media">
-      <!-- Troque pela imagem (WebP, até ~150 KB) ou por um vídeo:
-           <video src="/img/hero.mp4" poster="/img/hero.webp" autoplay muted loop playsinline></video> -->
-      <img src="/img/placeholder.svg" alt="Calçados originais Defanti Store" width="800" height="800" fetchpriority="high">
-    </div>
-    <div class="hero-text">
-      <h1>Calçados originais a preço de atacado</h1>
-      <p>Sandálias e papetes das melhores marcas com até 93% de desconto. Sem quantidade mínima.</p>
-      <a class="btn" href="#produtos">Ver produtos</a>
-    </div>
+    <a href="#produtos" class="hero-media" aria-label="Ver produtos">
+      <img src="/img/banner.webp" alt="Defanti Store — Calçados que combinam com você. Sandálias e papetes com até 67% OFF. Sem quantidade mínima." width="1400" height="1050" fetchpriority="high">
+    </a>
   </section>
 
   <section class="rules" aria-labelledby="rules-title">
