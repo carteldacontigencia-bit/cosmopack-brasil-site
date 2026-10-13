@@ -17,18 +17,32 @@ export function findProduct(id) {
   return getCatalog().products.find(p => p.id === id) || null;
 }
 
-export function calcTotal(items) {
+export function getOrderBumps() {
   const catalog = getCatalog();
+  if (catalog.orderBumps) return catalog.orderBumps.filter(b => b.enabled);
+  if (catalog.orderBump && catalog.orderBump.enabled) return [catalog.orderBump];
+  return [];
+}
+
+export function calcTotal(items) {
+  const bumps = getOrderBumps();
+  const bumpIds = new Set(bumps.map(b => b.productId));
   let total = 0;
   for (const item of items) {
     const product = findProduct(item.id);
     if (!product) throw new Error(`Produto não encontrado: ${item.id}`);
-    let price = product.price;
-    if (item.variant && product.variants) {
-      const v = product.variants.options.find(o => o.id === item.variant);
-      if (v && typeof v.price === 'number') price = v.price;
+    if (item.isBump && bumpIds.has(item.id)) {
+      const bump = bumps.find(b => b.productId === item.id);
+      const price = bump.fixedPrice != null ? bump.fixedPrice : Math.round(product.price * (1 - (bump.discountPercent || 0) / 100));
+      total += price * item.qty;
+    } else {
+      let price = product.price;
+      if (item.variant && product.variants) {
+        const v = product.variants.options.find(o => o.id === item.variant);
+        if (v && typeof v.price === 'number') price = v.price;
+      }
+      total += price * item.qty;
     }
-    total += price * item.qty;
   }
   return total;
 }

@@ -893,11 +893,20 @@
       }
     ]
   },
-  "orderBump": {
-    "enabled": true,
-    "productId": "5490-127",
-    "discountPercent": 20,
-    "title": "Aproveite e leve mais!",
-    "description": "Adicione mais uma sandália com 20% de desconto"
-  }
+  "orderBumps": [
+    {
+      "enabled": true,
+      "productId": "5490-127",
+      "fixedPrice": 1200,
+      "title": "Aproveite e leve mais!",
+      "description": "Leve esta sandália por apenas R$ 12,00"
+    },
+    {
+      "enabled": true,
+      "productId": "7213-100",
+      "fixedPrice": 1200,
+      "title": "Oferta imperdível!",
+      "description": "Leve este chinelo por apenas R$ 12,00"
+    }
+  ]
 }

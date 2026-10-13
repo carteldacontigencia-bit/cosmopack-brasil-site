@@ -412,7 +412,10 @@ fbq('track','PageView');
   <div class="drawer-foot" id="cartFoot">
     <div class="subtotal"><span>Subtotal</span><span id="cartSubtotal">R$ 0,00</span></div>
     <small>Frete calculado no próximo passo.</small>
-    <button class="btn btn-block" type="button" id="checkoutBtn">Finalizar</button>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <button class="btn btn-ghost btn-block" type="button" id="continueBtn" style="border:1.5px solid var(--line)">Continuar comprando</button>
+      <button class="btn btn-block" type="button" id="checkoutBtn">Finalizar compra</button>
+    </div>
   </div>
 </aside>
 
@@ -459,10 +462,7 @@ fbq('track','PageView');
       <h3>Entrega</h3>
       <div class="ship-opts" id="ckShipOpts"></div>
       <div class="ck-summary" id="ckSummary"></div>
-      <div class="order-bump" id="ckBump" hidden>
-        <h4>🔥 Oferta especial</h4>
-        <label><input type="checkbox" id="ckBumpCheck"><span id="ckBumpText"></span></label>
-      </div>
+      <div id="ckBumps"></div>
     </div>
 
     <!-- Tela PIX -->
@@ -954,36 +954,47 @@ fbq('track','PageView');
     return ok;
   }
 
-  var bumpInCart = false;
-  function bumpPrice() {
-    if (!CATALOG.orderBump || !CATALOG.orderBump.enabled) return 0;
-    var bp = PRODUCTS[CATALOG.orderBump.productId];
-    if (!bp) return 0;
-    return Math.round(bp.price * (1 - (CATALOG.orderBump.discountPercent || 0) / 100));
+  var bumpsInCart = [];
+  function getBumps() {
+    var list = CATALOG.orderBumps || (CATALOG.orderBump ? [CATALOG.orderBump] : []);
+    return list.filter(function (b) { return b.enabled && PRODUCTS[b.productId]; });
+  }
+  function bumpPriceOf(bump) {
+    if (bump.fixedPrice != null) return bump.fixedPrice;
+    var bp = PRODUCTS[bump.productId];
+    return Math.round(bp.price * (1 - (bump.discountPercent || 0) / 100));
+  }
+  function totalBumpCost() {
+    var bumps = getBumps();
+    return bumpsInCart.reduce(function (s, checked, i) { return s + (checked && bumps[i] ? bumpPriceOf(bumps[i]) : 0); }, 0);
   }
 
-  function renderOrderBump() {
-    var bump = CATALOG.orderBump;
-    var box = $('#ckBump');
-    if (!bump || !bump.enabled || !PRODUCTS[bump.productId]) { box.hidden = true; return; }
-    var bp = PRODUCTS[bump.productId];
-    var discounted = bumpPrice();
-    box.hidden = false;
-    $('#ckBumpText').innerHTML = '<div style="display:flex;gap:10px;align-items:center">' +
-      '<img src="' + esc(bp.images[0]) + '" alt="" width="56" height="56" style="border-radius:6px;object-fit:cover">' +
-      '<div><b>' + esc(bp.name) + '</b><br>' +
-      '<span style="text-decoration:line-through;color:var(--muted)">' + money(bp.price) + '</span> ' +
-      '<span style="color:var(--gold);font-weight:700">' + money(discounted) + '</span>' +
-      '<br><small style="color:var(--muted)">' + esc(bump.description || '') + '</small></div></div>';
-    $('#ckBumpCheck').checked = bumpInCart;
-    $('#ckBumpCheck').onchange = function () {
-      bumpInCart = this.checked;
-      updateCkSummary();
-    };
+  function renderOrderBumps() {
+    var bumps = getBumps();
+    var container = $('#ckBumps');
+    if (!bumps.length) { container.innerHTML = ''; return; }
+    container.innerHTML = bumps.map(function (bump, i) {
+      var bp = PRODUCTS[bump.productId];
+      var discounted = bumpPriceOf(bump);
+      return '<div class="order-bump" style="margin-bottom:12px">' +
+        '<h4>🔥 ' + esc(bump.title || 'Oferta especial') + '</h4>' +
+        '<label><input type="checkbox" data-bump-idx="' + i + '"' + (bumpsInCart[i] ? ' checked' : '') + '>' +
+        '<div style="display:flex;gap:10px;align-items:center">' +
+        '<img src="' + esc(bp.images[0]) + '" alt="" width="56" height="56" style="border-radius:6px;object-fit:cover">' +
+        '<div><b>' + esc(bp.name) + '</b><br>' +
+        '<span style="text-decoration:line-through;color:var(--muted)">' + money(bp.price) + '</span> ' +
+        '<span style="color:var(--gold);font-weight:700">' + money(discounted) + '</span>' +
+        '<br><small style="color:var(--muted)">' + esc(bump.description || '') + '</small></div></div>' +
+        '</label></div>';
+    }).join('');
+    container.addEventListener('change', function (e) {
+      var idx = e.target.getAttribute('data-bump-idx');
+      if (idx != null) { bumpsInCart[+idx] = e.target.checked; updateCkSummary(); }
+    });
   }
 
   function renderStep3() {
-    bumpInCart = false;
+    bumpsInCart = getBumps().map(function () { return false; });
     var tier = tierFor(itemCount());
     var opts = CATALOG.shipping.options;
     var html = '';
@@ -997,7 +1008,7 @@ fbq('track','PageView');
         '<div class="ship-opt-price">' + money(price) + '</div></label>';
     });
     $('#ckShipOpts').innerHTML = html;
-    renderOrderBump();
+    renderOrderBumps();
     updateCkSummary();
     // highlight selected
     $('#ckShipOpts').addEventListener('change', function () {
@@ -1020,7 +1031,7 @@ fbq('track','PageView');
   function updateCkSummary() {
     var ship = selectedShipping();
     var sub = subtotal();
-    var bumpCost = bumpInCart ? bumpPrice() : 0;
+    var bumpCost = totalBumpCost();
     var shipCost = ship ? ship.price : 0;
     var total = sub + bumpCost + shipCost;
     var html = '<h4>Resumo do pedido</h4>';
@@ -1031,15 +1042,16 @@ fbq('track','PageView');
         '<span class="ck-sline-info">' + esc(p.name) + (v ? ' (' + esc(v.name) + ')' : '') + ' × ' + it.q + '</span>' +
         '<span>' + money(unitPrice(p, it.v) * it.q) + '</span></div>';
     });
-    if (bumpInCart) {
-      var bp = PRODUCTS[CATALOG.orderBump.productId];
-      if (bp) {
-        html += '<div class="ck-sline ck-sline-product ck-sline-bump">' +
-          '<img src="' + esc(bp.images[0]) + '" alt="" width="48" height="48" loading="lazy">' +
-          '<span class="ck-sline-info">🔥 ' + esc(bp.name) + ' × 1</span>' +
-          '<span>' + money(bumpCost) + '</span></div>';
-      }
-    }
+    var bumps = getBumps();
+    bumpsInCart.forEach(function (checked, i) {
+      if (!checked || !bumps[i]) return;
+      var bp = PRODUCTS[bumps[i].productId];
+      if (!bp) return;
+      html += '<div class="ck-sline ck-sline-product ck-sline-bump">' +
+        '<img src="' + esc(bp.images[0]) + '" alt="" width="48" height="48" loading="lazy">' +
+        '<span class="ck-sline-info">🔥 ' + esc(bp.name) + ' × 1</span>' +
+        '<span>' + money(bumpPriceOf(bumps[i])) + '</span></div>';
+    });
     html += '<div class="ck-sline"><span>Frete (' + (ship ? esc(ship.name) : '-') + ')</span><span>' + money(shipCost) + '</span></div>';
     html += '<div class="ck-sline ck-total"><span>Total</span><span>' + money(total) + '</span></div>';
     $('#ckSummary').innerHTML = html;
@@ -1074,10 +1086,16 @@ fbq('track','PageView');
       items: cart.map(function (it) {
         var p = PRODUCTS[it.p];
         return { id: it.p, variant: it.v, qty: it.q, unitPrice: unitPrice(p, it.v) };
-      }).concat(bumpInCart ? [{ id: CATALOG.orderBump.productId, variant: null, qty: 1, unitPrice: bumpPrice() }] : []),
+      }).concat(function () {
+        var bumps = getBumps(), extra = [];
+        bumpsInCart.forEach(function (checked, i) {
+          if (checked && bumps[i]) extra.push({ id: bumps[i].productId, variant: null, qty: 1, unitPrice: bumpPriceOf(bumps[i]), isBump: true });
+        });
+        return extra;
+      }()),
       shipping: { id: ship.id, name: ship.name, price: ship.price },
-      subtotal: subtotal() + (bumpInCart ? bumpPrice() : 0),
-      total: subtotal() + (bumpInCart ? bumpPrice() : 0) + ship.price,
+      subtotal: subtotal() + totalBumpCost(),
+      total: subtotal() + totalBumpCost() + ship.price,
       createdAt: new Date().toISOString()
     };
   }
@@ -1217,12 +1235,13 @@ fbq('track','PageView');
     if (addCurrent()) { $('#pmodal').close(); toast('Adicionado ao carrinho.'); }
   });
   $('#pm-buy').addEventListener('click', function () {
-    if (addCurrent()) { $('#pmodal').close(); startCheckout(); }
+    if (addCurrent()) { $('#pmodal').close(); openCart(); toast('Produto adicionado ao carrinho!'); }
   });
 
   $('#cartBtn').addEventListener('click', openCart);
   $('#cartClose').addEventListener('click', closeCart);
   $('#overlay').addEventListener('click', closeCart);
+  $('#continueBtn').addEventListener('click', function () { closeCart(); });
   $('#checkoutBtn').addEventListener('click', startCheckout);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCart(); });
 
