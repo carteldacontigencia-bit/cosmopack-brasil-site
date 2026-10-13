@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Defanti Store — Calçados Originais a Preço de Atacado</title>
-<meta name="description" content="Defanti Store: sandálias e papetes das melhores marcas com até 93% de desconto. 100% originais, pagamento via PIX.">
+<meta name="description" content="Defanti Store: todos os calçados por R$ 25,00. Sandálias e papetes 100% originais, pagamento via PIX.">
 <meta name="theme-color" content="#E91E8C">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,7 +88,6 @@ section{padding:40px 0}
 .card-stars{color:var(--gold);font-size:.75rem;letter-spacing:1px}
 .card-stars small{color:var(--muted);letter-spacing:0;font-size:.8em}
 .price{font-weight:700;color:var(--accent)}
-.price s{color:var(--muted);font-weight:400;font-size:.85em;margin-right:6px;text-decoration:line-through}
 .card .btn{min-height:40px;margin-top:auto;font-size:.9rem}
 .skeleton{aspect-ratio:3/4;border-radius:var(--radius);background:linear-gradient(90deg,var(--bg-alt),#fafafa,var(--bg-alt));background-size:200% 100%;animation:sk 1.2s infinite}
 @keyframes sk{to{background-position:-200% 0}}
@@ -211,8 +210,12 @@ body.locked{overflow:hidden}
 /* Resumo lateral / pedido */
 .ck-summary{background:var(--bg-alt);border-radius:var(--radius);padding:14px 16px;margin-bottom:20px}
 .ck-summary h4{font-size:.95rem;margin:0 0 10px}
-.ck-sline{display:flex;justify-content:space-between;font-size:.9rem;padding:4px 0;border-bottom:1px solid var(--line)}
-.ck-sline:last-child{border:0;font-weight:700;font-size:1rem;padding-top:8px}
+.ck-sline{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;padding:6px 0;border-bottom:1px solid var(--line)}
+.ck-sline-product{gap:10px;align-items:center}
+.ck-sline-product img{width:48px;height:48px;object-fit:cover;border-radius:6px;flex-shrink:0;background:var(--bg)}
+.ck-sline-info{flex:1;min-width:0;line-height:1.3}
+.ck-sline-bump{color:var(--gold)}
+.ck-total{border:0;font-weight:700;font-size:1.05rem;padding-top:10px}
 
 /* Opções de entrega */
 .ship-opts{display:grid;gap:10px;margin-bottom:16px}
@@ -551,8 +554,7 @@ fbq('track','PageView');
     return v && typeof v.price === 'number' ? v.price : p.price;
   }
   function priceHtml(p, cents) {
-    var old = p.compareAt && p.compareAt > cents ? '<s>' + money(p.compareAt) + '</s>' : '';
-    return old + money(cents);
+    return money(cents);
   }
 
   /* ── frete por faixas ───────────────────────────────────────── */
@@ -647,18 +649,8 @@ fbq('track','PageView');
   }
 
   function renderShipProgress() {
-    var box = $('#shipProgress'), ft = freeTier(), n = itemCount();
-    box.classList.remove('done');
-    if (!ft || n === 0) { box.hidden = !ft; if (ft) box.innerHTML = 'Frete grátis (' + esc(optionName(ft.option)) + ') a partir de ' + ft.minItems + ' itens.<div class="bar"><i style="width:0"></i></div>'; return; }
-    box.hidden = false;
-    var pct = Math.min(100, Math.round(n / ft.minItems * 100));
-    if (n >= ft.minItems) {
-      box.classList.add('done');
-      box.innerHTML = 'Você ganhou frete grátis na entrega ' + esc(optionName(ft.option)) + '!<div class="bar"><i style="width:100%"></i></div>';
-    } else {
-      var falta = ft.minItems - n;
-      box.innerHTML = 'Falta' + (falta > 1 ? 'm ' : ' ') + '<b>' + falta + ' ' + (falta > 1 ? 'itens' : 'item') + '</b> para frete grátis (' + esc(optionName(ft.option)) + ').<div class="bar"><i style="width:' + pct + '%"></i></div>';
-    }
+    var box = $('#shipProgress');
+    box.hidden = true;
   }
 
   function renderCart() {
@@ -722,8 +714,7 @@ fbq('track','PageView');
   }
   function renderGrid() {
     $('#grid').innerHTML = CATALOG.products.map(function (p) {
-      var badge = p.discount ? '<span class="card-badge">-' + p.discount + '%</span>' : '';
-      return '<article class="card">' + badge +
+      return '<article class="card">' +
         '<a class="card-img" href="#p-' + esc(p.id) + '" data-open="' + esc(p.id) + '" aria-label="Ver ' + esc(p.name) + '">' +
           '<img src="' + esc(p.images[0]) + '" alt="' + esc(p.name) + '" width="400" height="400" loading="lazy" decoding="async"></a>' +
         '<div class="card-body">' +
@@ -751,8 +742,7 @@ fbq('track','PageView');
   function updateModalPrice() {
     var vid = selectedVariant();
     var cents = vid ? unitPrice(current, vid) : minPrice(current);
-    var disc = current.discount ? '<span class="pm-discount">-' + current.discount + '%</span>' : '';
-    $('#pm-price').innerHTML = priceHtml(current, cents) + disc;
+    $('#pm-price').innerHTML = priceHtml(current, cents);
   }
   function openProduct(pid) {
     var p = PRODUCTS[pid];
@@ -964,22 +954,50 @@ fbq('track','PageView');
     return ok;
   }
 
+  var bumpInCart = false;
+  function bumpPrice() {
+    if (!CATALOG.orderBump || !CATALOG.orderBump.enabled) return 0;
+    var bp = PRODUCTS[CATALOG.orderBump.productId];
+    if (!bp) return 0;
+    return Math.round(bp.price * (1 - (CATALOG.orderBump.discountPercent || 0) / 100));
+  }
+
+  function renderOrderBump() {
+    var bump = CATALOG.orderBump;
+    var box = $('#ckBump');
+    if (!bump || !bump.enabled || !PRODUCTS[bump.productId]) { box.hidden = true; return; }
+    var bp = PRODUCTS[bump.productId];
+    var discounted = bumpPrice();
+    box.hidden = false;
+    $('#ckBumpText').innerHTML = '<div style="display:flex;gap:10px;align-items:center">' +
+      '<img src="' + esc(bp.images[0]) + '" alt="" width="56" height="56" style="border-radius:6px;object-fit:cover">' +
+      '<div><b>' + esc(bp.name) + '</b><br>' +
+      '<span style="text-decoration:line-through;color:var(--muted)">' + money(bp.price) + '</span> ' +
+      '<span style="color:var(--gold);font-weight:700">' + money(discounted) + '</span>' +
+      '<br><small style="color:var(--muted)">' + esc(bump.description || '') + '</small></div></div>';
+    $('#ckBumpCheck').checked = bumpInCart;
+    $('#ckBumpCheck').onchange = function () {
+      bumpInCart = this.checked;
+      updateCkSummary();
+    };
+  }
+
   function renderStep3() {
+    bumpInCart = false;
     var tier = tierFor(itemCount());
     var opts = CATALOG.shipping.options;
     var html = '';
     opts.forEach(function (opt, i) {
       var price = tier.prices[opt.id];
-      var isFree = price === 0;
       var checked = i === 0 ? ' checked' : '';
       html += '<label class="ship-opt' + (i === 0 ? ' selected' : '') + '">' +
         '<input type="radio" name="ck-ship" value="' + esc(opt.id) + '"' + checked + '>' +
         '<div class="ship-opt-info"><div class="ship-opt-name">' + esc(opt.name) + '</div>' +
         '<div class="ship-opt-detail">' + esc(opt.days || '') + '</div></div>' +
-        '<div class="ship-opt-price' + (isFree ? ' free' : '') + '">' +
-        (isFree ? 'Grátis' : money(price)) + '</div></label>';
+        '<div class="ship-opt-price">' + money(price) + '</div></label>';
     });
     $('#ckShipOpts').innerHTML = html;
+    renderOrderBump();
     updateCkSummary();
     // highlight selected
     $('#ckShipOpts').addEventListener('change', function () {
@@ -1002,15 +1020,28 @@ fbq('track','PageView');
   function updateCkSummary() {
     var ship = selectedShipping();
     var sub = subtotal();
+    var bumpCost = bumpInCart ? bumpPrice() : 0;
     var shipCost = ship ? ship.price : 0;
-    var total = sub + shipCost;
+    var total = sub + bumpCost + shipCost;
     var html = '<h4>Resumo do pedido</h4>';
     cart.forEach(function (it) {
       var p = PRODUCTS[it.p], v = variantOf(p, it.v);
-      html += '<div class="ck-sline"><span>' + esc(p.name) + (v ? ' (' + esc(v.name) + ')' : '') + ' × ' + it.q + '</span><span>' + money(unitPrice(p, it.v) * it.q) + '</span></div>';
+      html += '<div class="ck-sline ck-sline-product">' +
+        '<img src="' + esc(p.images[0]) + '" alt="" width="48" height="48" loading="lazy">' +
+        '<span class="ck-sline-info">' + esc(p.name) + (v ? ' (' + esc(v.name) + ')' : '') + ' × ' + it.q + '</span>' +
+        '<span>' + money(unitPrice(p, it.v) * it.q) + '</span></div>';
     });
-    html += '<div class="ck-sline"><span>Frete (' + (ship ? esc(ship.name) : '-') + ')</span><span>' + (shipCost === 0 ? 'Grátis' : money(shipCost)) + '</span></div>';
-    html += '<div class="ck-sline"><span>Total</span><span>' + money(total) + '</span></div>';
+    if (bumpInCart) {
+      var bp = PRODUCTS[CATALOG.orderBump.productId];
+      if (bp) {
+        html += '<div class="ck-sline ck-sline-product ck-sline-bump">' +
+          '<img src="' + esc(bp.images[0]) + '" alt="" width="48" height="48" loading="lazy">' +
+          '<span class="ck-sline-info">🔥 ' + esc(bp.name) + ' × 1</span>' +
+          '<span>' + money(bumpCost) + '</span></div>';
+      }
+    }
+    html += '<div class="ck-sline"><span>Frete (' + (ship ? esc(ship.name) : '-') + ')</span><span>' + money(shipCost) + '</span></div>';
+    html += '<div class="ck-sline ck-total"><span>Total</span><span>' + money(total) + '</span></div>';
     $('#ckSummary').innerHTML = html;
   }
 
@@ -1043,10 +1074,10 @@ fbq('track','PageView');
       items: cart.map(function (it) {
         var p = PRODUCTS[it.p];
         return { id: it.p, variant: it.v, qty: it.q, unitPrice: unitPrice(p, it.v) };
-      }),
+      }).concat(bumpInCart ? [{ id: CATALOG.orderBump.productId, variant: null, qty: 1, unitPrice: bumpPrice() }] : []),
       shipping: { id: ship.id, name: ship.name, price: ship.price },
-      subtotal: subtotal(),
-      total: subtotal() + ship.price,
+      subtotal: subtotal() + (bumpInCart ? bumpPrice() : 0),
+      total: subtotal() + (bumpInCart ? bumpPrice() : 0) + ship.price,
       createdAt: new Date().toISOString()
     };
   }
