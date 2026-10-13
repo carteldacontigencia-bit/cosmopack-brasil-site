@@ -841,6 +841,50 @@
         ]
       },
       "maxPerCpf": null
+    },
+    {
+      "id": "5490-127",
+      "brand": "Moleca",
+      "name": "Sandália Moleca Rasteirinha Detalhe Strass 5490.127",
+      "price": 2990,
+      "compareAt": 8990,
+      "discount": 67,
+      "rating": 5.0,
+      "reviews": 22,
+      "description": "Sandália Moleca rasteirinha com detalhe em strass. Elegância e conforto para o dia a dia.",
+      "images": [
+        "/img/5490-127.png"
+      ],
+      "variants": {
+        "label": "Tamanho",
+        "options": [
+          {
+            "id": "34",
+            "name": "34"
+          },
+          {
+            "id": "35",
+            "name": "35"
+          },
+          {
+            "id": "36",
+            "name": "36"
+          },
+          {
+            "id": "37",
+            "name": "37"
+          },
+          {
+            "id": "38",
+            "name": "38"
+          },
+          {
+            "id": "39",
+            "name": "39"
+          }
+        ]
+      },
+      "maxPerCpf": null
     }
   ],
   "shipping": {
