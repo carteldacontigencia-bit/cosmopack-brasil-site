@@ -53,8 +53,8 @@ section{padding:40px 0}
 .topbar{background:var(--brand);color:var(--brand-text);text-align:center;font-size:.85rem;padding:8px 16px;font-weight:500}
 .header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
 .header .wrap{height:var(--header-h);display:flex;align-items:center;justify-content:space-between}
-.logo{font-family:var(--font-title);font-weight:700;font-size:1.15rem;text-decoration:none;letter-spacing:.02em}
-.logo img{height:32px;width:auto}
+.logo{text-decoration:none;display:flex;align-items:center}
+.logo img{height:40px;width:auto;border-radius:8px}
 .cart-btn{position:relative;display:grid;place-items:center;width:44px;height:44px;border:0;background:none;border-radius:50%}
 .cart-btn svg{width:26px;height:26px}
 .cart-count{position:absolute;top:2px;right:0;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--brand);color:var(--brand-text);font-size:.72rem;font-weight:700;display:grid;place-items:center;line-height:1}
@@ -184,6 +184,78 @@ legend{font-weight:600;margin-bottom:8px;padding:0}
 
 body.locked{overflow:hidden}
 
+/* ── Checkout ──────────────────────────────────────────────── */
+.ck-overlay{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;display:none;flex-direction:column}
+.ck-overlay.open{display:flex}
+.ck-head{display:flex;align-items:center;height:var(--header-h);border-bottom:1px solid var(--line);padding:0 16px;gap:12px;position:sticky;top:0;background:var(--bg);z-index:2}
+.ck-head button{width:40px;height:40px;border:0;background:none;font-size:1.3rem;border-radius:50%}
+.ck-head h2{font-size:1rem;margin:0;font-weight:600}
+.ck-steps{display:flex;gap:0;padding:14px 16px 0}
+.ck-step{flex:1;text-align:center;font-size:.78rem;color:var(--muted);padding-bottom:10px;border-bottom:3px solid var(--line)}
+.ck-step.active{color:var(--brand);font-weight:600;border-color:var(--brand)}
+.ck-step.done{color:var(--ok);border-color:var(--ok)}
+.ck-body{flex:1;max-width:560px;width:100%;margin:0 auto;padding:20px 16px 100px}
+.ck-body h3{font-size:1.15rem;margin:0 0 16px}
+.ck-field{margin-bottom:14px}
+.ck-field label{display:block;font-size:.88rem;font-weight:500;margin-bottom:4px}
+.ck-field input,.ck-field select{width:100%;height:48px;padding:0 14px;border:1.5px solid var(--line);border-radius:var(--radius);font-size:1rem;background:var(--bg);transition:border-color .15s}
+.ck-field input:focus,.ck-field select:focus{border-color:var(--brand);outline:none}
+.ck-field input.invalid{border-color:var(--danger)}
+.ck-field .field-hint{font-size:.8rem;color:var(--danger);margin-top:2px;min-height:1em}
+.ck-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ck-row3{display:grid;grid-template-columns:1fr 2fr 80px;gap:12px}
+.ck-foot{position:fixed;bottom:0;left:0;right:0;z-index:51;background:var(--bg);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+.ck-foot .wrap{max-width:560px;margin:0 auto;display:flex;gap:10px}
+.ck-foot .btn{flex:1}
+.ck-panel{display:none}
+.ck-panel.active{display:block}
+
+/* Resumo lateral / pedido */
+.ck-summary{background:var(--bg-alt);border-radius:var(--radius);padding:14px 16px;margin-bottom:20px}
+.ck-summary h4{font-size:.95rem;margin:0 0 10px}
+.ck-sline{display:flex;justify-content:space-between;font-size:.9rem;padding:4px 0;border-bottom:1px solid var(--line)}
+.ck-sline:last-child{border:0;font-weight:700;font-size:1rem;padding-top:8px}
+
+/* Opções de entrega */
+.ship-opts{display:grid;gap:10px;margin-bottom:16px}
+.ship-opt{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:var(--radius);padding:14px 16px;cursor:pointer}
+.ship-opt input{accent-color:var(--brand);width:18px;height:18px;margin:0}
+.ship-opt.selected{border-color:var(--brand);background:rgba(233,30,140,.04)}
+.ship-opt-info{flex:1}
+.ship-opt-name{font-weight:600;font-size:.95rem}
+.ship-opt-detail{font-size:.82rem;color:var(--muted)}
+.ship-opt-price{font-weight:700;color:var(--brand)}
+.ship-opt-price.free{color:var(--ok)}
+
+/* Order bump */
+.order-bump{border:2px dashed var(--gold);border-radius:var(--radius);padding:14px 16px;margin-bottom:20px;background:rgba(212,168,67,.06)}
+.order-bump h4{margin:0 0 6px;font-size:.95rem;color:var(--gold)}
+.order-bump label{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:.9rem}
+.order-bump input{accent-color:var(--gold);width:18px;height:18px;margin-top:2px;flex-shrink:0}
+
+/* Tela PIX */
+.pix-screen{text-align:center;padding:20px 0}
+.pix-screen h3{margin-bottom:4px}
+.pix-screen .pix-timer{font-size:.9rem;color:var(--muted);margin-bottom:16px}
+.pix-qr{width:220px;height:220px;margin:0 auto 16px;background:var(--bg-alt);border-radius:var(--radius);display:grid;place-items:center;overflow:hidden}
+.pix-qr img,.pix-qr canvas{width:100%;height:100%}
+.pix-code{display:flex;gap:8px;margin:0 auto 16px;max-width:400px}
+.pix-code input{flex:1;height:44px;padding:0 12px;border:1.5px solid var(--line);border-radius:var(--radius);font-size:.82rem;background:var(--bg)}
+.pix-code button{white-space:nowrap}
+.pix-status{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:var(--radius);font-weight:600;font-size:.95rem}
+.pix-status.pending{background:#fff8e1;color:#e65100}
+.pix-status.paid{background:#e8f5e9;color:#1b5e20}
+.pix-status.expired{background:#fbe9e7;color:#bf360c}
+.pix-help{font-size:.85rem;color:var(--muted);margin-top:20px;line-height:1.5}
+.pix-help ol{text-align:left;padding-left:20px;margin:8px 0}
+
+/* Confirmação */
+.ck-success{text-align:center;padding:40px 16px}
+.ck-success .checkmark{width:72px;height:72px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;margin:0 auto 16px;font-size:2rem}
+.ck-success h3{color:var(--ok);font-size:1.3rem}
+.ck-success p{color:var(--muted);max-width:36ch;margin:8px auto}
+.ck-success .order-code{font-size:1.2rem;font-weight:700;letter-spacing:.05em;background:var(--bg-alt);padding:10px 20px;border-radius:var(--radius);display:inline-block;margin:12px 0}
+
 @media (min-width:720px){
   .hero{display:grid;grid-template-columns:1.1fr 1fr;align-items:center}
   .hero-media{aspect-ratio:auto;height:min(78vh,620px)}
@@ -201,6 +273,7 @@ body.locked{overflow:hidden}
   .pactions{padding:16px 28px 24px;border:0}
 }
 @media (min-width:1000px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:720px){.ck-body{padding:28px 16px 80px}.ck-foot .wrap{max-width:560px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -210,7 +283,7 @@ body.locked{overflow:hidden}
 
 <header class="header">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="Defanti Store, início">Defanti Store</a>
+    <a class="logo" href="/" aria-label="Defanti Store, início"><img src="/img/logo.jpg" alt="Defanti Store" width="120" height="40"></a>
     <button class="cart-btn" id="cartBtn" type="button" aria-label="Abrir carrinho" aria-controls="cart" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
       <span class="cart-count" id="cartCount" data-zero aria-hidden="true">0</span>
@@ -288,9 +361,9 @@ body.locked{overflow:hidden}
       <a href="/trocas">Trocas e Devoluções</a>
       <a href="/entrega">Entrega</a>
     </nav>
-    <p>[Razão social] · CNPJ [00.000.000/0000-00]</p>
+    <p>Armazém Digital · CNPJ 46.569.462/0001-96</p>
     <p>Rua Alberto Siqueira, 2671 — Duque de Caxias/RJ</p>
-    <p>[E-mail de atendimento]</p>
+    <p>suporte@defantistore.com</p>
   </div>
 </footer>
 
@@ -340,6 +413,99 @@ body.locked{overflow:hidden}
     <button class="btn btn-block" type="button" id="checkoutBtn">Finalizar</button>
   </div>
 </aside>
+
+<!-- Checkout -->
+<div class="ck-overlay" id="checkout">
+  <div class="ck-head">
+    <button type="button" id="ckBack" aria-label="Voltar">←</button>
+    <h2>Finalizar pedido</h2>
+  </div>
+  <div class="ck-steps">
+    <div class="ck-step active" data-step="1">1. Dados</div>
+    <div class="ck-step" data-step="2">2. Endereço</div>
+    <div class="ck-step" data-step="3">3. Entrega</div>
+  </div>
+  <div class="ck-body">
+
+    <!-- Passo 1: Dados Pessoais -->
+    <div class="ck-panel active" id="ckStep1">
+      <h3>Seus dados</h3>
+      <div class="ck-field"><label for="ck-name">Nome completo</label><input id="ck-name" type="text" autocomplete="name" required maxlength="120"><div class="field-hint"></div></div>
+      <div class="ck-field"><label for="ck-cpf">CPF</label><input id="ck-cpf" type="tel" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" maxlength="14"><div class="field-hint"></div></div>
+      <div class="ck-field"><label for="ck-email">E-mail</label><input id="ck-email" type="email" autocomplete="email" required maxlength="200"><div class="field-hint"></div></div>
+      <div class="ck-field"><label for="ck-phone">WhatsApp</label><input id="ck-phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(00) 00000-0000" maxlength="15"><div class="field-hint"></div></div>
+    </div>
+
+    <!-- Passo 2: Endereço -->
+    <div class="ck-panel" id="ckStep2">
+      <h3>Endereço de entrega</h3>
+      <div class="ck-field"><label for="ck-cep">CEP</label><input id="ck-cep" type="tel" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9"><div class="field-hint"></div></div>
+      <div class="ck-row">
+        <div class="ck-field"><label for="ck-street">Rua</label><input id="ck-street" type="text" autocomplete="address-line1" maxlength="200"><div class="field-hint"></div></div>
+        <div class="ck-field" style="max-width:120px"><label for="ck-num">Número</label><input id="ck-num" type="text" autocomplete="off" maxlength="10"><div class="field-hint"></div></div>
+      </div>
+      <div class="ck-field"><label for="ck-comp">Complemento <small style="color:var(--muted)">(opcional)</small></label><input id="ck-comp" type="text" autocomplete="address-line2" maxlength="100"></div>
+      <div class="ck-field"><label for="ck-bairro">Bairro</label><input id="ck-bairro" type="text" maxlength="100"><div class="field-hint"></div></div>
+      <div class="ck-row">
+        <div class="ck-field"><label for="ck-city">Cidade</label><input id="ck-city" type="text" autocomplete="address-level2" maxlength="100"><div class="field-hint"></div></div>
+        <div class="ck-field" style="max-width:100px"><label for="ck-uf">UF</label><select id="ck-uf" autocomplete="address-level1"><option value="">UF</option><option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option></select><div class="field-hint"></div></div>
+      </div>
+    </div>
+
+    <!-- Passo 3: Entrega + Resumo + PIX -->
+    <div class="ck-panel" id="ckStep3">
+      <h3>Entrega</h3>
+      <div class="ship-opts" id="ckShipOpts"></div>
+      <div class="ck-summary" id="ckSummary"></div>
+      <div class="order-bump" id="ckBump" hidden>
+        <h4>🔥 Oferta especial</h4>
+        <label><input type="checkbox" id="ckBumpCheck"><span id="ckBumpText"></span></label>
+      </div>
+    </div>
+
+    <!-- Tela PIX -->
+    <div class="ck-panel" id="ckPix">
+      <div class="pix-screen">
+        <h3>Pague com PIX</h3>
+        <div class="pix-timer" id="pixTimer">Expira em 30:00</div>
+        <div class="pix-qr" id="pixQr"></div>
+        <div class="pix-code">
+          <input type="text" id="pixCopy" readonly aria-label="Código PIX copia e cola">
+          <button class="btn" type="button" id="pixCopyBtn">Copiar</button>
+        </div>
+        <div class="pix-status pending" id="pixStatus">⏳ Aguardando pagamento...</div>
+        <div class="pix-help">
+          <strong>Como pagar:</strong>
+          <ol>
+            <li>Abra o app do seu banco</li>
+            <li>Escolha pagar com PIX (QR Code ou Copia e Cola)</li>
+            <li>Escaneie o código ou cole a chave</li>
+            <li>Confirme o pagamento</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sucesso -->
+    <div class="ck-panel" id="ckSuccess">
+      <div class="ck-success">
+        <div class="checkmark">✓</div>
+        <h3>Pagamento confirmado!</h3>
+        <p>Seu pedido foi aprovado e já está sendo separado.</p>
+        <div class="order-code" id="ckOrderCode"></div>
+        <p>Enviamos os detalhes para o seu e-mail.</p>
+        <br>
+        <a class="btn" href="/" id="ckNewOrder">Continuar comprando</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="ck-foot" id="ckFoot">
+    <div class="wrap">
+      <button class="btn" type="button" id="ckNext">Continuar</button>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -641,11 +807,353 @@ body.locked{overflow:hidden}
     return addToCart(current.id, vid, 1);
   }
 
-  /* ── checkout (etapa 2) ─────────────────────────────────────── */
+  /* ── checkout ────────────────────────────────────────────────── */
+  var ckStep = 1;
+  var ckOrder = null;  // dados do pedido em andamento
+  var pixPoll = null;  // intervalo de polling
+  var pixEnd = 0;      // timestamp de expiração
+
+  function maskCPF(v) {
+    return v.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2').slice(0, 14);
+  }
+  function maskPhone(v) {
+    var d = v.replace(/\D/g, '');
+    if (d.length <= 2) return d.length ? '(' + d : '';
+    if (d.length <= 7) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+    return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7, 11);
+  }
+  function maskCEP(v) {
+    return v.replace(/\D/g, '').replace(/(\d{5})(\d)/, '$1-$2').slice(0, 9);
+  }
+  function validCPF(cpf) {
+    var d = cpf.replace(/\D/g, '');
+    if (d.length !== 11 || /^(\d)\1{10}$/.test(d)) return false;
+    for (var t = 9; t < 11; t++) {
+      var sum = 0;
+      for (var i = 0; i < t; i++) sum += +d[i] * (t + 1 - i);
+      var r = (sum * 10) % 11; if (r === 10) r = 0;
+      if (+d[t] !== r) return false;
+    }
+    return true;
+  }
+  function validEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+  function validPhone(p) { return p.replace(/\D/g, '').length >= 10; }
+  function validCEP(c) { return c.replace(/\D/g, '').length === 8; }
+
+  // Masks
+  function setupMasks() {
+    var cpf = $('#ck-cpf'), phone = $('#ck-phone'), cep = $('#ck-cep');
+    cpf.addEventListener('input', function () { this.value = maskCPF(this.value); });
+    phone.addEventListener('input', function () { this.value = maskPhone(this.value); });
+    cep.addEventListener('input', function () { this.value = maskCEP(this.value); });
+    cep.addEventListener('blur', lookupCEP);
+  }
+
+  function lookupCEP() {
+    var cep = $('#ck-cep').value.replace(/\D/g, '');
+    if (cep.length !== 8) return;
+    var hint = $('#ck-cep').nextElementSibling;
+    hint.textContent = 'Buscando...';
+    hint.style.color = 'var(--muted)';
+    fetch('https://viacep.com.br/ws/' + cep + '/json/')
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        hint.textContent = '';
+        if (d.erro) { hint.textContent = 'CEP não encontrado.'; hint.style.color = ''; return; }
+        if (d.logradouro) $('#ck-street').value = d.logradouro;
+        if (d.bairro) $('#ck-bairro').value = d.bairro;
+        if (d.localidade) $('#ck-city').value = d.localidade;
+        if (d.uf) $('#ck-uf').value = d.uf;
+        $('#ck-num').focus();
+      })
+      .catch(function () { hint.textContent = ''; hint.style.color = ''; });
+  }
+
+  function openCheckout() {
+    if (!itemCount()) return;
+    closeCart();
+    ckStep = 1;
+    renderCkStep();
+    $('#checkout').classList.add('open');
+    document.body.classList.add('locked');
+    window.history.pushState({ ck: 1 }, '');
+    setupMasks();
+    // Recover saved data
+    var saved = storage.get('defanti.ck.v1');
+    if (saved) {
+      if (saved.name) $('#ck-name').value = saved.name;
+      if (saved.cpf) $('#ck-cpf').value = saved.cpf;
+      if (saved.email) $('#ck-email').value = saved.email;
+      if (saved.phone) $('#ck-phone').value = saved.phone;
+    }
+  }
+  function closeCheckout() {
+    $('#checkout').classList.remove('open');
+    document.body.classList.remove('locked');
+    if (pixPoll) { clearInterval(pixPoll); pixPoll = null; }
+  }
+  function saveCkData() {
+    storage.set('defanti.ck.v1', {
+      name: $('#ck-name').value.trim(),
+      cpf: $('#ck-cpf').value.trim(),
+      email: $('#ck-email').value.trim(),
+      phone: $('#ck-phone').value.trim()
+    });
+  }
+
+  function renderCkStep() {
+    var panels = ['ckStep1', 'ckStep2', 'ckStep3', 'ckPix', 'ckSuccess'];
+    panels.forEach(function (id) { $('#' + id).classList.remove('active'); });
+    var steps = document.querySelectorAll('.ck-step');
+    steps.forEach(function (s) {
+      var n = +s.getAttribute('data-step');
+      s.classList.remove('active', 'done');
+      if (n === ckStep) s.classList.add('active');
+      else if (n < ckStep) s.classList.add('done');
+    });
+    if (ckStep <= 3) {
+      $('#' + panels[ckStep - 1]).classList.add('active');
+      $('#ckFoot').hidden = false;
+      document.querySelector('.ck-steps').hidden = false;
+      $('#ckNext').textContent = ckStep === 3 ? 'Gerar PIX' : 'Continuar';
+    } else if (ckStep === 4) {
+      $('#ckPix').classList.add('active');
+      $('#ckFoot').hidden = true;
+      document.querySelector('.ck-steps').hidden = true;
+    } else {
+      $('#ckSuccess').classList.add('active');
+      $('#ckFoot').hidden = true;
+      document.querySelector('.ck-steps').hidden = true;
+    }
+    window.scrollTo(0, 0);
+    $('#checkout').scrollTop = 0;
+  }
+
+  function clearHints(panel) {
+    panel.querySelectorAll('.field-hint').forEach(function (h) { h.textContent = ''; });
+    panel.querySelectorAll('.invalid').forEach(function (el) { el.classList.remove('invalid'); });
+  }
+  function setErr(id, msg) {
+    var el = $('#' + id);
+    el.classList.add('invalid');
+    var h = el.nextElementSibling;
+    if (h && h.classList.contains('field-hint')) h.textContent = msg;
+  }
+
+  function validateStep1() {
+    clearHints($('#ckStep1'));
+    var ok = true;
+    if (!$('#ck-name').value.trim() || $('#ck-name').value.trim().split(/\s+/).length < 2) { setErr('ck-name', 'Informe nome e sobrenome.'); ok = false; }
+    if (!validCPF($('#ck-cpf').value)) { setErr('ck-cpf', 'CPF inválido.'); ok = false; }
+    if (!validEmail($('#ck-email').value)) { setErr('ck-email', 'E-mail inválido.'); ok = false; }
+    if (!validPhone($('#ck-phone').value)) { setErr('ck-phone', 'WhatsApp inválido.'); ok = false; }
+    if (ok) saveCkData();
+    return ok;
+  }
+  function validateStep2() {
+    clearHints($('#ckStep2'));
+    var ok = true;
+    if (!validCEP($('#ck-cep').value)) { setErr('ck-cep', 'CEP inválido.'); ok = false; }
+    if (!$('#ck-street').value.trim()) { setErr('ck-street', 'Informe a rua.'); ok = false; }
+    if (!$('#ck-num').value.trim()) { setErr('ck-num', 'Nº obrigatório.'); ok = false; }
+    if (!$('#ck-bairro').value.trim()) { setErr('ck-bairro', 'Informe o bairro.'); ok = false; }
+    if (!$('#ck-city').value.trim()) { setErr('ck-city', 'Informe a cidade.'); ok = false; }
+    if (!$('#ck-uf').value) { setErr('ck-uf', 'Selecione o estado.'); ok = false; }
+    return ok;
+  }
+
+  function renderStep3() {
+    var tier = tierFor(itemCount());
+    var opts = CATALOG.shipping.options;
+    var html = '';
+    opts.forEach(function (opt, i) {
+      var price = tier.prices[opt.id];
+      var isFree = price === 0;
+      var checked = i === 0 ? ' checked' : '';
+      html += '<label class="ship-opt' + (i === 0 ? ' selected' : '') + '">' +
+        '<input type="radio" name="ck-ship" value="' + esc(opt.id) + '"' + checked + '>' +
+        '<div class="ship-opt-info"><div class="ship-opt-name">' + esc(opt.name) + '</div>' +
+        '<div class="ship-opt-detail">' + esc(opt.days || '') + '</div></div>' +
+        '<div class="ship-opt-price' + (isFree ? ' free' : '') + '">' +
+        (isFree ? 'Grátis' : money(price)) + '</div></label>';
+    });
+    $('#ckShipOpts').innerHTML = html;
+    updateCkSummary();
+    // highlight selected
+    $('#ckShipOpts').addEventListener('change', function () {
+      document.querySelectorAll('.ship-opt').forEach(function (el) { el.classList.remove('selected'); });
+      var checked = $('#ckShipOpts input:checked');
+      if (checked) checked.closest('.ship-opt').classList.add('selected');
+      updateCkSummary();
+    });
+  }
+
+  function selectedShipping() {
+    var r = $('#ckShipOpts input:checked');
+    if (!r) return null;
+    var tier = tierFor(itemCount());
+    var id = r.value;
+    var opt = CATALOG.shipping.options.filter(function (o) { return o.id === id; })[0];
+    return { id: id, name: opt ? opt.name : id, price: tier.prices[id] || 0 };
+  }
+
+  function updateCkSummary() {
+    var ship = selectedShipping();
+    var sub = subtotal();
+    var shipCost = ship ? ship.price : 0;
+    var total = sub + shipCost;
+    var html = '<h4>Resumo do pedido</h4>';
+    cart.forEach(function (it) {
+      var p = PRODUCTS[it.p], v = variantOf(p, it.v);
+      html += '<div class="ck-sline"><span>' + esc(p.name) + (v ? ' (' + esc(v.name) + ')' : '') + ' × ' + it.q + '</span><span>' + money(unitPrice(p, it.v) * it.q) + '</span></div>';
+    });
+    html += '<div class="ck-sline"><span>Frete (' + (ship ? esc(ship.name) : '-') + ')</span><span>' + (shipCost === 0 ? 'Grátis' : money(shipCost)) + '</span></div>';
+    html += '<div class="ck-sline"><span>Total</span><span>' + money(total) + '</span></div>';
+    $('#ckSummary').innerHTML = html;
+  }
+
+  function generateOrderCode() {
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var code = 'DF-';
+    for (var i = 0; i < 8; i++) code += chars[Math.floor(Math.random() * chars.length)];
+    return code;
+  }
+
+  function buildOrderPayload() {
+    var ship = selectedShipping();
+    return {
+      code: generateOrderCode(),
+      customer: {
+        name: $('#ck-name').value.trim(),
+        cpf: $('#ck-cpf').value.replace(/\D/g, ''),
+        email: $('#ck-email').value.trim().toLowerCase(),
+        phone: $('#ck-phone').value.replace(/\D/g, '')
+      },
+      address: {
+        cep: $('#ck-cep').value.replace(/\D/g, ''),
+        street: $('#ck-street').value.trim(),
+        number: $('#ck-num').value.trim(),
+        complement: $('#ck-comp').value.trim(),
+        neighborhood: $('#ck-bairro').value.trim(),
+        city: $('#ck-city').value.trim(),
+        state: $('#ck-uf').value
+      },
+      items: cart.map(function (it) {
+        var p = PRODUCTS[it.p];
+        return { id: it.p, variant: it.v, qty: it.q, unitPrice: unitPrice(p, it.v) };
+      }),
+      shipping: { id: ship.id, name: ship.name, price: ship.price },
+      subtotal: subtotal(),
+      total: subtotal() + ship.price,
+      createdAt: new Date().toISOString()
+    };
+  }
+
+  function startPix() {
+    var btn = $('#ckNext');
+    btn.disabled = true;
+    btn.textContent = 'Gerando PIX...';
+    ckOrder = buildOrderPayload();
+
+    fetch('/api/pix', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(ckOrder)
+    })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      btn.disabled = false;
+      btn.textContent = 'Gerar PIX';
+      if (!data.ok) { toast(data.error || 'Erro ao gerar PIX. Tente novamente.'); return; }
+      ckOrder.pixId = data.pixId;
+      ckOrder.code = data.orderCode || ckOrder.code;
+      showPixScreen(data);
+    })
+    .catch(function () {
+      btn.disabled = false;
+      btn.textContent = 'Gerar PIX';
+      toast('Erro de conexão. Verifique sua internet e tente novamente.');
+    });
+  }
+
+  function showPixScreen(data) {
+    ckStep = 4;
+    renderCkStep();
+    // QR Code
+    if (data.qrImage) {
+      $('#pixQr').innerHTML = '<img src="' + esc(data.qrImage) + '" alt="QR Code PIX">';
+    } else {
+      $('#pixQr').innerHTML = '<span style="color:var(--muted);font-size:.9rem">QR Code</span>';
+    }
+    // Copy-paste code
+    $('#pixCopy').value = data.pixCode || data.qrCode || '';
+    // Timer
+    pixEnd = Date.now() + (data.expiresIn || 1800) * 1000;
+    updatePixTimer();
+    // Status
+    $('#pixStatus').className = 'pix-status pending';
+    $('#pixStatus').textContent = '⏳ Aguardando pagamento...';
+    // Poll
+    if (pixPoll) clearInterval(pixPoll);
+    pixPoll = setInterval(function () {
+      updatePixTimer();
+      pollPixStatus();
+    }, 5000);
+    // Save pending PIX for recovery
+    storage.set('defanti.pix.pending', {
+      orderId: ckOrder.pixId,
+      orderCode: ckOrder.code,
+      pixCode: data.pixCode || data.qrCode || '',
+      qrImage: data.qrImage || '',
+      expiresAt: pixEnd,
+      createdAt: Date.now()
+    });
+  }
+
+  function updatePixTimer() {
+    var left = Math.max(0, Math.floor((pixEnd - Date.now()) / 1000));
+    var m = Math.floor(left / 60), s = left % 60;
+    $('#pixTimer').textContent = 'Expira em ' + m + ':' + (s < 10 ? '0' : '') + s;
+    if (left <= 0) {
+      if (pixPoll) { clearInterval(pixPoll); pixPoll = null; }
+      $('#pixStatus').className = 'pix-status expired';
+      $('#pixStatus').textContent = '⏰ PIX expirado. Gere um novo.';
+      storage.set('defanti.pix.pending', null);
+    }
+  }
+
+  function pollPixStatus() {
+    if (!ckOrder || !ckOrder.pixId) return;
+    fetch('/api/pix-status?id=' + encodeURIComponent(ckOrder.pixId))
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.status === 'paid' || data.status === 'approved') {
+          if (pixPoll) { clearInterval(pixPoll); pixPoll = null; }
+          onPixPaid();
+        }
+      })
+      .catch(function () {});
+  }
+
+  function onPixPaid() {
+    $('#pixStatus').className = 'pix-status paid';
+    $('#pixStatus').textContent = '✅ Pagamento confirmado!';
+    storage.set('defanti.pix.pending', null);
+    // Clear cart
+    cart = [];
+    saveCart();
+    renderCart();
+    // Show success after brief delay
+    setTimeout(function () {
+      ckStep = 5;
+      renderCkStep();
+      $('#ckOrderCode').textContent = ckOrder.code;
+    }, 1500);
+  }
+
   function startCheckout() {
     if (!itemCount()) return;
-    toast('O checkout entra na etapa 2.');
-    openCart();
+    openCheckout();
   }
 
   /* ── eventos ────────────────────────────────────────────────── */
@@ -690,6 +1198,72 @@ body.locked{overflow:hidden}
     if (e.key === CART_KEY && CATALOG) { loadCart(); renderCart(); }
   });
 
+  /* ── Checkout events ───────────────────────────────────────── */
+  $('#ckNext').addEventListener('click', function () {
+    if (ckStep === 1) {
+      if (!validateStep1()) return;
+      ckStep = 2;
+      renderCkStep();
+      // Auto-lookup if CEP already filled
+      if (validCEP($('#ck-cep').value)) lookupCEP();
+    } else if (ckStep === 2) {
+      if (!validateStep2()) return;
+      ckStep = 3;
+      renderCkStep();
+      renderStep3();
+    } else if (ckStep === 3) {
+      startPix();
+    }
+  });
+  $('#ckBack').addEventListener('click', function () {
+    if (ckStep === 1) { closeCheckout(); }
+    else if (ckStep <= 3) { ckStep--; renderCkStep(); }
+    else if (ckStep === 4) { ckStep = 3; renderCkStep(); renderStep3(); }
+    else { closeCheckout(); }
+  });
+  // History API back button
+  window.addEventListener('popstate', function (e) {
+    if ($('#checkout').classList.contains('open')) {
+      if (ckStep === 1) closeCheckout();
+      else if (ckStep <= 3) { ckStep--; renderCkStep(); window.history.pushState({ ck: ckStep }, ''); }
+      else if (ckStep === 4) { ckStep = 3; renderCkStep(); renderStep3(); window.history.pushState({ ck: 3 }, ''); }
+    }
+  });
+  // Copy PIX code
+  $('#pixCopyBtn').addEventListener('click', function () {
+    var code = $('#pixCopy').value;
+    if (!code) return;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(function () { toast('Código PIX copiado!'); });
+    } else {
+      $('#pixCopy').select();
+      document.execCommand('copy');
+      toast('Código PIX copiado!');
+    }
+  });
+  // Recover pending PIX
+  function recoverPendingPix() {
+    var pending = storage.get('defanti.pix.pending');
+    if (!pending || !pending.expiresAt) return;
+    if (Date.now() > pending.expiresAt) { storage.set('defanti.pix.pending', null); return; }
+    // Over 2 hours old: discard
+    if (Date.now() - pending.createdAt > 7200000) { storage.set('defanti.pix.pending', null); return; }
+    ckOrder = { pixId: pending.orderId, code: pending.orderCode };
+    pixEnd = pending.expiresAt;
+    openCheckout();
+    ckStep = 4;
+    renderCkStep();
+    if (pending.qrImage) {
+      $('#pixQr').innerHTML = '<img src="' + esc(pending.qrImage) + '" alt="QR Code PIX">';
+    }
+    $('#pixCopy').value = pending.pixCode || '';
+    updatePixTimer();
+    $('#pixStatus').className = 'pix-status pending';
+    $('#pixStatus').textContent = '⏳ Aguardando pagamento...';
+    if (pixPoll) clearInterval(pixPoll);
+    pixPoll = setInterval(function () { updatePixTimer(); pollPixStatus(); }, 5000);
+  }
+
   /* ── início ─────────────────────────────────────────────────── */
   fetch('/catalog.json', { credentials: 'same-origin' })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -703,6 +1277,7 @@ body.locked{overflow:hidden}
       renderCart();
       var m = location.hash.match(/^#p-(.+)$/);
       if (m) openProduct(decodeURIComponent(m[1]));
+      recoverPendingPix();
     })
     .catch(function () {
       $('#grid').innerHTML = '<p>Não foi possível carregar os produtos. <a href="">Tentar de novo</a></p>';
