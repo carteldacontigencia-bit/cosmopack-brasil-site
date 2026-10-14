@@ -7,11 +7,30 @@
 const GATEWAY = process.env.PAYMENT_GATEWAY || 'mock';
 const GATEWAY_KEY = process.env.GATEWAY_API_KEY || '';
 const SKALE_API = 'https://api.skalepayments.com.br';
+const PAGSENSE_API = 'https://api.pagsense.com/v1';
+const PAGSENSE_PUBLIC = process.env.PAGSENSE_PUBLIC_KEY || '';
+const PAGSENSE_SECRET = process.env.PAGSENSE_SECRET_KEY || '';
 const META_PIXEL_ID = process.env.META_PIXEL_ID || '';
 const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN || '';
 
 async function verifyWithGateway(pixId) {
   if (GATEWAY === 'mock') return { verified: true, status: 'paid' };
+
+  if (GATEWAY === 'pagsense') {
+    const auth = Buffer.from(`${PAGSENSE_PUBLIC}:${PAGSENSE_SECRET}`).toString('base64');
+    const resp = await fetch(`${PAGSENSE_API}/transactions/${encodeURIComponent(pixId)}`, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json', 'Authorization': `Basic ${auth}` }
+    });
+    if (!resp.ok) {
+      console.error('[postback] pagsense verify error status=' + resp.status);
+      return { verified: false, status: 'error' };
+    }
+    const data = await resp.json();
+    const rawStatus = (data.status || '').toLowerCase();
+    const isPaid = rawStatus === 'paid' || rawStatus === 'confirmed' || rawStatus === 'approved';
+    return { verified: isPaid, status: isPaid ? 'paid' : rawStatus };
+  }
 
   if (GATEWAY === 'skalepay') {
     const resp = await fetch(`${SKALE_API}/v1/charges/${encodeURIComponent(pixId)}`, {
@@ -79,7 +98,7 @@ export default async function handler(req, res) {
 
   try {
     const body = req.body;
-    const pixId = body?.id || body?.charge_id || body?.pixId || body?.data?.id;
+    const pixId = body?.insertId || body?.id || body?.charge_id || body?.pixId || body?.data?.id || body?.originalTransactionId;
     if (!pixId) return res.status(400).json({ error: 'Missing pixId' });
 
     console.log('[postback] received pixId=' + String(pixId).slice(0, 20));

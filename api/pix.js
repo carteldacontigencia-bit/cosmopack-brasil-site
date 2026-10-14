@@ -1,12 +1,15 @@
 /* POST /api/pix — Gera cobrança PIX.
    Calcula o preço no servidor (nunca confia no browser).
-   Gateway: Skale Pay (api.skalepayments.com.br) */
+   Gateways: PagSense, Skale Pay, ou mock. */
 
 import { calcTotal, calcShipping, findProduct, cors } from './_defanti/catalog.js';
 
 const GATEWAY = process.env.PAYMENT_GATEWAY || 'mock';
 const GATEWAY_KEY = process.env.GATEWAY_API_KEY || '';
 const SKALE_API = 'https://api.skalepayments.com.br';
+const PAGSENSE_API = 'https://api.pagsense.com/v1';
+const PAGSENSE_PUBLIC = process.env.PAGSENSE_PUBLIC_KEY || '';
+const PAGSENSE_SECRET = process.env.PAGSENSE_SECRET_KEY || '';
 
 function validateCPF(cpf) {
   const d = cpf.replace(/\D/g, '');
@@ -85,6 +88,86 @@ async function createPixSkalePay(order) {
   };
 }
 
+async function createPixPagSense(order) {
+  const auth = Buffer.from(`${PAGSENSE_PUBLIC}:${PAGSENSE_SECRET}`).toString('base64');
+  const siteUrl = process.env.SITE_URL || 'https://defantistore.vercel.app';
+
+  const items = order.items.map(item => {
+    const p = findProduct(item.id);
+    const unitPrice = item.isBump
+      ? Math.round((order.subtotal - calcTotal(order.items.filter(i => !i.isBump))) / order.items.filter(i => i.isBump).reduce((n, i) => n + i.qty, 0))
+      : p.price;
+    return {
+      title: p.name,
+      description: p.name,
+      unitPrice: unitPrice,
+      quantity: item.qty,
+      tangible: true
+    };
+  });
+
+  const payload = {
+    paymentMethod: 'pix',
+    amount: order.total,
+    isInfoProducts: false,
+    postbackUrl: `${siteUrl}/api/postback`,
+    customer: {
+      name: order.customer.name,
+      email: order.customer.email,
+      phone: order.customer.phone || ''
+    },
+    document: {
+      number: order.customer.cpf,
+      type: 'cpf'
+    },
+    items,
+    shipping: {
+      cost: order.shipping.price,
+      method: order.shipping.id || 'padrao',
+      estimated_delivery: '5 a 10 dias úteis',
+      tracking_code: '',
+      address: {
+        street: order.address.street || '',
+        streetNumber: order.address.number || '',
+        zipCode: (order.address.cep || '').replace(/\D/g, ''),
+        neighborhood: order.address.neighborhood || '',
+        city: order.address.city || '',
+        state: order.address.state || '',
+        country: 'BR',
+        complement: order.address.complement || ''
+      }
+    }
+  };
+
+  const resp = await fetch(`${PAGSENSE_API}/transactions`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Basic ${auth}`
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (!resp.ok) {
+    const errBody = await resp.text();
+    console.error('[pix] pagsense error status=' + resp.status + ' body=' + errBody.slice(0, 300));
+    throw new Error('Erro no gateway de pagamento.');
+  }
+
+  const data = await resp.json();
+
+  return {
+    ok: true,
+    pixId: String(data.insertId || data.id),
+    orderCode: order.code,
+    pixCode: data.pix_code || data.pixCode || data.brcode || data.qr_code || '',
+    qrImage: data.pix_qrcode || data.qr_code_url || '',
+    qrCode: data.pix_code || data.pixCode || data.brcode || data.qr_code || '',
+    expiresIn: data.expires_in || 1800
+  };
+}
+
 export default async function handler(req, res) {
   cors(res);
   if (req.method === 'OPTIONS') return res.status(204).end();
@@ -141,7 +224,9 @@ export default async function handler(req, res) {
     console.log('[pix] order=' + order.code + ' total=' + total + ' items=' + body.items.length + ' gateway=' + GATEWAY);
 
     let result;
-    if (GATEWAY === 'skalepay') {
+    if (GATEWAY === 'pagsense') {
+      result = await createPixPagSense(order);
+    } else if (GATEWAY === 'skalepay') {
       result = await createPixSkalePay(order);
     } else if (GATEWAY === 'mock') {
       result = await createPixMock(order);

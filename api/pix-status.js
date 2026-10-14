@@ -6,8 +6,41 @@ import { cors } from './_defanti/catalog.js';
 const GATEWAY = process.env.PAYMENT_GATEWAY || 'mock';
 const GATEWAY_KEY = process.env.GATEWAY_API_KEY || '';
 const SKALE_API = 'https://api.skalepayments.com.br';
+const PAGSENSE_API = 'https://api.pagsense.com/v1';
+const PAGSENSE_PUBLIC = process.env.PAGSENSE_PUBLIC_KEY || '';
+const PAGSENSE_SECRET = process.env.PAGSENSE_SECRET_KEY || '';
 
 async function checkMock(pixId) {
+  return { status: 'pending' };
+}
+
+async function checkPagSense(pixId) {
+  const auth = Buffer.from(`${PAGSENSE_PUBLIC}:${PAGSENSE_SECRET}`).toString('base64');
+  const resp = await fetch(`${PAGSENSE_API}/transactions/${encodeURIComponent(pixId)}`, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': `Basic ${auth}`
+    }
+  });
+
+  if (!resp.ok) {
+    console.error('[pix-status] pagsense error status=' + resp.status);
+    return { status: 'error' };
+  }
+
+  const data = await resp.json();
+  const rawStatus = (data.status || '').toLowerCase();
+
+  if (rawStatus === 'paid' || rawStatus === 'confirmed' || rawStatus === 'approved') {
+    return { status: 'paid' };
+  }
+  if (rawStatus === 'expired' || rawStatus === 'canceled' || rawStatus === 'cancelled') {
+    return { status: 'expired' };
+  }
+  if (rawStatus === 'refunded') {
+    return { status: 'refunded' };
+  }
   return { status: 'pending' };
 }
 
@@ -51,7 +84,9 @@ export default async function handler(req, res) {
 
   try {
     let result;
-    if (GATEWAY === 'skalepay') {
+    if (GATEWAY === 'pagsense') {
+      result = await checkPagSense(pixId);
+    } else if (GATEWAY === 'skalepay') {
       result = await checkSkalePay(pixId);
     } else if (GATEWAY === 'mock') {
       result = await checkMock(pixId);
