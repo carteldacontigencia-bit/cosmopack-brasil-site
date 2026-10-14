@@ -50,29 +50,53 @@ async function verifyWithGateway(pixId) {
   throw new Error('Gateway não configurado para verificação.');
 }
 
-async function sendPurchaseEvent(order, req) {
+async function sendPurchaseEvent(pixId, body, req) {
   if (!META_PIXEL_ID || !META_ACCESS_TOKEN) return;
 
   const crypto = await import('node:crypto');
   const hash = (v) => v ? crypto.createHash('sha256').update(v.trim().toLowerCase()).digest('hex') : '';
 
+  let email = '';
+  let phone = '';
+  let value = '0';
+  let orderId = String(pixId);
+
+  if (GATEWAY === 'pagsense') {
+    try {
+      const auth = Buffer.from(`${PAGSENSE_PUBLIC}:${PAGSENSE_SECRET}`).toString('base64');
+      const resp = await fetch(`${PAGSENSE_API}/transactions/${encodeURIComponent(pixId)}`, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json', 'Authorization': `Basic ${auth}` }
+      });
+      if (resp.ok) {
+        const tx = await resp.json();
+        email = tx.customer?.email || tx.email || '';
+        phone = tx.customer?.phone || tx.phone || '';
+        value = tx.amount ? (tx.amount / 100).toFixed(2) : '0';
+        orderId = tx.external_id || tx.id || pixId;
+      }
+    } catch (e) {
+      console.error('[postback] pagsense fetch for capi error', e.message);
+    }
+  }
+
   const eventData = {
     data: [{
       event_name: 'Purchase',
       event_time: Math.floor(Date.now() / 1000),
-      event_id: 'purchase_' + order.code,
+      event_id: 'purchase_' + orderId,
       event_source_url: (process.env.SITE_URL || 'https://defantistore.vercel.app') + '/',
       action_source: 'website',
       user_data: {
-        em: [hash(order.customer?.email)],
-        ph: [hash(order.customer?.phone)],
-        client_ip_address: req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.socket?.remoteAddress || '',
+        em: email ? [hash(email)] : [],
+        ph: phone ? [hash(phone)] : [],
+        client_ip_address: req.headers['x-forwarded-for']?.split(',')[0]?.trim() || '',
         client_user_agent: req.headers['user-agent'] || ''
       },
       custom_data: {
         currency: 'BRL',
-        value: (order.total / 100).toFixed(2),
-        order_id: order.code
+        value: value,
+        order_id: orderId
       }
     }],
     access_token: META_ACCESS_TOKEN
@@ -87,9 +111,9 @@ async function sendPurchaseEvent(order, req) {
         body: JSON.stringify(eventData)
       }
     );
-    console.log('[postback] capi event_id=purchase_' + order.code + ' status=' + resp.status);
+    console.log('[postback] capi event_id=purchase_' + orderId + ' status=' + resp.status);
   } catch (err) {
-    console.error('[postback] capi error order=' + order.code, err.message);
+    console.error('[postback] capi error order=' + orderId, err.message);
   }
 }
 
@@ -111,9 +135,7 @@ export default async function handler(req, res) {
 
     console.log('[postback] confirmed paid pixId=' + String(pixId).slice(0, 20));
 
-    if (body.order) {
-      await sendPurchaseEvent(body.order, req);
-    }
+    await sendPurchaseEvent(pixId, body, req);
 
     return res.status(200).json({ received: true, action: 'confirmed' });
   } catch (err) {
