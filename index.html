@@ -879,7 +879,24 @@ fbq('track','PageView');
     $('#checkout').classList.add('open');
     document.body.classList.add('locked');
     window.history.pushState({ ck: 1 }, '');
-    fbq('track','InitiateCheckout',{value:(subtotal()/100),currency:'BRL',num_items:itemCount()});
+    var icValue = (subtotal() / 100).toFixed(2);
+    var icItems = itemCount();
+    var icIds = cart.map(function(it) { return it.id; });
+    var icEventId = 'ic_' + Date.now();
+    fbq('track','InitiateCheckout',{value:parseFloat(icValue),currency:'BRL',num_items:icItems,eventID:icEventId});
+    fetch('/api/capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        eventName: 'InitiateCheckout',
+        eventId: icEventId,
+        value: icValue,
+        contentIds: icIds,
+        numItems: icItems,
+        fbc: getCookie('_fbc'),
+        fbp: getCookie('_fbp')
+      })
+    }).catch(function() {});
     setupMasks();
     // Recover saved data
     var saved = storage.get('defanti.ck.v1');
@@ -1212,11 +1229,14 @@ fbq('track','PageView');
     var purchaseValue = (ckOrder.total / 100).toFixed(2);
     var contentIds = ckOrder.items.map(function(it) { return it.id; });
     var numItems = ckOrder.items.reduce(function(n, it) { return n + it.qty; }, 0);
-    fbq('track','Purchase',{value:parseFloat(purchaseValue),currency:'BRL',content_ids:contentIds,content_type:'product',num_items:numItems});
+    var purchaseEventId = 'purchase_' + ckOrder.code;
+    fbq('track','Purchase',{value:parseFloat(purchaseValue),currency:'BRL',content_ids:contentIds,content_type:'product',num_items:numItems,eventID:purchaseEventId});
     fetch('/api/capi', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        eventName: 'Purchase',
+        eventId: purchaseEventId,
         orderCode: ckOrder.code,
         email: ckOrder.customer?.email || '',
         phone: ckOrder.customer?.phone || '',
