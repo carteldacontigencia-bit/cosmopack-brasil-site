@@ -116,7 +116,7 @@ async function createPixPagSense(order) {
   const payload = {
     paymentMethod: 'pix',
     amount: order.total,
-    isInfoProducts: true,
+    isInfoProducts: false,
     postbackUrl: `${siteUrl}/api/postback`,
     customer: {
       name: order.customer.name,
@@ -195,35 +195,32 @@ async function createPixPagSense(order) {
     throw new Error('Pagamento recusado. Verifique seus dados e tente novamente.');
   }
 
-  function isImageUrl(v) {
-    return typeof v === 'string' && (v.startsWith('http') || v.startsWith('data:'));
-  }
-
-  function findPix(obj) {
-    if (!obj || typeof obj !== 'object') return { code: '', img: '' };
-    const candidates = [
-      obj.pixCode, obj.pix_code, obj.brcode, obj.qr_code,
-      obj.emv, obj.pixCopiaECola, obj.pix_copia_cola, obj.copia_e_cola,
-      obj.qrCode,
-      obj.pix?.code, obj.pix?.brcode, obj.pix?.qr_code, obj.pix?.emv,
-      obj.pix?.pixCopiaECola, obj.pix?.copia_e_cola, obj.pix?.qrCode
-    ].filter(Boolean);
-    const imgCandidates = [
-      obj.qrCodeImage, obj.qr_code_image, obj.qr_code_url,
-      obj.pix_qrcode, obj.qrCodeBase64, obj.qr_code_base64,
-      obj.qrCode,
-      obj.pix?.qr_code_url, obj.pix?.qrcode, obj.pix?.qrCode,
-      obj.pix?.qrCodeImage, obj.pix?.qrCodeBase64
-    ].filter(Boolean);
-    const code = candidates.find(c => typeof c === 'string' && c.length > 20) || '';
-    const img = imgCandidates.find(c => isImageUrl(c)) || '';
+  function extractPix(obj, depth = 0) {
+    let code = '';
+    let img = '';
+    if (!obj || typeof obj !== 'object' || depth > 3) return { code, img };
+    for (const [k, v] of Object.entries(obj)) {
+      if (typeof v === 'string') {
+        if (!code && v.startsWith('00020126')) code = v;
+        if (!code && v.length > 50 && /^[A-Za-z0-9+/=]+$/.test(v.replace(/\s/g, '')) && !v.startsWith('http')) {
+          // might be base64 encoded EMV
+        }
+        if (!img && (v.startsWith('http') || v.startsWith('data:')) && (k.toLowerCase().includes('qr') || k.toLowerCase().includes('image'))) img = v;
+        if (!code && v.length > 100 && !v.startsWith('http') && !v.startsWith('data:') && !v.startsWith('{') && !v.startsWith('<')) code = v;
+      } else if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
+        const nested = extractPix(v, depth + 1);
+        if (!code && nested.code) code = nested.code;
+        if (!img && nested.img) img = nested.img;
+      }
+    }
     return { code, img };
   }
 
-  const fromTx = findPix(txData);
-  const fromCreate = findPix(data);
+  const fromTx = extractPix(txData);
+  const fromCreate = extractPix(data);
   const pixCode = fromTx.code || fromCreate.code;
   const qrImage = fromTx.img || fromCreate.img;
+  console.log('[pix] extracted pixCode=' + (pixCode ? pixCode.slice(0, 60) + '...' : 'EMPTY') + ' qrImage=' + (qrImage ? qrImage.slice(0, 60) : 'EMPTY'));
 
   if (!pixCode && !qrImage) {
     console.error('[pix] pagsense no pix code found. txData=' + JSON.stringify(txData).slice(0, 1500));
