@@ -158,20 +158,15 @@ async function createPixPagSense(order) {
 
   if (!resp.ok) {
     const errBody = await resp.text();
-    console.error('[pix] pagsense error status=' + resp.status + ' body=' + errBody.slice(0, 500));
-    console.error('[pix] pagsense payload=' + JSON.stringify(payload).slice(0, 800));
+    console.error('[pix] pagsense error status=' + resp.status);
     let detail = '';
     try { detail = JSON.parse(errBody)?.message || JSON.parse(errBody)?.error || ''; } catch {}
     throw new Error(detail || 'Erro no gateway de pagamento.');
   }
 
   const data = await resp.json();
-  console.log('[pix] pagsense create raw=' + JSON.stringify(data).slice(0, 600));
-
   const txId = String(data.insertId || data.id || '');
   if (!txId) throw new Error('PagSense não retornou ID da transação.');
-
-  console.log('[pix] pagsense create raw=' + JSON.stringify(data).slice(0, 800));
 
   let txData = data;
   try {
@@ -179,13 +174,7 @@ async function createPixPagSense(order) {
       method: 'GET',
       headers: { 'Accept': 'application/json', 'Authorization': `Basic ${auth}` }
     });
-    if (detailResp.ok) {
-      txData = await detailResp.json();
-      console.log('[pix] pagsense detail keys=' + Object.keys(txData).join(','));
-      console.log('[pix] pagsense detail raw=' + JSON.stringify(txData).slice(0, 1500));
-    } else {
-      console.error('[pix] pagsense detail status=' + detailResp.status);
-    }
+    if (detailResp.ok) txData = await detailResp.json();
   } catch (e) {
     console.error('[pix] pagsense detail fetch error', e.message);
   }
@@ -202,9 +191,6 @@ async function createPixPagSense(order) {
     for (const [k, v] of Object.entries(obj)) {
       if (typeof v === 'string') {
         if (!code && v.startsWith('00020126')) code = v;
-        if (!code && v.length > 50 && /^[A-Za-z0-9+/=]+$/.test(v.replace(/\s/g, '')) && !v.startsWith('http')) {
-          // might be base64 encoded EMV
-        }
         if (!img && (v.startsWith('http') || v.startsWith('data:')) && (k.toLowerCase().includes('qr') || k.toLowerCase().includes('image'))) img = v;
         if (!code && v.length > 100 && !v.startsWith('http') && !v.startsWith('data:') && !v.startsWith('{') && !v.startsWith('<')) code = v;
       } else if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
@@ -220,10 +206,8 @@ async function createPixPagSense(order) {
   const fromCreate = extractPix(data);
   const pixCode = fromTx.code || fromCreate.code;
   const qrImage = fromTx.img || fromCreate.img;
-  console.log('[pix] extracted pixCode=' + (pixCode ? pixCode.slice(0, 60) + '...' : 'EMPTY') + ' qrImage=' + (qrImage ? qrImage.slice(0, 60) : 'EMPTY'));
 
   if (!pixCode && !qrImage) {
-    console.error('[pix] pagsense no pix code found. txData=' + JSON.stringify(txData).slice(0, 1500));
     throw new Error('PIX não gerado. Tente novamente em alguns instantes.');
   }
 
