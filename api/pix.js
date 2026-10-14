@@ -121,11 +121,11 @@ async function createPixPagSense(order) {
     customer: {
       name: order.customer.name,
       email: order.customer.email,
-      phone: order.customer.phone || '',
-      document: {
-        number: order.customer.cpf,
-        type: 'cpf'
-      }
+      phone: order.customer.phone || ''
+    },
+    document: {
+      number: order.customer.cpf,
+      type: 'cpf'
     },
     items,
     shipping: {
