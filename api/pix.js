@@ -166,15 +166,19 @@ async function createPixPagSense(order) {
   }
 
   const data = await resp.json();
+  console.log('[pix] pagsense response keys=' + Object.keys(data).join(',') + ' raw=' + JSON.stringify(data).slice(0, 500));
+
+  const pixCode = data.pixCode || data.pix_code || data.brcode || data.qr_code || data.pix?.code || '';
+  const qrImage = data.qrCode || data.pix_qrcode || data.qr_code_url || data.pix?.qr_code_url || '';
 
   return {
     ok: true,
     pixId: String(data.insertId || data.id),
     orderCode: order.code,
-    pixCode: data.pix_code || data.pixCode || data.brcode || data.qr_code || '',
-    qrImage: data.pix_qrcode || data.qr_code_url || '',
-    qrCode: data.pix_code || data.pixCode || data.brcode || data.qr_code || '',
-    expiresIn: data.expires_in || 1800
+    pixCode: pixCode,
+    qrImage: qrImage,
+    qrCode: pixCode,
+    expiresIn: data.expires_in || data.expiresIn || 1800
   };
 }
 
