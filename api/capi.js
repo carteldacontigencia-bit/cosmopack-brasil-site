@@ -6,7 +6,7 @@ import { cors } from './_defanti/catalog.js';
 import { createHash } from 'node:crypto';
 
 const META_PIXEL_ID = process.env.META_PIXEL_ID || '';
-const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN || '';
+const META_ACCESS_TOKEN = process.env.META_CAPI_TOKEN || '';
 const ALLOWED_EVENTS = ['InitiateCheckout', 'Purchase'];
 
 function hash(v) {

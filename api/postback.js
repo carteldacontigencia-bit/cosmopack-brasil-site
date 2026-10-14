@@ -11,7 +11,7 @@ const PAGSENSE_API = 'https://api.pagsense.com/v1';
 const PAGSENSE_PUBLIC = process.env.PAGSENSE_PUBLIC_KEY || '';
 const PAGSENSE_SECRET = process.env.PAGSENSE_SECRET_KEY || '';
 const META_PIXEL_ID = process.env.META_PIXEL_ID || '';
-const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN || '';
+const META_ACCESS_TOKEN = process.env.META_CAPI_TOKEN || '';
 
 async function verifyWithGateway(pixId) {
   if (GATEWAY === 'mock') return { verified: true, status: 'paid' };
