@@ -166,19 +166,42 @@ async function createPixPagSense(order) {
   }
 
   const data = await resp.json();
-  console.log('[pix] pagsense response keys=' + Object.keys(data).join(',') + ' raw=' + JSON.stringify(data).slice(0, 500));
+  console.log('[pix] pagsense create keys=' + Object.keys(data).join(',') + ' raw=' + JSON.stringify(data).slice(0, 500));
 
-  const pixCode = data.pixCode || data.pix_code || data.brcode || data.qr_code || data.pix?.code || '';
-  const qrImage = data.qrCode || data.pix_qrcode || data.qr_code_url || data.pix?.qr_code_url || '';
+  const txId = String(data.insertId || data.id);
+
+  // PagSense may return PIX data only on GET, so fetch the transaction
+  let txData = data;
+  if (txId && (!data.pixCode && !data.pix_code && !data.brcode)) {
+    try {
+      const detailResp = await fetch(`${PAGSENSE_API}/transactions/${encodeURIComponent(txId)}`, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json', 'Authorization': `Basic ${auth}` }
+      });
+      if (detailResp.ok) {
+        txData = await detailResp.json();
+        console.log('[pix] pagsense detail keys=' + Object.keys(txData).join(',') + ' raw=' + JSON.stringify(txData).slice(0, 800));
+      }
+    } catch (e) {
+      console.error('[pix] pagsense detail fetch error', e.message);
+    }
+  }
+
+  const pixCode = txData.pixCode || txData.pix_code || txData.brcode || txData.qr_code
+    || txData.pix?.code || txData.pix?.brcode || txData.pix?.qr_code
+    || data.pixCode || data.pix_code || data.brcode || '';
+  const qrImage = txData.qrCode || txData.pix_qrcode || txData.qr_code_url
+    || txData.pix?.qr_code_url || txData.pix?.qrcode
+    || data.qrCode || data.pix_qrcode || '';
 
   return {
     ok: true,
-    pixId: String(data.insertId || data.id),
+    pixId: txId,
     orderCode: order.code,
     pixCode: pixCode,
     qrImage: qrImage,
     qrCode: pixCode,
-    expiresIn: data.expires_in || data.expiresIn || 1800
+    expiresIn: txData.expires_in || txData.expiresIn || data.expires_in || 1800
   };
 }
 
