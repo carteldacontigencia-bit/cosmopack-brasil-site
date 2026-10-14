@@ -225,7 +225,8 @@ async function createPixPagSense(order) {
     pixCode: pixCode,
     qrImage: qrImage,
     qrCode: pixCode,
-    expiresIn: txData.expires_in || txData.expiresIn || data.expires_in || 1800
+    expiresIn: txData.expires_in || txData.expiresIn || data.expires_in || 1800,
+    _debug: { createKeys: Object.keys(data), detailKeys: Object.keys(txData), txDataRaw: txData }
   };
 }
 

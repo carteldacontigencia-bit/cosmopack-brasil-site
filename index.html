@@ -1127,6 +1127,7 @@ fbq('track','PageView');
       btn.disabled = false;
       btn.textContent = 'Gerar PIX';
       if (!data.ok) { toast(data.error || 'Erro ao gerar PIX. Tente novamente.'); return; }
+      if (data._debug) console.log('[PIX DEBUG]', JSON.stringify(data._debug, null, 2));
       ckOrder.pixId = data.pixId;
       ckOrder.code = data.orderCode || ckOrder.code;
       showPixScreen(data);
