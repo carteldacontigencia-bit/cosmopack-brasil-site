@@ -1200,11 +1200,33 @@ fbq('track','PageView');
       .catch(function () {});
   }
 
+  function getCookie(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+
   function onPixPaid() {
     $('#pixStatus').className = 'pix-status paid';
     $('#pixStatus').textContent = '✅ Pagamento confirmado!';
     storage.set('defanti.pix.pending', null);
-    fbq('track','Purchase',{value:(ckOrder.total/100),currency:'BRL',content_ids:ckOrder.items.map(function(it){return it.id}),content_type:'product',num_items:ckOrder.items.reduce(function(n,it){return n+it.qty},0)});
+    var purchaseValue = (ckOrder.total / 100).toFixed(2);
+    var contentIds = ckOrder.items.map(function(it) { return it.id; });
+    var numItems = ckOrder.items.reduce(function(n, it) { return n + it.qty; }, 0);
+    fbq('track','Purchase',{value:parseFloat(purchaseValue),currency:'BRL',content_ids:contentIds,content_type:'product',num_items:numItems});
+    fetch('/api/capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        orderCode: ckOrder.code,
+        email: ckOrder.customer?.email || '',
+        phone: ckOrder.customer?.phone || '',
+        value: purchaseValue,
+        contentIds: contentIds,
+        numItems: numItems,
+        fbc: getCookie('_fbc'),
+        fbp: getCookie('_fbp')
+      })
+    }).catch(function() {});
     cart = [];
     saveCart();
     renderCart();
