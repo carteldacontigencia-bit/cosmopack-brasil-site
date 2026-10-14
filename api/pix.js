@@ -171,7 +171,8 @@ async function createPixPagSense(order) {
   const txId = String(data.insertId || data.id || '');
   if (!txId) throw new Error('PagSense não retornou ID da transação.');
 
-  // PagSense returns only insertId on POST; fetch full transaction for PIX data
+  console.log('[pix] pagsense create raw=' + JSON.stringify(data).slice(0, 800));
+
   let txData = data;
   try {
     const detailResp = await fetch(`${PAGSENSE_API}/transactions/${encodeURIComponent(txId)}`, {
@@ -180,7 +181,10 @@ async function createPixPagSense(order) {
     });
     if (detailResp.ok) {
       txData = await detailResp.json();
-      console.log('[pix] pagsense detail raw=' + JSON.stringify(txData).slice(0, 800));
+      console.log('[pix] pagsense detail keys=' + Object.keys(txData).join(','));
+      console.log('[pix] pagsense detail raw=' + JSON.stringify(txData).slice(0, 1500));
+    } else {
+      console.error('[pix] pagsense detail status=' + detailResp.status);
     }
   } catch (e) {
     console.error('[pix] pagsense detail fetch error', e.message);
@@ -191,15 +195,26 @@ async function createPixPagSense(order) {
     throw new Error('Pagamento recusado. Verifique seus dados e tente novamente.');
   }
 
-  const pixCode = txData.pixCode || txData.pix_code || txData.brcode || txData.qr_code
-    || txData.pix?.code || txData.pix?.brcode || txData.pix?.qr_code
-    || data.pixCode || data.pix_code || data.brcode || '';
-  const qrImage = txData.qrCode || txData.pix_qrcode || txData.qr_code_url
-    || txData.pix?.qr_code_url || txData.pix?.qrcode
-    || data.qrCode || data.pix_qrcode || '';
+  function findPix(obj) {
+    if (!obj || typeof obj !== 'object') return { code: '', img: '' };
+    const code = obj.pixCode || obj.pix_code || obj.brcode || obj.qr_code
+      || obj.emv || obj.pixCopiaECola || obj.pix_copia_cola || obj.copia_e_cola
+      || obj.pix?.code || obj.pix?.brcode || obj.pix?.qr_code || obj.pix?.emv
+      || obj.pix?.pixCopiaECola || obj.pix?.copia_e_cola || '';
+    const img = obj.qrCode || obj.qrCodeImage || obj.qr_code_image || obj.qr_code_url
+      || obj.pix_qrcode || obj.qrCodeBase64 || obj.qr_code_base64
+      || obj.pix?.qr_code_url || obj.pix?.qrcode || obj.pix?.qrCode
+      || obj.pix?.qrCodeImage || obj.pix?.qrCodeBase64 || '';
+    return { code, img };
+  }
+
+  const fromTx = findPix(txData);
+  const fromCreate = findPix(data);
+  const pixCode = fromTx.code || fromCreate.code;
+  const qrImage = fromTx.img || fromCreate.img;
 
   if (!pixCode && !qrImage) {
-    console.error('[pix] pagsense no pix code found. txData keys=' + Object.keys(txData).join(','));
+    console.error('[pix] pagsense no pix code found. txData=' + JSON.stringify(txData).slice(0, 1500));
     throw new Error('PIX não gerado. Tente novamente em alguns instantes.');
   }
 

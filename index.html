@@ -511,6 +511,7 @@ fbq('track','PageView');
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function () {
   'use strict';
@@ -529,6 +530,16 @@ fbq('track','PageView');
     get: function (k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
     set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   };
+  function renderQrCode(text, selector) {
+    var el = $(selector);
+    if (!el || !text) return;
+    el.innerHTML = '';
+    if (typeof QRCode !== 'undefined') {
+      new QRCode(el, { text: text, width: 220, height: 220, correctLevel: QRCode.CorrectLevel.M });
+    } else {
+      el.innerHTML = '<span style="color:var(--muted);font-size:.8rem;padding:16px;text-align:center;display:block">Use o código Copia e Cola abaixo</span>';
+    }
+  }
   var toastTimer;
   function toast(msg) {
     var t = $('#toast');
@@ -1131,8 +1142,11 @@ fbq('track','PageView');
     ckStep = 4;
     renderCkStep();
     // QR Code
+    var code = data.pixCode || data.qrCode || '';
     if (data.qrImage) {
       $('#pixQr').innerHTML = '<img src="' + esc(data.qrImage) + '" alt="QR Code PIX">';
+    } else if (code) {
+      renderQrCode(code, '#pixQr');
     } else {
       $('#pixQr').innerHTML = '<span style="color:var(--muted);font-size:.9rem">QR Code</span>';
     }
@@ -1307,6 +1321,8 @@ fbq('track','PageView');
     renderCkStep();
     if (pending.qrImage) {
       $('#pixQr').innerHTML = '<img src="' + esc(pending.qrImage) + '" alt="QR Code PIX">';
+    } else if (pending.pixCode) {
+      renderQrCode(pending.pixCode, '#pixQr');
     }
     $('#pixCopy').value = pending.pixCode || '';
     updatePixTimer();
