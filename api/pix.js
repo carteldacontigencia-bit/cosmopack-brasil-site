@@ -158,8 +158,11 @@ async function createPixPagSense(order) {
 
   if (!resp.ok) {
     const errBody = await resp.text();
-    console.error('[pix] pagsense error status=' + resp.status + ' body=' + errBody.slice(0, 300));
-    throw new Error('Erro no gateway de pagamento.');
+    console.error('[pix] pagsense error status=' + resp.status + ' body=' + errBody.slice(0, 500));
+    console.error('[pix] pagsense payload=' + JSON.stringify(payload).slice(0, 800));
+    let detail = '';
+    try { detail = JSON.parse(errBody)?.message || JSON.parse(errBody)?.error || ''; } catch {}
+    throw new Error(detail || 'Erro no gateway de pagamento.');
   }
 
   const data = await resp.json();
