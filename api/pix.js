@@ -166,25 +166,29 @@ async function createPixPagSense(order) {
   }
 
   const data = await resp.json();
-  console.log('[pix] pagsense create keys=' + Object.keys(data).join(',') + ' raw=' + JSON.stringify(data).slice(0, 500));
+  console.log('[pix] pagsense create raw=' + JSON.stringify(data).slice(0, 600));
 
-  const txId = String(data.insertId || data.id);
+  const txId = String(data.insertId || data.id || '');
+  if (!txId) throw new Error('PagSense não retornou ID da transação.');
 
-  // PagSense may return PIX data only on GET, so fetch the transaction
+  // PagSense returns only insertId on POST; fetch full transaction for PIX data
   let txData = data;
-  if (txId && (!data.pixCode && !data.pix_code && !data.brcode)) {
-    try {
-      const detailResp = await fetch(`${PAGSENSE_API}/transactions/${encodeURIComponent(txId)}`, {
-        method: 'GET',
-        headers: { 'Accept': 'application/json', 'Authorization': `Basic ${auth}` }
-      });
-      if (detailResp.ok) {
-        txData = await detailResp.json();
-        console.log('[pix] pagsense detail keys=' + Object.keys(txData).join(',') + ' raw=' + JSON.stringify(txData).slice(0, 800));
-      }
-    } catch (e) {
-      console.error('[pix] pagsense detail fetch error', e.message);
+  try {
+    const detailResp = await fetch(`${PAGSENSE_API}/transactions/${encodeURIComponent(txId)}`, {
+      method: 'GET',
+      headers: { 'Accept': 'application/json', 'Authorization': `Basic ${auth}` }
+    });
+    if (detailResp.ok) {
+      txData = await detailResp.json();
+      console.log('[pix] pagsense detail raw=' + JSON.stringify(txData).slice(0, 800));
     }
+  } catch (e) {
+    console.error('[pix] pagsense detail fetch error', e.message);
+  }
+
+  const state = (txData.creationState || txData.status || data.creationState || '').toLowerCase();
+  if (state === 'falhou' || state === 'failed' || state === 'refused' || state === 'recusado') {
+    throw new Error('Pagamento recusado. Verifique seus dados e tente novamente.');
   }
 
   const pixCode = txData.pixCode || txData.pix_code || txData.brcode || txData.qr_code
@@ -193,6 +197,11 @@ async function createPixPagSense(order) {
   const qrImage = txData.qrCode || txData.pix_qrcode || txData.qr_code_url
     || txData.pix?.qr_code_url || txData.pix?.qrcode
     || data.qrCode || data.pix_qrcode || '';
+
+  if (!pixCode && !qrImage) {
+    console.error('[pix] pagsense no pix code found. txData keys=' + Object.keys(txData).join(','));
+    throw new Error('PIX não gerado. Tente novamente em alguns instantes.');
+  }
 
   return {
     ok: true,
