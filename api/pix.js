@@ -2,7 +2,7 @@
    Calcula o preço no servidor (nunca confia no browser).
    Gateways: PagSense, Skale Pay, ou mock. */
 
-import { calcTotal, calcShipping, findProduct, cors } from './_defanti/catalog.js';
+import { calcTotal, calcShipping, findProduct, itemPrice, cors } from './_defanti/catalog.js';
 
 const GATEWAY = process.env.PAYMENT_GATEWAY || 'mock';
 const GATEWAY_KEY = process.env.GATEWAY_API_KEY || '';
@@ -94,13 +94,10 @@ async function createPixPagSense(order) {
 
   const items = order.items.map(item => {
     const p = findProduct(item.id);
-    const unitPrice = item.isBump
-      ? Math.round((order.subtotal - calcTotal(order.items.filter(i => !i.isBump))) / order.items.filter(i => i.isBump).reduce((n, i) => n + i.qty, 0))
-      : p.price;
     return {
       title: p.name,
       description: p.name,
-      unitPrice: unitPrice,
+      unitPrice: itemPrice(item),
       quantity: item.qty,
       tangible: true
     };
@@ -273,7 +270,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json(result);
   } catch (err) {
-    console.error('[pix] error code=unknown', err.message);
-    return res.status(500).json({ ok: false, error: 'Erro interno. Tente novamente.' });
+    console.error('[pix] error', err.message);
+    return res.status(500).json({ ok: false, error: err.message || 'Erro interno. Tente novamente.' });
   }
 }

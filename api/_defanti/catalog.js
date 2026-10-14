@@ -24,25 +24,28 @@ export function getOrderBumps() {
   return [];
 }
 
+export function itemPrice(item) {
+  const product = findProduct(item.id);
+  if (!product) throw new Error(`Produto não encontrado: ${item.id}`);
+  if (item.isBump) {
+    const bumps = getOrderBumps();
+    const bump = bumps.find(b => b.productId === item.id);
+    if (bump) {
+      return bump.fixedPrice != null ? bump.fixedPrice : Math.round(product.price * (1 - (bump.discountPercent || 0) / 100));
+    }
+  }
+  let price = product.price;
+  if (item.variant && product.variants) {
+    const v = product.variants.options.find(o => o.id === item.variant);
+    if (v && typeof v.price === 'number') price = v.price;
+  }
+  return price;
+}
+
 export function calcTotal(items) {
-  const bumps = getOrderBumps();
-  const bumpIds = new Set(bumps.map(b => b.productId));
   let total = 0;
   for (const item of items) {
-    const product = findProduct(item.id);
-    if (!product) throw new Error(`Produto não encontrado: ${item.id}`);
-    if (item.isBump && bumpIds.has(item.id)) {
-      const bump = bumps.find(b => b.productId === item.id);
-      const price = bump.fixedPrice != null ? bump.fixedPrice : Math.round(product.price * (1 - (bump.discountPercent || 0) / 100));
-      total += price * item.qty;
-    } else {
-      let price = product.price;
-      if (item.variant && product.variants) {
-        const v = product.variants.options.find(o => o.id === item.variant);
-        if (v && typeof v.price === 'number') price = v.price;
-      }
-      total += price * item.qty;
-    }
+    total += itemPrice(item) * item.qty;
   }
   return total;
 }
