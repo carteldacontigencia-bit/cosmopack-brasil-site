@@ -195,16 +195,28 @@ async function createPixPagSense(order) {
     throw new Error('Pagamento recusado. Verifique seus dados e tente novamente.');
   }
 
+  function isImageUrl(v) {
+    return typeof v === 'string' && (v.startsWith('http') || v.startsWith('data:'));
+  }
+
   function findPix(obj) {
     if (!obj || typeof obj !== 'object') return { code: '', img: '' };
-    const code = obj.pixCode || obj.pix_code || obj.brcode || obj.qr_code
-      || obj.emv || obj.pixCopiaECola || obj.pix_copia_cola || obj.copia_e_cola
-      || obj.pix?.code || obj.pix?.brcode || obj.pix?.qr_code || obj.pix?.emv
-      || obj.pix?.pixCopiaECola || obj.pix?.copia_e_cola || '';
-    const img = obj.qrCode || obj.qrCodeImage || obj.qr_code_image || obj.qr_code_url
-      || obj.pix_qrcode || obj.qrCodeBase64 || obj.qr_code_base64
-      || obj.pix?.qr_code_url || obj.pix?.qrcode || obj.pix?.qrCode
-      || obj.pix?.qrCodeImage || obj.pix?.qrCodeBase64 || '';
+    const candidates = [
+      obj.pixCode, obj.pix_code, obj.brcode, obj.qr_code,
+      obj.emv, obj.pixCopiaECola, obj.pix_copia_cola, obj.copia_e_cola,
+      obj.qrCode,
+      obj.pix?.code, obj.pix?.brcode, obj.pix?.qr_code, obj.pix?.emv,
+      obj.pix?.pixCopiaECola, obj.pix?.copia_e_cola, obj.pix?.qrCode
+    ].filter(Boolean);
+    const imgCandidates = [
+      obj.qrCodeImage, obj.qr_code_image, obj.qr_code_url,
+      obj.pix_qrcode, obj.qrCodeBase64, obj.qr_code_base64,
+      obj.qrCode,
+      obj.pix?.qr_code_url, obj.pix?.qrcode, obj.pix?.qrCode,
+      obj.pix?.qrCodeImage, obj.pix?.qrCodeBase64
+    ].filter(Boolean);
+    const code = candidates.find(c => typeof c === 'string' && c.length > 20) || '';
+    const img = imgCandidates.find(c => isImageUrl(c)) || '';
     return { code, img };
   }
 
