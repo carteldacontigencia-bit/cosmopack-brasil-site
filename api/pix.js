@@ -116,7 +116,7 @@ async function createPixPagSense(order) {
   const payload = {
     paymentMethod: 'pix',
     amount: order.total,
-    isInfoProducts: false,
+    isInfoProducts: true,
     postbackUrl: `${siteUrl}/api/postback`,
     customer: {
       name: order.customer.name,
