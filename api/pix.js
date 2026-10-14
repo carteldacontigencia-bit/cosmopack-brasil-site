@@ -106,6 +106,16 @@ async function createPixPagSense(order) {
     };
   });
 
+  if (order.shipping.price > 0) {
+    items.push({
+      title: 'Frete',
+      description: 'Frete ' + (order.shipping.id || 'padrao'),
+      unitPrice: order.shipping.price,
+      quantity: 1,
+      tangible: true
+    });
+  }
+
   const payload = {
     paymentMethod: 'pix',
     amount: order.total,
