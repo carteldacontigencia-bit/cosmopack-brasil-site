@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
   "functions": {
     "api/*.js": {
       "maxDuration": 15
@@ -7,23 +8,10 @@
   },
   "redirects": [
     {
-      "source": "/",
-      "destination": "/azucar-en-equilibrio/",
-      "permanent": false
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/pago",
-      "destination": "/checkout.html"
-    },
-    {
-      "source": "/cosmopack",
-      "destination": "/cosmopack/index.html"
-    },
-    {
-      "source": "/cosmopack/",
-      "destination": "/cosmopack/index.html"
+      "source": "/:path(.*)",
+      "has": [{ "type": "host", "value": "www.defantistore.vercel.app" }],
+      "destination": "https://defantistore.vercel.app/:path",
+      "permanent": true
     }
   ],
   "headers": [
@@ -53,15 +41,10 @@
         {
           "key": "Cross-Origin-Opener-Policy",
           "value": "same-origin"
-        }
-      ]
-    },
-    {
-      "source": "/(checkout.html|pago|gracias-.*|api/.*)",
-      "headers": [
+        },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; script-src 'self' https://connect.facebook.net; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://static.muwe.mx https://www.facebook.com; connect-src 'self' https://www.facebook.com; object-src 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; img-src 'self' data: https://www.facebook.com; connect-src 'self' https://www.facebook.com https://graph.facebook.com https://viacep.com.br; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'"
         }
       ]
     },
@@ -75,15 +58,6 @@
         {
           "key": "X-Robots-Tag",
           "value": "noindex, nofollow"
-        }
-      ]
-    },
-    {
-      "source": "/(gracias-.*|descargas/.*)",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
         }
       ]
     }
