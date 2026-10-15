@@ -20,7 +20,7 @@ async function sendToMeta(event) {
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: [event], access_token: META_TOKEN })
+      body: JSON.stringify({ data: [event], access_token: META_TOKEN, test_event_code: 'TEST42590' })
     }
   );
   return { status: resp.status, data: await resp.json() };
