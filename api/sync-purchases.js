@@ -19,7 +19,11 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
 
   if (!META_PIXEL_ID || !META_ACCESS_TOKEN) {
-    return res.status(200).json({ error: 'META_PIXEL_ID ou META_CAPI_TOKEN não configurados.' });
+    return res.status(200).json({
+      error: 'Variáveis não encontradas.',
+      META_PIXEL_ID: META_PIXEL_ID ? 'OK (' + META_PIXEL_ID.slice(0, 4) + '...)' : 'VAZIO',
+      META_CAPI_TOKEN: META_ACCESS_TOKEN ? 'OK (' + META_ACCESS_TOKEN.slice(0, 4) + '...)' : 'VAZIO'
+    });
   }
   if (!PAGSENSE_PUBLIC || !PAGSENSE_SECRET) {
     return res.status(200).json({ error: 'PagSense keys não configuradas.' });
