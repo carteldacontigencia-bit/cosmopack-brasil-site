@@ -107,8 +107,10 @@ section{padding:40px 0}
 .review p{margin:.4em 0}
 .review small{color:var(--muted)}
 .review[hidden]{display:none!important}
-.btn-ver-mais{display:block;margin:20px auto 0;padding:12px 32px;border:2px solid var(--accent);border-radius:var(--radius);background:transparent;color:var(--accent);font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s,color .2s}
-.btn-ver-mais:hover{background:var(--accent);color:#fff}
+.rev-pag{display:flex;justify-content:center;gap:6px;margin-top:20px;flex-wrap:wrap}
+.rev-pag button{min-width:40px;height:40px;border:2px solid var(--accent);border-radius:var(--radius);background:transparent;color:var(--accent);font-size:.95rem;font-weight:600;cursor:pointer;transition:background .2s,color .2s}
+.rev-pag button:hover{background:var(--accent);color:#fff}
+.rev-pag button.active{background:var(--accent);color:#fff}
 
 /* Rodapé */
 .footer{border-top:1px solid var(--line);padding:32px 0 calc(32px + env(safe-area-inset-bottom));font-size:.88rem;color:var(--muted)}
@@ -330,7 +332,7 @@ ttq.page();
 
   <section class="video-promo" style="padding:10px 0">
     <div class="wrap">
-      <video autoplay muted loop playsinline preload="metadata" style="width:100%;max-width:480px;margin:0 auto;display:block;border-radius:12px">
+      <video autoplay loop playsinline preload="metadata" style="width:100%;max-width:480px;margin:0 auto;display:block;border-radius:12px">
         <source src="/assets/video-promo.mp4" type="video/mp4">
       </video>
     </div>
@@ -345,19 +347,7 @@ ttq.page();
     </div>
   </section>
 
-  <section class="about" aria-labelledby="about-title">
-    <div class="wrap about-grid">
-      <img src="/img/logo.png" alt="Logo Defanti Store" loading="lazy" decoding="async">
-      <div>
-        <h2 id="about-title">Sobre a Defanti Store</h2>
-        <p>Somos uma loja de calçados femininos com mais de 1 milhão de itens vendidos. Trabalhamos com as melhores marcas — Vizzano, Moleca, Beira Rio, Modare, Melissa, Arezzo, Schutz, Santa Lolla — todas 100% originais com nota fiscal.</p>
-        <p>Nosso compromisso é oferecer preço de atacado para todos, sem quantidade mínima. Seja para uso próprio ou para revenda, aqui você encontra o melhor preço do Brasil.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Avaliações: fica escondida até você mandar depoimentos reais.
-       Para ativar, tire o atributo "hidden" e repita o bloco .review. -->
+  <!-- Avaliações -->
   <section class="reviews" aria-labelledby="rev-title">
     <div class="wrap">
       <h2 class="section-title" id="rev-title">O que dizem nossos clientes</h2>
@@ -924,7 +914,18 @@ ttq.page();
           <small>Júlia F. · Sete Lagoas/MG</small>
         </article>
       </div>
-      <button class="btn-ver-mais" id="btn-ver-mais" type="button">Ver mais avaliações</button>
+      <div class="rev-pag" id="rev-pag"></div>
+    </div>
+  </section>
+
+  <section class="about" aria-labelledby="about-title">
+    <div class="wrap about-grid">
+      <img src="/img/logo.png" alt="Logo Defanti Store" loading="lazy" decoding="async">
+      <div>
+        <h2 id="about-title">Sobre a Defanti Store</h2>
+        <p>Somos uma loja de calçados femininos com mais de 1 milhão de itens vendidos. Trabalhamos com as melhores marcas — Vizzano, Moleca, Beira Rio, Modare, Melissa, Arezzo, Schutz, Santa Lolla — todas 100% originais com nota fiscal.</p>
+        <p>Nosso compromisso é oferecer preço de atacado para todos, sem quantidade mínima. Seja para uso próprio ou para revenda, aqui você encontra o melhor preço do Brasil.</p>
+      </div>
     </div>
   </section>
 </main>
@@ -1088,20 +1089,26 @@ ttq.page();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function(){
-  var PER_PAGE=12;
-  var list=document.querySelector('.review-list');
-  var reviews=list.querySelectorAll('.review');
-  var btn=document.getElementById('btn-ver-mais');
-  var shown=0;
-  function showNext(){
-    var end=Math.min(shown+PER_PAGE,reviews.length);
-    for(var i=shown;i<end;i++) reviews[i].hidden=false;
-    shown=end;
-    if(shown>=reviews.length) btn.hidden=true;
+  var PER=12;
+  var reviews=document.querySelectorAll('.review-list .review');
+  var pag=document.getElementById('rev-pag');
+  var pages=Math.ceil(reviews.length/PER);
+  var cur=1;
+  function go(p){
+    cur=p;
+    var start=(p-1)*PER,end=Math.min(start+PER,reviews.length);
+    for(var i=0;i<reviews.length;i++) reviews[i].hidden=(i<start||i>=end);
+    pag.innerHTML='';
+    for(var j=1;j<=pages;j++){
+      var b=document.createElement('button');
+      b.textContent=j;
+      if(j===cur) b.className='active';
+      b.addEventListener('click',(function(n){return function(){go(n)}})(j));
+      pag.appendChild(b);
+    }
+    document.querySelector('.reviews').scrollIntoView({behavior:'smooth',block:'start'});
   }
-  for(var i=0;i<reviews.length;i++) reviews[i].hidden=true;
-  showNext();
-  btn.addEventListener('click',showNext);
+  go(1);
 })();
 </script>
 <script>
