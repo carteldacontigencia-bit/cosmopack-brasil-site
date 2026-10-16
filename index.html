@@ -285,6 +285,13 @@ fbq('init','1950973708724242');
 fbq('track','PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1950973708724242&ev=PageView&noscript=1"></noscript>
+<!-- TikTok Pixel -->
+<script>
+!function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var a=d.createElement("script");a.type="text/javascript",a.async=!0,a.src=r+"?sdkid="+e+"&lib="+t;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(a,s)};
+ttq.load('DB8KNARC77U7E2MRPD4G');
+ttq.page();
+}(window,document,'ttq');
+</script>
 </head>
 <body>
 
@@ -639,6 +646,7 @@ fbq('track','PageView');
     saveCart();
     renderCart();
     fbq('track','AddToCart',{content_name:p.name,content_ids:[pid],content_type:'product',value:(unitPrice(p,vid)/100),currency:'BRL'});
+    ttq.track('AddToCart',{content_name:p.name,content_id:pid,content_type:'product',value:(unitPrice(p,vid)/100),currency:'BRL'});
     var b = $('#cartBtn');
     b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
     return true;
@@ -760,6 +768,7 @@ fbq('track','PageView');
     if (!p) return;
     current = p;
     fbq('track','ViewContent',{content_name:p.name,content_ids:[p.id],content_type:'product',value:(p.price/100),currency:'BRL'});
+    ttq.track('ViewContent',{content_name:p.name,content_id:p.id,content_type:'product',value:(p.price/100),currency:'BRL'});
     $('#pm-brand').textContent = p.brand || '';
     $('#pm-name').textContent = p.name;
     $('#pm-stars').innerHTML = p.reviews ? starsHtml(p.rating, p.reviews) : '';
@@ -884,6 +893,7 @@ fbq('track','PageView');
     var icIds = cart.map(function(it) { return it.id; });
     var icEventId = 'ic_' + Date.now();
     fbq('track','InitiateCheckout',{value:parseFloat(icValue),currency:'BRL',num_items:icItems,eventID:icEventId});
+    ttq.track('InitiateCheckout',{value:parseFloat(icValue),currency:'BRL',quantity:icItems});
     fetch('/api/capi', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1231,6 +1241,7 @@ fbq('track','PageView');
     var numItems = ckOrder.items.reduce(function(n, it) { return n + it.qty; }, 0);
     var purchaseEventId = 'purchase_' + ckOrder.code;
     fbq('track','Purchase',{value:parseFloat(purchaseValue),currency:'BRL',content_ids:contentIds,content_type:'product',num_items:numItems,eventID:purchaseEventId});
+    ttq.track('CompletePayment',{value:parseFloat(purchaseValue),currency:'BRL',quantity:numItems});
     fetch('/api/capi', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
