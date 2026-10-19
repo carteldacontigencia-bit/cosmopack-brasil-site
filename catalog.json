@@ -133,6 +133,71 @@
         "/img/p10.png"
       ],
       "maxPerCpf": null
+    },
+    {
+      "id": "frigideira-ceramica-antiaderente-24cm",
+      "name": "Frigideira Cerâmica Antiaderente 24cm Indução Cooktop Fogão a Gás",
+      "price": 5131,
+      "oldPrice": 14990,
+      "rating": 4.8,
+      "reviews": 56,
+      "description": "Frigideira cerâmica antiaderente de 24cm, compatível com indução, cooktop e fogão a gás. Cabo de madeira ergonômico, revestimento premium.",
+      "images": [
+        "/img/p11.png"
+      ],
+      "maxPerCpf": null
+    },
+    {
+      "id": "fruteira-4-andares",
+      "name": "Fruteira Multiuso Plástico Chão 4 Andares",
+      "price": 3606,
+      "oldPrice": 4290,
+      "rating": 4.5,
+      "reviews": 63,
+      "description": "Fruteira multiuso de plástico com 4 andares para chão. Ideal para organizar frutas, legumes e verduras na cozinha. Prática e resistente.",
+      "images": [
+        "/img/p12.png"
+      ],
+      "maxPerCpf": null
+    },
+    {
+      "id": "kit-boleira-suporte-5-pecas",
+      "name": "Kit Boleira Suporte Mesa 5 Peças Ferro e Madeira Dourado",
+      "price": 6546,
+      "oldPrice": 8500,
+      "rating": 4.9,
+      "reviews": 47,
+      "description": "Kit boleira com suporte de mesa em ferro e madeira dourado, 5 peças. Perfeito para festas, bolos e doces. Design elegante e sofisticado.",
+      "images": [
+        "/img/p13.png"
+      ],
+      "maxPerCpf": null
+    },
+    {
+      "id": "kit-10-pano-prato-estampado",
+      "name": "Kit 10 Pano de Prato Estampado 100% Algodão",
+      "price": 2420,
+      "oldPrice": 2690,
+      "rating": 4.2,
+      "reviews": 71,
+      "description": "Kit com 10 panos de prato estampados em 100% algodão. Macios, absorventes e com estampas divertidas para alegrar sua cozinha.",
+      "images": [
+        "/img/p14.png"
+      ],
+      "maxPerCpf": null
+    },
+    {
+      "id": "tabua-corte-antibacteriana",
+      "name": "Tábua de Corte Antibacteriana para Carnes e Legumes Anti-mofo",
+      "price": 2290,
+      "oldPrice": 2990,
+      "rating": 4.7,
+      "reviews": 54,
+      "description": "Tábua de corte antibacteriana e anti-mofo para carnes e legumes. Material de alta qualidade, fácil de limpar e não absorve odores.",
+      "images": [
+        "/img/p15.png"
+      ],
+      "maxPerCpf": null
     }
   ],
   "shipping": {
