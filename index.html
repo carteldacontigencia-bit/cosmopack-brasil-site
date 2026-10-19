@@ -316,7 +316,10 @@ ttq.page();
 <main>
   <section class="hero">
     <a href="#produtos" class="hero-media" aria-label="Ver produtos">
-      <img src="/img/banner.webp" alt="Casa & Cia — Produtos para casa com os melhores preços. Pagamento via PIX." width="1400" height="1050" fetchpriority="high">
+      <picture>
+        <source media="(max-width: 768px)" srcset="/img/banner-mobile.webp">
+        <img src="/img/banner.webp" alt="Casa & Cia — Produtos para casa com os melhores preços. Pagamento via PIX." width="1400" height="420" fetchpriority="high">
+      </picture>
     </a>
   </section>
 
