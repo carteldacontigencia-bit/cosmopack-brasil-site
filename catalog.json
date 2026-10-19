@@ -9,7 +9,7 @@
     {
       "id": "kit-utensilios-facas",
       "name": "Kit Utensílios Silicone c/ Cabo de Madeira e Facas em Inox",
-      "price": 6899,
+      "price": 2500,
       "oldPrice": 11100,
       "rating": 4.8,
       "reviews": 67,
@@ -22,7 +22,7 @@
     {
       "id": "cortador-fatiador-vegetais",
       "name": "Cortador Fatiador e Ralador de Vegetais Multifuncional 16 Pçs",
-      "price": 3594,
+      "price": 2500,
       "oldPrice": 5990,
       "rating": 4.5,
       "reviews": 53,
@@ -35,7 +35,7 @@
     {
       "id": "kit-12-utensilios-silicone",
       "name": "Kit 12 Utensílios de Silicone com Cabo de Madeira",
-      "price": 3999,
+      "price": 2500,
       "oldPrice": 4597,
       "rating": 4.9,
       "reviews": 72,
@@ -48,7 +48,7 @@
     {
       "id": "frigideira-ceramica-24cm",
       "name": "Frigideira Antiaderente Cerâmica 24cm com Espátula de Silicone",
-      "price": 4962,
+      "price": 2500,
       "oldPrice": 8990,
       "rating": 4.9,
       "reviews": 61,
@@ -61,7 +61,7 @@
     {
       "id": "panela-pressao-7l",
       "name": "Panela de Pressão Alumínio Polido 7 Litros",
-      "price": 9720,
+      "price": 2500,
       "oldPrice": 10800,
       "rating": 4.7,
       "reviews": 48,
@@ -74,7 +74,7 @@
     {
       "id": "jogo-facas-tramontina-4p",
       "name": "Jogo Facas Tramontina Kit Conjunto Faca Cozinha Churrasco 4p",
-      "price": 3315,
+      "price": 2500,
       "oldPrice": 3490,
       "rating": 4.8,
       "reviews": 74,
@@ -87,31 +87,33 @@
     {
       "id": "jogo-6-tacas-diamond-340ml",
       "name": "Jogo 6 Taças Vidro Diamond 340ml Mesa Posta Água Suco",
-      "price": 3990,
+      "price": 2500,
       "rating": 4.7,
       "reviews": 58,
       "description": "Jogo com 6 taças de vidro modelo Diamond com capacidade de 340ml. Perfeitas para mesa posta, água, suco e drinks. Design sofisticado.",
       "images": [
         "/img/p7.png"
       ],
-      "maxPerCpf": null
+      "maxPerCpf": null,
+      "oldPrice": 3990
     },
     {
       "id": "faqueiro-buzios-tramontina-24p",
       "name": "Jogo Talheres Faqueiro Búzios Aço Inox 24 Peças Tramontina",
-      "price": 5973,
+      "price": 2500,
       "rating": 4.8,
       "reviews": 65,
       "description": "Faqueiro Búzios Tramontina com 24 peças em aço inox. Inclui facas, garfos, colheres e colheres de chá. Qualidade e elegância à mesa.",
       "images": [
         "/img/p8.png"
       ],
-      "maxPerCpf": null
+      "maxPerCpf": null,
+      "oldPrice": 5973
     },
     {
       "id": "jarra-vidro-borossilicato-1-5l",
       "name": "Jarra Vidro Borossilicato 1,5 Litros Tampa Inox Hermética",
-      "price": 3396,
+      "price": 2500,
       "oldPrice": 4590,
       "rating": 4.7,
       "reviews": 51,
@@ -124,7 +126,7 @@
     {
       "id": "kit-10-potes-1l-hermeticos",
       "name": "Kit 10 Potes 1 Litro Transparente Marmita Fitness BPA Free",
-      "price": 2990,
+      "price": 2500,
       "oldPrice": 5990,
       "rating": 4.7,
       "reviews": 69,
@@ -137,7 +139,7 @@
     {
       "id": "frigideira-ceramica-antiaderente-24cm",
       "name": "Frigideira Cerâmica Antiaderente 24cm Indução Cooktop Fogão a Gás",
-      "price": 5131,
+      "price": 2500,
       "oldPrice": 14990,
       "rating": 4.8,
       "reviews": 56,
@@ -150,7 +152,7 @@
     {
       "id": "fruteira-4-andares",
       "name": "Fruteira Multiuso Plástico Chão 4 Andares",
-      "price": 3606,
+      "price": 2500,
       "oldPrice": 4290,
       "rating": 4.5,
       "reviews": 63,
@@ -163,7 +165,7 @@
     {
       "id": "kit-boleira-suporte-5-pecas",
       "name": "Kit Boleira Suporte Mesa 5 Peças Ferro e Madeira Dourado",
-      "price": 6546,
+      "price": 2500,
       "oldPrice": 8500,
       "rating": 4.9,
       "reviews": 47,
@@ -176,7 +178,7 @@
     {
       "id": "kit-10-pano-prato-estampado",
       "name": "Kit 10 Pano de Prato Estampado 100% Algodão",
-      "price": 2420,
+      "price": 2500,
       "oldPrice": 2690,
       "rating": 4.2,
       "reviews": 71,
@@ -189,7 +191,7 @@
     {
       "id": "tabua-corte-antibacteriana",
       "name": "Tábua de Corte Antibacteriana para Carnes e Legumes Anti-mofo",
-      "price": 2290,
+      "price": 2500,
       "oldPrice": 2990,
       "rating": 4.7,
       "reviews": 54,
@@ -202,7 +204,7 @@
     {
       "id": "kit-4-protetor-silicone-fogao",
       "name": "Kit 4 Protetor Silicone Fogão Indução Cooktop Antiderrapante",
-      "price": 4500,
+      "price": 2500,
       "oldPrice": 6900,
       "rating": 4.8,
       "reviews": 52,
