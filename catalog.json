@@ -198,6 +198,19 @@
         "/img/p15.png"
       ],
       "maxPerCpf": null
+    },
+    {
+      "id": "kit-4-protetor-silicone-fogao",
+      "name": "Kit 4 Protetor Silicone Fogão Indução Cooktop Antiderrapante",
+      "price": 4500,
+      "oldPrice": 6900,
+      "rating": 4.8,
+      "reviews": 52,
+      "description": "Kit com 4 protetores de silicone para fogão de indução e cooktop. Antiderrapantes, resistentes ao calor e fáceis de limpar.",
+      "images": [
+        "/img/p16.png"
+      ],
+      "maxPerCpf": null
     }
   ],
   "shipping": {
