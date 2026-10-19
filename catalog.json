@@ -75,6 +75,74 @@
         "/img/p5.png"
       ],
       "maxPerCpf": null
+    },
+    {
+      "id": "jogo-facas-tramontina-4p",
+      "brand": "Casa & Cia",
+      "name": "Jogo Facas Tramontina Kit Conjunto Faca Cozinha Churrasco 4p",
+      "price": 3315,
+      "oldPrice": 3490,
+      "rating": 4.8,
+      "reviews": 74,
+      "description": "Jogo de facas Tramontina com 4 peças para cozinha e churrasco. Lâminas em aço inox de alta qualidade com cabos ergonômicos.",
+      "images": [
+        "/img/p6.png"
+      ],
+      "maxPerCpf": null
+    },
+    {
+      "id": "jogo-6-tacas-diamond-340ml",
+      "brand": "Casa & Cia",
+      "name": "Jogo 6 Taças Vidro Diamond 340ml Mesa Posta Água Suco",
+      "price": 3990,
+      "rating": 4.7,
+      "reviews": 58,
+      "description": "Jogo com 6 taças de vidro modelo Diamond com capacidade de 340ml. Perfeitas para mesa posta, água, suco e drinks. Design sofisticado.",
+      "images": [
+        "/img/p7.png"
+      ],
+      "maxPerCpf": null
+    },
+    {
+      "id": "faqueiro-buzios-tramontina-24p",
+      "brand": "Casa & Cia",
+      "name": "Jogo Talheres Faqueiro Búzios Aço Inox 24 Peças Tramontina",
+      "price": 5973,
+      "rating": 4.8,
+      "reviews": 65,
+      "description": "Faqueiro Búzios Tramontina com 24 peças em aço inox. Inclui facas, garfos, colheres e colheres de chá. Qualidade e elegância à mesa.",
+      "images": [
+        "/img/p8.png"
+      ],
+      "maxPerCpf": null
+    },
+    {
+      "id": "jarra-vidro-borossilicato-1-5l",
+      "brand": "Casa & Cia",
+      "name": "Jarra Vidro Borossilicato 1,5 Litros Tampa Inox Hermética",
+      "price": 3396,
+      "oldPrice": 4590,
+      "rating": 4.7,
+      "reviews": 51,
+      "description": "Jarra de vidro borossilicato com capacidade de 1,5 litros e tampa em aço inox hermética. Ideal para água, sucos e bebidas quentes ou geladas.",
+      "images": [
+        "/img/p9.png"
+      ],
+      "maxPerCpf": null
+    },
+    {
+      "id": "kit-10-potes-1l-hermeticos",
+      "brand": "Casa & Cia",
+      "name": "Kit 10 Potes 1 Litro Transparente Marmita Fitness BPA Free",
+      "price": 2990,
+      "oldPrice": 5990,
+      "rating": 4.7,
+      "reviews": 69,
+      "description": "Kit com 10 potes de 1 litro transparentes com tampa hermética. Livres de BPA, ideais para marmita fitness, organização de geladeira e armazenamento.",
+      "images": [
+        "/img/p10.png"
+      ],
+      "maxPerCpf": null
     }
   ],
   "shipping": {
