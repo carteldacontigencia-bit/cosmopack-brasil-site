@@ -8,7 +8,7 @@
   "products": [
     {
       "id": "kit-utensilios-facas",
-      "brand": "Casa & Cia",
+      "brand": "",
       "name": "Kit Utensílios Silicone c/ Cabo de Madeira e Facas em Inox",
       "price": 6899,
       "oldPrice": 11100,
@@ -22,7 +22,7 @@
     },
     {
       "id": "cortador-fatiador-vegetais",
-      "brand": "Casa & Cia",
+      "brand": "",
       "name": "Cortador Fatiador e Ralador de Vegetais Multifuncional 16 Pçs",
       "price": 3594,
       "oldPrice": 5990,
@@ -36,7 +36,7 @@
     },
     {
       "id": "kit-12-utensilios-silicone",
-      "brand": "Casa & Cia",
+      "brand": "",
       "name": "Kit 12 Utensílios de Silicone com Cabo de Madeira",
       "price": 3999,
       "oldPrice": 4597,
@@ -50,7 +50,7 @@
     },
     {
       "id": "frigideira-ceramica-24cm",
-      "brand": "Casa & Cia",
+      "brand": "",
       "name": "Frigideira Antiaderente Cerâmica 24cm com Espátula de Silicone",
       "price": 4962,
       "oldPrice": 8990,
@@ -64,7 +64,7 @@
     },
     {
       "id": "panela-pressao-7l",
-      "brand": "Casa & Cia",
+      "brand": "",
       "name": "Panela de Pressão Alumínio Polido 7 Litros",
       "price": 9720,
       "oldPrice": 10800,
@@ -78,7 +78,7 @@
     },
     {
       "id": "jogo-facas-tramontina-4p",
-      "brand": "Casa & Cia",
+      "brand": "",
       "name": "Jogo Facas Tramontina Kit Conjunto Faca Cozinha Churrasco 4p",
       "price": 3315,
       "oldPrice": 3490,
@@ -92,7 +92,7 @@
     },
     {
       "id": "jogo-6-tacas-diamond-340ml",
-      "brand": "Casa & Cia",
+      "brand": "",
       "name": "Jogo 6 Taças Vidro Diamond 340ml Mesa Posta Água Suco",
       "price": 3990,
       "rating": 4.7,
@@ -105,7 +105,7 @@
     },
     {
       "id": "faqueiro-buzios-tramontina-24p",
-      "brand": "Casa & Cia",
+      "brand": "",
       "name": "Jogo Talheres Faqueiro Búzios Aço Inox 24 Peças Tramontina",
       "price": 5973,
       "rating": 4.8,
@@ -118,7 +118,7 @@
     },
     {
       "id": "jarra-vidro-borossilicato-1-5l",
-      "brand": "Casa & Cia",
+      "brand": "",
       "name": "Jarra Vidro Borossilicato 1,5 Litros Tampa Inox Hermética",
       "price": 3396,
       "oldPrice": 4590,
@@ -132,7 +132,7 @@
     },
     {
       "id": "kit-10-potes-1l-hermeticos",
-      "brand": "Casa & Cia",
+      "brand": "",
       "name": "Kit 10 Potes 1 Litro Transparente Marmita Fitness BPA Free",
       "price": 2990,
       "oldPrice": 5990,
