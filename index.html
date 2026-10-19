@@ -89,6 +89,8 @@ section{padding:40px 0}
 .card-stars{color:var(--gold);font-size:.75rem;letter-spacing:1px}
 .card-stars small{color:var(--muted);letter-spacing:0;font-size:.8em}
 .price{font-weight:700;color:var(--accent)}
+.old-price{text-decoration:line-through;color:var(--muted);font-size:.8rem;font-weight:400}
+.discount-badge{display:inline-block;background:var(--brand);color:#fff;font-size:.7rem;font-weight:700;padding:1px 6px;border-radius:4px;margin-left:4px}
 .card .btn{min-height:40px;margin-top:auto;font-size:.9rem}
 .skeleton{aspect-ratio:3/4;border-radius:var(--radius);background:linear-gradient(90deg,var(--bg-alt),#fafafa,var(--bg-alt));background-size:200% 100%;animation:sk 1.2s infinite}
 @keyframes sk{to{background-position:-200% 0}}
@@ -962,6 +964,7 @@ ttq.page();
       <div class="pinfo">
         <div class="pm-brand" id="pm-brand"></div>
         <h2 id="pm-name"></h2>
+        <div class="old-price" id="pm-oldprice"></div>
         <div class="price" id="pm-price"></div>
         <div class="pm-stars" id="pm-stars"></div>
         <div class="pm-stock">Em estoque, pronto para enviar</div>
@@ -1339,7 +1342,10 @@ ttq.page();
         (p.brand ? '<div class="card-brand">' + esc(p.brand) + '</div>' : '') +
         '<div class="card-name">' + esc(p.name) + '</div>' +
         (p.reviews ? '<div class="card-stars">' + starsHtml(p.rating, p.reviews) + '</div>' : '') +
-        '<div class="price">' + priceHtml(p, minPrice(p)) + '</div></a>' +
+        (p.oldPrice ? '<div class="old-price">' + money(p.oldPrice) + '</div>' : '') +
+        '<div class="price">' + priceHtml(p, minPrice(p)) +
+        (p.oldPrice ? ' <span class="discount-badge">' + Math.round((1 - p.price / p.oldPrice) * 100) + '% OFF</span>' : '') +
+        '</div></a>' +
         '<button class="btn" type="button" data-open="' + esc(p.id) + '">Comprar</button></div></article>';
     }).join('');
   }
@@ -1360,7 +1366,10 @@ ttq.page();
   function updateModalPrice() {
     var vid = selectedVariant();
     var cents = vid ? unitPrice(current, vid) : minPrice(current);
-    $('#pm-price').innerHTML = priceHtml(current, cents);
+    $('#pm-price').innerHTML = priceHtml(current, cents) +
+      (current.oldPrice ? ' <span class="discount-badge">' + Math.round((1 - current.price / current.oldPrice) * 100) + '% OFF</span>' : '');
+    $('#pm-oldprice').innerHTML = current.oldPrice ? money(current.oldPrice) : '';
+    $('#pm-oldprice').hidden = !current.oldPrice;
   }
   function openProduct(pid) {
     var p = PRODUCTS[pid];
