@@ -9,8 +9,8 @@
   "redirects": [
     {
       "source": "/:path(.*)",
-      "has": [{ "type": "host", "value": "www.defantistore.vercel.app" }],
-      "destination": "https://defantistore.vercel.app/:path",
+      "has": [{ "type": "host", "value": "www.casaecia.vercel.app" }],
+      "destination": "https://casaecia.vercel.app/:path",
       "permanent": true
     }
   ],

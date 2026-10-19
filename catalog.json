@@ -1,9 +1,9 @@
 {
   "_leia": "Fonte única de produtos e frete. Preços em CENTAVOS (2990 = R$ 29,90). A página e o servidor leem este arquivo.",
   "store": {
-    "name": "Defanti Store",
-    "tagline": "100% Originais · +1M de itens vendidos",
-    "topbar": "🔥 Preço de atacado · Sem quantidade mínima · Pagamento via PIX"
+    "name": "Casa & Cia",
+    "tagline": "Produtos para Casa · Qualidade Garantida",
+    "topbar": "🏠 Produtos para Casa · Melhores Preços · Pagamento via PIX"
   },
   "products": [
     {

@@ -34,7 +34,7 @@ export default async function handler(req, res) {
     event_name: eventName,
     event_time: Math.floor(Date.now() / 1000),
     event_id: eventId,
-    event_source_url: (process.env.SITE_URL || 'https://defantistore.vercel.app') + '/',
+    event_source_url: (process.env.SITE_URL || 'https://casaecia.vercel.app') + '/',
     action_source: 'website',
     user_data: {
       em: body.email ? [hash(body.email)] : [],

@@ -85,7 +85,7 @@ async function sendPurchaseEvent(pixId, body, req) {
       event_name: 'Purchase',
       event_time: Math.floor(Date.now() / 1000),
       event_id: 'purchase_' + orderId,
-      event_source_url: (process.env.SITE_URL || 'https://defantistore.vercel.app') + '/',
+      event_source_url: (process.env.SITE_URL || 'https://casaecia.vercel.app') + '/',
       action_source: 'website',
       user_data: {
         em: email ? [hash(email)] : [],

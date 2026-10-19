@@ -3,26 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Defanti Store — Calçados Originais a Preço de Atacado</title>
-<meta name="description" content="Defanti Store: todos os calçados por R$ 25,00. Sandálias e papetes 100% originais, pagamento via PIX.">
-<meta name="theme-color" content="#E91E8C">
+<title>Casa & Cia — Produtos para Casa a Preço de Atacado</title>
+<meta name="description" content="Casa & Cia: produtos para casa com os melhores preços. Qualidade garantida, pagamento via PIX.">
+<meta name="theme-color" content="#D32F2F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" href="/catalog.json" as="fetch" crossorigin>
 <style>
-/* ── IDENTIDADE VISUAL — Defanti Store ──────────────────────────── */
+/* ── IDENTIDADE VISUAL — Casa & Cia ──────────────────────────── */
 :root{
   --bg:#ffffff;
-  --bg-alt:#fdf2f8;       /* rosa bem claro */
+  --bg-alt:#fef2f2;       /* vermelho bem claro */
   --text:#1a1a1a;
   --muted:#666666;
-  --line:#f0d6e8;
-  --brand:#E91E8C;        /* rosa/magenta do logo */
+  --line:#f0d0d0;
+  --brand:#D32F2F;        /* vermelho do logo */
   --brand-text:#ffffff;
-  --brand-dark:#c4167a;   /* hover */
-  --gold:#D4A843;         /* dourado do logo */
-  --accent:#E91E8C;
+  --brand-dark:#b71c1c;   /* hover */
+  --gold:#F9A825;         /* amarelo/laranja do logo */
+  --accent:#D32F2F;
   --danger:#b3261e;
   --ok:#1e7a3c;
   --font-body:'Poppins',system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
@@ -301,11 +301,11 @@ ttq.page();
 </head>
 <body>
 
-<div class="topbar" id="topbar">🔥 Preço de atacado · Sem quantidade mínima · Pagamento via PIX</div>
+<div class="topbar" id="topbar">🏠 Produtos para Casa · Melhores Preços · Pagamento via PIX</div>
 
 <header class="header">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="Defanti Store, início"><img src="/img/logo.png" alt="Defanti Store"></a>
+    <a class="logo" href="/" aria-label="Casa & Cia, início"><img src="/img/logo.png" alt="Casa & Cia"></a>
     <button class="cart-btn" id="cartBtn" type="button" aria-label="Abrir carrinho" aria-controls="cart" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
       <span class="cart-count" id="cartCount" data-zero aria-hidden="true">0</span>
@@ -316,21 +316,22 @@ ttq.page();
 <main>
   <section class="hero">
     <a href="#produtos" class="hero-media" aria-label="Ver produtos">
-      <img src="/img/banner.webp" alt="Defanti Store — Calçados que combinam com você. Sandálias e papetes com até 67% OFF. Sem quantidade mínima." width="1400" height="1050" fetchpriority="high">
+      <img src="/img/banner.webp" alt="Casa & Cia — Produtos para casa com os melhores preços. Pagamento via PIX." width="1400" height="1050" fetchpriority="high">
     </a>
   </section>
 
   <section class="rules" aria-labelledby="rules-title">
     <div class="wrap">
-      <h2 class="section-title" id="rules-title">Como funciona a promoção</h2>
+      <h2 class="section-title" id="rules-title">Como funciona</h2>
       <ul>
         <li><span class="ico" aria-hidden="true">1</span><div><b>Pagamento via PIX</b><span>Aprovação na hora. Pedido separado assim que o PIX é confirmado.</span></div></li>
-        <li><span class="ico" aria-hidden="true">2</span><div><b>100% Originais</b><span>Todas as marcas com nota fiscal e garantia de fábrica.</span></div></li>
+        <li><span class="ico" aria-hidden="true">2</span><div><b>Qualidade garantida</b><span>Todos os produtos com nota fiscal e garantia.</span></div></li>
         <li><span class="ico" aria-hidden="true">3</span><div><b>Enquanto durar</b><span>Promoção válida enquanto durar o estoque. Aproveite!</span></div></li>
       </ul>
     </div>
   </section>
 
+  <!-- Video promo: descomentar quando tiver vídeo da Casa & Cia
   <section class="video-promo" style="padding:10px 0">
     <div class="wrap">
       <video autoplay muted loop playsinline controls preload="metadata" style="width:100%;max-width:480px;margin:0 auto;display:block;border-radius:12px">
@@ -338,6 +339,7 @@ ttq.page();
       </video>
     </div>
   </section>
+  -->
 
   <section id="produtos" aria-labelledby="prod-title">
     <div class="wrap">
@@ -348,8 +350,8 @@ ttq.page();
     </div>
   </section>
 
-  <!-- Avaliações -->
-  <section class="reviews" aria-labelledby="rev-title">
+  <!-- Avaliações: descomentar quando tiver depoimentos da Casa & Cia -->
+  <section class="reviews" aria-labelledby="rev-title" hidden>
     <div class="wrap">
       <h2 class="section-title" id="rev-title">O que dizem nossos clientes</h2>
       <div class="rating"><strong>4,9</strong><span class="stars" aria-hidden="true">★★★★★</span><br><small>média de 112 avaliações</small></div>
@@ -921,10 +923,10 @@ ttq.page();
 
   <section class="about" aria-labelledby="about-title">
     <div class="wrap about-grid">
-      <img src="/img/logo.png" alt="Logo Defanti Store" loading="lazy" decoding="async">
+      <img src="/img/logo.png" alt="Logo Casa & Cia" loading="lazy" decoding="async">
       <div>
-        <h2 id="about-title">Sobre a Defanti Store</h2>
-        <p>Somos uma loja de calçados femininos com mais de 1 milhão de itens vendidos. Trabalhamos com as melhores marcas — Vizzano, Moleca, Beira Rio, Modare, Melissa, Arezzo, Schutz, Santa Lolla — todas 100% originais com nota fiscal.</p>
+        <h2 id="about-title">Sobre a Casa & Cia</h2>
+        <p>Somos uma loja especializada em produtos para casa com os melhores preços do mercado. Trabalhamos com marcas de qualidade e todos os produtos possuem nota fiscal e garantia.</p>
         <p>Nosso compromisso é oferecer preço de atacado para todos, sem quantidade mínima. Seja para uso próprio ou para revenda, aqui você encontra o melhor preço do Brasil.</p>
       </div>
     </div>
@@ -941,7 +943,7 @@ ttq.page();
     </nav>
     <p>Armazém Digital · CNPJ 46.569.462/0001-96</p>
     <p>Rua Alberto Siqueira, 2671 — Duque de Caxias/RJ</p>
-    <p>suporte@defantistore.com</p>
+    <p>suporte@casaecia.com</p>
   </div>
 </footer>
 

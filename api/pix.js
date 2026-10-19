@@ -63,9 +63,9 @@ async function createPixSkalePay(order) {
         email: order.customer.email,
         phone: order.customer.phone || undefined
       },
-      description: `Pedido ${order.code} - Defanti Store`,
+      description: `Pedido ${order.code} - Casa & Cia`,
       external_id: order.code,
-      postback_url: (process.env.SITE_URL || 'https://defantistore.vercel.app') + '/api/postback'
+      postback_url: (process.env.SITE_URL || 'https://casaecia.vercel.app') + '/api/postback'
     })
   });
 
@@ -90,7 +90,7 @@ async function createPixSkalePay(order) {
 
 async function createPixPagSense(order) {
   const auth = Buffer.from(`${PAGSENSE_PUBLIC}:${PAGSENSE_SECRET}`).toString('base64');
-  const siteUrl = process.env.SITE_URL || 'https://defantistore.vercel.app';
+  const siteUrl = process.env.SITE_URL || 'https://casaecia.vercel.app';
 
   const items = order.items.map(item => {
     const p = findProduct(item.id);
