@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Casa & Cia — Produtos para Casa a Preço de Atacado</title>
 <meta name="description" content="Casa & Cia: produtos para casa com os melhores preços. Qualidade garantida, pagamento via PIX.">
-<meta name="theme-color" content="#D32F2F">
+<meta name="theme-color" content="#1a1a1a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" href="/catalog.json" as="fetch" crossorigin>
 <style>
 /* ── IDENTIDADE VISUAL — Casa & Cia ──────────────────────────── */
@@ -25,9 +25,11 @@
   --accent:#D32F2F;
   --danger:#b3261e;
   --ok:#1e7a3c;
-  --font-body:'Poppins',system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-body:'DM Sans','Poppins',system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --font-title:var(--font-body);
-  --radius:12px;
+  --radius:0;
+  --bg-dark:#1a1a1a;
+  --text-light:#ffffff;
   --header-h:56px;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -37,12 +39,12 @@ img{display:block;max-width:100%;height:auto}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
 a{color:inherit}
-h1,h2,h3{font-family:var(--font-title);line-height:1.2;margin:0 0 .5em}
+h1,h2,h3{font-family:var(--font-title);line-height:1.2;margin:0 0 .5em;text-transform:uppercase;letter-spacing:.04em}
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 section{padding:40px 0}
-.section-title{font-size:1.5rem;text-align:center}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:6px;border:none;background:var(--brand);color:var(--brand-text);font-weight:600;text-decoration:none;transition:opacity .15s}
+.section-title{font-size:1.5rem;text-align:center;font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:0;border:none;background:var(--brand);color:var(--brand-text);font-weight:600;text-decoration:none;transition:background .2s,transform .15s;text-transform:uppercase;letter-spacing:.04em}
 .btn:hover{background:var(--brand-dark)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .btn-ghost{background:transparent;color:var(--brand);border:none}
@@ -50,7 +52,11 @@ section{padding:40px 0}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* Topo */
-.topbar{background:var(--brand);color:var(--brand-text);text-align:center;font-size:.85rem;padding:8px 16px;font-weight:500}
+.topbar{background:var(--bg-dark);color:var(--text-light);font-size:.85rem;padding:8px 0;font-weight:500;overflow:hidden;white-space:nowrap}
+.marquee{display:flex;width:100%}
+.marquee-content{display:flex;animation:marquee 20s linear infinite;flex-shrink:0}
+.marquee-content span{padding:0 2em}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
 .header .wrap{height:var(--header-h);display:flex;align-items:center;justify-content:space-between}
 .logo{text-decoration:none;display:flex;align-items:center}
@@ -64,23 +70,30 @@ section{padding:40px 0}
 
 /* Hero */
 .hero{padding:0}
-.hero-media{background:var(--bg-alt);overflow:hidden}
-.hero-media img,.hero-media video{width:100%;height:auto;display:block}
-.hero-text{display:none}
+.hero-media{position:relative;background:var(--bg-dark);overflow:hidden;min-height:320px}
+.hero-media img,.hero-media video{width:100%;height:auto;display:block;min-height:320px;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.35) 100%)}
+.hero-overlay h1{font-size:clamp(1.8rem,5vw,3.5rem);color:#fff;margin:0 0 .3em;letter-spacing:.06em;font-weight:700}
+.hero-overlay p{font-size:clamp(1rem,2.5vw,1.5rem);color:rgba(255,255,255,.85);margin:0 0 1.2em;letter-spacing:.08em;font-weight:500;text-transform:uppercase}
+.hero-overlay .btn{background:#fff;color:var(--bg-dark);font-weight:700;letter-spacing:.06em;padding:0 32px;min-height:52px}
+.hero-overlay .btn:hover{background:var(--gold);color:var(--bg-dark)}
 
 /* Regras */
-.rules{background:var(--bg-alt)}
+.rules{background:var(--bg-dark);color:var(--text-light)}
+.rules .section-title{color:var(--text-light)}
 .rules ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.rules li{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.rules li{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:0;padding:14px 16px}
 .rules b{display:block}
-.rules span{color:var(--muted);font-size:.92rem}
-.rules .ico{flex:0 0 28px;height:28px;border-radius:50%;background:var(--brand);color:var(--brand-text);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.rules span{color:rgba(255,255,255,.65);font-size:.92rem}
+.rules .ico{flex:0 0 28px;height:28px;border-radius:0;background:var(--brand);color:var(--brand-text);display:grid;place-items:center;font-weight:700;font-size:.85rem}
 
 /* Produtos */
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.card{position:relative;display:flex;flex-direction:column;border:none;border-radius:0;overflow:hidden;background:var(--bg);text-align:left;padding:0}
-.card-img{aspect-ratio:1;background:#f5f5f5;border-radius:8px}
-.card-img img{width:100%;height:100%;object-fit:cover}
+.card{position:relative;display:flex;flex-direction:column;border:none;border-radius:0;overflow:hidden;background:var(--bg);text-align:left;padding:0;transition:transform .3s ease}
+.card:hover{transform:translateY(-4px)}
+.card-img{aspect-ratio:1;background:#f5f5f5;border-radius:0;overflow:hidden}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.card:hover .card-img img{transform:scale(1.08)}
 .card-badge{position:absolute;top:8px;left:8px;background:#e53935;color:#fff;font-size:.75rem;font-weight:700;padding:3px 8px;border-radius:4px;z-index:1}
 .card-body{padding:10px 4px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
 .card-info{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:inherit;cursor:pointer}
@@ -96,12 +109,13 @@ section{padding:40px 0}
 @keyframes sk{to{background-position:-200% 0}}
 
 /* Sobre */
+.about{background:var(--bg-alt)}
 .about-grid{display:grid;gap:20px;align-items:center}
 .about-grid img{width:100%;max-width:260px;object-fit:contain;margin:0 auto}
 .about-grid p{color:var(--muted)}
 
 /* Avaliações */
-.reviews{background:var(--bg-alt)}
+.reviews{background:var(--bg)}
 .rating{text-align:center;margin-bottom:20px}
 .rating strong{font-size:2.2rem;display:block;line-height:1}
 .stars{color:var(--gold);letter-spacing:2px}
@@ -116,10 +130,11 @@ section{padding:40px 0}
 .rev-pag button.active{background:var(--accent);color:#fff}
 
 /* Rodapé */
-.footer{border-top:1px solid var(--line);padding:32px 0 calc(32px + env(safe-area-inset-bottom));font-size:.88rem;color:var(--muted)}
+.footer{background:var(--bg-dark);color:rgba(255,255,255,.6);border-top:none;padding:40px 0 calc(40px + env(safe-area-inset-bottom));font-size:.88rem}
 .footer nav{display:flex;flex-wrap:wrap;gap:10px 20px;margin-bottom:16px}
-.footer nav a{color:var(--text)}
-.footer p{margin:.3em 0}
+.footer nav a{color:rgba(255,255,255,.85);transition:color .2s}
+.footer nav a:hover{color:var(--brand)}
+.footer p{margin:.3em 0;color:rgba(255,255,255,.5)}
 
 /* Janela do produto */
 dialog{border:0;padding:0;max-width:100%;max-height:100%;background:var(--bg);color:var(--text)}
@@ -150,7 +165,7 @@ fieldset{border:0;margin:16px 0 0;padding:0}
 legend{font-weight:600;margin-bottom:8px;padding:0}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip input{position:absolute;opacity:0;pointer-events:none}
-.chip span{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border:1.5px solid var(--line);border-radius:6px;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border:1.5px solid var(--line);border-radius:0;cursor:pointer}
 .chip input:checked+span{border-color:var(--brand);background:var(--brand);color:var(--brand-text)}
 .chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
 .field-error{color:var(--danger);font-size:.88rem;margin:8px 0 0;min-height:1.2em}
@@ -282,6 +297,10 @@ body.locked{overflow:hidden}
 @media (min-width:720px){.ck-body{padding:28px 16px 80px}.ck-foot .wrap{max-width:560px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
 /* TikTok in-app browser & mobile WebView fixes */
 dialog:not([open]){display:none}
 dialog[open]{display:block}
@@ -325,7 +344,7 @@ ttq.page();
 </head>
 <body>
 
-<div class="topbar" id="topbar">🔒 Ofertas Válidas Somente pelo Site</div>
+<div class="topbar" id="topbar"><div class="marquee"><div class="marquee-content"><span>🏠 Promoções apenas no Site</span><span>🏠 Promoções apenas no Site</span><span>🏠 Promoções apenas no Site</span><span>🏠 Promoções apenas no Site</span><span>🏠 Promoções apenas no Site</span><span>🏠 Promoções apenas no Site</span></div></div></div>
 
 <header class="header">
   <div class="wrap">
@@ -339,19 +358,24 @@ ttq.page();
 
 <main>
   <section class="hero">
-    <a href="#produtos" class="hero-media" aria-label="Ver produtos">
+    <div class="hero-media">
       <picture>
         <source media="(max-width: 768px)" srcset="/img/banner-mobile.webp">
         <img src="/img/banner.webp" alt="Casa & Cia — Produtos para casa com os melhores preços. Pagamento via PIX." width="1400" height="420" fetchpriority="high">
       </picture>
-    </a>
+      <div class="hero-overlay">
+        <h1>Produtos para Casa</h1>
+        <p>A preço de atacado</p>
+        <a href="#produtos" class="btn">Ver Produtos</a>
+      </div>
+    </div>
   </section>
 
   <section class="promo-video" style="background:var(--bg-alt);padding:0;overflow:hidden">
     <video id="promoVideo" muted loop playsinline preload="none" style="width:100%;display:block;max-height:620px;object-fit:cover"></video>
   </section>
 
-  <section class="rules" aria-labelledby="rules-title">
+  <section class="rules reveal" aria-labelledby="rules-title">
     <div class="wrap">
       <h2 class="section-title" id="rules-title">Como funciona</h2>
       <ul>
@@ -372,7 +396,7 @@ ttq.page();
   </section>
   -->
 
-  <section id="produtos" aria-labelledby="prod-title">
+  <section id="produtos" class="reveal" aria-labelledby="prod-title">
     <div class="wrap">
       <h2 class="section-title" id="prod-title">Produtos</h2>
       <div class="grid" id="grid" aria-live="polite">
@@ -381,7 +405,7 @@ ttq.page();
     </div>
   </section>
 
-  <section class="reviews" aria-labelledby="rev-title">
+  <section class="reviews reveal" aria-labelledby="rev-title">
     <div class="wrap">
       <h2 class="section-title" id="rev-title">O que dizem nossos clientes</h2>
       <div class="rating"><strong>4,8</strong><span class="stars" aria-hidden="true">★★★★★</span><br><small>média de 237 avaliações</small></div>
@@ -796,7 +820,7 @@ ttq.page();
     </div>
   </section>
 
-  <section class="about" aria-labelledby="about-title">
+  <section class="about reveal" aria-labelledby="about-title">
     <div class="wrap about-grid">
       <img src="/img/logo.png" alt="Logo Casa & Cia" loading="lazy" decoding="async">
       <div>
@@ -816,7 +840,7 @@ ttq.page();
       <a href="/trocas">Trocas e Devoluções</a>
       <a href="/entrega">Entrega</a>
     </nav>
-    <p><a href="https://www.instagram.com/casaecia.utilidades" target="_blank" rel="noopener" style="color:var(--text);text-decoration:none">📸 @casaecia.utilidades</a></p>
+    <p><a href="https://www.instagram.com/casaecia.utilidades" target="_blank" rel="noopener" style="color:rgba(255,255,255,.85);text-decoration:none">📸 @casaecia.utilidades</a></p>
     <p>suporte@casaecia.com</p>
   </div>
 </footer>
@@ -866,7 +890,7 @@ ttq.page();
     <div class="subtotal"><span>Subtotal</span><span id="cartSubtotal">R$ 0,00</span></div>
     <small>Frete calculado no próximo passo.</small>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-      <button class="btn btn-ghost btn-block" type="button" id="continueBtn" style="border:1.5px solid var(--line)">Continuar comprando</button>
+      <button class="btn btn-ghost btn-block" type="button" id="continueBtn" style="border:1.5px solid var(--line);border-radius:0">Continuar comprando</button>
       <button class="btn btn-block" type="button" id="checkoutBtn">Finalizar compra</button>
     </div>
   </div>
@@ -1868,7 +1892,11 @@ ttq.page();
       CATALOG = data;
       data.products.forEach(function (p) { PRODUCTS[p.id] = p; });
       var bar = $('#topbar');
-      if (data.store && data.store.topbar) bar.textContent = data.store.topbar;
+      if (data.store && data.store.topbar) {
+        var spans = bar.querySelectorAll('.marquee-content span');
+        if (spans.length) { for (var si = 0; si < spans.length; si++) spans[si].textContent = data.store.topbar; }
+        else bar.textContent = data.store.topbar;
+      }
       renderGrid();
       loadCart();
       renderCart();
@@ -1879,6 +1907,21 @@ ttq.page();
     .catch(function () {
       $('#grid').innerHTML = '<p>Não foi possível carregar os produtos. <a href="">Tentar de novo</a></p>';
     });
+})();
+
+/* ── Scroll reveal ────────────────────────────────────────── */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  var els = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.08});
+  els.forEach(function(el){ obs.observe(el); });
 })();
 
 /* ── TikTok WebView: dialog polyfill ───────────────────────── */
